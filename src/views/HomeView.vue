@@ -1,7 +1,15 @@
 <template>
   <div><h2 class="text-2xl text-red-800">HomeView</h2></div>
+  <button @click="showSuccess">Show Success Toast</button>
 </template>
 
-<script setup></script>
+<script setup>
+import { useToast } from 'vue-toastification'
 
-<style lang="scss" scoped></style>
+const toast = useToast()
+const showSuccess = () => {
+  toast.success('Testing success Tostification')
+}
+</script>
+
+<style scoped></style>
