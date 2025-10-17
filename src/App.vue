@@ -1,20 +1,26 @@
 <template>
-  <main class="w-auto ml-4 sm:ml-8" id="mainApp">
+  <header class="w-auto px-2 py-1 sm:ml-6">
     <TheTopbar />
+  </header>
+  <main class="min-h-screen w-auto mx-4 mt-1 sm:mx-8" id="mainApp">
     <RouterView />
   </main>
 </template>
 
 <script setup>
 import { RouterView } from 'vue-router'
+import TheTopbar from '@/components/TheTopbar.vue'
+
 import { provideToast } from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
-import TheTopbar from '@/components/TheTopbar.vue'
 
 provideToast()
 </script>
 
 <style>
+body {
+  background-color: #fcfdfe;
+}
 .hide-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -23,7 +29,7 @@ provideToast()
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 70%;
   display: flex;
   justify-content: left;
   align-items: top;
