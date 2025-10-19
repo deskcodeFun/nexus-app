@@ -7,11 +7,14 @@ const navOpen = ref(false)
 </script>
 
 <template>
-  <div class="py-2 px-2 rounded-md bg-blue-50/65">
+  <div class="pt-2 pb-4 px-2 rounded-md bg-blue-50/65">
     <div class="flex flex-row">
       <button @click="navOpen = !navOpen">
-        <Bars3Icon :class="navOpen ? 'hidden' : ''" class="h-6 w-6 mt-1 text-gray-500" />
-        <XMarkIcon :class="navOpen ? '' : 'hidden'" class="h-6 w-6 bg-gray-50 text-red-900" />
+        <Bars3Icon
+          :class="navOpen ? 'hidden' : ''"
+          class="h-6 w-6 mt-1 bg-gray-50/25 text-blue-900"
+        />
+        <XMarkIcon :class="navOpen ? '' : 'hidden'" class="h-6 w-6 bg-gray-50/25 text-red-900" />
       </button>
       <p class="ml-2 font-bold text-2xl text-sky-900 text-shadow-lg">Nexus Service</p>
     </div>

@@ -1,10 +1,10 @@
 <template>
   <div class="bg-linear-35 from-red-400 to-blue-500">
     <!-- <header class="w-auto px-2 py-1 sm:ml-6"> -->
-    <header class="w-auto px-2">
+    <header class="w-auto mx-8 mb-2 pt-1">
       <TheTopbar />
     </header>
-    <main class="min-h-screen w-auto px-8 mt-1 mx-2 bg-sky-50/65" id="mainApp">
+    <main class="min-h-screen w-auto px-8 mt-1 mx-8 bg-sky-50/65" id="mainApp">
       <RouterView />
     </main>
   </div>
