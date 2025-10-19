@@ -7,13 +7,13 @@ const navOpen = ref(false)
 </script>
 
 <template>
-  <div class="mt-4 mb-4">
-    <div class="pr-2 flex flex-row">
+  <div class="py-2 px-2 rounded-md bg-blue-50/65">
+    <div class="flex flex-row">
       <button @click="navOpen = !navOpen">
-        <Bars3Icon :class="navOpen ? 'hidden' : ''" class="h-6 w-6 text-gray-500" />
+        <Bars3Icon :class="navOpen ? 'hidden' : ''" class="h-6 w-6 mt-1 text-gray-500" />
         <XMarkIcon :class="navOpen ? '' : 'hidden'" class="h-6 w-6 bg-gray-50 text-red-900" />
       </button>
-      <p class="ml-4 font-bold text-2xl text-sky-900 text-shadow-lg">Nexus Service</p>
+      <p class="ml-2 font-bold text-2xl text-sky-900 text-shadow-lg">Nexus Service</p>
     </div>
   </div>
   <Transition name="slide-fade">

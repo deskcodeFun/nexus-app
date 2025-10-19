@@ -1,10 +1,13 @@
 <template>
-  <header class="w-auto px-2 py-1 sm:ml-6">
-    <TheTopbar />
-  </header>
-  <main class="min-h-screen w-auto mx-4 mt-1 sm:mx-8" id="mainApp">
-    <RouterView />
-  </main>
+  <div class="bg-linear-35 from-red-400 to-blue-500">
+    <!-- <header class="w-auto px-2 py-1 sm:ml-6"> -->
+    <header class="w-auto px-2">
+      <TheTopbar />
+    </header>
+    <main class="min-h-screen w-auto px-8 mt-1 mx-2 bg-sky-50/65" id="mainApp">
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <script setup>
@@ -17,7 +20,7 @@ import 'vue-toastification/dist/index.css'
 provideToast()
 </script>
 
-<style>
+<!-- <style>
 body {
   background-color: #fcfdfe;
 }
@@ -52,4 +55,4 @@ body {
   transform: translateX(-100%);
   opacity: 0;
 }
-</style>
+</style> -->
