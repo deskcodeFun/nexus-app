@@ -12,9 +12,12 @@ const navOpen = ref(false)
       <button @click="navOpen = !navOpen">
         <Bars3Icon
           :class="navOpen ? 'hidden' : ''"
-          class="h-6 w-6 mt-1 bg-gray-50/25 text-blue-900"
+          class="h-6 w-6 mt-1 rounded-full bg-gray-50/25 text-blue-900"
         />
-        <XMarkIcon :class="navOpen ? '' : 'hidden'" class="h-6 w-6 bg-gray-50/25 text-red-900" />
+        <XMarkIcon
+          :class="navOpen ? '' : 'hidden'"
+          class="h-6 w-6 rounded-full bg-gray-50/25 text-red-900"
+        />
       </button>
       <p class="ml-2 font-bold text-2xl text-sky-900 text-shadow-lg">Nexus Service</p>
     </div>
