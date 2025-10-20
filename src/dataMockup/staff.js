@@ -51,7 +51,8 @@ export const mockStaff = [
     id: 7,
     fname: 'Arpatcha',
     lname: 'Tonpoo',
-    email: 'apatcha@nexus.co.th,Investment Advisory',
+    email: 'apatcha@nexus.co.th,',
+    department: 'Investment Advisory',
     office_id: '4',
   },
   {
