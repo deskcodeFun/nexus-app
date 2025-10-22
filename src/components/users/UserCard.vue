@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-[280px] flex flex-wrap bg-white/75 border-1 border-gray-400 rounded-xl shadow-xl px-2 py-4 m-2"
+    class="w-[320px] flex flex-row flex-wrap bg-white/75 border-1 border-gray-400 rounded-xl shadow-xl px-2 py-4 m-2"
   >
     <!-- show data -->
     <table
