@@ -34,6 +34,13 @@ const navOpen = ref(false)
             >Home</RouterLink
           >
           <RouterLink
+            to="/user"
+            class="px-8 text-lg rounded-xl m-1 p-1 hover:bg-gray-200 md:text-lg"
+            active-class="bg-sky-200 px-2 rounded-lg text-xl hover:bg-sky-200 "
+            @click="navOpen = !navOpen"
+            >User</RouterLink
+          >
+          <RouterLink
             to="/services"
             class="px-8 text-lg rounded-xl m-1 p-1 hover:bg-gray-200 md:text-lg"
             active-class="bg-sky-200 px-2 rounded-lg text-xl hover:bg-sky-200 "

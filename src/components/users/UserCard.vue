@@ -4,7 +4,7 @@
   >
     <!-- show data -->
     <table
-      class="table-auto [&_th]:text-left [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-2"
+      class="[&_th]:text-left [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-2"
     >
       <tbody>
         <tr>

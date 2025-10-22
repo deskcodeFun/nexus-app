@@ -6,6 +6,9 @@ import NotFoundView from '@/views/NotFoundView.vue'
 // import ComputerDetail from '@/components/computer/ComputerDetail.vue'
 
 import ServiceView from '@/views/ServiceView.vue'
+import UserAdd from '@/components/users/UserAdd.vue'
+
+import UserView from '@/views/UserView.vue'
 // import ComputerAdd from '@/components/computer/ComputerAdd.vue'
 // import UserAdd from '@/components/user/userAdd.vue'
 
@@ -29,6 +32,18 @@ const router = createRouter({
       name: 'service',
 
       component: ServiceView,
+    },
+    {
+      path: '/user',
+      name: 'user',
+
+      component: UserView,
+    },
+    {
+      path: '/addUser',
+      name: 'add-user',
+
+      component: UserAdd,
     },
 
     // {
