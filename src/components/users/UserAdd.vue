@@ -12,21 +12,21 @@
   </header>
 
   <main class="flex flex-col p-2 sm:pl-8">
-    <form class="w-auto sm:max-w-screen-sm flex flex-col gap-4" @submit.prevent="addSubmit">
+    <form class="w-auto sm:max-w-screen-sm flex flex-col gap-2" @submit.prevent="addSubmit">
       <label for="fname">First Name</label>
-      <input type="text" v-model="fname" class="bg-sky-50" />
+      <input type="text" v-model="fname" class="bg-sky-50 text-2xl" />
       <label for="lname">Last Name</label>
-      <input type="text" v-model="lname" class="bg-sky-50" />
+      <input type="text" v-model="lname" class="bg-sky-50 text-2xl" />
       <label for="email">Email</label>
-      <input type="text" v-model="email" class="bg-sky-50" />
+      <input type="text" v-model="email" class="bg-sky-50 text-2xl" />
       <label for="department">Department</label>
-      <input type="text" v-model="department" class="bg-sky-50" />
+      <input type="text" v-model="department" class="bg-sky-50 text-2xl" />
 
       <label for="offie_id">Office Name</label>
-      <input type="number" v-model="office_id" class="bg-sky-50" />
+      <input type="number" v-model="office_id" class="bg-sky-50 text-2xl" />
     </form>
     <button
-      class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-8 mt-4 rounded-full w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
       type="submit"
       @click="addSubmit"
     >
@@ -58,6 +58,7 @@ const newUser = reactive({
 })
 const addSubmit = () => {
   // console.log(newUser)
+  // TODO: validate data
   staff.push(newUser)
   // console.log('After add user: ', staff)
   router.back()

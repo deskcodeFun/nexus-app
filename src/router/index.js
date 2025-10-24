@@ -9,6 +9,7 @@ import ServiceView from '@/views/ServiceView.vue'
 import UserAdd from '@/components/users/UserAdd.vue'
 
 import UserView from '@/views/UserView.vue'
+import UserEdit from '@/components/users/UserEdit.vue'
 // import ComputerAdd from '@/components/computer/ComputerAdd.vue'
 // import UserAdd from '@/components/user/userAdd.vue'
 
@@ -44,6 +45,12 @@ const router = createRouter({
       name: 'add-user',
 
       component: UserAdd,
+    },
+    {
+      path: '/editUser/:id',
+      name: 'edit-user',
+
+      component: UserEdit,
     },
 
     // {
