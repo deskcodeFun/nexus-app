@@ -37,7 +37,7 @@ const router = useRouter()
 const onClick = () => {
   console.log('id of card ', props.staff.id)
   // navigate to /edit/<id>
-  const id = props.staff.id
+  const id = props.staff.id - 1
   router.push(`editUser/${id}`)
 }
 </script>

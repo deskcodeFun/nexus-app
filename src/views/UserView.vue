@@ -1,11 +1,11 @@
 <template>
-  <header class="flex flex-row justify-between p-4 sm:pl-8 py-2">
-    <p class="font-semibold sm:text-xl text-sky-900 text-shadow-lg">User Management</p>
+  <header class="flex flex-row gap-8 sm:pl-8 py-2">
+    <p class="font-semibold text-2xl text-sky-900 text-shadow-lg">User Management</p>
     <router-link
       to="/addUser"
-      class="flex flex-row mt-1 ml-4 px-2 rounded-sm border-1 border-blue-800 text-blue-900 font-semibold bg-white/25 hover:bg-blue-900 hover:text-white"
+      class="flex flex-row p-2 text-blue-900 hover:bg-blue-900 hover:text-white"
     >
-      <UserPlusIcon class="h-6 w-5 mr-1" />
+      <PlusIcon class="h-6 w-6 mr-0.5" />
       Add User
     </router-link>
   </header>
@@ -22,7 +22,7 @@ import { reactive } from 'vue'
 import { mockStaff } from '@/dataMockup/staff'
 import UserCard from '@/components/users/UserCard.vue'
 
-import { UserPlusIcon } from '@heroicons/vue/20/solid'
+import { PlusIcon } from '@heroicons/vue/20/solid'
 
 const staffs = reactive(mockStaff)
 </script>

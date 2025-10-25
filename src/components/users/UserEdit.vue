@@ -64,7 +64,7 @@ import { mockStaff } from '@/dataMockup/staff'
 
 const route = useRoute()
 const router = useRouter()
-let userId = route.params.id - 1
+let userId = route.params.id
 
 const fname = ref(mockStaff[`${userId}`].fname)
 const lname = ref(mockStaff[`${userId}`].lname)
