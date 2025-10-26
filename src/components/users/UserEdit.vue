@@ -4,54 +4,55 @@
       <p class="font-semibold text-xl text-sky-900 text-shadow-lg">Edit User</p>
     </div>
     <div class="w-auto sm:max-w-screen-sm flex flex-col gap-2">
-      <label for="fname">First Name</label>
-      <input
-        type="text"
-        v-model="fname"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
-      <label for="lname">Last Name</label>
-      <input
-        type="text"
-        v-model="lname"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
-      <label for="email">Email</label>
-      <input
-        type="text"
-        v-model="email"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
-      <label for="department">Department</label>
-      <input
-        type="text"
-        v-model="department"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
+      <form class="sm:max-w-screen-sm flex flex-col gap-2" @submit.prevent="editSubmit">
+        <label for="fname">First Name</label>
+        <input
+          type="text"
+          v-model="fname"
+          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        />
+        <label for="lname">Last Name</label>
+        <input
+          type="text"
+          v-model="lname"
+          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        />
+        <label for="email">Email</label>
+        <input
+          type="text"
+          v-model="email"
+          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        />
+        <label for="department">Department</label>
+        <input
+          type="text"
+          v-model="department"
+          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        />
 
-      <label for="offie_id">Office Name</label>
-      <input
-        type="number"
-        v-model="office_id"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
+        <label for="offie_id">Office Name</label>
+        <input
+          type="number"
+          v-model="office_id"
+          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        />
 
-      <div class="flex flex-row gap-8 sm:justify-between">
-        <button
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
-          type="submit"
-          @click="editSubmit"
-        >
-          Save
-        </button>
-        <button
-          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
-          type="button"
-          @click="router.back()"
-        >
-          Cancel
-        </button>
-      </div>
+        <div class="flex flex-row gap-8 sm:justify-between">
+          <button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+            type="submit"
+          >
+            Save
+          </button>
+          <button
+            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+            type="button"
+            @click="router.back()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   </main>
 </template>

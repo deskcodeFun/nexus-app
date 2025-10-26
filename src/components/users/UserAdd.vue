@@ -48,6 +48,7 @@ import { ref, reactive } from 'vue'
 const router = useRouter()
 
 const staff = reactive(mockStaff)
+
 const fname = ref('')
 const lname = ref('')
 const email = ref('')
@@ -55,9 +56,12 @@ const department = ref('')
 const office_id = ref('')
 
 const addSubmit = () => {
+  const staffId = ref(staff.length + 1)
+
   // console.log(newUser)
   // TODO: validate data
   staff.push({
+    id: staffId,
     fname: fname.value,
     lname: lname.value,
     email: email.value,
