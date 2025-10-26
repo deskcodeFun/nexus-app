@@ -1,9 +1,8 @@
 <template>
-  <header class="flex flex-row justify-between p-4 sm:pl-8 py-2">
-    <p class="font-semibold text-xl text-sky-900 text-shadow-lg">Add New User</p>
-  </header>
-
-  <main class="w-auto flex flex-col p-2 sm:pl-8">
+  <main class="w-auto flex flex-col px-4">
+    <div class="flex flex-row justify-between py-2">
+      <p class="font-semibold text-xl text-sky-900 text-shadow-lg">Edit User</p>
+    </div>
     <div class="w-auto sm:max-w-screen-sm flex flex-col gap-2">
       <label for="fname">First Name</label>
       <input
@@ -37,16 +36,16 @@
         class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
       />
 
-      <div class="flex flex-row justify-between">
+      <div class="flex flex-row gap-8 sm:justify-between">
         <button
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
           type="submit"
           @click="editSubmit"
         >
           Save
         </button>
         <button
-          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
           type="button"
           @click="router.back()"
         >
