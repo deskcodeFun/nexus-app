@@ -47,9 +47,10 @@
           <button
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
             type="button"
-            @click="router.back()"
+            @click="delUser"
           >
-            Cancel
+            <!-- Conmfire dialog -->
+            Delete
           </button>
         </div>
       </form>
@@ -60,29 +61,34 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { mockStaff } from '@/dataMockup/staff'
+
+import { usersStore } from '@/stores/usersData'
 
 const route = useRoute()
 const router = useRouter()
+const store = usersStore()
 let userId = route.params.id
+let idx = userId - 1
 
-const fname = ref(mockStaff[`${userId}`].fname)
-const lname = ref(mockStaff[`${userId}`].lname)
-const email = ref(mockStaff[`${userId}`].email)
-const department = ref(mockStaff[`${userId}`].department)
-const office_id = ref(mockStaff[`${userId}`].office_id)
+// console.log('id in edit mode', userId)
+// console.log('data in userId', store.users[idx])
+
+const fname = ref(store.users[idx].fname)
+const lname = ref(store.users[idx].lname)
+const email = ref(store.users[idx].email)
+const department = ref(store.users[idx].department)
+const office_id = ref(store.users[idx].office_id)
 
 const editSubmit = () => {
   // TODO: validate data
-  mockStaff[userId].fname = fname.value
-  mockStaff[userId].lname = lname.value
-  mockStaff[userId].email = email.value
-  mockStaff[userId].department = department.value
-  mockStaff[userId].office_id = office_id.value
+  store.users[idx].fname = fname.value
+  store.users[idx].lname = lname.value
+  store.users[idx].email = email.value
+  store.users[idx].department = department.value
+  store.users[idx].office_id = office_id.value
   // console.log('After add user: ', staff)
   router.back()
 }
 
-// console.log(' params', userId)
-// console.log('mockStaff: ', mockStaff[`${userId}`].fname)
+const delUser = () => {}
 </script>

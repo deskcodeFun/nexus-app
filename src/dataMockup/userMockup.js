@@ -1,4 +1,4 @@
-export const mockStaff = [
+const users = [
   {
     id: 1,
     fname: 'Sumita',
@@ -151,59 +151,6 @@ export const mockStaff = [
     department: 'Research Advisory',
     office_id: '4',
   },
-  {
-    id: 20,
-    fname: 'Teerawit',
-    lname: 'Limthongsakul',
-    email: 'teerawit@nexus.co.th',
-    department: '',
-    office_id: '4',
-  },
-  {
-    id: 21,
-    fname: 'Nalinrat',
-    lname: 'Chareonsuphong',
-    email: 'nalinrat@nexus.co.th',
-    department: ',3',
-  },
-  {
-    id: 22,
-    fname: 'Noppakrit',
-    lname: 'Phuwasiriwarakit',
-    email: 'noppakrit@nexus.co.th',
-    department: 'Land Acquistion',
-    office_id: '1',
-  },
-  {
-    id: 23,
-    fname: 'Thanawat',
-    lname: 'Charoenthirasakundet',
-    email: 'thanawat@nexus.co.th',
-    department: 'Research Advisory',
-    office_id: '4',
-  },
-  {
-    id: 24,
-    fname: 'Saravadee',
-    lname: 'Vanichsombat',
-    email: 'saravadee@nexus.co.th',
-    department: '',
-    office_id: '1',
-  },
-  {
-    id: 25,
-    fname: 'Anucha',
-    lname: 'Kasun',
-    email: 'anucha@oho.co.th',
-    department: 'OHO service',
-    office_id: '6',
-  },
-  {
-    id: 26,
-    fname: 'Sirapop',
-    lname: 'Chutsittidate',
-    email: 'sipapop@nexus.co.th',
-    department: 'Sales Service',
-    office_id: '3',
-  },
 ]
+
+export default users

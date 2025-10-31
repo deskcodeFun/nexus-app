@@ -41,13 +41,14 @@
 
 <script setup>
 import { ChevronDoubleLeftIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
-import { mockStaff } from '@/dataMockup/staff'
+// import { users } from '@/dataMockup/staff'
 import { useRouter } from 'vue-router'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
+import { usersStore } from '@/stores/usersData'
 
 const router = useRouter()
 
-const staff = reactive(mockStaff)
+const store = usersStore()
 
 const fname = ref('')
 const lname = ref('')
@@ -56,25 +57,28 @@ const department = ref('')
 const office_id = ref('')
 
 const addSubmit = () => {
-  const staffId = ref(staff.length + 1)
-
-  // console.log(newUser)
-  // TODO: validate data
-  staff.push({
+  // compute a simple next id (fallback to 1)
+  const staffId = store.users && Array.isArray(store.users) ? store.users.length + 1 : 1
+  const newUser = {
     id: staffId,
     fname: fname.value,
     lname: lname.value,
     email: email.value,
     department: department.value,
     office_id: office_id.value,
-  })
+  }
+
+  console.log('newUser ', newUser)
+  // emit the new user to parent instead of mutating prop
+  store.users.push(newUser)
+
   // reset inputs
   fname.value = ''
   lname.value = ''
   email.value = ''
   department.value = ''
   office_id.value = ''
-  // console.log('After add user: ', staff)
+  // navigate back to user list
   router.push('/user')
 }
 </script>
