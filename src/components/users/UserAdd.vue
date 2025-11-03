@@ -58,7 +58,8 @@ const office_id = ref('')
 
 const addSubmit = () => {
   // compute a simple next id (fallback to 1)
-  const staffId = store.users && Array.isArray(store.users) ? store.users.length + 1 : 1
+  const staffId =
+    store.$state.users && Array.isArray(store.$state.users) ? store.$state.users.length + 1 : 1
   const newUser = {
     id: staffId,
     fname: fname.value,
@@ -67,10 +68,10 @@ const addSubmit = () => {
     department: department.value,
     office_id: office_id.value,
   }
-
-  console.log('newUser ', newUser)
+  // console.log('newUser ', newUser)
   // emit the new user to parent instead of mutating prop
-  store.users.push(newUser)
+  // store.users.push(newUser)
+  store.addUser(newUser)
 
   // reset inputs
   fname.value = ''

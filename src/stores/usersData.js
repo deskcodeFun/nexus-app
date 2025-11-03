@@ -163,4 +163,10 @@ export const usersStore = defineStore('userStore', {
       return state.users.map((user) => user.fname + (user.lname ? ' ' + user.lname : ''))
     },
   },
+  actions: {
+    addUser(newUser) {
+      // user is object
+      this.users.push(newUser)
+    },
+  },
 })
