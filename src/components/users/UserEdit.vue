@@ -47,12 +47,20 @@
           <button
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
             type="button"
-            @click="delUser"
+            @click="toggleModal"
           >
             <!-- Conmfire dialog -->
             Delete
           </button>
         </div>
+
+        <BaseModal :modalActive="modalActive" @close-modal="toggleModal" @save-data="delUser">
+          <div>
+            <h1 class="px-4 py-2 bg-red-600 font-semibold text-xl text-white">Delete User</h1>
+            <p class="px-16 text-lg mt-4">Are you sure to DELETE USER ?</p>
+            <p class="px-16 text-lg mt-4">user name:{{ store.users[idx].fname }}</p>
+          </div>
+        </BaseModal>
       </form>
     </div>
   </main>
@@ -63,6 +71,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 import { usersStore } from '@/stores/usersData'
+import BaseModal from '../BaseModal.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -70,6 +79,10 @@ const store = usersStore()
 let userId = route.params.id
 let idx = userId - 1
 
+const modalActive = ref(null)
+const toggleModal = () => {
+  modalActive.value = !modalActive.value
+}
 // console.log('id in edit mode', userId)
 // console.log('data in userId', store.users[idx])
 
@@ -90,5 +103,18 @@ const editSubmit = () => {
   router.back()
 }
 
-const delUser = () => {}
+function delUser() {
+  let id = userId
+  let idx = id - 1
+  console.log('user Id to delete : ', id, 'index is: ', idx)
+  if (store.users && Array.isArray(store.users)) {
+    store.users = store.users.filter((user) => user.id !== userId)
+    console.log('User with ID ', userId, 'Deleted.')
+  } else {
+    console.warn('store.users.value is not an array or is undefined. Cannot delete user.')
+  }
+  router.back('/user')
+  // store.users = store.users.filter((user) => store.users.id !== user.id)
+  // store.users = store.users.splice(store.users.indexOf(store.users), 5)
+}
 </script>
