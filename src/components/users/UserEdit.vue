@@ -61,7 +61,7 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 import { usersStore } from '@/stores/usersData'
 // import BaseModal from '../BaseModal.vue'
@@ -71,8 +71,7 @@ const router = useRouter()
 
 const store = usersStore()
 let id = +route.params.id
-const currentUserId = computed(() => store.getUserById(store.users[id].id))
-console.log('getUserById', currentUserId)
+
 // const modalActive = ref(null)
 // const toggleModal = () => {
 //   modalActive.value = !modalActive.value
@@ -96,9 +95,7 @@ const editSubmit = () => {
 }
 const deleteID = store.users[id].id
 const delUser = (deleteID) => {
-  console.log('id in delUser', deleteID)
   store.deleteUser(deleteID)
-
   router.push('/user')
 }
 </script>
