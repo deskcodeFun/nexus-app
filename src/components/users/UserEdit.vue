@@ -5,6 +5,7 @@
     </div>
     <div class="w-auto sm:max-w-screen-sm flex flex-col gap-2">
       <form class="sm:max-w-screen-sm flex flex-col gap-2" @submit.prevent="editSubmit">
+        <p>User Id : {{ store.users[id].id }}</p>
         <label for="fname">First Name</label>
         <input
           type="text"
@@ -47,20 +48,12 @@
           <button
             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
             type="button"
-            @click="toggleModal"
+            @click="delUser(deleteID)"
           >
             <!-- Conmfire dialog -->
             Delete
           </button>
         </div>
-
-        <BaseModal :modalActive="modalActive" @close-modal="toggleModal" @save-data="delUser">
-          <div>
-            <h1 class="px-4 py-2 bg-red-600 font-semibold text-xl text-white">Delete User</h1>
-            <p class="px-16 text-lg mt-4">Are you sure to DELETE USER ?</p>
-            <p class="px-16 text-lg mt-4">user name:{{ store.users[idx].fname }}</p>
-          </div>
-        </BaseModal>
       </form>
     </div>
   </main>
@@ -68,53 +61,44 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 import { usersStore } from '@/stores/usersData'
-import BaseModal from '../BaseModal.vue'
+// import BaseModal from '../BaseModal.vue'
 
 const route = useRoute()
 const router = useRouter()
+
 const store = usersStore()
-let userId = route.params.id
-let idx = userId - 1
+let id = +route.params.id
+const currentUserId = computed(() => store.getUserById(store.users[id].id))
+console.log('getUserById', currentUserId)
+// const modalActive = ref(null)
+// const toggleModal = () => {
+//   modalActive.value = !modalActive.value
+// }
 
-const modalActive = ref(null)
-const toggleModal = () => {
-  modalActive.value = !modalActive.value
-}
-// console.log('id in edit mode', userId)
-// console.log('data in userId', store.users[idx])
-
-const fname = ref(store.users[idx].fname)
-const lname = ref(store.users[idx].lname)
-const email = ref(store.users[idx].email)
-const department = ref(store.users[idx].department)
-const office_id = ref(store.users[idx].office_id)
+const fname = ref(store.users[id].fname)
+const lname = ref(store.users[id].lname)
+const email = ref(store.users[id].email)
+const department = ref(store.users[id].department)
+const office_id = ref(store.users[id].office_id)
 
 const editSubmit = () => {
   // TODO: validate data
-  store.users[idx].fname = fname.value
-  store.users[idx].lname = lname.value
-  store.users[idx].email = email.value
-  store.users[idx].department = department.value
-  store.users[idx].office_id = office_id.value
+  store.users[id].fname = fname.value
+  store.users[id].lname = lname.value
+  store.users[id].email = email.value
+  store.users[id].department = department.value
+  store.users[id].office_id = office_id.value
   // console.log('After add user: ', staff)
-  router.back()
+  router.push('/user')
 }
+const deleteID = store.users[id].id
+const delUser = (deleteID) => {
+  console.log('id in delUser', deleteID)
+  store.deleteUser(deleteID)
 
-function delUser() {
-  let id = userId
-  let idx = id - 1
-  console.log('user Id to delete : ', id, 'index is: ', idx)
-  if (store.users && Array.isArray(store.users)) {
-    store.users = store.users.filter((user) => user.id !== userId)
-    console.log('User with ID ', userId, 'Deleted.')
-  } else {
-    console.warn('store.users.value is not an array or is undefined. Cannot delete user.')
-  }
-  router.back('/user')
-  // store.users = store.users.filter((user) => store.users.id !== user.id)
-  // store.users = store.users.splice(store.users.indexOf(store.users), 5)
+  router.push('/user')
 }
 </script>

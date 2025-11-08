@@ -14,16 +14,18 @@
   </div>
   <div class="flex flex-row flex-wrap justify-center sm:justify-start sm:ml-8">
     <div v-for="(user, index) in store.users" :key="index">
-      <UserCard :currentUser="user"></UserCard>
+      <UserCard :currentUser="user" @click="router.push(`/editUser/${index}`)"></UserCard>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import UserCard from '@/components/users/UserCard.vue'
 import { PlusIcon } from '@heroicons/vue/20/solid'
 import { usersStore } from '@/stores/usersData'
 
 const store = usersStore()
+const router = useRouter(0)
 console.log('users in usersStore', store.users)
 </script>

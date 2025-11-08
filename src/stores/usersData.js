@@ -160,13 +160,21 @@ export const usersStore = defineStore('userStore', {
   getters: {
     fullname: (state) => {
       // return an array of full names for all users
-      return state.users.map((user) => user.fname + (user.lname ? ' ' + user.lname : ''))
+      return state.users.fname + state.users.lname
+    },
+    getUserById: (state) => (id) => {
+      return state.users.find((user) => user.id === id)
     },
   },
   actions: {
     addUser(newUser) {
       // user is object
       this.users.push(newUser)
+    },
+    deleteUser(userId) {
+      this.users = this.users.filter((user) => {
+        return user.id !== userId
+      })
     },
   },
 })
