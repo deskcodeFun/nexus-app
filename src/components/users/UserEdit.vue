@@ -43,18 +43,20 @@
 
       <div class="flex flex-row gap-8 sm:justify-between">
         <button
-          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+          class="flex items-center justify-center bg-blue-800 hover:bg-blue-900 hover:scale-102 text-white py-2 px-4 mt-8 rounded-full"
           type="submit"
         >
-          Save
+          <BookmarkIcon class="h-6 w-6 mr-1" />
+          <span> Save </span>
         </button>
         <button
-          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+          class="flex items-center justify-center bg-red-800 hover:bg-red-900 hover:scale-102 text-white py-2 px-4 mt-8 rounded-full"
           type="button"
           @click="delUser(deleteID)"
         >
           <!-- Conmfire dialog -->
-          Delete
+          <TrashIcon class="h-6 w-6 mr-1" />
+          <span> Delete </span>
         </button>
       </div>
     </form>
@@ -66,6 +68,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue'
 
 import { usersStore } from '@/stores/usersData'
+
+import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
 // import BaseModal from '../BaseModal.vue'
 
 const route = useRoute()
