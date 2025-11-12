@@ -1,61 +1,63 @@
 <template>
-  <main class="w-auto flex flex-col px-4">
-    <div class="flex flex-row justify-between py-2">
-      <p class="font-semibold text-xl text-sky-900 text-shadow-lg">Edit User</p>
+  <main class="w-auto flex flex-col">
+    <div class="flex flex-row mx-auto py-4">
+      <p class="font-semibold text-2xl text-sky-900 text-shadow-lg">Edit User</p>
     </div>
-    <div class="w-auto sm:max-w-screen-sm flex flex-col gap-2">
-      <form class="sm:max-w-screen-sm flex flex-col gap-2" @submit.prevent="editSubmit">
-        <p>User Id : {{ store.users[id].id }}</p>
-        <label for="fname">First Name</label>
-        <input
-          type="text"
-          v-model="fname"
-          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-        />
-        <label for="lname">Last Name</label>
-        <input
-          type="text"
-          v-model="lname"
-          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-        />
-        <label for="email">Email</label>
-        <input
-          type="text"
-          v-model="email"
-          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-        />
-        <label for="department">Department</label>
-        <input
-          type="text"
-          v-model="department"
-          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-        />
 
-        <label for="offie_id">Office Name</label>
-        <input
-          type="number"
-          v-model="office_id"
-          class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-        />
+    <form
+      class="sm:max-w-screen-sm sm:mx-auto mx-2 w-auto sm:w-full flex flex-col gap-2"
+      @submit.prevent="editSubmit"
+    >
+      <p>{{ 'User ID:' + ' ' + store.users[id].id }}</p>
+      <label for="fname">First Name</label>
+      <input
+        type="text"
+        v-model="fname"
+        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+      />
+      <label for="lname">Last Name</label>
+      <input
+        type="text"
+        v-model="lname"
+        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+      />
+      <label for="email">Email</label>
+      <input
+        type="text"
+        v-model="email"
+        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+      />
+      <label for="department">Department</label>
+      <input
+        type="text"
+        v-model="department"
+        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+      />
 
-        <div class="flex flex-row gap-8 sm:justify-between">
-          <button
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
-            type="submit"
-          >
-            Save
-          </button>
-          <button
-            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
-            type="button"
-            @click="delUser(deleteID)"
-          >
-            <!-- Conmfire dialog -->
-            Delete
-          </button>
-        </div>
-      </form>
-    </div>
+      <label for="offie_id">Office Name</label>
+      <input
+        type="number"
+        v-model="office_id"
+        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+      />
+
+      <div class="flex flex-row gap-8 sm:justify-between">
+        <button
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+          type="submit"
+        >
+          Save
+        </button>
+        <button
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 sm:px-8 mt-8 rounded-sm w-full sm:w-fit focus:outline-hidden focus:shadow-outline"
+          type="button"
+          @click="delUser(deleteID)"
+        >
+          <!-- Conmfire dialog -->
+          Delete
+        </button>
+      </div>
+    </form>
   </main>
 </template>
 
