@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-linear-35 from-red-400 to-blue-500">
+  <div class="bg-linear-180 from-indigo-300 to-red-400">
+    <!-- <div class="bg-linear-to-b from-indigo-500 via-green-400 to-red-400"> -->
     <!-- <header class="w-auto px-2 py-1 sm:ml-6"> -->
     <header class="w-auto mb-2 pt-1">
       <TheTopbar />
