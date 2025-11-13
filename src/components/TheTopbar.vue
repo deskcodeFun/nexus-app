@@ -7,12 +7,12 @@ const navOpen = ref(false)
 </script>
 
 <template>
-  <div class="pt-2 pb-4 px-2 rounded-md bg-blue-50/65">
+  <div class="pt-2 pb-4 px-2 rounded-md">
     <div class="flex flex-row">
       <button @click="navOpen = !navOpen">
         <Bars3Icon
           :class="navOpen ? 'hidden' : ''"
-          class="h-6 w-6 mt-1 rounded-full bg-gray-50/25 text-blue-900"
+          class="h-6 w-6 mt-1 rounded-full bg-gray-50/10 text-blue-900"
         />
         <XMarkIcon
           :class="navOpen ? '' : 'hidden'"
