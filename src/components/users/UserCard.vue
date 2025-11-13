@@ -44,7 +44,7 @@ const props = defineProps({ currentUser: Object })
 const fullname = computed(() => {
   const fname = props.currentUser?.fname ?? ''
   const lname = props.currentUser?.lname ?? ''
-  const shortLname = lname.length > 15 ? lname.substring(0, 15) + '...' : lname
+  const shortLname = lname.length > 10 ? lname.substring(0, 10) + '...' : lname
   return (fname + ' ' + shortLname).trim()
 })
 </script>
