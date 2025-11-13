@@ -1,14 +1,14 @@
 <template>
   <!-- Header -->
   <div class="flex flex-row justify-between sm:justify-normal px-2 sm:pl-8 py-2">
-    <p class="font-semibold sm:text-2xl text-sky-900 text-shadow-lg">User Management</p>
+    <p class="text-lg mt-1 sm:text-xl text-sky-900 text-shadow-lg">User Management</p>
     <span>
       <RouterLink
-        class="flex flex-row mt-1 mx-4 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
+        class="flex flex-row mt-2 mx-4 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
         to="/addUser"
       >
         <PlusIcon class="h-5 w-5" />
-        <p class="ml-2">Add User</p>
+        <p class="ml-2 text-sm">Add User</p>
       </RouterLink>
     </span>
   </div>
