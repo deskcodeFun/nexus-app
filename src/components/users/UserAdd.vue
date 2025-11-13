@@ -29,7 +29,7 @@
         <button
           @click="router.push('/user')"
           type="button"
-          class="flex items-center justify-center bg-gray-700 hover:bg-gray-900 hover:scale-102 text-white py-2 px-4 mt-8 rounded-full"
+          class="flex items-center justify-center bg-white/65 text-black border-1 hover:bg-gray-900 hover:scale-102 hover:text-white py-2 px-4 mt-8 rounded-full"
         >
           <ChevronDoubleLeftIcon class="h-6 w-6 mr-1" />
           <span> Back </span>

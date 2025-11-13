@@ -50,7 +50,7 @@
           <span> Save </span>
         </button>
         <button
-          class="flex items-center justify-center bg-red-800 hover:bg-red-900 hover:scale-102 text-white py-2 px-4 mt-8 rounded-full"
+          class="flex items-center justify-center hover:bg-red-900 hover:text-white hover:scale-102 text-black bg-white/65 border-1 py-2 px-4 mt-8 rounded-full"
           type="button"
           @click="delUser(deleteID)"
         >

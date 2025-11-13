@@ -42,6 +42,9 @@ import { computed } from 'vue'
 const props = defineProps({ currentUser: Object })
 
 const fullname = computed(() => {
-  return props.currentUser.fname + ' ' + props.currentUser.lname
+  const fname = props.currentUser?.fname ?? ''
+  const lname = props.currentUser?.lname ?? ''
+  const shortLname = lname.length > 15 ? lname.substring(0, 15) + '...' : lname
+  return (fname + ' ' + shortLname).trim()
 })
 </script>
