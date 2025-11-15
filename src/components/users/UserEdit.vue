@@ -8,7 +8,6 @@
       class="sm:max-w-screen-sm sm:mx-auto mx-2 w-auto sm:w-full flex flex-col gap-2"
       @submit.prevent="editSubmit"
     >
-      <p>{{ 'User ID:' + ' ' + store.users[id].id }}</p>
       <label for="fname">First Name</label>
       <input
         type="text"
@@ -52,12 +51,22 @@
         <button
           class="flex items-center justify-center hover:bg-red-900 hover:text-white hover:scale-102 text-black bg-white/65 border-1 py-2 px-4 mt-8 rounded-full"
           type="button"
-          @click="delUser(deleteID)"
+          @click="toggleModal"
         >
           <!-- Conmfire dialog -->
           <TrashIcon class="h-6 w-6 mr-1" />
           <span> Delete </span>
         </button>
+        <BaseModal
+          :modalActive="modalActive"
+          @save-data="delUser(deleteID)"
+          @close-modal="modalActive = false"
+        >
+          <p class="bg-linear-to-r from-red-900 to-gray-400 text-white px-4 py-2">
+            Delete {{ ' ' + fname }}
+          </p>
+          <p class="mt-4 px-4 text-lg">Are you sure to delete ?</p>
+        </BaseModal>
       </div>
     </form>
   </main>
@@ -70,7 +79,7 @@ import { ref } from 'vue'
 import { usersStore } from '@/stores/usersData'
 
 import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
-// import BaseModal from '../BaseModal.vue'
+import BaseModal from '../BaseModal.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -78,10 +87,10 @@ const router = useRouter()
 const store = usersStore()
 let id = +route.params.id
 
-// const modalActive = ref(null)
-// const toggleModal = () => {
-//   modalActive.value = !modalActive.value
-// }
+const modalActive = ref(null)
+const toggleModal = () => {
+  modalActive.value = !modalActive.value
+}
 
 const fname = ref(store.users[id].fname)
 const lname = ref(store.users[id].lname)
