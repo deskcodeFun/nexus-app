@@ -2,9 +2,15 @@
   <teleport to="body">
     <div
       v-show="modalActive"
-      class="absolute w-full bg-black/30 h-screen top-0 left-0 flex justify-center"
+      @click.self="emit('close-modal')"
+      class="backdrop-blur-xs absolute w-full bg-black/10 h-screen top-0 left-0 flex justify-center"
     >
-      <div v-if="modalActive" class="bg-white self-start mt-32 max-w-screen-md sm:w-96">
+      <div v-if="modalActive" class="bg-white self-start mt-36 mx-4 w-full sm:w-96">
+        <!-- Title of model props from parent -->
+        <p class="bg-linear-to-r from-red-900 to-gray-400 text-white text-xl px-4 py-2">
+          {{ title }}
+        </p>
+        <!-- contents of modal create in parent -->
         <slot />
         <div class="flex justify-between">
           <button
@@ -31,8 +37,7 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  title: String,
 })
 const emit = defineEmits(['close-modal', 'save-data'])
 </script>
-
-<style lang="scss" scoped></style>

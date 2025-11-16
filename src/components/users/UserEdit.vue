@@ -59,13 +59,11 @@
         </button>
         <BaseModal
           :modalActive="modalActive"
+          title="Delete"
           @save-data="delUser(deleteID)"
           @close-modal="modalActive = false"
         >
-          <p class="bg-linear-to-r from-red-900 to-gray-400 text-white px-4 py-2">
-            Delete {{ ' ' + fname }}
-          </p>
-          <p class="mt-4 px-4 text-lg">Are you sure to delete ?</p>
+          <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
         </BaseModal>
       </div>
     </form>
