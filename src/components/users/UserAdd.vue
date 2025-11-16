@@ -20,19 +20,19 @@
       <!-- Save Button -->
       <div class="flex flex-row justify-between">
         <button
+          @click="router.push('/user')"
+          type="button"
+          class="flex items-center justify-center bg-white/20 text-black hover:bg-gray-200 hover:scale-102 hover:text-blue-900 py-2 px-4 mt-8 rounded-full"
+        >
+          <ChevronDoubleLeftIcon class="h-6 w-6 mr-1" />
+          <span> Back </span>
+        </button>
+        <button
           class="flex items-center justify-center bg-blue-800 hover:bg-blue-900 hover:scale-102 text-white py-2 px-4 mt-8 rounded-full"
           type="submit"
         >
           <BookmarkIcon class="h-6 w-6 mr-1" />
           <span> Save </span>
-        </button>
-        <button
-          @click="router.push('/user')"
-          type="button"
-          class="flex items-center justify-center bg-white/65 text-black border-1 hover:bg-gray-900 hover:scale-102 hover:text-white py-2 px-4 mt-8 rounded-full"
-        >
-          <ChevronDoubleLeftIcon class="h-6 w-6 mr-1" />
-          <span> Back </span>
         </button>
       </div>
     </form>
