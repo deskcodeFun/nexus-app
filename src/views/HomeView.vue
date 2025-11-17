@@ -10,7 +10,7 @@
           <!-- <option value="" disabled>Select BU</option> -->
           <option value="0">All</option>
           <option
-            v-for="officeStore in officeStores.office"
+            v-for="officeStore in officeStores.offices"
             :key="officeStore.id"
             :value="officeStore.id"
           >

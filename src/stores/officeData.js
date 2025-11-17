@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useOfficeStore = defineStore('officeStore', {
   state: () => ({
-    office: [
+    offices: [
       {
         id: 1,
         name: 'Nexus Poperty Agency Co., Ltd.',

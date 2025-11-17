@@ -9,7 +9,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Khongnok',
         email: 'sumita@nexus.co.th',
         department: 'Finance & Accounting',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 2,
@@ -17,7 +17,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Muangnanta',
         email: 'nattapon@nexus.co.th',
         department: 'Valuation Advisory',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 3,
@@ -25,7 +25,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Makchuay',
         email: 'napasorn@nexus.co.th',
         department: 'Marketing Communication',
-        office_id: '3',
+        office_id: 'NPM',
       },
       {
         id: 4,
@@ -33,7 +33,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Jangprasitchai',
         email: 'chavanut@nexus.co.th',
         department: 'Land Acquistion',
-        office_id: '1',
+        office_id: 'Nexus Poperty Agency Co., Ltd.',
       },
       {
         id: 5,
@@ -41,7 +41,7 @@ export const usersStore = defineStore('userStore', {
         lname: '',
         email: '',
         department: 'Central Administrations',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 6,
@@ -49,7 +49,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Sinprasertporn',
         email: 'patthama@nexus.co.th',
         department: 'Sales Services',
-        office_id: '3',
+        office_id: 'NPM',
       },
       {
         id: 7,
@@ -57,7 +57,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Tonpoo',
         email: 'apatcha@nexus.co.th,',
         department: 'Investment Advisory',
-        office_id: '4',
+        office_id: 'NRA',
       },
       {
         id: 8,
@@ -65,7 +65,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Kotama',
         email: 'patcharin@nexus.co.th',
         department: 'Central Administrations',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 9,
@@ -73,7 +73,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Mairieng',
         email: 'natthida@nexus.co.th',
         department: 'Business Development',
-        office_id: '3',
+        office_id: 'NPM',
       },
       {
         id: 10,
@@ -81,7 +81,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Hiranprasatkul',
         email: 'seksan@nexus.co.th',
         department: 'Valuation Advisory',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 11,
@@ -89,7 +89,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Seangthong',
         email: 'massupa@nexus.co.th',
         department: 'Finance & Accounting',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 12,
@@ -97,7 +97,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Suntornkrut',
         email: 'ayika@nexus.co.th',
         department: 'Valuation Advisory',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 13,
@@ -105,7 +105,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Mahaolan',
         email: 'achara@nexus.co.th',
         department: 'Valuation Advisory',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 14,
@@ -113,7 +113,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Teepatimakorn',
         email: 'satita@nexus.co.th',
         department: 'Investment Advisory',
-        office_id: '4',
+        office_id: 'NRA',
       },
       {
         id: 15,
@@ -121,7 +121,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Chaisirikul',
         email: '',
         department: 'Conspire',
-        office_id: '7',
+        office_id: 'Conspire',
       },
       {
         id: 16,
@@ -129,7 +129,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Taechamongkalapiwat',
         email: 'danuya@nexus.co.th',
         department: 'Marketing Communication',
-        office_id: '3',
+        office_id: 'NPM',
       },
       {
         id: 17,
@@ -137,7 +137,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Dangbunjong',
         email: 'ketwadee@nexus.co.th',
         department: 'Central Administrations',
-        office_id: '2',
+        office_id: 'NPC',
       },
       {
         id: 18,
@@ -145,7 +145,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Pankaew',
         email: 'patcharaporn@nexus.co.th',
         department: 'Retail  Services',
-        office_id: '5',
+        office_id: 'NRT',
       },
       {
         id: 19,
@@ -153,7 +153,7 @@ export const usersStore = defineStore('userStore', {
         lname: 'Muthita',
         email: 'atipa@nexus.co.th',
         department: 'Research Advisory',
-        office_id: '4',
+        office_id: 'NRA',
       },
     ],
   }),
