@@ -23,10 +23,12 @@
     <!--Show computer  -->
     <div>
       <h1>Computer</h1>
+      <ComputerView />
     </div>
     <!--Show printer  -->
     <div>
       <h1>Printer</h1>
+      <PrinterView />
     </div>
     <!--Show other -->
     <div>
@@ -39,8 +41,11 @@
 // import { ref, watch } from 'vue'
 import { useOfficeStore } from '@/stores/officeData'
 
+import ComputerView from './ComputerView.vue'
+import PrinterView from './PrinterView.vue'
+
 const officeStores = useOfficeStore()
-console.log(officeStores.office)
+console.log(officeStores.offices)
 </script>
 
 <style scoped></style>
