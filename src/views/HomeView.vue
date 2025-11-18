@@ -1,5 +1,5 @@
 <template>
-  <main class="mx-8">
+  <main class="w-full mx-2 sm:mx-8">
     <!-- submenu filter dropdown select BU-->
     <div class="flex flex-row py-8 gap-8">
       <p class="text-lg">Select BU</p>
@@ -22,8 +22,8 @@
 
     <!--Show computer  -->
     <div class="w-full my-8">
-      <div @click="toggleVisible" class="w-48 flex flex-row justify-between">
-        <p class="text-xl text-shadow-lg px-4">Computer</p>
+      <div @click="toggleVisible" class="max-w-screen mx-4 sm:w-48 flex flex-row justify-between">
+        <p class="text-xl text-shadow-lg">Computer</p>
         <div v-if="visible">
           <ChevronDownIcon class="h-6 w-6 mt-1 bg-white" />
         </div>
@@ -38,8 +38,8 @@
 
     <!--Show printer  -->
     <div class="w-full my-8">
-      <div @click="toggleVisible1" class="w-48 justify-between flex flex-row gap-4">
-        <p class="text-xl text-shadow-lg px-4">Printer</p>
+      <div @click="toggleVisible1" class="max-w-screen mx-4 sm:w-48 justify-between flex flex-row">
+        <p class="text-xl text-shadow-lg">Printer</p>
         <div v-if="visible1">
           <ChevronDownIcon class="h-6 w-6 mt-1 bg-white" />
         </div>
@@ -54,8 +54,8 @@
 
     <!--Show other -->
     <div class="w-full my-8">
-      <div @click="toggleVisible2" class="w-48 justify-between flex flex-row gap-4">
-        <p class="text-xl text-shadow-lg px-4">Other</p>
+      <div @click="toggleVisible2" class="max-w-screen mx-4 sm:w-48 justify-between flex flex-row">
+        <p class="text-xl text-shadow-lg">Other</p>
         <div v-if="visible2">
           <ChevronDownIcon class="h-6 w-6 mt-1 bg-white" />
         </div>
