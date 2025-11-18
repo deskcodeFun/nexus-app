@@ -1,7 +1,7 @@
 <template>
   <!-- <div v-if="computer.isLoading" class="text-green-600 text-2xl text-center">Loading...</div> -->
   <div>
-    <ul class="bg-sky-50/30 flex flex-row flex-wrap justify-center sm:justify-start">
+    <ul class="bg-sky-50/30 flex flex-nowrap overflow-x-scroll p-4 justify-center sm:justify-start">
       <li v-for="(asset, index) in computerStore" :key="index">
         <ComputerCard :currentAsset="asset" />
       </li>

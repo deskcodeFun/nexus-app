@@ -21,31 +21,82 @@
     </div>
 
     <!--Show computer  -->
-    <div>
-      <h1>Computer</h1>
-      <ComputerView />
+    <div class="w-full my-8">
+      <div @click="toggleVisible" class="w-48 flex flex-row justify-between">
+        <p class="text-xl text-shadow-lg px-4">Computer</p>
+        <div v-if="visible">
+          <ChevronDownIcon class="h-6 w-6 mt-1 bg-white" />
+        </div>
+        <div v-else>
+          <ChevronUpIcon class="h-6 w-6 mt-1 text-gray-500" />
+        </div>
+      </div>
+      <div v-if="visible">
+        <ComputerView />
+      </div>
     </div>
+
     <!--Show printer  -->
-    <div>
-      <h1>Printer</h1>
-      <PrinterView />
+    <div class="w-full my-8">
+      <div @click="toggleVisible1" class="w-48 justify-between flex flex-row gap-4">
+        <p class="text-xl text-shadow-lg px-4">Printer</p>
+        <div v-if="visible1">
+          <ChevronDownIcon class="h-6 w-6 mt-1 bg-white" />
+        </div>
+        <div v-else>
+          <ChevronUpIcon class="h-6 w-6 mt-1 text-gray-500" />
+        </div>
+      </div>
+      <div v-if="visible1">
+        <PrinterView />
+      </div>
     </div>
+
     <!--Show other -->
-    <div>
-      <h1>Other</h1>
+    <div class="w-full my-8">
+      <div @click="toggleVisible2" class="w-48 justify-between flex flex-row gap-4">
+        <p class="text-xl text-shadow-lg px-4">Other</p>
+        <div v-if="visible2">
+          <ChevronDownIcon class="h-6 w-6 mt-1 bg-white" />
+        </div>
+        <div v-else>
+          <ChevronUpIcon class="h-6 w-6 mt-1 text-gray-500" />
+        </div>
+      </div>
+      <div v-if="visible2">
+        <PrinterView />
+      </div>
     </div>
   </main>
 </template>
 
 <script setup>
-// import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useOfficeStore } from '@/stores/officeData'
 
 import ComputerView from './ComputerView.vue'
 import PrinterView from './PrinterView.vue'
 
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid'
+
 const officeStores = useOfficeStore()
 console.log(officeStores.offices)
+
+const visible1 = ref(false)
+const toggleVisible1 = () => {
+  visible1.value = !visible1.value
+  console.log(toggleVisible1)
+}
+const visible = ref(false)
+const toggleVisible = () => {
+  visible.value = !visible.value
+  console.log(toggleVisible)
+}
+const visible2 = ref(false)
+const toggleVisible2 = () => {
+  visible2.value = !visible2.value
+  console.log(toggleVisible2)
+}
 </script>
 
 <style scoped></style>
