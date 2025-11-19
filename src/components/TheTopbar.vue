@@ -19,7 +19,7 @@ const navOpen = ref(false)
           class="h-6 w-6 rounded-full bg-gray-50/25 text-red-900"
         /> -->
       </button>
-      <p class="ml-2 font-bold text-2xl text-sky-900 text-shadow-lg">Nexus Service</p>
+      <p class="ml-2 font-bold text-2xl text-blue-900 text-shadow-lg">Nexus Service</p>
     </div>
   </div>
   <Transition name="slide-fade">
