@@ -114,5 +114,3 @@ const toggleVisible2 = () => {
   }
 }
 </script>
-
-<style scoped></style>

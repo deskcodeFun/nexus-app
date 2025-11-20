@@ -16,11 +16,8 @@ import { useAssetsStore } from '@/stores/assetsData'
 
 import PrinterCard from '@/components/printers/PrinterCard.vue'
 const store = useAssetsStore()
-console.log('All asset store', store.assets)
 
 const printerStore = store.assets.filter((item) => item.catalog === 'printer')
-
-console.log('computer filter', printerStore)
 </script>
 
 <style lang="scss" scoped></style>

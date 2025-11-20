@@ -17,11 +17,8 @@ import { useAssetsStore } from '@/stores/assetsData'
 import ComputerCard from '@/components/computers/ComputerCard.vue'
 
 const store = useAssetsStore()
-console.log('All asset store', store.assets)
 
 const computerStore = store.assets.filter((item) => item.catalog === 'computer')
-
-console.log('computer filter', computerStore)
 </script>
 
 <style lang="scss" scoped></style>

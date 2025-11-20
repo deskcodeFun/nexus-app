@@ -42,7 +42,6 @@
 
 <script setup>
 const props = defineProps({ currentAsset: Object })
-console.log('currentComputer', props.currentComputer)
 </script>
 
 <style lang="scss" scoped></style>
