@@ -3,11 +3,13 @@ import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import ServiceView from '@/views/ServiceView.vue'
+import AssetsView from '@/views/AssetsView.vue'
 // import UserAdd from '@/components/users/UserAdd.vue'
 
 import UserView from '@/views/UserView.vue'
 import UserAdd from '@/components/users/UserAdd.vue'
 import UserEdit from '@/components/users/UserEdit.vue'
+
 // import ComputerAdd from '@/components/computer/ComputerAdd.vue'
 
 const router = createRouter({
@@ -23,6 +25,12 @@ const router = createRouter({
       name: 'about',
 
       component: AboutView,
+    },
+    {
+      path: '/assets',
+      name: 'assets',
+
+      component: AssetsView,
     },
 
     {

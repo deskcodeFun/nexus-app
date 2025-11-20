@@ -1,7 +1,7 @@
 <template>
   <!-- Header -->
-  <div class="flex flex-row justify-between sm:justify-normal px-2 sm:pl-8 py-2">
-    <p class="text-lg mt-1 sm:text-xl text-sky-900 text-shadow-lg">User Management</p>
+  <div class="flex flex-row justify-between sm:justify-normal px-2 py-2">
+    <p class="text-lg mt-1 sm:text-2xl text-sky-900 text-shadow-lg">User Management</p>
     <span>
       <RouterLink
         class="flex flex-row mt-2 mx-4 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"

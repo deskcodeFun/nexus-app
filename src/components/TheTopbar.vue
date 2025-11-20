@@ -7,31 +7,25 @@ const navOpen = ref(false)
 </script>
 
 <template>
-  <div class="rounded-md">
-    <div class="flex flex-row">
+  <div class="bg-white/40">
+    <div class="flex flex-row mx-4">
       <button @click="navOpen = !navOpen">
         <Bars3Icon
           :class="navOpen ? 'hidden' : ''"
           class="h-6 w-6 mt-1 rounded-full bg-gray-50/50 text-blue-900"
         />
-        <!-- <XMarkIcon
+        <XMarkIcon
           :class="navOpen ? '' : 'hidden'"
           class="h-6 w-6 rounded-full bg-gray-50/25 text-red-900"
-        /> -->
+        />
       </button>
-      <p class="font-bold text-2xl mx-4 my-4 w-fit text-blue-900 text-shadow-lg">Nexus Service</p>
+      <p class="font-bold text-3xl m-4 w-fit text-blue-900 text-shadow-lg">Nexus Service</p>
     </div>
   </div>
   <Transition name="slide-fade">
     <Teleport to="body">
       <div v-if="navOpen" class="modal mt-16" @click.self="navOpen = false">
         <nav class="flex flex-col py-2 w-64 bg-sky-50">
-          <button @click="navOpen = !navOpen" class="flex justify-end px-2">
-            <XMarkIcon
-              :class="navOpen ? '' : 'hidden'"
-              class="h-6 w-6 rounded-full bg-gray-50/25 text-red-900 hover:bg-red-900 hover:text-white"
-            />
-          </button>
           <RouterLink
             to="/"
             class="px-8 text-lg rounded-xl m-1 p-1 hover:bg-gray-200 md:text-lg"
@@ -39,6 +33,14 @@ const navOpen = ref(false)
             @click="navOpen = !navOpen"
             >Home</RouterLink
           >
+          <RouterLink
+            to="/assets"
+            class="px-8 text-lg rounded-xl m-1 p-1 hover:bg-gray-200 md:text-lg"
+            active-class="bg-sky-200 px-2 rounded-lg text-xl hover:bg-sky-200 "
+            @click="navOpen = !navOpen"
+            >Asset Account</RouterLink
+          >
+
           <RouterLink
             to="/user"
             class="px-8 text-lg rounded-xl m-1 p-1 hover:bg-gray-200 md:text-lg"
