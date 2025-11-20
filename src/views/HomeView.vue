@@ -30,9 +30,11 @@
         <p class="text-xl text-shadow-lg pl-4">Computer</p>
       </div>
       <div class="w-11/12 border-t border-blue-900 mt-4"></div>
-      <div v-if="visible">
-        <ComputerView />
-      </div>
+      <Transition name="slide-down">
+        <div v-if="visible">
+          <ComputerView />
+        </div>
+      </Transition>
     </div>
 
     <!--Show printer  -->
@@ -47,9 +49,11 @@
         <p class="text-xl text-shadow-lg pl-4">Printer</p>
       </div>
       <div class="w-11/12 border-t border-blue-900 mt-4"></div>
-      <div v-if="visible1">
-        <PrinterView />
-      </div>
+      <Transition name="slide-down">
+        <div v-if="visible1">
+          <PrinterView />
+        </div>
+      </Transition>
     </div>
 
     <!--Show other -->
@@ -64,9 +68,11 @@
         <p class="text-xl text-shadow-lg pl-4">Other</p>
       </div>
       <div class="w-11/12 border-t border-blue-900 mt-4"></div>
-      <div v-if="visible2">
-        <PrinterView />
-      </div>
+      <Transition name="slide-down">
+        <div v-if="visible2">
+          <PrinterView />
+        </div>
+      </Transition>
     </div>
   </main>
 </template>
