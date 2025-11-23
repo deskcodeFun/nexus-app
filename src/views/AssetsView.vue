@@ -33,7 +33,7 @@
       <div class="w-11/12 border-t border-blue-900 mt-4"></div>
       <Transition name="slide-down">
         <div v-if="visible">
-          <ComputerView />
+          <ComputerView></ComputerView>
         </div>
       </Transition>
     </div>
