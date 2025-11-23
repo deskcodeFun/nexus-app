@@ -19,7 +19,8 @@
           <tr>
             <th>User Name</th>
             <!-- <td>{{ props.currentAsset.fname + ' ' + props.currentAsset.lname }}</td> -->
-            <td>{{ item.user_name }}</td>
+            <!-- <td>{{ item.user_name.substring(0, 16) + '...' }}</td> -->
+            <td>{{ shortName(item.user_name) }}</td>
           </tr>
           <tr>
             <th scope="col">Type</th>
@@ -31,11 +32,11 @@
           </tr>
           <tr>
             <th scope="col">Asset Tag</th>
-            <td>{{ item.asset_tag }}</td>
+            <td>{{ shortName(item.asset_tag) }}</td>
           </tr>
           <tr>
             <th scope="col">Serial</th>
-            <td>{{ item.serial }}</td>
+            <td>{{ shortName(item.serial) }}</td>
           </tr>
         </tbody>
       </table>
@@ -45,8 +46,14 @@
 
 <script setup>
 import { useAssetsStore } from '@/stores/assetsData'
+
 const store = useAssetsStore()
 const computerStore = store.assets.filter((item) => item.catalog === 'computer')
+
+function shortName(name) {
+  if (!name) return ''
+  return name.length > 12 ? name.substring(0, 15) + '...' : name
+}
 </script>
 
 <style lang="scss" scoped></style>
