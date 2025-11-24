@@ -12,32 +12,32 @@
       <input
         type="text"
         v-model="fname"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
       />
       <label for="lname">Last Name</label>
       <input
         type="text"
         v-model="lname"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
       />
       <label for="email">Email</label>
       <input
         type="text"
         v-model="email"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
       />
       <label for="department">Department</label>
       <input
         type="text"
         v-model="department"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
       />
 
       <label for="offie_id">Office Name</label>
       <input
-        type="number"
+        type="text"
         v-model="office_id"
-        class="bg-sky-50/70 text-2xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
+        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
       />
 
       <div class="flex flex-row gap-8 sm:justify-between">

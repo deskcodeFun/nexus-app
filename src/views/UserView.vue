@@ -12,20 +12,32 @@
       </RouterLink>
     </span>
   </div>
-  <div class="flex flex-row flex-wrap justify-center sm:justify-start sm:ml-8">
-    <div v-for="(user, index) in store.users" :key="index">
-      <UserCard :currentUser="user" @click="router.push(`/editUser/${index}`)"></UserCard>
-    </div>
+
+  <div class="w-11/12 py-4">
+    <component :is="activeComponent"></component>
   </div>
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import UserCard from '@/components/users/UserCard.vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { PlusIcon } from '@heroicons/vue/20/solid'
-import { usersStore } from '@/stores/usersData'
 
-const store = usersStore()
-const router = useRouter(0)
-console.log('users in usersStore', store.users)
+import UserTable from '@/components/users/UserTable.vue'
+import UserCard from '@/components/users/UserCard.vue'
+
+// detect screen
+const windowWidth = ref(window.innerWidth)
+const onWidthChange = () => {
+  windowWidth.value = window.innerWidth
+}
+onMounted(() => {
+  window.addEventListener('resize', onWidthChange)
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', onWidthChange)
+})
+const activeComponent = computed(() => {
+  return windowWidth.value <= 768 ? UserCard : UserTable
+})
+// const router = useRouter()
 </script>
