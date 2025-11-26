@@ -1,6 +1,6 @@
 <template>
   <!-- <div v-if="computer.isLoading" class="text-green-600 text-2xl text-center">Loading...</div> -->
-  <div class="w-11/12 py-4">
+  <div>
     <component :is="activeComponent"></component>
   </div>
 </template>

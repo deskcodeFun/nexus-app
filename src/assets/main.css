@@ -34,11 +34,11 @@
 
 /* use in <Transition name="slide-down"  */
 .slide-down-enter-active {
-  transition: all 0.3s ease-in;
+  transition: all 0.3s linear;
 }
 
 .slide-down-leave-active {
-  transition: all ease-out;
+  transition: all linear;
   transform: translateY(10%);
   opacity: 0;
 }

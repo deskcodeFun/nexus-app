@@ -1,9 +1,11 @@
 <template>
-  <div v-for="(item, index) in computerStore" :key="index" class="flex flex-row flex-wrap">
+  <div
+    v-for="(item, index) in computerStore"
+    :key="index"
+    class="sm:flex-row sm:flex-wrap justify-center"
+  >
     <!-- each card layout -->
-    <div
-      class="w-[300px] bg-white/65 border-1 border-gray-400 rounded-xl shadow-xl px-2 py-4 my-4 hover:transition-y-1 hover:scale-105"
-    >
+    <BaseCard>
       <!-- show data in each card -->
       <table
         class="[&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4"
@@ -40,11 +42,13 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </BaseCard>
   </div>
 </template>
 
 <script setup>
+import BaseCard from '../BaseCard.vue'
+
 import { useAssetsStore } from '@/stores/assetsData'
 
 const store = useAssetsStore()
