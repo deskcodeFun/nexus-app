@@ -1,19 +1,18 @@
 <template>
   <!-- Header -->
-  <div class="flex flex-row justify-between sm:justify-normal px-2 py-2">
+  <div class="w-full justify-between flex flex-col sm:flex-row mx-auto py-2 border-b mt-2">
     <p class="text-lg mt-1 sm:text-2xl text-sky-900 text-shadow-lg">User Management</p>
-    <span>
-      <RouterLink
-        class="flex flex-row mt-2 mx-4 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
-        to="/addUser"
-      >
-        <PlusIcon class="h-5 w-5" />
-        <p class="ml-2 text-sm">Add User</p>
-      </RouterLink>
-    </span>
+
+    <RouterLink
+      class="flex flex-row mt-4 sm:mx-4 sm:px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
+      to="/addUser"
+    >
+      <PlusIcon class="h-5 w-5" />
+      <p class="ml-2 text-sm">Add User</p>
+    </RouterLink>
   </div>
 
-  <div class="w-11/12 py-4">
+  <div class="mt-4 w-full">
     <component :is="activeComponent"></component>
   </div>
 </template>

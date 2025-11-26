@@ -1,8 +1,6 @@
 <template>
   <div v-for="(user, index) in store.users" :key="index" @click="router.push(`/editUser/${index}`)">
-    <div
-      class="w-full sm:w-[300px] flex flex-row flex-wrap justify-center sm:flex-col rounded-xl shadow-xl px-2 py-4 m-2 hover:transition-y-1 hover:scale-105"
-    >
+    <BaseCard>
       <!-- show data -->
       <table
         class="[&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-2"
@@ -34,13 +32,14 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </BaseCard>
   </div>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router'
 import { usersStore } from '@/stores/usersData'
+import BaseCard from '../BaseCard.vue'
 
 const router = useRouter()
 const store = usersStore()
