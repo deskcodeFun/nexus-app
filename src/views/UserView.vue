@@ -18,25 +18,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { computed } from 'vue'
 import { PlusIcon } from '@heroicons/vue/20/solid'
 
 import UserTable from '@/components/users/UserTable.vue'
 import UserCard from '@/components/users/UserCard.vue'
+import { useMonitorSize } from '@/composables/DeviceScreen'
 
 // detect screen
-const windowWidth = ref(window.innerWidth)
-const onWidthChange = () => {
-  windowWidth.value = window.innerWidth
-}
-onMounted(() => {
-  window.addEventListener('resize', onWidthChange)
-})
-onUnmounted(() => {
-  window.removeEventListener('resize', onWidthChange)
-})
+const sizes = useMonitorSize()
 const activeComponent = computed(() => {
-  return windowWidth.value <= 768 ? UserCard : UserTable
+  return sizes.isMobile.value ? UserCard : UserTable
 })
 // const router = useRouter()
 </script>
