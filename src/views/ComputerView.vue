@@ -6,24 +6,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-
+// import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import ComputerCard from '@/components/computers/ComputerCard.vue'
 import ComputerTable from '@/components/computers/ComputerTable.vue'
+import { useMonitorSize } from '@/composables/DeviceScreen'
 
-// detect screen
-const windowWidth = ref(window.innerWidth)
-const onWidthChange = () => {
-  windowWidth.value = window.innerWidth
-}
-onMounted(() => {
-  window.addEventListener('resize', onWidthChange)
-})
-onUnmounted(() => {
-  window.removeEventListener('resize', onWidthChange)
-})
+const sizes = useMonitorSize()
 const activeComponent = computed(() => {
-  return windowWidth.value <= 768 ? ComputerCard : ComputerTable
+  return sizes.isMobile.value ? ComputerCard : ComputerTable
 })
 </script>
 
