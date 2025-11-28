@@ -1,5 +1,6 @@
 <template>
-  <div class="w-full min-h-screen bg-linear-180 from-indigo-100 to-red-100">
+  <!-- <div class="w-full min-h-screen bg-linear-180 from-indigo-100 to-red-100"> -->
+  <div class="w-full min-h-screen bg-gray-50">
     <div>
       <TheTopbar />
     </div>

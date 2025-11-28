@@ -9,6 +9,13 @@ import AssetsView from '@/views/AssetsView.vue'
 import UserView from '@/views/UserView.vue'
 import UserAdd from '@/components/users/UserAdd.vue'
 import UserEdit from '@/components/users/UserEdit.vue'
+import AssetsNPA from '@/components/assets/AssetsNPA.vue'
+import AssetsNPC from '@/components/assets/AssetsNPC.vue'
+import AssetsNPM from '@/components/assets/AssetsNPM.vue'
+import AssetsNRA from '@/components/assets/AssetsNRA.vue'
+import AssetsNRT from '@/components/assets/AssetsNRT.vue'
+import AssetsOHO from '@/components/assets/AssetsOHO.vue'
+import AssetsConspire from '@/components/assets/AssetsConspire.vue'
 
 // import ComputerAdd from '@/components/computer/ComputerAdd.vue'
 
@@ -29,8 +36,42 @@ const router = createRouter({
     {
       path: '/assets',
       name: 'assets',
-
       component: AssetsView,
+    },
+    {
+      path: '/npa',
+      name: 'assets-npa',
+      component: AssetsNPA,
+    },
+    {
+      path: '/npc',
+      name: 'assets-npc',
+      component: AssetsNPC,
+    },
+    {
+      path: '/npm',
+      name: 'assets-npm',
+      component: AssetsNPM,
+    },
+    {
+      path: '/nra',
+      name: 'assets-nra',
+      component: AssetsNRA,
+    },
+    {
+      path: '/nrt',
+      name: 'assets-nrt',
+      component: AssetsNRT,
+    },
+    {
+      path: '/oho',
+      name: 'assets-oho',
+      component: AssetsOHO,
+    },
+    {
+      path: '/conspire',
+      name: 'assets-conspire',
+      component: AssetsConspire,
     },
 
     {

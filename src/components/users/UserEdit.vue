@@ -1,73 +1,52 @@
 <template>
-  <main class="w-auto flex flex-col">
-    <div class="flex flex-row mx-auto py-4">
-      <p class="font-semibold text-2xl text-sky-900 text-shadow-lg">Edit User</p>
+  <div class="flex flex-col justify-center items-center bg-white p-4">
+    <p class="flex mb-8 text-lg text-blue-900">Edit User</p>
+
+    <div class="w-2/5 bg-white">
+      <form class="flex flex-col justify-center gap-2" @submit.prevent="editSubmit">
+        <div class="flex flex-row justify-between">
+          <label for="fname">First Name</label>
+          <button
+            class="flex items-center justify-center hover:bg-gray-200 hover:scale-102 hover:text-blue-900 py-1 px-4 rounded-xl"
+            type="button"
+            @click="toggleModal"
+          >
+            <TrashIcon class="h-4 w-4 mr-1 text-gray-400 hover:text-red-900" />
+          </button>
+        </div>
+        <input type="text" v-model="fname" class="bg-sky-50 text-md p-1" />
+        <label for="lname">Last Name</label>
+        <input type="text" v-model="lname" class="bg-sky-50 text-md p-1" />
+        <label for="email">Email</label>
+        <input type="text" v-model="email" class="bg-sky-50 text-md p-1" />
+        <label for="department">Department</label>
+        <input type="text" v-model="department" class="bg-sky-50 text-md p-1" />
+
+        <label for="offie_id">Office Name</label>
+        <input type="text" v-model="office_id" class="bg-sky-50 text-md p-1" />
+        <!-- Show button -->
+        <div class="flex flex-row justify-between">
+          <BaseButttonBack />
+          <button
+            class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+            type="submit"
+          >
+            <BookmarkIcon class="h-4 w-4 mr-1" />
+            <span> Save </span>
+          </button>
+
+          <BaseModal
+            :modalActive="modalActive"
+            title="Delete"
+            @save-data="delUser(deleteID)"
+            @close-modal="modalActive = false"
+          >
+            <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
+          </BaseModal>
+        </div>
+      </form>
     </div>
-
-    <form
-      class="sm:max-w-screen-sm sm:mx-auto mx-2 w-auto sm:w-full flex flex-col gap-2"
-      @submit.prevent="editSubmit"
-    >
-      <label for="fname">First Name</label>
-      <input
-        type="text"
-        v-model="fname"
-        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
-      <label for="lname">Last Name</label>
-      <input
-        type="text"
-        v-model="lname"
-        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
-      <label for="email">Email</label>
-      <input
-        type="text"
-        v-model="email"
-        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
-      <label for="department">Department</label>
-      <input
-        type="text"
-        v-model="department"
-        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
-
-      <label for="offie_id">Office Name</label>
-      <input
-        type="text"
-        v-model="office_id"
-        class="bg-sky-50/70 text-xl p-2 rounded-xl focus:outline-blue-600 focus:shadow-xl focus:scale-101"
-      />
-
-      <div class="flex flex-row gap-8 sm:justify-between">
-        <button
-          class="flex items-center justify-center bg-blue-800 hover:bg-blue-900 hover:scale-102 text-white py-2 px-4 mt-8 rounded-full"
-          type="submit"
-        >
-          <BookmarkIcon class="h-6 w-6 mr-1" />
-          <span> Save </span>
-        </button>
-        <button
-          class="flex items-center justify-center hover:bg-red-900 hover:text-white hover:scale-102 text-black bg-white/65 border-1 py-2 px-4 mt-8 rounded-full"
-          type="button"
-          @click="toggleModal"
-        >
-          <!-- Conmfire dialog -->
-          <TrashIcon class="h-6 w-6 mr-1" />
-          <span> Delete </span>
-        </button>
-        <BaseModal
-          :modalActive="modalActive"
-          title="Delete"
-          @save-data="delUser(deleteID)"
-          @close-modal="modalActive = false"
-        >
-          <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
-        </BaseModal>
-      </div>
-    </form>
-  </main>
+  </div>
 </template>
 
 <script setup>
@@ -78,6 +57,7 @@ import { usersStore } from '@/stores/usersData'
 
 import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
 import BaseModal from '../BaseModal.vue'
+import BaseButttonBack from '../BaseButttonBack.vue'
 
 const route = useRoute()
 const router = useRouter()

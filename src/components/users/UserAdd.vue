@@ -1,50 +1,44 @@
 <template>
-  <header class="w-fit flex flex-row p-4 sm:pl-8 py-2">
-    <p class="font-semibold text-xl text-sky-900 text-shadow-lg">Add New User</p>
-  </header>
+  <div class="flex flex-col justify-center items-center bg-white p-4">
+    <p class="mb-8 text-lg text-blue-900">Add New User</p>
+    <div class="w-2/5 bg-white">
+      <form class="flex flex-col justify-center gap-2" @submit.prevent="addSubmit">
+        <label for="fname">First Name</label>
+        <input type="text" v-model="fname" class="bg-sky-50 text-md p-1" />
+        <label for="lname">Last Name</label>
+        <input type="text" v-model="lname" class="bg-sky-50 text-md p-1" />
+        <label for="email">Email</label>
+        <input type="text" v-model="email" class="bg-sky-50 text-md p-1" />
+        <label for="department">Department</label>
+        <input type="text" v-model="department" class="bg-sky-50 text- p-1" />
 
-  <main class="flex flex-col p-2 w-auto sm:pl-8">
-    <form class="sm:max-w-screen-sm flex flex-col gap-2" @submit.prevent="addSubmit">
-      <label for="fname">First Name</label>
-      <input type="text" v-model="fname" class="bg-sky-50 text-2xl" />
-      <label for="lname">Last Name</label>
-      <input type="text" v-model="lname" class="bg-sky-50 text-2xl" />
-      <label for="email">Email</label>
-      <input type="text" v-model="email" class="bg-sky-50 text-2xl" />
-      <label for="department">Department</label>
-      <input type="text" v-model="department" class="bg-sky-50 text-2xl" />
+        <label for="offie_id">Office Name</label>
+        <input type="number" v-model="office_id" class="bg-sky-50 text-md p-1" />
 
-      <label for="offie_id">Office Name</label>
-      <input type="number" v-model="office_id" class="bg-sky-50 text-2xl" />
-
-      <!-- Save Button -->
-      <div class="flex flex-row justify-between">
-        <button
-          @click="router.push('/user')"
-          type="button"
-          class="flex items-center justify-center bg-white/20 text-black hover:bg-gray-200 hover:scale-102 hover:text-blue-900 py-2 px-4 mt-8 rounded-full"
-        >
-          <ChevronDoubleLeftIcon class="h-6 w-6 mr-1" />
-          <span> Back </span>
-        </button>
-        <button
-          class="flex items-center justify-center bg-blue-800 hover:bg-blue-900 hover:scale-102 text-white py-2 px-4 mt-8 rounded-full"
-          type="submit"
-        >
-          <BookmarkIcon class="h-6 w-6 mr-1" />
-          <span> Save </span>
-        </button>
-      </div>
-    </form>
-  </main>
+        <!-- Save Button -->
+        <div class="flex flex-row justify-between">
+          <BaseButttonBack />
+          <button
+            class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+            type="submit"
+          >
+            <BookmarkIcon class="h-4 w-4 mr-1" />
+            <span> Save </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ChevronDoubleLeftIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
+import { BookmarkIcon } from '@heroicons/vue/20/solid'
 // import { users } from '@/dataMockup/staff'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import { usersStore } from '@/stores/usersData'
+
+import BaseButttonBack from '../BaseButttonBack.vue'
 
 const router = useRouter()
 

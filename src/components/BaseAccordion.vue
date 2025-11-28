@@ -2,12 +2,12 @@
   <div class="w-full flex-col mx-auto my-8">
     <div @click="toggleVisible" class="flex flex-row">
       <div v-if="visible">
-        <ChevronDownIcon class="h-6 w-6 mt-1 bg-white/50" />
+        <ChevronDownIcon class="h-4 w-4 mt-1 bg-white/50 hover:cursor-pointer" />
       </div>
       <div v-else>
-        <ChevronUpIcon class="h-6 w-6 mt-1 bg-white/50" />
+        <ChevronUpIcon class="h-4 w-4 mt-1 bg-white/50 hover:cursor-pointer" />
       </div>
-      <p class="text-xl text-shadow-lg pl-4">{{ props.title }}</p>
+      <p class="text-md pl-2">{{ props.title }}</p>
     </div>
     <div class="border-t border-blue-900 mt-4"></div>
     <Transition name="slide-down">
