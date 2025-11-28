@@ -2,13 +2,8 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/20/solid'
 
 const navOpen = ref(false)
-const visible = ref(false)
-const toggleVisible = () => {
-  visible.value = !visible.value
-}
 </script>
 
 <template>
@@ -41,73 +36,17 @@ const toggleVisible = () => {
           >
             Home
           </RouterLink>
-          <RouterLink
-            to="/assets"
-            class="px-2 mr-4 rounded-xl m-1 py-2 hover:bg-gray-200 hover:text-blue-900"
+          <div
+            class="flex flex-row justify-between"
             active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
           >
-            <p class="flex flex-row justify-between border-gray-400">
+            <RouterLink
+              to="/assets"
+              class="w-full px-2 rounded-xl m-1 py-2 hover:bg-gray-200 hover:text-blue-900"
+              active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
+              @click="navOpen = !navOpen"
+            >
               Assets
-              <span @click="toggleVisible">
-                <div v-if="visible">
-                  <ChevronDownIcon class="h-4 w-4 mt-1 bg-gray-400/50 hover:cursor-pointer" />
-                </div>
-                <div v-else>
-                  <ChevronUpIcon class="h-4 w-4 mt-1 bg-gray-400/50 hover:cursor-pointer" />
-                </div>
-              </span>
-            </p>
-          </RouterLink>
-
-          <div v-if="visible" class="w-11/12 mx-6 flex flex-col flex-wrap py-2 text-sm">
-            <RouterLink
-              to="/npa"
-              class="px-2 mr-4 rounded-xl m-1 py-2 hover:bg-gray-200 hover:text-blue-900"
-              active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen"
-              >NPA
-            </RouterLink>
-            <RouterLink
-              to="/npc"
-              class="px-2 mr-4 rounded-xl m-1 py-2 mx-2 hover:bg-gray-200 hover:text-blue-900"
-              active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen"
-              >NPC
-            </RouterLink>
-            <RouterLink
-              to="/npm"
-              class="px-2 mr-4 rounded-xl m-1 py-2 mx-2 hover:bg-gray-200 hover:text-blue-900"
-              active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen"
-              >NPM
-            </RouterLink>
-            <RouterLink
-              to="/nra"
-              class="px-2 mr-4 rounded-xl m-1 py-2 mx-2 hover:bg-gray-200 hover:text-blue-900"
-              active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen"
-              >NRA
-            </RouterLink>
-            <RouterLink
-              to="/nrt"
-              class="px-2 mr-4 rounded-xl m-1 py-2 mx-2 hover:bg-gray-200 hover:text-blue-900"
-              active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen"
-              >NRT
-            </RouterLink>
-            <RouterLink
-              to="/oho"
-              class="px-2 mr-4 rounded-xl m-1 py-2 mx-2 hover:bg-gray-200 hover:text-blue-900"
-              active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen"
-              >OHO
-            </RouterLink>
-            <RouterLink
-              to="/conspire"
-              class="px-2 mr-4 rounded-xl m-1 py-2 mx-2 hover:bg-gray-200 hover:text-blue-900"
-              active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen"
-              >Conspire
             </RouterLink>
           </div>
 
