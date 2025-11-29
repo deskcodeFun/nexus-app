@@ -49,7 +49,7 @@ import PrinterView from './PrinterView.vue'
 const officeStores = useOfficeStore()
 console.log(officeStores.offices)
 
-const showCom = ref(false)
+const showCom = ref(true)
 const showPrinter = ref(false)
 const showOther = ref(false)
 const toggleCom = () => {
