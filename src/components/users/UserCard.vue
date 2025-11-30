@@ -1,5 +1,10 @@
 <template>
-  <div v-for="(user, index) in store.users" :key="index" @click="router.push(`/editUser/${index}`)">
+  <div
+    v-for="(user, index) in store.users"
+    :key="index"
+    @click="router.push(`/editUser/${index}`)"
+    class="flex justify-center mx-2"
+  >
     <BaseCard>
       <!-- show data -->
       <table

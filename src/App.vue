@@ -2,7 +2,7 @@
   <!-- <div class="w-full min-h-screen bg-linear-180 from-indigo-100 to-red-100"> -->
   <div class="w-full min-h-screen">
     <TheTopbar />
-    <RouterView class="px-8" />
+    <RouterView />
   </div>
 </template>
 

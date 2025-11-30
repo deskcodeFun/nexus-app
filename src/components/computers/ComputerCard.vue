@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-for="(item, index) in computerStore"
-    :key="index"
-    class="sm:flex-row sm:flex-wrap justify-center"
-  >
+  <div v-for="(item, index) in computerStore" :key="index" class="flex justify-center mx-2">
     <!-- each card layout -->
     <BaseCard>
       <!-- show data in each card -->
