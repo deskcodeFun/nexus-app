@@ -7,8 +7,8 @@ const navOpen = ref(false)
 </script>
 
 <template>
-  <div class="w-full block pt-4 sm:flex sm:flex-row sm:justify-between bg-amber-50">
-    <p class="pt-1 pl-4 text-2xl text-blue-900 text-shadow-lg">
+  <div class="w-full block pt-4 sm:flex sm:flex-row sm:justify-between">
+    <p class="pt-1 pl-8 text-2xl text-blue-900 text-shadow-lg">
       Ne<span class="text-red-800">x</span>us Service
     </p>
     <div
