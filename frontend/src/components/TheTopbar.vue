@@ -11,6 +11,7 @@ const navOpen = ref(false)
     <p class="pt-1 pl-8 text-2xl text-blue-900 text-shadow-lg">
       Ne<span class="text-red-800">x</span>us Service
     </p>
+    <!-- check width screnn for responsive  -->
     <div
       class="flex flex-row sm:px-4 mx-auto sm:mx-4 sm:justify-between sm:gap-2 mt-4 sm:mt-0 py-2"
     >
