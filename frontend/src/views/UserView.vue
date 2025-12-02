@@ -1,7 +1,7 @@
 <template>
   <!-- Header -->
   <div class="w-full justify-between flex flex-col sm:text-2xl sm:py-16 sm:flex-row bg-white mx-auto pb-4 pt-2 mt-2">
-    <p class="text-lg tracking-widest pl-2 py-4 sm:py-0 text-blue-900">USER MANAGEMENT</p>
+    <p class="text-lg tracking-widest pl-2 py-18 sm:py-0 text-blue-900">USER MANAGEMENT</p>
 
     <RouterLink
       class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
