@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center bg-white p-4">
-    <p class="flex mb-8 text-lg text-blue-900">Edit User</p>
+    <p class="flex mb-8 text-lg tracking-wide py-4 text-blue-900">EDIT USER</p>
 
     <div class="w-2/5 bg-white">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="editSubmit">

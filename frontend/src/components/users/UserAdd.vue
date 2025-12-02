@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center items-center bg-white p-4">
-    <p class="mb-8 text-lg text-blue-900">Add New User</p>
+    <p class="mb-8 text-lg tracking-wide py-4  text-blue-900">ADD USER</p>
     <div class="w-2/5 bg-white">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="addSubmit">
         <label for="fname">First Name</label>
