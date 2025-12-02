@@ -10,21 +10,35 @@ body {
 .modal {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 0px;
   width: 100%;
   height: 70%;
   display: flex;
   justify-content: left;
   align-items: top;
   backdrop-filter: blur(4px);
-  /* background: #57eb94; */
-  /* background: linear-gradient(180deg, rgba(87, 176, 235, 0.15) 50%, rgba(243, 243, 237, 0.1) 100%); */
+  z-index: 99;
+}
+.modal-menu {
+  position: fixed;
+  float: right;
+  top: 0;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: top;
+  backdrop-filter: blur(4px);
+
 }
 /* transition: 10s ease-in-out; */
 /* class for <Transition name="slide-fade" using in <Thetopbar.vue */
 /* .slide-fade-(hook-name) */
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
+  right: 100%;
+
 }
 .slide-fade-leave-active {
   transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
@@ -51,3 +65,19 @@ body {
   transform: translateY(-10%);
   opacity: 0;
 }
+
+.slide-right-to-left-enter-active,
+.slide-right-to-left-leave-active {
+  transition: transform 0.5s ease-out; /* Adjust duration and easing as needed */
+}
+
+.slide-right-to-left-enter-from, /* Starting state for entering */
+.slide-right-to-left-leave-to { /* Ending state for leaving */
+  transform: translateX(100%); /* Start off-screen to the right */
+}
+
+.slide-right-to-left-enter-to, /* Ending state for entering */
+.slide-right-to-left-leave-from { /* Starting state for leaving */
+  transform: translateX(0); /* End at its natural position */
+}
+
