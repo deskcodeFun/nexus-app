@@ -1,22 +1,27 @@
 <template>
   <!-- Header -->
-  <div class="w-full justify-between flex flex-col sm:text-2xl sm:py-16 sm:flex-row bg-white mx-auto pb-4 pt-2 mt-2">
-    <p class="text-lg tracking-widest pl-2 py-18 sm:py-0 text-blue-900">USER MANAGEMENT</p>
-
+  <header>
+    <div class="flex flex-col justify-between bg-white sm:justify-normal py-16 px-2">
+      <p class="text-lg tracking-widest text-blue-900">USER MANAGEMENT</p>
+    </div>
+  </header>
+  <!-- Sub Menu -->
+  <div class="flex flex-row bg-white text-blue-900 tracking-wide px-2 pb-4 gap-4">
     <RouterLink
       class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
       to="/addUser"
     >
       <div class="flex flex-row">
-        <PlusIcon class="h-4 w-4" />
-        <p class="ml-2 text-sm">Add User</p>
+        <PlusIcon class="h-6 w-6" />
+        <p>Add User</p>
       </div>
     </RouterLink>
   </div>
 
-  <div>
-    <component :is="activeComponent"></component>
-  </div>
+  <!-- show data -->
+  <main class="bg-white px-8">
+      <component :is="activeComponent"></component>
+  </main>
 </template>
 
 <script setup>

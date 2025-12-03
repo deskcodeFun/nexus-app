@@ -1,7 +1,10 @@
 <template>
-  <div class="flex flex-col justify-center items-center bg-white p-4">
-    <p class="flex mb-8 text-lg tracking-wide py-4 text-blue-900">EDIT USER</p>
-
+  <header>
+    <div class="flex flex-col justify-between bg-white sm:justify-normal py-16 px-2">
+      <p class="text-lg tracking-widest mx-auto text-blue-900">EDIT USER</p>
+    </div>
+  </header>
+  <main class="flex justify-center bg-white">
     <div class="w-2/5 bg-white">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="editSubmit">
         <div class="flex flex-row justify-between">
@@ -46,7 +49,10 @@
         </div>
       </form>
     </div>
-  </div>
+
+  </main>
+
+
 </template>
 
 <script setup>

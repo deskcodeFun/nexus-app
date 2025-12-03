@@ -4,7 +4,7 @@
     <header>
       <TheTopbar />
     </header>
-    <main class=" sm:px-8">
+    <main class="sm:pl-8">
       <RouterView />
     </main>
   </div>

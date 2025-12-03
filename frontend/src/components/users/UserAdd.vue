@@ -1,7 +1,11 @@
 <template>
-  <div class="flex flex-col justify-center items-center bg-white p-4">
-    <p class="mb-8 text-lg tracking-wide py-18  text-blue-900">ADD USER</p>
-    <div class="w-2/5 bg-white">
+  <header>
+    <div class="flex flex-col justify-between bg-white sm:justify-normal py-16 px-2">
+      <p class="text-lg tracking-widest mx-auto text-blue-900">ADD NEW USER</p>
+    </div>
+  </header>
+  <main class="flex justify-center bg-white">
+    <div class="w-2/5">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="addSubmit">
         <label for="fname">First Name</label>
         <input type="text" v-model="fname" class="bg-sky-50 text-md p-1" />
@@ -28,7 +32,7 @@
         </div>
       </form>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup>
