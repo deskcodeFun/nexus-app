@@ -228,4 +228,15 @@ export const useAssetsStore = defineStore('assetsStore', {
       },
     ],
   }),
+  actions: {
+    addAsset(newAsset) {
+      // assets is object
+      this.assets.push(newAsset)
+    },
+    deleteAsset(assetId) {
+      this.assets = this.assets.filter((asset) => {
+        return asset.id !== assetId
+      })
+    },
+  },
 })

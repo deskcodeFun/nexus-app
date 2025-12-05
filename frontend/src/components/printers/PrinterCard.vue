@@ -1,7 +1,8 @@
 <template>
   <div
-    v-for="(item, index) in computerStore"
-    :key="index"
+    v-for="item in computerStore"
+    :key="item.id"
+    @click="router.push(`/editPrinter/${item.id}`)"
     class="sm:flex-row sm:flex-wrap justify-center"
   >
     <!-- each card layout -->
@@ -47,9 +48,11 @@
 </template>
 
 <script setup>
+import {useRouter} from 'vue-router'
 import { useAssetsStore } from '@/stores/assetsData'
 import BaseCard from '../BaseCard.vue'
 
+const router =useRouter()
 const store = useAssetsStore()
 const computerStore = store.assets.filter((item) => item.catalog === 'printer')
 

@@ -1,5 +1,9 @@
 <template>
-  <div v-for="(item, index) in computerStore" :key="index" class="flex justify-center mx-2">
+  <div
+    v-for="item in computerStore"
+    :key="item.id"
+    @click="router.push(`/editComputer/${item.id}`)"
+    class="flex justify-center mx-2">
     <!-- each card layout -->
     <BaseCard>
       <!-- show data in each card -->
@@ -43,10 +47,11 @@
 </template>
 
 <script setup>
+import {useRouter} from 'vue-router'
+import { useAssetsStore } from '@/stores/assetsData'
 import BaseCard from '../BaseCard.vue'
 
-import { useAssetsStore } from '@/stores/assetsData'
-
+const router = useRouter()
 const store = useAssetsStore()
 const computerStore = store.assets.filter((item) => item.catalog === 'computer')
 
@@ -56,4 +61,4 @@ function shortName(name) {
 }
 </script>
 
-<style lang="scss" scoped></style>
+

@@ -19,9 +19,14 @@
       </thead>
 
       <tbody>
-        <tr v-for="(item, index) in computerStore" :key="index">
+        <tr v-for="item in printerStore" :key="item.id">
           <td>{{ item.id }}</td>
-          <td>{{ item.asset_tag }}</td>
+          <td
+            @click="router.push(`/editPrinter/${item.id}`)"
+            class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2"
+          >
+            {{ item.asset_tag }}
+          </td>
           <td>{{ item.serial }}</td>
           <td>{{ item.user_name }}</td>
           <td>{{ item.office_name }}</td>
@@ -34,9 +39,12 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import { useAssetsStore } from '@/stores/assetsData'
+
+const router = useRouter()
 const store = useAssetsStore()
-const computerStore = store.assets.filter((item) => item.catalog === 'printer')
+const printerStore = store.assets.filter((item) => item.catalog === 'printer')
 </script>
 
 <style lang="scss" scoped></style>

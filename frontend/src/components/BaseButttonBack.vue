@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="router.push('/user')"
+    @click="router.back()"
     type="button"
     class="flex items-center justify-center bg-gray-50 text-black hover:bg-gray-200 hover:scale-102 hover:text-blue-900 py-1 px-4 mt-8 rounded-xl"
   >
