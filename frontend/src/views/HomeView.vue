@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <section class="hero">
-      <div class="hero-text container">
-        <h4>Vue Responsive Nav Menu</h4>
+    <section class="hero  absolute inset-0 bg-[url(../assets/hero-bg2.jpg)] bg-conver bg-center z-0">
+      <div class="hero-text container ml-8">
+        <h4>Nexus Property Consultants.</h4>
         <hr />
         <h2>
-          With Vue <br />
-          Animations
+          IT Servive<br />
+          Web Application
         </h2>
         <hr />
       </div>
@@ -19,23 +19,23 @@
 
 <style scoped>
 .hero {
-  background-image: url('../assets/hero-bg.png');
-  background-attachment: fixed;
+  /* background-image: url('../assets/hero-bg.jpg'); */
+  background-attachment: absolute;
   position: relative;
-  height: 100vh;
-
+  height: 85vh;
+/*
   img {
     object-fit: cover;
     height: 100%;
     width: 100%;
-  }
+  } */
 
   .hero-text {
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #2e04a1;
+    color: #eaf3ff;
 
     h4 {
       text-transform: uppercase;

@@ -41,7 +41,7 @@ const updateScroll = () => {
 </script>
 
 <template>
-  <div class="w-full z-10 flex sm:flex-row justify-between  pt-4">
+  <div class="w-full z-10 flex sm:flex-row justify-between py-8 sm:pr-8">
     <!-- Logo -->
     <p class="pb-2 font-semibold pl-2 sm:pl-8 text-2xl text-blue-900 text-shadow-lg">
       Ne<span class="text-red-800">x</span>us Service

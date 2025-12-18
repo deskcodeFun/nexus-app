@@ -1,10 +1,10 @@
 <template>
   <!-- <div class="w-full min-h-screen bg-linear-180 from-indigo-100 to-red-100"> -->
-  <div class="w-full min-h-screen">
+  <div class="w-full min-h-screen sm:mr-8">
     <header>
       <TheTopbar />
     </header>
-    <main class="sm:pl-8">
+    <main class="sm:pl-8 sm:mr-8">
       <RouterView />
     </main>
   </div>
