@@ -12,17 +12,20 @@
     </thead>
 
     <tbody>
-      <tr v-for="(item, index) in store.users" :key="index">
-        <td class="text-center m-2 p-2">{{ item.id }}</td>
+      <tr v-for="staff in store.staff" :key="staff.id">
+        <td class="text-center m-2 p-2">{{ staff.id }}</td>
         <td
           @click="router.push(`/editUser/${index}`)"
           class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2"
         >
-          {{ item.fname + ' ' + item.lname }}
+          {{ staff.fname + ' ' + staff.lname }}
         </td>
-        <td class="m-2 p-2">{{ item.email }}</td>
-        <td class="m-2 p-2">{{ item.department }}</td>
-        <td class="m-2 p-2">{{ item.office_id }}</td>
+        <td class="m-2 p-2">{{ staff.email }}</td>
+        <td class="m-2 p-2">{{ staff.department }}</td>
+        <!-- <td class="m-2 p-2">{{ staff.office_id}}</td> -->
+        <td class="m-2 p-2">{{ staff.office_name.name}}</td>
+        <!-- <td class="m-2 p-2">{{ staff.}}</td> -->
+
         <!-- <td>{{ item.catalog }}</td> -->
       </tr>
     </tbody>
@@ -31,11 +34,18 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { useStaffStore } from '@/stores/staff.js'
 
-import { usersStore } from '@/stores/usersData'
+
 
 const router = useRouter()
-const store = usersStore()
+const store = useStaffStore()
+
+
+
+console.log('store is: ',store.staff)
+
+
 </script>
 
 <style lang="scss" scoped></style>

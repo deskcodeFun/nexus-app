@@ -40,13 +40,13 @@ import { BookmarkIcon } from '@heroicons/vue/20/solid'
 // import { users } from '@/dataMockup/staff'
 import { useRouter } from 'vue-router'
 import { ref } from 'vue'
-import { usersStore } from '@/stores/usersData'
+import { useStaffStore } from '@/stores/staff'
 
 import BaseButttonBack from '../BaseButttonBack.vue'
 
 const router = useRouter()
 
-const store = usersStore()
+const store = useStaffStore()
 
 const fname = ref('')
 const lname = ref('')

@@ -20,7 +20,7 @@
 
   <!-- show data -->
   <main class="bg-white px-8">
-      <component :is="activeComponent"></component>
+    <component :is="activeComponent"></component>
   </main>
 </template>
 

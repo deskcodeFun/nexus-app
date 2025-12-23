@@ -59,7 +59,7 @@
 import { useRoute, useRouter } from 'vue-router'
 import { ref } from 'vue'
 
-import { usersStore } from '@/stores/usersData'
+import { useStaffStore } from '@/stores/staff'
 
 import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
 import BaseModal from '../BaseModal.vue'
@@ -68,7 +68,7 @@ import BaseButttonBack from '../BaseButttonBack.vue'
 const route = useRoute()
 const router = useRouter()
 
-const store = usersStore()
+const store = useStaffStore()
 let id = +route.params.id
 
 const modalActive = ref(null)
@@ -76,23 +76,23 @@ const toggleModal = () => {
   modalActive.value = !modalActive.value
 }
 
-const fname = ref(store.users[id].fname)
-const lname = ref(store.users[id].lname)
-const email = ref(store.users[id].email)
-const department = ref(store.users[id].department)
-const office_id = ref(store.users[id].office_id)
+const fname = ref(store.staff[id].fname)
+const lname = ref(store.staff[id].lname)
+const email = ref(store.staff[id].email)
+const department = ref(store.staff[id].department)
+const office_id = ref(store.staff[id].office_id)
 
 const editSubmit = () => {
   // TODO: validate data
-  store.users[id].fname = fname.value
-  store.users[id].lname = lname.value
-  store.users[id].email = email.value
-  store.users[id].department = department.value
-  store.users[id].office_id = office_id.value
+  store.staff[id].fname = fname.value
+  store.staff[id].lname = lname.value
+  store.staff[id].email = email.value
+  store.staff[id].department = department.value
+  store.staff[id].office_id = office_id.value
   // console.log('After add user: ', staff)
   router.push('/user')
 }
-const deleteID = store.users[id].id
+const deleteID = store.staff[id].id
 const delUser = (deleteID) => {
   store.deleteUser(deleteID)
   router.push('/user')
