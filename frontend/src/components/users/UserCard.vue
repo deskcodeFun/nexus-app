@@ -1,14 +1,10 @@
 <template>
-  <div
-    v-for="staff in store.staff" :key="staff.id"
-    @click="router.push(`/editUser/${index}`)"
-    class="flex justify-center mx-2"
-  >
+  <div v-for="staff in store.staff" :key="staff.id" @click="router.push(`/editUser/${index}`)"
+    class="flex justify-center mx-2">
     <BaseCard>
       <!-- show data -->
       <table
-        class="[&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-2"
-      >
+        class="[&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-2">
         <tbody>
           <tr>
             <th>User ID</th>
@@ -41,10 +37,12 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { useStaffStore } from '@/stores/staff'
-import BaseCard from '../BaseCard.vue'
+  import { useRouter } from 'vue-router'
+  import { useStaffStore } from '@/stores/staff'
+  import BaseCard from '../BaseCard.vue'
 
-const router = useRouter()
-const store = useStaffStore()
+  const router = useRouter()
+  const store = useStaffStore()
+
+
 </script>
