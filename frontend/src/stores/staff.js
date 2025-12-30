@@ -22,7 +22,7 @@ export const useStaffStore = defineStore('useStaffStore', () => {
 
   async function addUser(newUser) {
     try {
-      const { error } = await supabase.from('staff').insert([newUser]).select('*')
+      const { error } = await supabase.from('staff').insert([newUser])
       if (error) throw error
     } catch (error) {
       console.error('Add new User ERROR: ', error)
@@ -32,7 +32,6 @@ export const useStaffStore = defineStore('useStaffStore', () => {
   }
 
   getAllStaff()
-  addUser()
 
   return {
     staff,
