@@ -8,42 +8,36 @@
     <div class="w-2/5 bg-white">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="editSubmit">
         <div class="flex flex-row justify-between">
+          <p>User ID: {{ updateData.id }}</p>
           <label for="fname">First Name</label>
           <button
             class="flex items-center justify-center hover:bg-gray-200 hover:scale-102 hover:text-blue-900 py-1 px-4 rounded-xl"
-            type="button"
-            @click="toggleModal"
-          >
+            type="button" @click="toggleModal">
             <TrashIcon class="h-4 w-4 mr-1 text-gray-400 hover:text-red-700" />
           </button>
         </div>
-        <input type="text" v-model="fname" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="updateData.fname" class="bg-sky-50 text-md p-1" />
         <label for="lname">Last Name</label>
-        <input type="text" v-model="lname" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="updateData.lname" class="bg-sky-50 text-md p-1" />
         <label for="email">Email</label>
-        <input type="text" v-model="email" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="updateData.email" class="bg-sky-50 text-md p-1" />
         <label for="department">Department</label>
-        <input type="text" v-model="department" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="updateData.department" class="bg-sky-50 text-md p-1" />
 
         <label for="offie_id">Office Name</label>
-        <input type="text" v-model="office_id" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="updateData.office_id" class="bg-sky-50 text-md p-1" />
         <!-- Show button -->
         <div class="flex flex-row justify-between">
           <BaseButttonBack />
           <button
             class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
-            type="submit"
-          >
+            type="submit">
             <BookmarkIcon class="h-4 w-4 mr-1" />
             <span> Save </span>
           </button>
 
-          <BaseModal
-            :modalActive="modalActive"
-            title="Delete"
-            @save-data="delUser(deleteID)"
-            @close-modal="modalActive = false"
-          >
+          <BaseModal :modalActive="modalActive" title="Delete user" @save-data="delUser(paramID)"
+            @close-modal="modalActive = false">
             <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
           </BaseModal>
         </div>
@@ -56,45 +50,77 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
-import { ref } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
+  import { reactive, ref, onMounted } from 'vue'
 
-import { useStaffStore } from '@/stores/staff'
+  import { useStaffStore } from '@/stores/staff'
 
-import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
-import BaseModal from '../BaseModal.vue'
-import BaseButttonBack from '../BaseButttonBack.vue'
+  import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
+  import BaseModal from '../BaseModal.vue'
+  import BaseButttonBack from '../BaseButttonBack.vue'
 
-const route = useRoute()
-const router = useRouter()
+  const route = useRoute()
+  const router = useRouter()
 
-const store = useStaffStore()
-let id = +route.params.id
+  const store = useStaffStore()
+  let paramID = +route.params.id
+  // console.log('paramID from route:', paramID)
 
-const modalActive = ref(null)
-const toggleModal = () => {
-  modalActive.value = !modalActive.value
-}
+  // store.getStaffDetail(paramID)
+  // console.log('getstaffDetail: ', store.staffDetail[0])
 
-const fname = ref(store.staff[id].fname)
-const lname = ref(store.staff[id].lname)
-const email = ref(store.staff[id].email)
-const department = ref(store.staff[id].department)
-const office_id = ref(store.staff[id].office_id)
+  const updateData = reactive({
+    id: paramID,
+    fname: '',
+    lname: '',
+    email: '',
+    department: '',
+    office_id: '',
+  })
+  onMounted(async () => {
+    // Await the completion of the getStaffDetail action
+    await store.getStaffDetail(paramID)
+    // console.log('getstaffDetail: ', store.staffDetail[0])
 
-const editSubmit = () => {
-  // TODO: validate data
-  store.staff[id].fname = fname.value
-  store.staff[id].lname = lname.value
-  store.staff[id].email = email.value
-  store.staff[id].department = department.value
-  store.staff[id].office_id = office_id.value
-  // console.log('After add user: ', staff)
-  router.push('/user')
-}
-const deleteID = store.staff[id].id
-const delUser = (deleteID) => {
-  store.deleteUser(deleteID)
-  router.push('/user')
-}
+    // After the data is loaded, populate updateData
+    if (store.staffDetail[0]) {
+      updateData.fname = store.staffDetail[0].fname
+      updateData.lname = store.staffDetail[0].lname
+      updateData.email = store.staffDetail[0].email
+      updateData.department = store.staffDetail[0].department
+      updateData.office_id = store.staffDetail[0].office_id
+    } else {
+      // Handle the case where no staff detail is found (e.g., redirect or show an error)
+      console.warn(`Staff with ID ${paramID} not found.`)
+      // Example: Redirect to a 404 page or list page
+      // router.push('/staff');
+    }
+  })
+  const modalActive = ref(null)
+  const toggleModal = () => {
+    modalActive.value = !modalActive.value
+  }
+
+
+
+  async function editSubmit() {
+    // TODO: validate data
+    // check value in updateUser
+    // console.log('updateUser in editSubmit() : ', updateData)
+    await store.updateUser(paramID, updateData)
+    // console.log('After add user: ', staff)
+    router.push('/user')
+  }
+  function delUser(paramID) {
+    console.log('store.deleteUser: ', paramID)
+    store.deleteUser(paramID)
+    store.getAllStaff()
+    router.push('/user')
+
+  }
+  // const deleteID = store.staffDetail[id].id
+  // const delUser = (deleteID) => {
+  //   store.deleteUser(deleteID)
+  //   router.push('/user')
+  // }
 </script>

@@ -8,16 +8,16 @@
     <div class="w-2/5">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="addSubmit">
         <label for="fname">First Name</label>
-        <input type="text" v-model="fname" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="fname" class="bg-sky-50 text-md p-1" />
         <label for="lname">Last Name</label>
-        <input type="text" v-model="lname" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="lname" class="bg-sky-50 text-md p-1" />
         <label for="email">Email</label>
-        <input type="text" v-model="email" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="email" class="bg-sky-50 text-md p-1" />
         <label for="department">Department</label>
-        <input type="text" v-model="department" class="bg-sky-50 text- p-1" />
+        <input type="text" v-model.trim="department" class="bg-sky-50 text- p-1" />
 
         <label for="offie_id">Office</label>
-        <select name="officeName" id="officeName" v-model="office_id" class="bg-sky-50 py-2">
+        <select name="officeName" id="officeName" v-model.trim="office_id" class="bg-sky-50 py-2">
           <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
             {{ office_name.name }}
           </option>

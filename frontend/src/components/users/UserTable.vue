@@ -12,12 +12,10 @@
     </thead>
 
     <tbody>
-      <tr v-for="staff in store.staff" :key="staff.id">
+      <tr v-for="staff in store.staff" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
+        class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
         <td class="text-center m-2 p-2">{{ staff.id }}</td>
-        <td @click="router.push(`/editUser/${index}`)"
-          class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
-          {{ staff.fname + ' ' + staff.lname }}
-        </td>
+        <td>{{ staff.fname + ' ' + staff.lname }}</td>
         <td class="m-2 p-2">{{ staff.email }}</td>
         <td class="m-2 p-2">{{ staff.department }}</td>
         <!-- <td class="m-2 p-2">{{ staff.office_id}}</td> -->
@@ -34,14 +32,9 @@
   import { useRouter } from 'vue-router'
   import { useStaffStore } from '@/stores/staff.js'
 
-
-
   const router = useRouter()
   const store = useStaffStore()
 
-
-
   console.log('store is: ', store.staff)
   store.getAllStaff()
-
 </script>
