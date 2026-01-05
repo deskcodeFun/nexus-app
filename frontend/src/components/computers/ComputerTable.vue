@@ -5,8 +5,7 @@
   <!-- show data -->
   <div class="w-full flex justify-center">
     <table
-      class="w-11/12 bg-white/30 [&_th]:p-2 [&_th]:text-left [&_th]:align-baseline [&_td]:py-2 [&_th]:text-md [&_th]:text-gray-600 [&_td]:text-blue-900 [&_td]:px-4"
-    >
+      class="w-11/12 bg-white/30 [&_th]:p-2 [&_th]:text-left [&_th]:align-baseline [&_td]:py-2 [&_th]:text-md [&_th]:text-gray-600 [&_td]:text-blue-900 [&_td]:px-4">
       <thead>
         <tr class="border-b border-gray-400">
           <th>Asset ID</th>
@@ -17,16 +16,11 @@
           <!-- <th scope="col">Type</th> -->
         </tr>
       </thead>
-
       <tbody>
-        <tr v-for="item in computerStore" :key="item.id">
+        <tr v-for="item in computerStore" :key="item.id" @click="router.push(`/editComputer/${item.id}`)"
+          class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
           <td>{{ item.id }}</td>
-          <td
-            @click="router.push(`/editComputer/${item.id}`)"
-            class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2"
-          >
-            {{ item.asset_tag }}
-          </td>
+          <td>{{ item.asset_tag }}</td>
           <td>{{ item.serial }}</td>
           <td>{{ item.user_name }}</td>
           <td>{{ item.office_name }}</td>
@@ -39,12 +33,10 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router'
-import { useAssetsStore } from '@/stores/assetsData'
+  import { useRouter } from 'vue-router'
+  import { useAssetsStore } from '@/stores/assetsData'
 
-const router =useRouter()
-const store = useAssetsStore()
-const computerStore = store.assets.filter((item) => item.catalog === 'computer')
+  const router = useRouter()
+  const store = useAssetsStore()
+  const computerStore = store.assets.filter((item) => item.catalog === 'computer')
 </script>
-
-

@@ -6,28 +6,20 @@
     </div>
   </header>
   <!-- sub menu -->
-  <div
-    class=" flex flex-col sm:flex-row sm:justify-between bg-white text-blue-900 tracking-wide px-2 pb-4"
-  >
-    <div class="gap-4 pb-4 flex flex-row items-center">
-      <p>SELETECT BU</p>
-      <select class="bg-gray-100">
-        <option value="0">All</option>
-        <option
-          v-for="officeStore in officeStores.offices"
-          :key="officeStore.id"
-          :value="officeStore.id"
-        >
+  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
+    <div class="flex flex-row w-fit">
+      <p class="pr-4">SELETECT BU</p>
+      <select class="bg-blue-50/25 ml-4">
+        <option value="0"> All</option>
+        <option v-for="officeStore in officeStores.offices" :key="officeStore.id" :value="officeStore.id">
           {{ officeStore.short_name }}
         </option>
       </select>
     </div>
     <!-- Add new asset -->
-    <div class="flex flex-row sm:items-end bg-white text-blue-900 tracking-wide">
-      <RouterLink
-        class="w-fit flex flex-row  p-2 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
-        to="/addComputer"
-      >
+    <div class="flex flex-row w-fit  rounded-full  text-blue-900 tracking-wide">
+      <RouterLink class="flex flex-row px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
+        to="/addComputer">
         <div class="flex flex-row">
           <PlusIcon class="h-4 w-4 mt-1" />
           <p>Add New</p>
@@ -35,23 +27,18 @@
       </RouterLink>
     </div>
   </div>
-  <div class="pb-4 bg-white flex flex-row">
-    <button
-      @click="toggleCom"
-      class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100"
-    >
+  <!-- select a kind of assets -->
+  <div class="py-4 bg-white flex flex-row">
+    <button @click="toggleCom"
+      class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100">
       Computer
     </button>
-    <button
-      @click="togglePrinter"
-      class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100"
-    >
+    <button @click="togglePrinter"
+      class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100">
       Printer
     </button>
-    <button
-      @click="toggleOther"
-      class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100"
-    >
+    <button @click="toggleOther"
+      class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100">
       Other
     </button>
   </div>
@@ -71,35 +58,35 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useOfficeStore } from '@/stores/officeData'
+  import { ref } from 'vue'
+  import { useOfficeStore } from '@/stores/officeData'
 
-import ComputerView from './ComputerView.vue'
-import PrinterView from './PrinterView.vue'
+  import ComputerView from './ComputerView.vue'
+  import PrinterView from './PrinterView.vue'
 
-import { PlusIcon } from '@heroicons/vue/20/solid'
+  import { PlusIcon } from '@heroicons/vue/20/solid'
 
-// import BaseAccordion from '@/components/BaseAccordion.vue'
+  // import BaseAccordion from '@/components/BaseAccordion.vue'
 
-const officeStores = useOfficeStore()
-console.log(officeStores.offices)
+  const officeStores = useOfficeStore()
+  console.log(officeStores.offices)
 
-const showCom = ref(true)
-const showPrinter = ref(false)
-const showOther = ref(false)
-const toggleCom = () => {
-  showCom.value = true
-  showPrinter.value = false
-  showOther.value = false
-}
-const togglePrinter = () => {
-  showCom.value = false
-  showPrinter.value = true
-  showOther.value = false
-}
-const toggleOther = () => {
-  showCom.value = false
-  showPrinter.value = false
-  showOther.value = true
-}
+  const showCom = ref(true)
+  const showPrinter = ref(false)
+  const showOther = ref(false)
+  const toggleCom = () => {
+    showCom.value = true
+    showPrinter.value = false
+    showOther.value = false
+  }
+  const togglePrinter = () => {
+    showCom.value = false
+    showPrinter.value = true
+    showOther.value = false
+  }
+  const toggleOther = () => {
+    showCom.value = false
+    showPrinter.value = false
+    showOther.value = true
+  }
 </script>
