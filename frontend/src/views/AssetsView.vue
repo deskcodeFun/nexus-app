@@ -69,7 +69,7 @@
   // import BaseAccordion from '@/components/BaseAccordion.vue'
 
   const officeStores = useOfficeStore()
-  console.log(officeStores.offices)
+
 
   const showCom = ref(true)
   const showPrinter = ref(false)

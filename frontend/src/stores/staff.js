@@ -16,7 +16,6 @@ export const useStaffStore = defineStore('useStaffStore', () => {
       // const { data, error } = await supabase.from('staff').select(`id,name,short_name,office_name(id,name,short_name)`)
       staff.value = data
       if (error) throw error
-      console.log('data staff in stores folder:', staff)
     } catch (error) {
       console.error('Error get all staff', error)
     } finally {

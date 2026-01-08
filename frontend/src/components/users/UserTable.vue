@@ -35,6 +35,5 @@
   const router = useRouter()
   const store = useStaffStore()
 
-  console.log('store is: ', store.staff)
-  store.getAllStaff()
+
 </script>
