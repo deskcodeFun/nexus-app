@@ -88,7 +88,7 @@
       updateData.lname = store.staffDetail[0].lname
       updateData.email = store.staffDetail[0].email
       updateData.department = store.staffDetail[0].department
-      updateData.office_id = store.staffDetail[0].office_id
+      updateData.office_id = store.staffDetail[0].office_name.name
     } else {
       // Handle the case where no staff detail is found (e.g., redirect or show an error)
       console.warn(`Staff with ID ${paramID} not found.`)
