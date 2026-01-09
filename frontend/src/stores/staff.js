@@ -5,6 +5,7 @@ import { ref } from 'vue'
 export const useStaffStore = defineStore('useStaffStore', () => {
   let staff = ref(null)
   let staffDetail = ref(null)
+  let StaffByOffice = ref(null)
   const isLoading = ref(true)
 
   async function getAllStaff() {
@@ -12,7 +13,7 @@ export const useStaffStore = defineStore('useStaffStore', () => {
       let { data, error } = await supabase
         .from('staff')
         .select(`*,office_name(*)`)
-        .order('id', { ascending: true })
+        .order('office_name', { ascending: true })
       // const { data, error } = await supabase.from('staff').select(`id,name,short_name,office_name(id,name,short_name)`)
       staff.value = data
       if (error) throw error
@@ -29,11 +30,14 @@ export const useStaffStore = defineStore('useStaffStore', () => {
           .from('staff')
           .select('*,office_name(*)')
           .eq('id', paramID)
+          .order('id', { ascending: true })
         staffDetail.value = data
         console.log('staffDetail in staff.js: ', staffDetail)
         if (error) throw error
       } catch (error) {
         console.error('error get staff detail:', error)
+      } finally {
+        isLoading.value = false
       }
     } else {
       console.error('param id is undefined')
@@ -50,6 +54,35 @@ export const useStaffStore = defineStore('useStaffStore', () => {
     } finally {
       isLoading.value = false
     }
+  }
+
+  async function getStaffByOffice(officeID) {
+    if (officeID !== undefined && officeID !== 0) {
+      try {
+        const { data, error } = await supabase
+          .from('staff')
+          .select('*, office_name(*)')
+          .eq('office_id', officeID)
+          .order('id', { ascending: true })
+        StaffByOffice.value = data
+        if (error) throw error
+      } catch (error) {
+        console.log('Error filter user by office :', error)
+      }
+    } else
+      try {
+        let { data, error } = await supabase
+          .from('staff')
+          .select(`*,office_name(*)`)
+          .order('office_id', { ascending: true })
+        // const { data, error } = await supabase.from('staff').select(`id,name,short_name,office_name(id,name,short_name)`)
+        StaffByOffice.value = data
+        if (error) throw error
+      } catch (error) {
+        console.error('Error get all staff', error)
+      } finally {
+        isLoading.value = false
+      }
   }
 
   async function updateUser(staffID, updateData) {
@@ -77,8 +110,10 @@ export const useStaffStore = defineStore('useStaffStore', () => {
     staff,
     staffDetail,
     isLoading,
+    StaffByOffice,
     getAllStaff,
     getStaffDetail,
+    getStaffByOffice,
     addUser,
     updateUser,
     deleteUser,

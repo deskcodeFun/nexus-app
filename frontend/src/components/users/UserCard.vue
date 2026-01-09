@@ -1,5 +1,5 @@
 <template>
-  <div v-for="staff in store.staff" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
+  <div v-for="staff in store.StaffByOffice" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
     class="flex justify-center mx-2">
     <BaseCard>
       <!-- show data -->

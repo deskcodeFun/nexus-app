@@ -6,36 +6,68 @@
     </div>
   </header>
   <!-- Sub Menu -->
-  <div class="flex flex-row bg-white text-blue-900 tracking-wide px-2 pb-4 gap-4">
-    <RouterLink
-      class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
-      to="/addUser"
-    >
-      <div class="flex flex-row">
-        <PlusIcon class="h-6 w-6" />
-        <p>Add User</p>
-      </div>
-    </RouterLink>
+  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
+    <div class="flex flex-row w-fit">
+      <p class="pr-4">SELETECT BU</p>
+      <select v-model="selectChoice" @change="handleChange" class="bg-blue-50/25 ml-4">
+        <option :value=0>All</option>
+        <option v-for="item in officeStores.offices" :key="item.id" :value="item.id">
+          {{ item.id + ' ' + item.name }}
+        </option>
+      </select>
+    </div>
+    <!-- Add new user button -->
+    <div class="flex flex-row bg-white text-blue-900 tracking-wide px-2 pb-4 gap-4">
+      <RouterLink
+        class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
+        to="/addUser">
+        <div class="flex flex-row">
+          <PlusIcon class="h-6 w-6" />
+          <p>Add User</p>
+        </div>
+      </RouterLink>
+    </div>
   </div>
-
   <!-- show data -->
   <main class="bg-white px-8">
+    <!-- <div v-if="activeComponent">
+      <UserCard />
+    </div>
+    <div>
+      <UserTable />
+    </div> -->
     <component :is="activeComponent"></component>
   </main>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { PlusIcon } from '@heroicons/vue/20/solid'
+  import { ref, computed, watch, onMounted } from 'vue'
+  import { PlusIcon } from '@heroicons/vue/20/solid'
+  import { useOfficeStore } from '@/stores/officeData'
+  import { useStaffStore } from '@/stores/staff'
+  import UserTable from '@/components/users/UserTable.vue'
+  import UserCard from '@/components/users/UserCard.vue'
+  import { useMonitorSize } from '@/composables/DeviceScreen'
 
-import UserTable from '@/components/users/UserTable.vue'
-import UserCard from '@/components/users/UserCard.vue'
-import { useMonitorSize } from '@/composables/DeviceScreen'
+  const officeStores = useOfficeStore()
+  const staffStore = useStaffStore()
+  // detect screen
+  const sizes = useMonitorSize()
+  const selectChoice = ref(0)
 
-// detect screen
-const sizes = useMonitorSize()
-const activeComponent = computed(() => {
-  return sizes.isMobile.value ? UserCard : UserTable
-})
-// const router = useRouter()
+  watch(selectChoice, () => {
+    console.log('select choice is ', selectChoice)
+    if (selectChoice.value !== undefined) {
+      // use function from staff store
+      staffStore.getStaffByOffice(selectChoice.value)
+      console.log('data from staff store: ', staffStore.StaffByOffice)
+    }
+  })
+  onMounted(() => {
+    staffStore.getStaffByOffice(selectChoice.value)
+  })
+
+  const activeComponent = computed(() => {
+    return sizes.isMobile.value ? UserCard : UserTable
+  })
 </script>
