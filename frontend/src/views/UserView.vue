@@ -6,18 +6,18 @@
     </div>
   </header>
   <!-- Sub Menu -->
-  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
-    <div class="flex flex-row w-fit">
-      <p class="pr-4">SELETECT BU</p>
-      <select v-model="selectChoice" @change="handleChange" class="bg-blue-50/25 ml-4">
+  <div class="flex flex-col sm:flex-row justify-between bg-white text-blue-900 tracking-wide p-2">
+    <div class="flex flex-col sm:flex-row w-fit items-baseline">
+      <p class="pr-4 mb-4 sm:mb-0">SELETECT BU</p>
+      <select v-model="selectChoice" @change="handleChange" class="w-[150px] py-4 sm:py-0 bg-blue-50 ml-4 mb-4">
         <option :value="0">All</option>
         <option v-for="item in officeStores.offices" :key="item.id" :value="item.id">
-          {{ item.id + ' ' + item.name }}
+          {{ item.short_name }}
         </option>
       </select>
     </div>
     <!-- Add new user button -->
-    <div class="flex flex-row bg-white text-blue-900 tracking-wide px-2 pb-4 gap-4">
+    <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
       <RouterLink
         class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
         to="/addUser">
