@@ -6,14 +6,15 @@ export const useStaffStore = defineStore('useStaffStore', () => {
   let staff = ref(null)
   let staffDetail = ref(null)
   let StaffByOffice = ref(null)
-  const isLoading = ref(true)
+  const isLoading = ref(false)
 
   async function getAllStaff() {
     try {
+      isLoading.value = true
       let { data, error } = await supabase
         .from('staff')
         .select(`*,office_name(*)`)
-        .order('office_name', { ascending: true })
+        .order('office_id', { ascending: true })
       // const { data, error } = await supabase.from('staff').select(`id,name,short_name,office_name(id,name,short_name)`)
       staff.value = data
       if (error) throw error
@@ -26,6 +27,7 @@ export const useStaffStore = defineStore('useStaffStore', () => {
   async function getStaffDetail(paramID) {
     if (paramID !== undefined) {
       try {
+        isLoading.value = true
         const { data, error } = await supabase
           .from('staff')
           .select('*,office_name(*)')
@@ -47,6 +49,7 @@ export const useStaffStore = defineStore('useStaffStore', () => {
 
   async function addUser(newUser) {
     try {
+      isLoading.value = true
       const { error } = await supabase.from('staff').insert([newUser])
       if (error) throw error
     } catch (error) {
@@ -59,6 +62,7 @@ export const useStaffStore = defineStore('useStaffStore', () => {
   async function getStaffByOffice(officeID) {
     if (officeID !== undefined && officeID !== 0) {
       try {
+        isLoading.value = true
         const { data, error } = await supabase
           .from('staff')
           .select('*, office_name(*)')
@@ -68,9 +72,12 @@ export const useStaffStore = defineStore('useStaffStore', () => {
         if (error) throw error
       } catch (error) {
         console.log('Error filter user by office :', error)
+      } finally {
+        isLoading.value = false
       }
     } else
       try {
+        isLoading.value = true
         let { data, error } = await supabase
           .from('staff')
           .select(`*,office_name(*)`)
@@ -88,19 +95,24 @@ export const useStaffStore = defineStore('useStaffStore', () => {
   async function updateUser(staffID, updateData) {
     console.log('updateData in staff.js: ', staffID, updateData)
     try {
+      isLoading.value = true
       const { error } = await supabase.from('staff').update(updateData).eq('id', staffID).select()
-
       if (error) throw error
     } catch (error) {
       console.error('updat staff error: ', error)
+    } finally {
+      isLoading.value = false
     }
   }
   async function deleteUser(paramID) {
     try {
+      isLoading.value = true
       const { error } = await supabase.from('staff').delete().eq('id', paramID).select()
       if (error) throw error
     } catch (error) {
       console.error('Delete staff is Error: ', error)
+    } finally {
+      isLoading.value = false
     }
   }
 

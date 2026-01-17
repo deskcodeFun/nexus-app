@@ -15,9 +15,11 @@
           </tr>
           <tr>
             <th>User Name</th>
-            <!-- <td>{{ props.currentstaff.fname + ' ' + props.currentstaff.lname }}</td> -->
-            <td>{{ staff.fname + ' ' + staff.lname.substring(0, 15) + '...' }}</td>
+            <td>
+              {{ staff.fname + ' ' + staff.lname.substring(0, 1) + '.' }}
+            </td>
           </tr>
+
           <tr>
             <th scope="col">Email</th>
             <td>{{ staff.email }}</td>
@@ -37,12 +39,19 @@
 </template>
 
 <script setup>
+  import { computed } from 'vue'
   import { useRouter } from 'vue-router'
   import { useStaffStore } from '@/stores/staff'
   import BaseCard from '../BaseCard.vue'
 
   const router = useRouter()
   const store = useStaffStore()
-
-
+  const fullName = computed(() => {
+    if (store.staff.lname.length() !== 0) {
+      return store.staff.fname + ' ' + store.staff.lname.substring(0, 1)
+    } else {
+      return store.staff.fname
+    }
+  })
+  console.log('fullname', fullName)
 </script>

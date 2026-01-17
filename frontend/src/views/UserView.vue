@@ -10,7 +10,7 @@
     <div class="flex flex-row w-fit">
       <p class="pr-4">SELETECT BU</p>
       <select v-model="selectChoice" @change="handleChange" class="bg-blue-50/25 ml-4">
-        <option :value=0>All</option>
+        <option :value="0">All</option>
         <option v-for="item in officeStores.offices" :key="item.id" :value="item.id">
           {{ item.id + ' ' + item.name }}
         </option>
@@ -56,15 +56,18 @@
   const selectChoice = ref(0)
 
   watch(selectChoice, () => {
-    console.log('select choice is ', selectChoice)
+    console.log('select choice is ', selectChoice.value)
     if (selectChoice.value !== undefined) {
       // use function from staff store
       staffStore.getStaffByOffice(selectChoice.value)
       console.log('data from staff store: ', staffStore.StaffByOffice)
+    } else {
+      staffStore.getAllStaff()
     }
   })
   onMounted(() => {
     staffStore.getStaffByOffice(selectChoice.value)
+    staffStore.getAllStaff()
   })
 
   const activeComponent = computed(() => {
