@@ -11,19 +11,19 @@
           <th>Asset ID</th>
           <th>Asset Tag</th>
           <th>Serial</th>
+          <th>Model</th>
           <th>User Name</th>
-          <th>Office</th>
           <!-- <th scope="col">Type</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in computerStore" :key="item.id" @click="router.push(`/editComputer/${item.id}`)"
+        <tr v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)"
           class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
           <td>{{ item.id }}</td>
           <td>{{ item.asset_tag }}</td>
-          <td>{{ item.serial }}</td>
-          <td>{{ item.user_name }}</td>
-          <td>{{ item.office_name }}</td>
+          <td>{{ item.serial_tag }}</td>
+          <td>{{ item.model }}</td>
+          <td>{{ item.staff.fname + ' ' + item.staff.lname }}</td>
           <!-- <td>{{ item.catalog }}</td> -->
         </tr>
       </tbody>
@@ -34,9 +34,8 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
-  import { useAssetsStore } from '@/stores/assetsData'
-
+  import { useComputerStore } from '@/stores/computerData'
   const router = useRouter()
-  const store = useAssetsStore()
-  const computerStore = store.assets.filter((item) => item.catalog === 'computer')
+  const store = useComputerStore()
+  console.log('Computer Store', store)
 </script>
