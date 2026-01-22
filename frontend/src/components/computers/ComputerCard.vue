@@ -16,18 +16,10 @@
           <tr>
             <th>asset_tag</th>
             <td>{{ item.asset_tag }}</td>
-            <!-- <td>{{ props.currentAsset.fname + ' ' + props.currentAsset.lname }}</td> -->
-            <!-- <td>{{ item.user_name.substring(0, 16) + '...' }}</td> -->
-            <!-- <td>{{ shortName(item.user_name) }}</td> -->
           </tr>
-          <!-- <tr>
-            <th scope="col">Type</th>
-            <td>{{ item.catalog }}</td>
-          </tr> -->
           <tr>
             <th scope="col">Serial Number</th>
             <td>{{ item.serial_tag }}</td>
-            <!-- <td>{{ shortName(item.serial_tag) }}</td> -->
           </tr>
           <tr>
             <th scope="col">Model</th>
@@ -50,5 +42,4 @@
 
   const router = useRouter()
   const store = useComputerStore()
-  // const computerStore = store.assets.filter((item) => item.catalog === 'computer')
 </script>
