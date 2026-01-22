@@ -6,18 +6,18 @@
     </div>
   </header>
   <!-- sub menu -->
-  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
+  <!-- <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
     <div class="flex flex-row w-fit">
       <p class="pr-4">SELETECT BU</p>
-      <select class="bg-blue-50/25 ml-4">
-        <option value="0"> All</option>
-        <option v-for="officeStore in officeStores.offices" :key="officeStore.id" :value="officeStore.id">
-          {{ officeStore.short_name }}
+      <select v-model="selectChoice" @change="handleChange" class="bg-blue-50/25 ml-4">
+        <option :value="0">All</option>
+        <option v-for="item in officeStores.offices" :key="item.id" :value="item.id">
+          {{ item.short_name }}
         </option>
       </select>
-    </div>
-    <!-- Add new asset -->
-    <div class="flex flex-row w-fit  rounded-full  text-blue-900 tracking-wide">
+    </div> -->
+  <!-- Add new asset -->
+  <!-- <div class="flex flex-row w-fit rounded-full text-blue-900 tracking-wide">
       <RouterLink class="flex flex-row px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
         to="/addComputer">
         <div class="flex flex-row">
@@ -26,7 +26,7 @@
         </div>
       </RouterLink>
     </div>
-  </div>
+  </div>-->
   <!-- select a kind of assets -->
   <div class="py-4 bg-white flex flex-row">
     <button @click="toggleCom"
@@ -45,31 +45,32 @@
 
   <!--Show data  -->
   <main class="bg-white pt-4">
-    <Transition name="slide-down">
-      <ComputerView v-if="showCom"></ComputerView>
-    </Transition>
-    <Transition name="slide-down">
-      <PrinterView v-if="showPrinter"></PrinterView>
-    </Transition>
-    <Transition name="slide-down">
-      <PrinterView v-if="showOther"></PrinterView>
-    </Transition>
+
+    <ComputerView v-if="showCom"></ComputerView>
+
+
+    <PrinterView v-if="showPrinter"></PrinterView>
+
+    <PrinterView v-if="showOther"></PrinterView>
+
   </main>
 </template>
 
 <script setup>
   import { ref } from 'vue'
-  import { useOfficeStore } from '@/stores/officeData'
+  // import { useOfficeStore } from '@/stores/officeData'
+  // import { useComputerStore } from '@/stores/computerData'
 
   import ComputerView from './ComputerView.vue'
   import PrinterView from './PrinterView.vue'
 
-  import { PlusIcon } from '@heroicons/vue/20/solid'
+  // import { PlusIcon } from '@heroicons/vue/20/solid'
 
   // import BaseAccordion from '@/components/BaseAccordion.vue'
 
-  const officeStores = useOfficeStore()
-
+  // const officeStores = useOfficeStore()
+  // const computerStore = useComputerStore()
+  // const selectChoice = ref(0)
 
   const showCom = ref(true)
   const showPrinter = ref(false)
@@ -89,4 +90,13 @@
     showPrinter.value = false
     showOther.value = true
   }
+
+  // watch(selectChoice, () => {
+  //   if (selectChoice.value !== undefined && selectChoice.value !== 0) {
+  //     console.log('computer choice :', selectChoice)
+  //     computerStore.getComputerByOffice(selectChoice.value)
+  //   } else {
+  //     computerStore.getAllComputer()
+  //   }
+  // })
 </script>

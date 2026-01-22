@@ -11,7 +11,7 @@
       <p class="pr-4 mb-4 sm:mb-0">SELETECT BU</p>
       <select v-model="selectChoice" @change="handleChange" class="w-[150px] py-4 sm:py-0 bg-blue-50 ml-4 mb-4">
         <option :value="0">All</option>
-        <option v-for="item in officeStores.offices" :key="item.id" :value="item.id">
+        <option v-for="item in officeStores.officeName" :key="item.id" :value="item.id">
           {{ item.short_name }}
         </option>
       </select>
@@ -30,12 +30,6 @@
   </div>
   <!-- show data -->
   <main class="bg-white px-8">
-    <!-- <div v-if="activeComponent">
-      <UserCard />
-    </div>
-    <div>
-      <UserTable />
-    </div> -->
     <component :is="activeComponent"></component>
   </main>
 </template>
@@ -43,13 +37,14 @@
 <script setup>
   import { ref, computed, watch, onMounted } from 'vue'
   import { PlusIcon } from '@heroicons/vue/20/solid'
-  import { useOfficeStore } from '@/stores/officeData'
+
   import { useStaffStore } from '@/stores/staff'
   import UserTable from '@/components/users/UserTable.vue'
   import UserCard from '@/components/users/UserCard.vue'
   import { useMonitorSize } from '@/composables/DeviceScreen'
+  import { useOfficeNameStore } from '@/stores/officeData'
 
-  const officeStores = useOfficeStore()
+  const officeStores = useOfficeNameStore()
   const staffStore = useStaffStore()
   // detect screen
   const sizes = useMonitorSize()

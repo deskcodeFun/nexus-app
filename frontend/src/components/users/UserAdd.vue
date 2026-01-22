@@ -44,7 +44,7 @@
   import { useRouter } from 'vue-router'
   import { ref } from 'vue'
   import { useStaffStore } from '@/stores/staff'
-  import { useOfficeNameStore } from '@/stores/officeName'
+  import { useOfficeNameStore } from '@/stores/officeData'
 
   import BaseButttonBack from '../BaseButttonBack.vue'
 
