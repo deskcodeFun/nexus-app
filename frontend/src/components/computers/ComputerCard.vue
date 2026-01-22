@@ -27,7 +27,7 @@
           </tr>
           <tr>
             <th scope="col">User Name</th>
-            <td>{{ item.staff.fname + ' ' + item.staff.lname }}</td>
+            <td>{{ item.staff.fname + ' ' + item.staff.lname.substring(0, 1) + '.' }}</td>
           </tr>
         </tbody>
       </table>
