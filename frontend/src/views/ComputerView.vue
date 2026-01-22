@@ -23,7 +23,7 @@
     </div>
   </div>
   <!-- show data -->
-  <main class="bg-white px-8">
+  <main class="bg-white px-2">
     <component :is="activeComponent"></component>
   </main>
 </template>

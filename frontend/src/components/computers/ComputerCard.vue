@@ -9,7 +9,6 @@
         <tbody>
           <tr>
             <th>Asset ID</th>
-            <!-- <td>{{ currentUser.fname + ' ' + currentUser.lname }}</td> -->
             <td>
               {{ item.id }}
             </td>
