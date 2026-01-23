@@ -17,7 +17,7 @@
         </div>
         <input type="text" v-model="updateData.asset_tag" class="bg-sky-50 text-md p-1" />
         <label for="serial">Serial Number</label>
-        <input type="text" v-model="updateData.serial" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model="updateData.serial_tag" class="bg-sky-50 text-md p-1" />
         <label for="brand">Brand</label>
         <input type="text" v-model="updateData.brand" class="bg-sky-50 text-md p-1" />
         <label for="catalog">Model</label>
@@ -30,9 +30,9 @@
         <input type="text" v-model="updateData.harddisk" class="bg-sky-50 text-md p-1" />
 
         <label for="user_name">User Name</label>
-        <input type="text" v-model="updateData.user_name" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model="user_name" class="bg-sky-50 text-md p-1" />
         <label for="office_name">Office Name</label>
-        <input type="text" v-model="updateData.officeName" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model="officeName" class="bg-sky-50 text-md p-1" />
         <!-- Show button -->
         <div class="flex flex-row justify-between">
           <BaseButttonBack />
@@ -70,25 +70,30 @@
   const updateData = reactive({
     id: paramID,
     asset_tag: '',
-    serial: '',
+    serial_tag: '',
     brand: '',
-    user_name: '',
-    officeName: '',
+    model: '',
+    cpu: '',
+    ram: '',
+    harddisk: ''
   })
 
+  // separate user from updateDATA to save edit
+
+  const user_name = ref('')
+  const officeName = ref('')
   onMounted(async () => {
     await store.getComputerDetail(paramID)
     if (store.computerDetail[0]) {
       updateData.asset_tag = store.computerDetail[0].asset_tag
-      updateData.serial = store.computerDetail[0].serial_tag
+      updateData.serial_tag = store.computerDetail[0].serial_tag
       updateData.brand = store.computerDetail[0].brand
       updateData.model = store.computerDetail[0].model
       updateData.cpu = store.computerDetail[0].cpu
       updateData.ram = store.computerDetail[0].ram
       updateData.harddisk = store.computerDetail[0].model
-      updateData.user_name =
-        store.computerDetail[0].staff.fname + ' ' + store.computerDetail[0].staff.lname
-      updateData.officeName = store.computerDetail[0].office_name.name
+      user_name.value = store.computerDetail[0].staff.fname + ' ' + store.computerDetail[0].staff.lname
+      officeName.value = store.computerDetail[0].office_name.name
     }
   })
   const modalActive = ref(null)
