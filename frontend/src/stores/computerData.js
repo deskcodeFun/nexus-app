@@ -5,6 +5,7 @@ import { ref } from 'vue'
 export const useComputerStore = defineStore('useComputerStore', () => {
   let computer = ref(null)
   let computerByOffice = ref(null)
+  let computerDetail = ref(null)
   const isLoading = ref(false)
 
   async function getAllComputer() {
@@ -54,12 +55,33 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     }
   }
 
+  async function getComputerDetail(paramID) {
+    let computerID = paramID
+    if (computerID !== undefined) {
+      try {
+        isLoading.value = true
+        const { data, error } = await supabase
+          .from('computer')
+          .select(`*,staff(*,...office_name(*))`)
+          .eq('id', computerID)
+        computerDetail.value = data
+
+        if (error) throw error
+      } catch (error) {
+        console.error('Error get computer detail :', error)
+      } finally {
+        isLoading.value = false
+      }
+    }
+  }
   getAllComputer()
   return {
     computer,
     isLoading,
     computerByOffice,
+    computerDetail,
     getAllComputer,
     getComputerByOffice,
+    getComputerDetail,
   }
 })
