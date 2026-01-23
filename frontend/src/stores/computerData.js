@@ -62,10 +62,11 @@ export const useComputerStore = defineStore('useComputerStore', () => {
         isLoading.value = true
         const { data, error } = await supabase
           .from('computer')
-          .select(`*,staff(*,...office_name(*))`)
+          // .select(`*,staff(*,...office_name!inner(*))`)
+          .select(`*,staff(fname,lname),office_name(name)`)
           .eq('id', computerID)
         computerDetail.value = data
-
+        console.log('computer detail from store:', computerDetail)
         if (error) throw error
       } catch (error) {
         console.error('Error get computer detail :', error)
@@ -74,6 +75,36 @@ export const useComputerStore = defineStore('useComputerStore', () => {
       }
     }
   }
+
+  async function updateComputer(computerID, updateData) {
+    console.log('updataData in computerData.js', computerID, updateData)
+    try {
+      isLoading.value = true
+      const { error } = await supabase
+        .from('computer')
+        .update(updateData)
+        .eq('id', computerID)
+        .select()
+      if (error) throw error
+    } catch (error) {
+      console.error('update Computer Assets error: ', error)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function deleteComputer(paramID) {
+    try {
+      isLoading.value = false
+      const { error } = await supabase.from('computer').delete().eq('id', paramID).select()
+      if (error) throw error
+    } catch (error) {
+      console.error('Detele Computer assets error :', error, paramID)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   getAllComputer()
   return {
     computer,
@@ -83,5 +114,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     getAllComputer,
     getComputerByOffice,
     getComputerDetail,
+    updateComputer,
+    deleteComputer,
   }
 })
