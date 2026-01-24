@@ -50,8 +50,8 @@
   }
 
   onMounted(() => {
-    computerStores.getAllComputer()
-    computerStores.getComputerByOffice(selectChoice.value)
+
+    computerStores.getComputerByOffice(0)
   })
 
   const activeComponent = computed(() => {
