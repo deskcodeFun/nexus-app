@@ -11,7 +11,10 @@ export const useComputerStore = defineStore('useComputerStore', () => {
   async function getAllComputer() {
     try {
       isLoading.value = true
-      let { data, error } = await supabase.from('computer').select(`*,staff(*)`)
+      let { data, error } = await supabase
+        .from('computer')
+        .select(`*,staff(*)`)
+        .order('id', { ascending: true })
       computer.value = data
       console.log('Computer value from computerData.js', computer)
       if (error) throw error
@@ -26,14 +29,12 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     if (officeID !== undefined && officeID !== 0) {
       try {
         isLoading.value = true
-        // const { data, error } = await supabase
-        //   .from('computer')
-        //   .select(`*,office_name(*)`)
-        //   .eq('office_id', officeID)
+
         const { data, error } = await supabase
           .from('computer')
           .select(`*,staff(*)`)
           .eq('office_id', officeID)
+          .order('id', { ascending: true })
         computerByOffice.value = data
         if (error) throw error
       } catch (error) {
@@ -44,7 +45,10 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     } else {
       try {
         isLoading.value = true
-        let { data, error } = await supabase.from('computer').select(`*, staff(*)`)
+        let { data, error } = await supabase
+          .from('computer')
+          .select(`*, staff(*)`)
+          .order('id', { ascending: true })
         computerByOffice.value = data
         if (error) throw error
       } catch (error) {

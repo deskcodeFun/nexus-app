@@ -6,16 +6,9 @@
     </div>
   </header>
   <!-- Sub Menu -->
-  <div class="flex flex-col sm:flex-row justify-between bg-white text-blue-900 tracking-wide p-2">
-    <div class="flex flex-col sm:flex-row w-fit items-baseline">
-      <p class="pr-4 mb-4 sm:mb-0">SELETECT BU</p>
-      <select v-model="selectChoice" @change="handleChange" class="w-[150px] py-4 sm:py-0 bg-blue-50 ml-4 mb-4">
-        <option :value="0">All</option>
-        <option v-for="item in officeStores.officeName" :key="item.id" :value="item.id">
-          {{ item.short_name }}
-        </option>
-      </select>
-    </div>
+  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
+    <BaseOfficeDrop @select-option="handleChoice" />
+
     <!-- Add new user button -->
     <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
       <RouterLink
@@ -35,34 +28,35 @@
 </template>
 
 <script setup>
-  import { ref, computed, watch, onMounted } from 'vue'
+  import { ref, computed, onMounted } from 'vue'
   import { PlusIcon } from '@heroicons/vue/20/solid'
 
   import { useStaffStore } from '@/stores/staff'
   import UserTable from '@/components/users/UserTable.vue'
   import UserCard from '@/components/users/UserCard.vue'
+  import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
   import { useMonitorSize } from '@/composables/DeviceScreen'
-  import { useOfficeNameStore } from '@/stores/officeData'
 
-  const officeStores = useOfficeNameStore()
   const staffStore = useStaffStore()
   // detect screen
   const sizes = useMonitorSize()
   const selectChoice = ref(0)
 
-  watch(selectChoice, () => {
-    console.log('select choice is ', selectChoice.value)
-    if (selectChoice.value !== undefined) {
-      // use function from staff store
+  function handleChoice(value) {
+    console.log('handleChoice value in UserView', value)
+    if (value == 0) {
       staffStore.getStaffByOffice(selectChoice.value)
-      console.log('data from staff store: ', staffStore.StaffByOffice)
-    } else {
-      staffStore.getAllStaff()
     }
-  })
+    if (value !== undefined) {
+      // use function from staff store
+      staffStore.getStaffByOffice(value)
+      console.log('data from staff store: ', staffStore.StaffByOffice)
+    }
+  }
+
   onMounted(() => {
     staffStore.getStaffByOffice(selectChoice.value)
-    staffStore.getAllStaff()
+
   })
 
   const activeComponent = computed(() => {
