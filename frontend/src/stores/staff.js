@@ -3,27 +3,58 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useStaffStore = defineStore('useStaffStore', () => {
-  let staff = ref(null)
-  let staffDetail = ref(null)
-  let StaffByOffice = ref(null)
+  const staff = ref(null)
+  const staffDetail = ref(null)
+  // const staffByOffice = ref(null)
   const isLoading = ref(false)
 
-  async function getAllStaff() {
-    try {
-      isLoading.value = true
-      let { data, error } = await supabase
-        .from('staff')
-        .select(`*,office_name(*)`)
-        .order('office_id', { ascending: true })
-      // const { data, error } = await supabase.from('staff').select(`id,name,short_name,office_name(id,name,short_name)`)
-      staff.value = data
-      if (error) throw error
-    } catch (error) {
-      console.error('Error get all staff', error)
-    } finally {
-      isLoading.value = false
+  // async function getAllStaff() {
+  //   try {
+  //     isLoading.value = true
+  //     const { data, error } = await supabase
+  //       .from('staff')
+  //       .select(`*,office_name(*)`)
+  //       .order('office_id', { ascending: true })
+  //     // const { data, error } = await supabase.from('staff').select(`id,name,short_name,office_name(id,name,short_name)`)
+  //     staff.value = data
+  //     if (error) throw error
+  //   } catch (error) {
+  //     console.error('Error get all staff', error)
+  //   } finally {
+  //     isLoading.value = false
+  //   }
+  // }
+  async function getStaffByOffice(officeID) {
+    console.log('officeID parameter from staff store', officeID)
+    if (officeID !== undefined && officeID !== '0') {
+      try {
+        isLoading.value = true
+        const { data, error } = await supabase
+          .from('staff')
+          .select('*, office_name(*)')
+          .eq('office_id', officeID)
+          .order('id', { ascending: true })
+        staff.value = data
+        if (error) throw error
+      } catch (error) {
+        console.log('Error filter user by office :', error)
+      } finally {
+        isLoading.value = false
+      }
+    } else {
+      try {
+        isLoading.value = true
+        const { data, error } = await supabase.from('staff').select('*, office_name(*)')
+        staff.value = data
+        if (error) throw error
+      } catch (error) {
+        console.error('Error get all staff from staff store', error)
+      } finally {
+        isLoading.value = false
+      }
     }
   }
+
   async function getStaffDetail(paramID) {
     if (paramID !== undefined) {
       try {
@@ -34,7 +65,6 @@ export const useStaffStore = defineStore('useStaffStore', () => {
           .eq('id', paramID)
           .order('id', { ascending: true })
         staffDetail.value = data
-        console.log('staffDetail in staff.js: ', staffDetail)
         if (error) throw error
       } catch (error) {
         console.error('error get staff detail:', error)
@@ -57,39 +87,6 @@ export const useStaffStore = defineStore('useStaffStore', () => {
     } finally {
       isLoading.value = false
     }
-  }
-
-  async function getStaffByOffice(officeID) {
-    if (officeID !== undefined && officeID !== 0) {
-      try {
-        isLoading.value = true
-        const { data, error } = await supabase
-          .from('staff')
-          .select('*, office_name(*)')
-          .eq('office_id', officeID)
-          .order('id', { ascending: true })
-        StaffByOffice.value = data
-        if (error) throw error
-      } catch (error) {
-        console.log('Error filter user by office :', error)
-      } finally {
-        isLoading.value = false
-      }
-    } else
-      try {
-        isLoading.value = true
-        let { data, error } = await supabase
-          .from('staff')
-          .select(`*,office_name(*)`)
-          .order('office_id', { ascending: true })
-        // const { data, error } = await supabase.from('staff').select(`id,name,short_name,office_name(id,name,short_name)`)
-        StaffByOffice.value = data
-        if (error) throw error
-      } catch (error) {
-        console.error('Error get all staff', error)
-      } finally {
-        isLoading.value = false
-      }
   }
 
   async function updateUser(staffID, updateData) {
@@ -116,14 +113,15 @@ export const useStaffStore = defineStore('useStaffStore', () => {
     }
   }
 
-  getAllStaff()
+  // getAllStaff()
+  getStaffByOffice(0)
 
   return {
     staff,
     staffDetail,
     isLoading,
-    StaffByOffice,
-    getAllStaff,
+    // staffByOffice,
+    // getAllStaff,
     getStaffDetail,
     getStaffByOffice,
     addUser,

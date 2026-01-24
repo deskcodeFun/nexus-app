@@ -12,7 +12,7 @@
     </thead>
 
     <tbody>
-      <tr v-for="staff in store.StaffByOffice" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
+      <tr v-for="staff in store.staff" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
         class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
         <td class="text-center m-2 p-2">{{ staff.id }}</td>
         <td>{{ staff.fname + ' ' + staff.lname }}</td>

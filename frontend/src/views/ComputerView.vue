@@ -42,16 +42,18 @@
     console.log('select choice in ComputerView', value)
     if (value == 0) {
       computerStores.getComputerByOffice(selectChoice.value)
+      // computerStores.computer
     }
     if (value !== undefined) {
       computerStores.getComputerByOffice(value)
-      console.log('Data from getComputerByOffice ', computerStores.getComputerByOffice.value)
     }
   }
 
   onMounted(() => {
+    computerStores.getAllComputer()
     computerStores.getComputerByOffice(selectChoice.value)
   })
+
   const activeComponent = computed(() => {
     return sizes.isMobile.value ? ComputerCard : ComputerTable
   })

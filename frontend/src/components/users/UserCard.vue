@@ -1,5 +1,5 @@
 <template>
-  <div v-for="staff in store.StaffByOffice" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
+  <div v-for="staff in store.staff" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
     class="flex justify-center mx-2">
     <BaseCard>
       <!-- show data -->
@@ -39,19 +39,13 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue'
+
   import { useRouter } from 'vue-router'
   import { useStaffStore } from '@/stores/staff'
   import BaseCard from '../BaseCard.vue'
 
   const router = useRouter()
   const store = useStaffStore()
-  const fullName = computed(() => {
-    if (store.staff.lname.length() !== 0) {
-      return store.staff.fname + ' ' + store.staff.lname.substring(0, 1)
-    } else {
-      return store.staff.fname
-    }
-  })
-  console.log('fullname', fullName)
+
+
 </script>

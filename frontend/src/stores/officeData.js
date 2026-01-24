@@ -13,7 +13,6 @@ export const useOfficeNameStore = defineStore('useOfficeNameStore', () => {
       let { data, error } = await supabase.from('office_name').select('*')
       officeName.value = data
       if (error) throw error
-      console.log('get all office name', officeName)
     } catch (error) {
       console.error('Error get all office name: ', error)
     } finally {

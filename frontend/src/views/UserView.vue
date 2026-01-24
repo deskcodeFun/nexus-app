@@ -8,7 +8,6 @@
   <!-- Sub Menu -->
   <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
     <BaseOfficeDrop @select-option="handleChoice" />
-
     <!-- Add new user button -->
     <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
       <RouterLink
@@ -28,7 +27,7 @@
 </template>
 
 <script setup>
-  import { ref, computed, onMounted } from 'vue'
+  import { computed, onMounted } from 'vue'
   import { PlusIcon } from '@heroicons/vue/20/solid'
 
   import { useStaffStore } from '@/stores/staff'
@@ -40,22 +39,20 @@
   const staffStore = useStaffStore()
   // detect screen
   const sizes = useMonitorSize()
-  const selectChoice = ref(0)
+  // const selectChoice = ref(0)
 
   function handleChoice(value) {
-    console.log('handleChoice value in UserView', value)
-    if (value == 0) {
-      staffStore.getStaffByOffice(selectChoice.value)
-    }
-    if (value !== undefined) {
+    if (value !== undefined && value !== 0) {
       // use function from staff store
       staffStore.getStaffByOffice(value)
-      console.log('data from staff store: ', staffStore.StaffByOffice)
+      console.log('data from staff store: ', value, staffStore.staff)
+    } else if (value == 0) {
+      staffStore.getStaffByOffice(0)
     }
   }
 
   onMounted(() => {
-    staffStore.getStaffByOffice(selectChoice.value)
+    staffStore.getStaffByOffice(0)
 
   })
 

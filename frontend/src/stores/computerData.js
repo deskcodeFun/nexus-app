@@ -4,38 +4,36 @@ import { ref } from 'vue'
 
 export const useComputerStore = defineStore('useComputerStore', () => {
   let computer = ref(null)
-  let computerByOffice = ref(null)
+  // let computerByOffice = ref(null)
   let computerDetail = ref(null)
   const isLoading = ref(false)
 
-  async function getAllComputer() {
-    try {
-      isLoading.value = true
-      let { data, error } = await supabase
-        .from('computer')
-        .select(`*,staff(*)`)
-        .order('id', { ascending: true })
-      computer.value = data
-      console.log('Computer value from computerData.js', computer)
-      if (error) throw error
-    } catch (error) {
-      console.log('Error get all Computer', error)
-    } finally {
-      isLoading.value = false
-    }
-  }
+  // async function getAllComputer() {
+  //   try {
+  //     isLoading.value = true
+  //     let { data, error } = await supabase
+  //       .from('computer')
+  //       .select(`*,staff(*)`)
+  //       .order('id', { ascending: true })
+  //     computer.value = data
+  //     if (error) throw error
+  //   } catch (error) {
+  //     console.log('Error get all Computer', error)
+  //   } finally {
+  //     isLoading.value = false
+  //   }
+  // }
 
   async function getComputerByOffice(officeID) {
-    if (officeID !== undefined && officeID !== 0) {
+    if (officeID !== undefined && officeID !== '0') {
       try {
         isLoading.value = true
-
         const { data, error } = await supabase
           .from('computer')
           .select(`*,staff(*)`)
           .eq('office_id', officeID)
           .order('id', { ascending: true })
-        computerByOffice.value = data
+        computer.value = data
         if (error) throw error
       } catch (error) {
         console.log('Error filter computer by office', error)
@@ -49,7 +47,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
           .from('computer')
           .select(`*, staff(*)`)
           .order('id', { ascending: true })
-        computerByOffice.value = data
+        computer.value = data
         if (error) throw error
       } catch (error) {
         console.error('Error get all computer', error)
@@ -109,13 +107,13 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     }
   }
 
-  getAllComputer()
+  getComputerByOffice(0)
   return {
     computer,
     isLoading,
-    computerByOffice,
+    // computerByOffice,
     computerDetail,
-    getAllComputer,
+    // getAllComputer,
     getComputerByOffice,
     getComputerDetail,
     updateComputer,
