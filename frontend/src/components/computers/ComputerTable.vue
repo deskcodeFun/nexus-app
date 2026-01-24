@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in store.computerByOffice" :key="item.id" @click="router.push(`/editComputer/${item.id}`)"
+        <tr v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)"
           class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
           <td>{{ item.id }}</td>
           <td>{{ item.asset_tag }}</td>

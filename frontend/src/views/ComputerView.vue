@@ -2,7 +2,6 @@
   <!-- <div v-if="computer.isLoading" class="text-green-600 text-2xl text-center">Loading...</div> -->
   <!-- sub menu -->
   <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
-
     <BaseOfficeDrop @select-option="handleChoice" />
     <!-- Add new asset -->
     <div class="flex flex-row w-fit rounded-full text-blue-900 tracking-wide">
@@ -22,7 +21,7 @@
 </template>
 
 <script setup>
-  import { ref, onMounted, computed } from 'vue'
+  import { onMounted, computed } from 'vue'
 
   import { useComputerStore } from '@/stores/computerData'
 
@@ -32,16 +31,14 @@
   import { PlusIcon } from '@heroicons/vue/20/solid'
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
 
-
-
   const computerStores = useComputerStore()
-  const selectChoice = ref(0)
+
   const sizes = useMonitorSize()
 
   function handleChoice(value) {
     console.log('select choice in ComputerView', value)
     if (value == 0) {
-      computerStores.getComputerByOffice(selectChoice.value)
+      computerStores.getComputerByOffice(value)
       // computerStores.computer
     }
     if (value !== undefined) {
@@ -50,7 +47,6 @@
   }
 
   onMounted(() => {
-
     computerStores.getComputerByOffice(0)
   })
 
