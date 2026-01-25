@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
-    <div class="flex flex-row w-fit">
+    <div id="selct-bu" class="flex flex-row w-fit">
       <p class="pr-4">SELETECT BU</p>
       <select v-model="selectChoice" @change="handleChange" class="bg-blue-50/25 ml-4">
         <option v-for="item in officeStores.officeName" :key="item.id" :value="item.id">
@@ -26,4 +26,5 @@
     // emit the event 'select-option' with selectChoice value
     emit('select-option', value)
   }
+
 </script>

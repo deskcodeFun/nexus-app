@@ -33,7 +33,6 @@ export const useStaffStore = defineStore('useStaffStore', () => {
           .from('staff')
           .select('*, office_name(*)')
           .eq('office_id', officeID)
-          .order('id', { ascending: true })
         staff.value = data
         if (error) throw error
       } catch (error) {
@@ -114,7 +113,7 @@ export const useStaffStore = defineStore('useStaffStore', () => {
   }
 
   // getAllStaff()
-  getStaffByOffice(0)
+  getStaffByOffice()
 
   return {
     staff,

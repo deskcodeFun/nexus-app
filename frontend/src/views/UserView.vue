@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-  import { computed, onMounted } from 'vue'
+  import { computed } from 'vue'
   import { PlusIcon } from '@heroicons/vue/20/solid'
 
   import { useStaffStore } from '@/stores/staff'
@@ -37,6 +37,7 @@
   import { useMonitorSize } from '@/composables/DeviceScreen'
 
   const staffStore = useStaffStore()
+  staffStore.getStaffByOffice()
   // detect screen
   const sizes = useMonitorSize()
   // const selectChoice = ref(0)
@@ -50,11 +51,6 @@
       staffStore.getStaffByOffice(0)
     }
   }
-
-  onMounted(() => {
-    staffStore.getStaffByOffice(0)
-
-  })
 
   const activeComponent = computed(() => {
     return sizes.isMobile.value ? UserCard : UserTable

@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-  import { onMounted, computed } from 'vue'
+  import { computed } from 'vue'
 
   import { useComputerStore } from '@/stores/computerData'
 
@@ -32,12 +32,13 @@
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
 
   const computerStores = useComputerStore()
+  computerStores.getComputerByOffice('0')
 
   const sizes = useMonitorSize()
 
   function handleChoice(value) {
     console.log('select choice in ComputerView', value)
-    if (value == 0) {
+    if (value == 0 && value === null) {
       computerStores.getComputerByOffice(value)
       // computerStores.computer
     }
@@ -45,11 +46,6 @@
       computerStores.getComputerByOffice(value)
     }
   }
-
-  onMounted(() => {
-    computerStores.getComputerByOffice(0)
-  })
-
   const activeComponent = computed(() => {
     return sizes.isMobile.value ? ComputerCard : ComputerTable
   })

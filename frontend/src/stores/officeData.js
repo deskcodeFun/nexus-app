@@ -19,7 +19,7 @@ export const useOfficeNameStore = defineStore('useOfficeNameStore', () => {
       isLoading.value = false
     }
   }
-  getAllOfficeName()
+  getAllOfficeName(0)
   return {
     officeName,
     isLoading,

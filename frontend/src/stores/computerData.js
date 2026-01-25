@@ -103,7 +103,8 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     }
   }
 
-  getComputerByOffice(0)
+  getComputerByOffice()
+
   return {
     computer,
     isLoading,

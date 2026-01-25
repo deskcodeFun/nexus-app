@@ -38,8 +38,10 @@
   import { useComputerStore } from '@/stores/computerData'
 
 
+
   const router = useRouter()
   const store = useComputerStore()
+
 
 
 
