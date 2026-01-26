@@ -83,7 +83,8 @@
     department.value = ''
     office_id.value = ''
     // navigate back to user list
-    staffStore.getAllStaff()
+    // staffStore.getAllStaff()
+    staffStore.getStaffByOffice()
     router.push('/user')
   }
 </script>

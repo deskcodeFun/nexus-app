@@ -114,7 +114,7 @@
   function delUser(paramID) {
     console.log('store.deleteUser: ', paramID)
     store.deleteUser(paramID)
-    store.getAllStaff()
+    store.getStaffByOffice()
     router.push('/user')
 
   }
