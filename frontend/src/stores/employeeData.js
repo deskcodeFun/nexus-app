@@ -80,7 +80,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     }
   }
 
-  async function addUser(newUser) {
+  async function addEmployee(newUser) {
     try {
       isLoading.value = true
       const { error } = await supabase.from('employee').insert([newUser])
@@ -131,7 +131,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     // getAllemployee,
     getEmployee,
     getEmployeeDetail,
-    addUser,
+    addEmployee,
     updateEmployee,
     deleteEmployee,
   }

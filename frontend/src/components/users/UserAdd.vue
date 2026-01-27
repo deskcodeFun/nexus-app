@@ -43,7 +43,7 @@
   // import { users } from '@/dataMockup/staff'
   import { useRouter } from 'vue-router'
   import { ref } from 'vue'
-  import { useStaffStore } from '@/stores/employeeData'
+  import { useEmployeeStore } from '@/stores/employeeData'
   import { useOfficeNameStore } from '@/stores/officeData'
 
   import BaseButttonBack from '../BaseButttonBack.vue'
@@ -51,7 +51,7 @@
 
   const router = useRouter()
 
-  const staffStore = useStaffStore()
+  const employeeStore = useEmployeeStore()
   const officeNameStore = useOfficeNameStore()
   console.log('office name', officeNameStore)
   const fname = ref('')
@@ -63,7 +63,7 @@
   const addSubmit = () => {
     // compute a simple next id (fallback to 1)
 
-    const newUser = {
+    const newEmployee = {
       fname: fname.value,
       lname: lname.value,
       email: email.value,
@@ -71,10 +71,10 @@
       office_id: office_id.value,
     }
 
-    // console.log('newUser ', newUser)
+    // console.log('newEmployee ', newUser)
     // emit the new user to parent instead of mutating prop
     // store.users.push(newUser)
-    staffStore.addUser(newUser)
+    employeeStore.addEmployee(newEmployee)
 
     // reset inputs
     fname.value = ''
@@ -83,8 +83,8 @@
     department.value = ''
     office_id.value = ''
     // navigate back to user list
-    // staffStore.getAllStaff()
-    staffStore.getStaffByOffice()
+    // employeeStore.getAllStaff()
+    employeeStore.getEmployee()
     router.push('/user')
   }
 </script>

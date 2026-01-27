@@ -2,7 +2,7 @@
   <!-- Header -->
   <header>
     <div class="flex flex-col justify-between bg-white sm:justify-normal py-16 px-2">
-      <p class="text-lg tracking-widest text-blue-900">USER MANAGEMENT</p>
+      <p class="text-lg tracking-widest text-blue-900">EMPLOYEE MANAGEMENT</p>
     </div>
   </header>
   <!-- Sub Menu -->
@@ -15,7 +15,7 @@
         to="/addUser">
         <div class="flex flex-row">
           <PlusIcon class="h-6 w-6" />
-          <p>Add User</p>
+          <p>Add Employee</p>
         </div>
       </RouterLink>
     </div>
@@ -30,14 +30,14 @@
   import { computed } from 'vue'
   import { PlusIcon } from '@heroicons/vue/20/solid'
 
-  import { useStaffStore } from '@/stores/employeeData'
+  import { useEmployeeStore } from '@/stores/employeeData.js'
   import UserTable from '@/components/users/UserTable.vue'
   import UserCard from '@/components/users/UserCard.vue'
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
   import { useMonitorSize } from '@/composables/DeviceScreen'
 
-  const staffStore = useStaffStore()
-  staffStore.getStaffByOffice()
+  const employeeStore = useEmployeeStore()
+  employeeStore.getEmployee()
   // detect screen
   const sizes = useMonitorSize()
   // const selectChoice = ref(0)
@@ -45,10 +45,10 @@
   function handleChoice(value) {
     if (value !== undefined && value !== 0) {
       // use function from staff store
-      staffStore.getStaffByOffice(value)
-      console.log('data from staff store: ', value, staffStore.staff)
+      employeeStore.getEmployee(value)
+      console.log('data from staff store: ', value, employeeStore.employee)
     } else if (value == 0) {
-      staffStore.getStaffByOffice(0)
+      employeeStore.getStaffByOffice(0)
     }
   }
 

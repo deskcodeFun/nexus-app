@@ -1,5 +1,5 @@
 <template>
-  <div v-for="staff in store.staff" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
+  <div v-for="employee in store.employee" :key="employee.id" @click="router.push(`/editUser/${employee.id}`)"
     class="flex justify-center mx-2">
     <BaseCard>
       <!-- show data -->
@@ -10,27 +10,27 @@
             <th>User ID</th>
             <!-- <td>{{ currentUser.fname + ' ' + currentUser.lname }}</td> -->
             <td>
-              {{ staff.id }}
+              {{ employee.id }}
             </td>
           </tr>
           <tr>
             <th>User Name</th>
             <td>
-              {{ staff.fname + ' ' + staff.lname.substring(0, 1) + '.' }}
+              {{ employee.fname + ' ' + employee.lname.substring(0, 1) + '.' }}
             </td>
           </tr>
 
           <tr>
             <th scope="col">Email</th>
-            <td>{{ staff.email }}</td>
+            <td>{{ employee.email }}</td>
           </tr>
           <tr>
             <th scope="col">Department</th>
-            <td>{{ staff.department }}</td>
+            <td>{{ employee.department }}</td>
           </tr>
           <tr>
             <th scope="col">Office</th>
-            <td>{{ staff.office_name.name }}</td>
+            <td>{{ employee.office_name.name }}</td>
           </tr>
         </tbody>
       </table>
@@ -41,11 +41,11 @@
 <script setup>
 
   import { useRouter } from 'vue-router'
-  import { useStaffStore } from '@/stores/employeeData'
+  import { useEmployeeStore } from '@/stores/employeeData'
   import BaseCard from '../BaseCard.vue'
 
   const router = useRouter()
-  const store = useStaffStore()
+  const store = useEmployeeStore()
 
 
 </script>

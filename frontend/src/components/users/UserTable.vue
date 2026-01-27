@@ -12,14 +12,14 @@
     </thead>
 
     <tbody>
-      <tr v-for="staff in store.staff" :key="staff.id" @click="router.push(`/editUser/${staff.id}`)"
+      <tr v-for="employee in store.employee" :key="employee.id" @click="router.push(`/editUser/${employee.id}`)"
         class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
-        <td class="text-center m-2 p-2">{{ staff.id }}</td>
-        <td>{{ staff.fname + ' ' + staff.lname }}</td>
-        <td class="m-2 p-2">{{ staff.email }}</td>
-        <td class="m-2 p-2">{{ staff.department }}</td>
-        <!-- <td class="m-2 p-2">{{ staff.office_id}}</td> -->
-        <td class="m-2 p-2">{{ staff.office_name.name }}</td>
+        <td class="text-center m-2 p-2">{{ employee.id }}</td>
+        <td>{{ employee.fname + ' ' + employee.lname }}</td>
+        <td class="m-2 p-2">{{ employee.email }}</td>
+        <td class="m-2 p-2">{{ employee.department }}</td>
+        <!-- <td class="m-2 p-2">{{ employee.office_id}}</td> -->
+        <td class="m-2 p-2">{{ employee.office_name.name }}</td>
         <!-- <td class="m-2 p-2">{{ staff.}}</td> -->
 
         <!-- <td>{{ item.catalog }}</td> -->
@@ -30,10 +30,10 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
-  import { useStaffStore } from '@/stores/employeeData.js'
+  import { useEmployeeStore } from '@/stores/employeeData.js'
 
   const router = useRouter()
-  const store = useStaffStore()
+  const store = useEmployeeStore()
 
 
 
