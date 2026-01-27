@@ -23,7 +23,7 @@
           <td>{{ item.asset_tag }}</td>
           <td>{{ item.serial_tag }}</td>
           <td>{{ item.model }}</td>
-          <td>{{ item.staff.fname + ' ' + item.staff.lname }}</td>
+          <td>{{ item.employee.fname + ' ' + item.employee.lname }}</td>
           <!-- <td>{{ item.catalog }}</td> -->
         </tr>
       </tbody>

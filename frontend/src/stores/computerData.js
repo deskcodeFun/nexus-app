@@ -30,7 +30,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
         isLoading.value = true
         const { data, error } = await supabase
           .from('computer')
-          .select(`*,staff(*)`)
+          .select(`*,employee(*)`)
           .eq('office_id', officeID)
           .order('id')
         computer.value = data
@@ -43,7 +43,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     } else {
       try {
         isLoading.value = true
-        let { data, error } = await supabase.from('computer').select(`*, staff(*)`).order('id')
+        let { data, error } = await supabase.from('computer').select(`*, employee(*)`).order('id')
         computer.value = data
         if (error) throw error
       } catch (error) {
@@ -62,7 +62,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
         const { data, error } = await supabase
           .from('computer')
           // .select(`*,staff(*,...office_name!inner(*))`)
-          .select(`*,staff(fname,lname),office_name(name)`)
+          .select(`*,employee(fname,lname),office_name(name)`)
           .eq('id', computerID)
           .order('id')
         computerDetail.value = data

@@ -27,9 +27,9 @@
 
   import ComputerCard from '@/components/computers/ComputerCard.vue'
   import ComputerTable from '@/components/computers/ComputerTable.vue'
+  import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
   import { useMonitorSize } from '@/composables/DeviceScreen'
   import { PlusIcon } from '@heroicons/vue/20/solid'
-  import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
 
   const computerStores = useComputerStore()
   computerStores.getComputerByOffice('0')
