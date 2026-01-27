@@ -32,7 +32,12 @@
         <label for="user_name">User Name</label>
         <input type="text" v-model="user_name" class="bg-sky-50 text-md p-1" />
         <label for="office_name">Office Name</label>
-        <input type="text" v-model="officeName" class="bg-sky-50 text-md p-1" />
+        <select name="officeName" id="officeName" v-model.trim="updateData.office_id" class="bg-sky-50 py-2">
+          <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
+            {{ office_name.name }}
+          </option>
+        </select>
+        <!-- <input type="text" v-model="officeName" class="bg-sky-50 text-md p-1" /> -->
         <!-- Show button -->
         <div class="flex flex-row justify-between">
           <BaseButttonBack />
@@ -58,6 +63,7 @@
   import { ref, onMounted, reactive } from 'vue'
 
   import { useComputerStore } from '@/stores/computerData'
+  import { useOfficeNameStore } from '@/stores/officeData'
 
   import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
   import BaseModal from '../BaseModal.vue'
@@ -67,6 +73,7 @@
   const router = useRouter()
   let paramID = +route.params.id
   const store = useComputerStore()
+  const officeNameStore = useOfficeNameStore()
   const updateData = reactive({
     id: paramID,
     asset_tag: '',
@@ -75,12 +82,13 @@
     model: '',
     cpu: '',
     ram: '',
-    harddisk: ''
+    harddisk: '',
+    office_id: ''
   })
 
   // separate user from updateDATA to save edit
   const user_name = ref('')
-  const officeName = ref('')
+
   onMounted(async () => {
     await store.getComputerDetail(paramID)
     if (store.computerDetail[0]) {
@@ -91,8 +99,8 @@
       updateData.cpu = store.computerDetail[0].cpu
       updateData.ram = store.computerDetail[0].ram
       updateData.harddisk = store.computerDetail[0].model
-      user_name.value = store.computerDetail[0].staff.fname + ' ' + store.computerDetail[0].staff.lname
-      officeName.value = store.computerDetail[0].office_name.name
+      user_name.value = store.computerDetail[0].employee.fname + ' ' + store.computerDetail[0].employee.lname
+      updateData.office_id = store.computerDetail[0].office_id
     }
   })
   const modalActive = ref(null)
