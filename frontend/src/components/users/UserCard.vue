@@ -41,7 +41,7 @@
 <script setup>
 
   import { useRouter } from 'vue-router'
-  import { useStaffStore } from '@/stores/staff'
+  import { useStaffStore } from '@/stores/employeeData'
   import BaseCard from '../BaseCard.vue'
 
   const router = useRouter()

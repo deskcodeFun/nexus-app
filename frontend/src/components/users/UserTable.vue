@@ -30,7 +30,7 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
-  import { useStaffStore } from '@/stores/staff.js'
+  import { useStaffStore } from '@/stores/employeeData.js'
 
   const router = useRouter()
   const store = useStaffStore()

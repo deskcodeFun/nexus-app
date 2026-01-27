@@ -53,7 +53,7 @@
   import { useRoute, useRouter } from 'vue-router'
   import { reactive, ref, onMounted } from 'vue'
 
-  import { useStaffStore } from '@/stores/staff'
+  import { useStaffStore } from '@/stores/employeeData'
 
   import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
   import BaseModal from '../BaseModal.vue'

@@ -43,7 +43,7 @@
   // import { users } from '@/dataMockup/staff'
   import { useRouter } from 'vue-router'
   import { ref } from 'vue'
-  import { useStaffStore } from '@/stores/staff'
+  import { useStaffStore } from '@/stores/employeeData'
   import { useOfficeNameStore } from '@/stores/officeData'
 
   import BaseButttonBack from '../BaseButttonBack.vue'
