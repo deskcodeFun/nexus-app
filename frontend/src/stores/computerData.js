@@ -75,7 +75,17 @@ export const useComputerStore = defineStore('useComputerStore', () => {
       }
     }
   }
-
+  async function addComputer(newComputer) {
+    try {
+      isLoading.value = true
+      const { error } = await supabase.from('computer').insert([newComputer])
+      if (error) throw error
+    } catch (error) {
+      console.error('ERROR Add new computer fail: ', error)
+    } finally {
+      isLoading.value = false
+    }
+  }
   async function updateComputer(computerID, updateData) {
     console.log('updataData in computerData.js', computerID, updateData)
     try {
@@ -105,7 +115,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     }
   }
 
-  getComputerByOffice()
+  getComputerByOffice('0')
 
   return {
     computer,
@@ -115,6 +125,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
     // getAllComputer,
     getComputerByOffice,
     getComputerDetail,
+    addComputer,
     updateComputer,
     deleteComputer,
   }

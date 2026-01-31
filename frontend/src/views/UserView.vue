@@ -48,7 +48,7 @@
       employeeStore.getEmployee(value)
       console.log('data from staff store: ', value, employeeStore.employee)
     } else if (value == 0) {
-      employeeStore.getStaffByOffice(0)
+      employeeStore.getStaffByOffice()
     }
   }
 

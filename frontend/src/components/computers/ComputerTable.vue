@@ -5,24 +5,28 @@
   <!-- show data -->
   <div class="w-full flex justify-center">
     <table
-      class="w-11/12 bg-white/30 [&_th]:p-2 [&_th]:text-left [&_th]:align-baseline [&_td]:py-2 [&_th]:text-md [&_th]:text-gray-600 [&_td]:text-blue-900 [&_td]:px-4">
+      class="w-11/12 bg-white/30 [&_th]:p-2 [&_th]:text-left [&_th]:align-baseline  [&_th]:text-md [&_th]:text-gray-600 [&_td]:text-blue-900 [&_td]:py-4 [&_td]:mx-auto">
       <thead>
-        <tr class="border-b border-gray-400">
-          <th>Asset ID</th>
-          <th>Asset Tag</th>
-          <th>Serial</th>
-          <th>Model</th>
-          <th>User Name</th>
+        <tr class="border-b border-gray-400 text-nowrap">
+          <th scope="col">Asset ID</th>
+          <th scope="col">Asset Tag</th>
+          <th scope="col">Brand</th>
+          <th scope="col">CPU</th>
+          <th scope="col">Ram</th>
+          <th scope="col">Harddisk</th>
+          <th scope="col">User Name</th>
           <!-- <th scope="col">Type</th> -->
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)"
-          class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
+          class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer  text-nowrap">
           <td>{{ item.id }}</td>
           <td>{{ item.asset_tag }}</td>
-          <td>{{ item.serial_tag }}</td>
-          <td>{{ item.model }}</td>
+          <td>{{ item.brand }}</td>
+          <td>{{ item.cpu.substring(0, 18) }}</td>
+          <td>{{ item.ram.substring(0, 18) }}</td>
+          <td>{{ item.harddisk }}</td>
           <td>{{ item.employee.fname + ' ' + item.employee.lname }}</td>
           <!-- <td>{{ item.catalog }}</td> -->
         </tr>

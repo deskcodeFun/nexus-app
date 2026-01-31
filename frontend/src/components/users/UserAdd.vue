@@ -22,7 +22,7 @@
             {{ office_name.name }}
           </option>
         </select>
-        <!-- <p>select office: {{ office_id }}</p> -->
+
         <!-- Save Button -->
         <div class="flex flex-row justify-between">
           <BaseButttonBack />

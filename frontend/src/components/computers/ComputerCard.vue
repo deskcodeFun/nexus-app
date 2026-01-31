@@ -14,16 +14,24 @@
             </td>
           </tr>
           <tr>
-            <th>asset_tag</th>
+            <th>Asset Tag</th>
             <td>{{ item.asset_tag }}</td>
           </tr>
           <tr>
-            <th scope="col">Serial Number</th>
-            <td>{{ item.serial_tag }}</td>
+            <th scope="col">Brand</th>
+            <td>{{ item.brand }}</td>
           </tr>
           <tr>
-            <th scope="col">Model</th>
-            <td>{{ item.model }}</td>
+            <th scope="col">CPU</th>
+            <td>{{ item.cpu }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Ram</th>
+            <td>{{ item.ram }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Hard Disk</th>
+            <td>{{ item.harddisk }}</td>
           </tr>
           <tr>
             <th scope="col">User Name</th>
