@@ -38,12 +38,12 @@
 
   function handleChoice(value) {
     console.log('select choice in ComputerView', value)
-    if (value == 0 && value === null) {
+    if (value !== 0 && value === undefined) {
       computerStores.getComputerByOffice(value)
       // computerStores.computer
     }
-    if (value !== undefined) {
-      computerStores.getComputerByOffice(value)
+    if (value == 0 || value !== undefined) {
+      computerStores.getComputerByOffice()
     }
   }
   const activeComponent = computed(() => {

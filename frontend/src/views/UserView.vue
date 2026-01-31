@@ -37,16 +37,18 @@
   import { useMonitorSize } from '@/composables/DeviceScreen'
 
   const employeeStore = useEmployeeStore()
-  employeeStore.getEmployee('0')
+
   // detect screen
   const sizes = useMonitorSize()
   // const selectChoice = ref(0)
 
   function handleChoice(value) {
-    if (value !== undefined) {
+    if (value !== '0') {
       // use function from employee store
       employeeStore.getEmployee(value)
       console.log('data from staff store: ', value, employeeStore.employee)
+    } else if (value == 0) {
+      employeeStore.getAllEmployee()
     }
   }
 

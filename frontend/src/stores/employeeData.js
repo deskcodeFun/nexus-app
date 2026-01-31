@@ -8,22 +8,22 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
   // const employeeByOffice = ref(null)
   const isLoading = ref(false)
 
-  // async function getAllemployee() {
-  //   try {
-  //     isLoading.value = true
-  //     const { data, error } = await supabase
-  //       .from('employee')
-  //       .select(`*,office_name(*)`)
-  //       .order('office_id', { ascending: true })
-  //     // const { data, error } = await supabase.from('employee').select(`id,name,short_name,office_name(id,name,short_name)`)
-  //     employee.value = data
-  //     if (error) throw error
-  //   } catch (error) {
-  //     console.error('Error get all employee', error)
-  //   } finally {
-  //     isLoading.value = false
-  //   }
-  // }
+  async function getAllEmployee() {
+    try {
+      isLoading.value = true
+      const { data, error } = await supabase
+        .from('employee')
+        .select(`*,office_name(*)`)
+        .order('office_id', { ascending: true })
+      // const { data, error } = await supabase.from('employee').select(`id,name,short_name,office_name(id,name,short_name)`)
+      employee.value = data
+      if (error) throw error
+    } catch (error) {
+      console.error('Error get all employee', error)
+    } finally {
+      isLoading.value = false
+    }
+  }
   async function getEmployee(officeID) {
     console.log('officeID parameter from employee store', officeID)
     if (officeID !== undefined && officeID !== 0) {
@@ -42,12 +42,20 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         isLoading.value = false
       }
     } else {
-      isLoading.value = true
-      const { data, error } = await supabase.from('employee').select('*, office_name(*)')
-      employee.value = data
-      console.log('employee with office 0 :', data)
-      if (error) throw error
-      isLoading.value = false
+      try {
+        isLoading.value = true
+        const { data, error } = await supabase
+          .from('employee')
+          .select('*,office_name(*)')
+          .order('office_id', { ascending: true })
+        // const { data, error } = await supabase.from('employee').select(`id,name,short_name,office_name(id,name,short_name)`)
+        employee.value = data
+        if (error) throw error
+      } catch (error) {
+        console.error('Error get all employee', error)
+      } finally {
+        isLoading.value = false
+      }
     }
   }
 
@@ -114,7 +122,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
   }
 
   // getAllemployee()
-  getEmployee(0)
+  getAllEmployee()
 
   return {
     employee,
@@ -123,6 +131,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     // employeeByOffice,
     // getAllemployee,
     getEmployee,
+    getAllEmployee,
     getEmployeeDetail,
     addEmployee,
     updateEmployee,
