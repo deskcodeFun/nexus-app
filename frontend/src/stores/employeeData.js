@@ -26,7 +26,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
   // }
   async function getEmployee(officeID) {
     console.log('officeID parameter from employee store', officeID)
-    if (officeID !== undefined && officeID !== '0') {
+    if (officeID !== undefined && officeID !== 0) {
       try {
         isLoading.value = true
         const { data, error } = await supabase
@@ -42,19 +42,12 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         isLoading.value = false
       }
     } else {
-      try {
-        isLoading.value = true
-        const { data, error } = await supabase
-          .from('employee')
-          .select('*, office_name(*)')
-          .order('id')
-        employee.value = data
-        if (error) throw error
-      } catch (error) {
-        console.error('Error get all Employee stores: ', error)
-      } finally {
-        isLoading.value = false
-      }
+      isLoading.value = true
+      const { data, error } = await supabase.from('employee').select('*, office_name(*)')
+      employee.value = data
+      console.log('employee with office 0 :', data)
+      if (error) throw error
+      isLoading.value = false
     }
   }
 
@@ -121,7 +114,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
   }
 
   // getAllemployee()
-  getEmployee()
+  getEmployee(0)
 
   return {
     employee,

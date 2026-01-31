@@ -34,6 +34,8 @@
 
   const router = useRouter()
   const store = useEmployeeStore()
+  store.getEmployee(0)
+
 
 
 
