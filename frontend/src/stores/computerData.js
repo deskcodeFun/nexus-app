@@ -25,7 +25,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
   // }
 
   async function getComputerByOffice(officeID) {
-    if (officeID !== undefined && officeID !== '0') {
+    if (officeID !== null && officeID !== '0') {
       try {
         isLoading.value = true
         const { data, error } = await supabase
@@ -40,7 +40,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
       } finally {
         isLoading.value = false
       }
-    } else {
+    } else if (officeID == '0') {
       try {
         isLoading.value = true
         let { data, error } = await supabase.from('computer').select(`*, employee(*)`).order('id')
