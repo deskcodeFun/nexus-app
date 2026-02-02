@@ -42,7 +42,7 @@
       computerStores.getComputerByOffice(value)
       // computerStores.computer
     }
-    if (value == 0 || value !== undefined) {
+    if (value == 0 || value == null) {
       computerStores.getComputerByOffice('0')
     }
   }

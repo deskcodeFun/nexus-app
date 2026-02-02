@@ -35,7 +35,12 @@
           </tr>
           <tr>
             <th scope="col">User Name</th>
-            <td>{{ item.employee.fname + ' ' + item.employee.lname.substring(0, 1) + '.' }}</td>
+            <td>
+              <p v-if="item.employee">
+                {{ item.employee.fname + ' ' + item.employee.lname.substring(0, 1) + '.' }}
+              </p>
+              <p v-else class="font-bold text-green-800">FREE</p>
+            </td>
           </tr>
         </tbody>
       </table>

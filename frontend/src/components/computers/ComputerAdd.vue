@@ -69,7 +69,7 @@
   const ram = ref('')
   const harddisk = ref('')
   const office_id = ref('')
-  const user_id = ref(0)
+  const user_id = ref(null)
 
   // use array data type so we have to create assetID
   // const assetId =

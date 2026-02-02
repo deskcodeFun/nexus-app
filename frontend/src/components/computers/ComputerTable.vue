@@ -27,7 +27,12 @@
           <td>{{ item.cpu.substring(0, 18) }}</td>
           <td>{{ item.ram.substring(0, 18) }}</td>
           <td>{{ item.harddisk }}</td>
-          <td>{{ item.employee.fname + ' ' + item.employee.lname }}</td>
+          <td>
+            <p v-if="item.employee">
+              {{ item.employee.fname + ' ' + item.employee.lname }}
+            </p>
+            <p v-else class="font-bold text-green-800">Free</p>
+          </td>
           <!-- <td>{{ item.catalog }}</td> -->
         </tr>
       </tbody>
