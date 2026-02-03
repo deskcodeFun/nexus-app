@@ -12,7 +12,7 @@
 
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <!-- 3 section -->
-    <div class="w-11/12 gap-16 sm:flex sm:flex-row bg-white">
+    <div class=" gap-16 sm:flex sm:flex-row bg-white">
       <!-- accounting section -->
       <div class="flex flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
@@ -48,7 +48,7 @@
       </div>
       <!-- user info section -->
       <div class="flex flex-col">
-        <p class="pt-8 sm:pt-0 sm:pr-40 sm:pb-4 text-lg tracking-wide">User Infomation</p>
+        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Infomation</p>
         <div v-if="user_name === 'FREE'" class="pb-2">
           <label for="user_name">Status</label>
           <div class="bg-sky-50 text-md mb-2 font-bold text-green-800">{{ user_name }}</div>
@@ -64,16 +64,14 @@
           </select>
         </div>
         <!-- button section -->
-        <form class="gap-2" @submit.prevent="editSubmit">
+        <form @submit.prevent="editSubmit">
           <!-- Show button -->
           <div class="flex flex-row justify-between">
-            <div class="flex flex-row justify-between">
-              <button
-                class="flex items-center justify-center border-1 bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
-                type="button" @click="toggleModal">
-                <TrashIcon class="h-4 w-4 mr-2 " /> Delete
-              </button>
-            </div>
+            <button
+              class="flex items-center justify-center border-1 bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
+              type="button" @click="toggleModal">
+              <TrashIcon class="h-4 w-4 mr-2 " /> Delete
+            </button>
             <!-- <BaseButttonBack /> -->
             <button
               class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
