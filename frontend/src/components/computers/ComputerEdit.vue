@@ -48,7 +48,7 @@
       </div>
       <!-- user info section -->
       <div class="flex flex-col">
-        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Infomation</p>
+        <p class="pt-8 sm:pt-0 sm:pr-40 sm:pb-4 text-lg tracking-wide">User Infomation</p>
         <div v-if="user_name === 'FREE'" class="pb-2">
           <label for="user_name">Status</label>
           <div class="bg-sky-50 text-md mb-2 font-bold text-green-800">{{ user_name }}</div>
