@@ -59,13 +59,15 @@
           </div>
           <div v-if="editUser">
             <!-- editUser == true -->
+            <!-- no option FREE because computer status is FREE -->
             <p>Add or change user</p>
             <select v-model.trim="updateData.user_id" class=" bg-sky-50 py-2 pr-2">
               <option v-for="employeeName in employeeStore.employee" :key="employeeName.id" :value="employeeName.id">
                 <p class="pr-4">
-                  {{ employeeName.fname + ' ' + employeeName.lname.substring(0, 1) + '.' + ' ' + '-' + ' ' }}
+                  {{ employeeName.fname + ' ' + employeeName.lname.substring(0, 1) + '.' + ' '
+                    + employeeName.office_name.name }}
                 </p>
-                {{ employeeName.office_name.name }}
+
               </option>
             </select>
           </div>
@@ -85,11 +87,12 @@
             <!-- editUser == true -->
             <p>Add or change user</p>
             <select v-model.trim="updateData.user_id" class=" bg-sky-50 py-2 pr-2">
+              <option :value="null">FREE</option>
               <option v-for="employeeName in employeeStore.employee" :key="employeeName.id" :value="employeeName.id">
                 <p class="pr-4">
-                  {{ employeeName.fname + ' ' + employeeName.lname.substring(0, 1) + '.' + ' ' + '-' + ' ' }}
+                  {{ employeeName.fname + ' ' + employeeName.lname.substring(0, 1) + '.' + ' ' +
+                    employeeName.office_name.name }}
                 </p>
-                {{ employeeName.office_name.name }}
               </option>
             </select>
           </div>
@@ -184,7 +187,7 @@
       updateData.model = store.computerDetail[0].model
       updateData.cpu = store.computerDetail[0].cpu
       updateData.ram = store.computerDetail[0].ram
-      updateData.harddisk = store.computerDetail[0].model
+      updateData.harddisk = store.computerDetail[0].harddisk
       updateData.office_id = store.computerDetail[0].office_id
       if (store.computerDetail[0].employee) {
         user_name.value =
