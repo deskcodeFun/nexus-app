@@ -62,7 +62,7 @@ export const useComputerStore = defineStore('useComputerStore', () => {
         const { data, error } = await supabase
           .from('computer')
           // .select(`*,staff(*,...office_name!inner(*))`)
-          .select(`*,employee(fname,lname),office_name(name)`)
+          .select(`*,employee(*),office_name(*)`)
           .eq('id', computerID)
           .order('id')
         computerDetail.value = data
@@ -105,7 +105,9 @@ export const useComputerStore = defineStore('useComputerStore', () => {
 
   async function deleteComputer(paramID) {
     try {
-      isLoading.value = false
+      // const idToDelete = parseInt(paramID)
+      console.log('paramID:', paramID, typeof paramID)
+      isLoading.value = true
       const { error } = await supabase.from('computer').delete().eq('id', paramID).select()
       if (error) throw error
     } catch (error) {
