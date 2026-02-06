@@ -11,14 +11,20 @@
 
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <!-- 3 section -->
-    <div class="gap-16 sm:flex sm:flex-row bg-white">
+    <div class="gap-16  sm:flex sm:flex-row bg-white">
       <!-- accounting section -->
-      <div class="flex flex-col">
+      <div class="w-fit text-nowrap flex flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
         <p class="py-2 text-sm text-gray-500 tracking-widest">Asset Tag</p>
         <p class="bg-sky-50 text-md p-1 pr-4">{{ updateData.asset_tag }}</p>
         <p class="py-2 text-sm text-gray-500 tracking-widest">Serial Number</p>
         <p class="bg-sky-50 text-md p-1 pr-4">{{ updateData.serial_tag }}</p>
+        <p class="py-2 text-sm text-gray-500">Brand</p>
+        <div class="bg-sky-50 text-md p-1">{{ updateData.brand }}</div>
+        <p class="py-2 text-sm text-gray-500">Model</p>
+        <div class="bg-sky-50 text-md p-1">{{ updateData.model }}</div>
+        <p class="py-2 text-sm text-gray-500">CPU</p>
+        <div class="bg-sky-50 text-md p-1">{{ updateData.cpu }}</div>
       </div>
       <!-- computer spec. section -->
       <!-- TODO:
@@ -27,12 +33,7 @@
         -->
       <div class="flex flex-col">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
-        <p class="py-2 text-sm text-gray-500">Brand</p>
-        <div class="bg-sky-50 text-md p-1">{{ updateData.brand }}</div>
-        <p class="py-2 text-sm text-gray-500">Model</p>
-        <div class="bg-sky-50 text-md p-1">{{ updateData.model }}</div>
-        <p class="py-2 text-sm text-gray-500">CPU</p>
-        <div class="bg-sky-50 text-md p-1">{{ updateData.cpu }}</div>
+
 
         <!-- can edit computer spec. section -->
         <p class="py-2 text-sm text-gray-500">RAM</p>
@@ -61,15 +62,16 @@
             <!-- editUser == true -->
             <!-- no option FREE because computer status is FREE -->
             <p>Add or change user</p>
-            <select v-model.trim="updateData.user_id" class=" bg-sky-50 py-2 pr-2">
-              <option v-for="employeeName in employeeStore.employee" :key="employeeName.id" :value="employeeName.id">
-                <p class="pr-4">
-                  {{ employeeName.fname + ' ' + employeeName.lname.substring(0, 1) + '.' + ' '
-                    + employeeName.office_name.name }}
-                </p>
-
+            <select v-model.trim="updateData.user_id" @change="handleChange" class=" w-full  py-2 pr-2">
+              <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="bg-sky-50 pr-4">
+                {{
+                  item.fname + ' ' + item.lname
+                }}
               </option>
             </select>
+            <p>User id :{{ employeeStore.employeeDetail[0].id }}</p>
+            <p>User Name: {{ employeeStore.employeeDetail[0].fname }}</p>
+            <p>Office BU:{{ employeeStore.employeeDetail[0].office_name.name }}</p>
           </div>
           <div v-else class="bg-sky-50 text-md py-2 p-1 mb-2 font-bold text-green-800">
             <!-- editUser == flase, just show user name -->
@@ -78,7 +80,7 @@
         </div>
         <div v-else>
           <div class="flex fles-row justify-between">
-            <p class="py-2 text-sm text-gray-500 ">User Name</p>
+            <p class="py-2 text-sm text-gray-500">User Name</p>
             <div>
               <PencilSquareIcon @click="toggleUser" class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800" />
             </div>
@@ -86,22 +88,19 @@
           <div v-if="editUser">
             <!-- editUser == true -->
             <p>Add or change user</p>
-            <select v-model.trim="updateData.user_id" class=" bg-sky-50 py-2 pr-2">
+            <select v-model.trim="updateData.user_id" class="bg-sky-50 py-2 pr-2">
               <option :value="null">FREE</option>
-              <option v-for="employeeName in employeeStore.employee" :key="employeeName.id" :value="employeeName.id">
-                <p class="pr-4">
-                  {{ employeeName.fname + ' ' + employeeName.lname.substring(0, 1) + '.' + ' ' +
-                    employeeName.office_name.name }}
-                </p>
+              <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="pr-4">
+                {{
+                  item.fname + ' ' + item.lname.substring(0, 1) + '.' + ' ' + item.office_name.name
+                }}
               </option>
             </select>
           </div>
           <div v-else>
-
-            <p class="bg-sky-50 text-md py-2 px-1 mb-2"> {{ user_name }}</p>
-            <p class="py-2 text-sm text-gray-500 ">Office</p>
+            <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</p>
+            <p class="py-2 text-sm text-gray-500">Office</p>
             <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
-
           </div>
           <!-- <select name="officeName" id="officeName" v-model.trim="updateData.office_id" class="bg-sky-50 py-2 pr-2">
             <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
@@ -171,12 +170,24 @@
   const user_name = ref(null)
   const user_officeName = ref(null)
 
-
   const editUser = ref(false)
+
   const toggleUser = () => {
     editUser.value = !editUser.value
     console.log('toggleUser value : ', editUser)
   }
+
+
+  async function handleChange(event) {
+    const value = event.target.value
+    updateData.user_id = value
+    console.log('updateData.user_id value', value)
+    if (value !== null) {
+      await employeeStore.getEmployeeDetail(value)
+      console.log('employee detail', employeeStore.employeeDetail)
+    }
+  }
+
 
   onMounted(async () => {
     await store.getComputerDetail(paramID)
