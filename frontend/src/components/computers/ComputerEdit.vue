@@ -46,46 +46,37 @@
       </div>
 
       <!-- user info section -->
-      <div class="flex flex-col w-3/5">
+      <div class="flex flex-col  ">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Infomation</p>
         <!-- header label and edit icon -->
-        <div v-if="user_name === 'FREE'" class="pb-2">
+        <div class="pb-2">
           <div class="flex fles-row justify-between">
-            <label for="user_name">Status</label>
+            <p>{{ userNameLabel }}</p>
             <PencilSquareIcon @click="toggleUser" class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800" />
           </div>
         </div>
-        <div v-else>
-          <div class="flex fles-row justify-between">
-            <p class="py-2 text-sm text-gray-500">User Name</p>
-            <div>
-              <PencilSquareIcon @click="toggleUser" class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800" />
-            </div>
-          </div>
-        </div>
         <!-- Show userDetail -->
-        <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</p>
         <div v-if="user_name !== 'FREE'">
-          <p class="py-2 text-sm text-gray-500">Office </p>
+          <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</p>
+          <p class=" text-md text-gray-500">Office </p>
           <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
         </div>
-        <!--
-        <div v-if="editUser">
+        <div v-else>{{ user_name }}</div>
+        <!-- editUser = true && user_name = true -->
+        <div v-if="editUser && user_name">
           <p>Update Computer User</p>
           <select v-model.trim="updateData.user_id" @change="handleChange" class=" w-full  py-2 pr-2">
+            <option :value="0" class="bg-sky-50 pr-4">FREE</option>
             <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="bg-sky-50 pr-4">
               {{
                 item.fname + ' ' + item.lname
               }}
             </option>
           </select>
-          <p>User id :{{ employeeStore.employeeDetail[0].id }}</p>
-          <p>User Name: {{ employeeStore.employeeDetail[0].fname }}</p>
-          <p>Office BU:{{  }}</p>
+          <p>Office BU </p>
+          <div>{{ new_officeName }}</div>
         </div>
-        <div v-else class="bg-sky-50 text-md py-2 p-1 mb-2 font-bold text-green-800">
-          <p class="p">{{ user_name }}</p>
-        </div> -->
+        <div v-else></div>
 
 
         <!-- editUser == true -->
@@ -112,7 +103,7 @@
         <!-- button section -->
         <form @submit.prevent="editSubmit">
           <!-- Show button -->
-          <div class="flex flex-row justify-between">
+          <div class="flex flex-row justify-between gap-24">
             <button
               class="flex items-center justify-center border-1 bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
               type="button" @click="toggleModal">
@@ -139,7 +130,7 @@
 
 <script setup>
   import { useRoute, useRouter } from 'vue-router'
-  import { ref, onMounted, reactive } from 'vue'
+  import { ref, computed, onMounted, reactive } from 'vue'
 
   import { useComputerStore } from '@/stores/computerData'
   import { useOfficeNameStore } from '@/stores/officeData'
@@ -170,29 +161,41 @@
   // separate user from updateDATA to save edit
   const user_name = ref('')
   const user_officeName = ref('')
-
+  const new_officeName = ref('')
   const editUser = ref(false)
-
+  const userNameLabel = computed(() => {
+    if (user_name.value === 'FREE') {
+      return 'Status'
+    } else {
+      return 'User Name'
+    }
+  })
   const toggleUser = () => {
     editUser.value = !editUser.value
     console.log('toggleUser value : ', editUser)
   }
 
 
-  // async function handleChange(event) {
-  //   const value = event.target.value
-  //   updateData.user_id = value
-  //   console.log('updateData.user_id value', value)
-  //   if (value !== null) {
-  //     await employeeStore.getEmployeeDetail(value)
-  //     console.log('employee detail', employeeStore.employeeDetail)
-  //   }
-  // }
+  async function handleChange(event) {
+    const value = event.target.value
+    updateData.user_id = value
+    console.log('updateData.user_id value', value)
+    if (updateData.user_id !== '0') {
+      await employeeStore.getEmployeeDetail(updateData.user_id)
+      console.log('employee detail', employeeStore.employeeDetail)
+      new_officeName.value = employeeStore.employeeDetail[0].office_name.name
+
+    } else {
+      editUser.value = false
+      new_officeName.value = ''
+      user_name.value = 'FREE'
+      updateData.user_id = null
+    }
+  }
 
 
   onMounted(async () => {
     await store.getComputerDetail(paramID)
-    await employeeStore.getEmployeeDetail(store.computerDetail[0].user_id)
     if (store.computerDetail[0]) {
       updateData.asset_tag = store.computerDetail[0].asset_tag
       updateData.serial_tag = store.computerDetail[0].serial_tag
@@ -202,15 +205,16 @@
       updateData.ram = store.computerDetail[0].ram
       updateData.harddisk = store.computerDetail[0].harddisk
       updateData.office_id = store.computerDetail[0].office_id
+      updateData.user_id = store.computerDetail[0].user_id
+      // prepare user name and user's office name
+      // use user_id from computer table to get user detail from employee table
       if (store.computerDetail[0].employee) {
-        // console.log('data from employee store: ', employeeStore.employeeDetail)
-        // console.log('user detail:', user_name, user_officeName)
-        // console.log('user id:', store.computerDetail[0].user_id)
-        // user_name.value = store.computerDetail[0].employee.fname + ' ' + store.computerDetail[0].employee.lname
+        console.log('store.computerDetail[0].employee', store.computerDetail[0].employee)
+        await employeeStore.getEmployeeDetail(store.computerDetail[0].user_id)
         user_name.value = employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
         user_officeName.value = employeeStore.employeeDetail[0].office_name.name
       } else {
-        // Handle the case where employee data is not available, e.g.,
+        // employee data is not available-> computer is available in stock, free computer
         user_name.value = 'FREE' // Assign an empty string or a default value
       }
       updateData.user_id = employeeStore.id

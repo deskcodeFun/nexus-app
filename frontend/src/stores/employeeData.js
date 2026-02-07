@@ -59,14 +59,14 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     }
   }
 
-  async function getEmployeeDetail(paramID) {
-    if (paramID !== undefined) {
+  async function getEmployeeDetail(userID) {
+    if (userID !== null || undefined) {
       try {
         isLoading.value = true
         const { data, error } = await supabase
           .from('employee')
           .select('*,office_name(*)')
-          .eq('id', paramID)
+          .eq('id', userID)
           .order('id', { ascending: true })
         employeeDetail.value = data
         if (error) throw error

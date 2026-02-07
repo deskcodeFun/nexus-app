@@ -12,35 +12,35 @@
 </template>
 
 <script setup>
-import { ref} from 'vue'
-import { RouterView } from 'vue-router'
-import TheTopbar from '@/components/TheTopbar.vue'
-import { supabase } from './lib/supabaseClient.js';
-const isConnected = ref(false);
-const error = ref(null);
+  import { ref } from 'vue'
+  import { RouterView } from 'vue-router'
+  import TheTopbar from '@/components/TheTopbar.vue'
+  import { supabase } from './lib/supabaseClient.js';
+  const isConnected = ref(false);
+  const error = ref(null);
 
-async function checkConnection() {
-  try {
-    // Attempt a simple, lightweight request, like checking the current session
-    const { data: { session }, error: authError } = await supabase.auth.getSession();
+  async function checkConnection() {
+    try {
+      // Attempt a simple, lightweight request, like checking the current session
+      const { data: { session }, error: authError } = await supabase.auth.getSession();
 
-    if (authError) {
-      throw authError;
+      if (authError) {
+        throw authError;
+      }
+
+      // If the request succeeds without throwing an error, the connection is working
+      isConnected.value = true;
+      console.log('Supabase connection successful. User session:', session);
+
+    } catch (err) {
+      // This block catches network errors or auth errors
+      isConnected.value = false;
+      error.value = err.message;
+      console.error('Supabase connection failed:', err.message);
+      // Common errors might be "connection refused" or "network request failed"
     }
-
-    // If the request succeeds without throwing an error, the connection is working
-    isConnected.value = true;
-    console.log('Supabase connection successful. User session:', session);
-
-  } catch (err) {
-    // This block catches network errors or auth errors
-    isConnected.value = false;
-    error.value = err.message;
-    console.error('Supabase connection failed:', err.message);
-    // Common errors might be "connection refused" or "network request failed"
   }
-}
 
-// Check connection when the component mounts
-checkConnection();
+  // Check connection when the component mounts
+  checkConnection();
 </script>
