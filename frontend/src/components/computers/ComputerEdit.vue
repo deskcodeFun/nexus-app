@@ -61,11 +61,11 @@
           <p class=" text-md text-gray-500">Office </p>
           <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
         </div>
-        <div v-else>{{ user_name }}</div>
+        <div v-else class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</div>
         <!-- editUser = true && user_name = true -->
         <div v-if="editUser && user_name">
           <p>Update Computer User</p>
-          <select v-model.trim="updateData.user_id" @change="handleChange" class=" w-full  py-2 pr-2">
+          <select v-model.trim="updateData.user_id" @change="handleChange" class=" w-full bg-sky-50 py-2 pr-2">
             <option :value="0" class="bg-sky-50 pr-4">FREE</option>
             <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="bg-sky-50 pr-4">
               {{
@@ -74,7 +74,7 @@
             </option>
           </select>
           <p>Office BU </p>
-          <div>{{ new_officeName }}</div>
+          <div class="bg-sky-50  py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
         </div>
         <div v-else></div>
 
