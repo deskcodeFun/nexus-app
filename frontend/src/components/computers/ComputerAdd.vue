@@ -63,7 +63,7 @@
   const store = useComputerStore()
   const officeNameStore = useOfficeNameStore()
   const updateData = reactive({
-    // id: paramID,
+    // id: Number,
     asset_tag: '',
     serial_tag: '',
     brand: '',
@@ -75,12 +75,20 @@
   })
 
   async function addSubmit() {
-    // compute a simple next id (fallback to 1)
     await store.addComputer(updateData)
-    console.log('New Computer Add to table computer:  ', updateData)
-    router.push('/assets')
+      // reset variable
+      ; ((updateData.asset_tag = ''),
+        (updateData.serial_tag = ''),
+        (updateData.brand = ''),
+        (updateData.model = ''),
+        (updateData.cpu = ''),
+        (updateData.ram = ''),
+        (updateData.harddisk = ''),
+        (updateData.office_id = null),
+        router.push('/assets'))
   }
 </script>
+
 <style scoped>
   .label {
     padding-top: 0.5rem;

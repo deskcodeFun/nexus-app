@@ -1,23 +1,25 @@
 <template>
-  <header>
+  <!-- <header>
     <div class="flex flex-col justify-between bg-white sm:justify-normal py-16 px-2">
       <p class="text-lg tracking-widest mx-auto text-blue-900">ADD NEW USER</p>
     </div>
-  </header>
-  <main class="flex justify-center bg-white">
-    <div class="w-2/5">
+  </header> -->
+  <BaseHeader :title="'ADD NEW USER'" />
+  <BaseButttonBack />
+  <main class="flex pl-8 py-4 bg-white">
+    <div>
       <form class="flex flex-col justify-center gap-2" @submit.prevent="addSubmit">
         <label for="fname">First Name</label>
-        <input type="text" v-model.trim="fname" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="newEmployee.fname" class="bg-sky-50 text-md p-1" />
         <label for="lname">Last Name</label>
-        <input type="text" v-model.trim="lname" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="newEmployee.lname" class="bg-sky-50 text-md p-1" />
         <label for="email">Email</label>
-        <input type="text" v-model.trim="email" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model.trim="newEmployee.email" class="bg-sky-50 text-md p-1" />
         <label for="department">Department</label>
-        <input type="text" v-model.trim="department" class="bg-sky-50 text- p-1" />
+        <input type="text" v-model.trim="newEmployee.department" class="bg-sky-50 text- p-1" />
 
         <label for="offie_id">Office</label>
-        <select name="officeName" id="officeName" v-model.trim="office_id" class="bg-sky-50 py-2">
+        <select name="officeName" id="officeName" v-model.trim="newEmployee.office_id" class="bg-sky-50 py-2">
           <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
             {{ office_name.name }}
           </option>
@@ -25,7 +27,6 @@
 
         <!-- Save Button -->
         <div class="flex flex-row justify-between">
-          <BaseButttonBack />
           <button
             class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
             type="submit">
@@ -42,49 +43,40 @@
   import { BookmarkIcon } from '@heroicons/vue/20/solid'
   // import { users } from '@/dataMockup/staff'
   import { useRouter } from 'vue-router'
-  import { ref } from 'vue'
+  import { reactive } from 'vue'
   import { useEmployeeStore } from '@/stores/employeeData'
   import { useOfficeNameStore } from '@/stores/officeData'
 
   import BaseButttonBack from '../BaseButttonBack.vue'
-
+  import BaseHeader from '../BaseHeader.vue'
 
   const router = useRouter()
 
   const employeeStore = useEmployeeStore()
   const officeNameStore = useOfficeNameStore()
   console.log('office name', officeNameStore)
-  const fname = ref('')
-  const lname = ref('')
-  const email = ref('')
-  const department = ref('')
-  const office_id = ref('')
+  const newEmployee = reactive({
+    fname: String,
+    lname: String,
+    email: String,
+    department: String,
+    office_id: Number,
+  })
 
-  const addSubmit = () => {
-    // compute a simple next id (fallback to 1)
+  async function addSubmit() {
+    try {
+      const { error } = await employeeStore.addEmployee(newEmployee)
 
-    const newEmployee = {
-      fname: fname.value,
-      lname: lname.value,
-      email: email.value,
-      department: department.value,
-      office_id: office_id.value,
+      if (error) throw error
+    } catch (error) {
+      console.error('Can not Add new Employee: ', error)
+    } finally {
+      newEmployee.fname = ''
+      newEmployee.lname = ''
+      newEmployee.email = ''
+      newEmployee.department = ''
+      newEmployee.office_id = null
+      router.push('/employee')
     }
-
-    // console.log('newEmployee ', newUser)
-    // emit the new user to parent instead of mutating prop
-    // store.users.push(newUser)
-    employeeStore.addEmployee(newEmployee)
-
-    // reset inputs
-    fname.value = ''
-    lname.value = ''
-    email.value = ''
-    department.value = ''
-    office_id.value = ''
-    // navigate back to user list
-    // employeeStore.getAllStaff()
-    employeeStore.getEmployee()
-    router.push('/user')
   }
 </script>

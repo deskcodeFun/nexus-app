@@ -6,14 +6,12 @@ import ServiceView from '@/views/ServiceView.vue'
 import AssetsView from '@/views/AssetsView.vue'
 // import UserAdd from '@/components/users/UserAdd.vue'
 
-import UserView from '@/views/UserView.vue'
-import UserAdd from '@/components/users/UserAdd.vue'
-import UserEdit from '@/components/users/UserEdit.vue'
+import EmployeeView from '@/views/EmployeeView.vue'
+import EmployeeEdit from '@/components/employees/EmployeeEdit.vue'
 import ComputerAdd from '@/components/computers/ComputerAdd.vue'
 import ComputerEdit from '@/components/computers/ComputerEdit.vue'
 import PrinterEdit from '@/components/printers/PrinterEdit.vue'
-
-
+import EmployeeAdd from '@/components/employees/EmployeeAdd.vue'
 
 // import ComputerAdd from '@/components/computer/ComputerAdd.vue'
 
@@ -62,22 +60,22 @@ const router = createRouter({
       component: ServiceView,
     },
     {
-      path: '/user',
-      name: 'user',
+      path: '/employee',
+      name: 'employee',
 
-      component: UserView,
+      component: EmployeeView,
     },
     {
-      path: '/addUser',
-      name: 'add-user',
+      path: '/addEmployee',
+      name: 'add-employee',
 
-      component: UserAdd,
+      component: EmployeeAdd,
     },
     {
-      path: '/editUser/:id',
-      name: 'edit-user',
+      path: '/editEmployee/:id',
+      name: 'edit-employee',
 
-      component: UserEdit,
+      component: EmployeeEdit,
     },
     {
       path: '/:catchAll(.*)',

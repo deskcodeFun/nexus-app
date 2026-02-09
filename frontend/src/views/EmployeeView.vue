@@ -12,7 +12,7 @@
     <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
       <RouterLink
         class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
-        to="/addUser">
+        to="/addEmployee">
         <div class="flex flex-row">
           <PlusIcon class="h-6 w-6" />
           <p>Add Employee</p>
@@ -31,8 +31,8 @@
   import { PlusIcon } from '@heroicons/vue/20/solid'
 
   import { useEmployeeStore } from '@/stores/employeeData.js'
-  import UserTable from '@/components/users/UserTable.vue'
-  import UserCard from '@/components/users/UserCard.vue'
+  import EmployeeTable from '@/components/employees/EmployeeTable.vue'
+  import EmployeeCard from '@/components/employees/EmployeeCard.vue'
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
   import { useMonitorSize } from '@/composables/DeviceScreen'
 
@@ -46,13 +46,12 @@
     if (value !== '0') {
       // use function from employee store
       employeeStore.getEmployee(value)
-      console.log('data from staff store: ', value, employeeStore.employee)
     } else if (value == 0) {
       employeeStore.getAllEmployee()
     }
   }
 
   const activeComponent = computed(() => {
-    return sizes.isMobile.value ? UserCard : UserTable
+    return sizes.isMobile.value ? EmployeeCard : EmployeeTable
   })
 </script>

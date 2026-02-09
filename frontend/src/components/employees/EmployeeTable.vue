@@ -2,7 +2,6 @@
   <table class="w-full bg-white text-left">
     <thead>
       <tr class="border-b border-gray-400">
-        <th class="text-center">User ID</th>
         <th class="m-2 p-2">User Name</th>
         <th class="m-2 p-2">Email</th>
         <th class="m-2 p-2">Department</th>
@@ -12,9 +11,8 @@
     </thead>
 
     <tbody>
-      <tr v-for="employee in store.employee" :key="employee.id" @click="router.push(`/editUser/${employee.id}`)"
+      <tr v-for="employee in store.employee" :key="employee.id" @click="router.push(`/editEmployee/${employee.id}`)"
         class="hover:scale-102 hover:bg-sky-100 hover:cursor-pointer m-2 p-2">
-        <td class="text-center m-2 p-2">{{ employee.id }}</td>
         <td>{{ employee.fname + ' ' + employee.lname }}</td>
         <td class="m-2 p-2">{{ employee.email }}</td>
         <td class="m-2 p-2">{{ employee.department }}</td>

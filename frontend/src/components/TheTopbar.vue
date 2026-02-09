@@ -53,7 +53,7 @@
         <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'assets' }">Assets</RouterLink>
       </li>
       <li>
-        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'user' }">User</RouterLink>
+        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'employee' }">Employee</RouterLink>
       </li>
       <li>
         <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'service' }">Services</RouterLink>

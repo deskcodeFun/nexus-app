@@ -14,7 +14,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
       const { data, error } = await supabase
         .from('employee')
         .select(`*,office_name(*)`)
-        .order('office_id', { ascending: true })
+        .order('fname', { ascending: true })
       // const { data, error } = await supabase.from('employee').select(`id,name,short_name,office_name(id,name,short_name)`)
       employee.value = data
       if (error) throw error
@@ -33,7 +33,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
           .from('employee')
           .select('*, office_name(*)')
           .eq('office_id', officeID)
-          .order('id')
+          .order('fname', { ascending: true })
         employee.value = data
         if (error) throw error
       } catch (error) {
@@ -47,7 +47,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         const { data, error } = await supabase
           .from('employee')
           .select('*,office_name(*)')
-          .order('office_id', { ascending: true })
+          .order('fname', { ascending: true })
         // const { data, error } = await supabase.from('employee').select(`id,name,short_name,office_name(id,name,short_name)`)
         employee.value = data
         if (error) throw error
@@ -67,7 +67,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
           .from('employee')
           .select('*,office_name(*)')
           .eq('id', userID)
-          .order('id', { ascending: true })
+          .order('fname', { ascending: true })
         employeeDetail.value = data
         if (error) throw error
       } catch (error) {

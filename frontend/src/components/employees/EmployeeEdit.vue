@@ -1,22 +1,19 @@
 <template>
-  <header>
-    <div class="flex flex-col justify-between bg-white sm:justify-normal py-16 px-2">
-      <p class="text-lg tracking-widest mx-auto text-blue-900">EDIT USER</p>
-    </div>
-  </header>
-  <main class="flex justify-center bg-white">
-    <div class="w-2/5 bg-white">
+  <BaseHeader :title="'EDIT USER'" />
+  <BaseButttonBack />
+  <main class="flex pl-8 pt-8 bg-white">
+    <div class=" bg-white">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="editSubmit">
         <div class="flex flex-row justify-between">
-          <p>User ID: {{ updateData.id }}</p>
-
+          <label for="fname">First Name</label>
           <button
             class="flex items-center justify-center hover:bg-gray-200 hover:scale-102 hover:text-blue-900 py-1 px-4 rounded-xl"
             type="button" @click="toggleModal">
             <TrashIcon class="h-4 w-4 mr-1 text-gray-400 hover:text-red-700" />
           </button>
+
         </div>
-        <label for="fname">First Name</label>
+
         <input type="text" v-model.trim="updateData.fname" class="bg-sky-50 text-md p-1" />
         <label for="lname">Last Name</label>
         <input type="text" v-model.trim="updateData.lname" class="bg-sky-50 text-md p-1" />
@@ -34,15 +31,15 @@
         <!-- <input type="text" v-model.trim="updateData.office_id" class="bg-sky-50 text-md p-1" /> -->
         <!-- Show button -->
         <div class="flex flex-row justify-between">
-          <BaseButttonBack />
+
           <button
-            class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+            class="flex items-center justify-center  text-white bg-blue-700  hover:bg-blue-900  hover:scale-110  py-1 px-4 my-4 rounded-xl"
             type="submit">
-            <BookmarkIcon class="h-4 w-4 mr-1" />
+            <BookmarkIcon class="h-4 w-4 mr-2" />
             <span> Save </span>
           </button>
 
-          <BaseModal :modalActive="modalActive" title="Delete user" @save-data="delUser(paramID)"
+          <BaseModal :modalActive="modalActive" title="Delete user" @save-data="delEmployee(paramID)"
             @close-modal="modalActive = false">
             <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
           </BaseModal>
@@ -65,6 +62,7 @@
   import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
   import BaseModal from '../BaseModal.vue'
   import BaseButttonBack from '../BaseButttonBack.vue'
+  import BaseHeader from '../BaseHeader.vue'
 
   const route = useRoute()
   const router = useRouter()
@@ -116,18 +114,14 @@
     // console.log('updateUser in editSubmit() : ', updateData)
     await store.updateEmployee(paramID, updateData)
     // console.log('After add user: ', staff)
-    router.push('/user')
+    router.push('/employee')
   }
-  function delUser(paramID) {
+  function delEmployee(paramID) {
     console.log('store.deleteUser: ', paramID)
     store.deleteEmployee(paramID)
     store.getEmployee()
-    router.push('/user')
+    router.push('/employee')
 
   }
-  // const deleteID = store.staffDetail[id].id
-  // const delUser = (deleteID) => {
-  //   store.deleteUser(deleteID)
-  //   router.push('/user')
-  // }
+
 </script>
