@@ -7,7 +7,6 @@
     <main class="sm:pl-8 sm:mr-8">
       <RouterView />
     </main>
-
   </div>
 </template>
 
@@ -23,7 +22,6 @@
     try {
       // Attempt a simple, lightweight request, like checking the current session
       const { data: { session }, error: authError } = await supabase.auth.getSession();
-
       if (authError) {
         throw authError;
       }

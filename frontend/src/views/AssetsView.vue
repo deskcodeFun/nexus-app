@@ -1,10 +1,6 @@
 <template>
   <!-- Header -->
-  <header>
-    <div class="flex flex-col bg-white py-16 px-2">
-      <p class="text-lg tracking-widest text-blue-900">ASSETS ACCOUNTING</p>
-    </div>
-  </header>
+  <BaseHeader :title="'ASSETS ACCOUNTING'" />
   <div class="py-4 bg-white flex flex-row text-blue-900 tracking-wide">
     <button @click="toggleCom"
       class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100">
@@ -31,6 +27,7 @@
   import { ref } from 'vue'
   import ComputerView from './ComputerView.vue'
   import PrinterView from './PrinterView.vue'
+  import BaseHeader from '@/components/BaseHeader.vue'
 
   const showCom = ref(true)
   const showPrinter = ref(false)

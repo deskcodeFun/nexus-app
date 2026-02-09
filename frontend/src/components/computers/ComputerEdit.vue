@@ -1,13 +1,8 @@
 <template>
   <!-- Header -->
-  <header>
-    <div class="flex flex-col bg-white h-50 pt-16 px-2">
-      <p class="h-40 text-lg tracking-widest text-blue-900">COMPUTER DETAIL</p>
-      <div class="items-end">
-        <BaseButttonBack />
-      </div>
-    </div>
-  </header>
+  <BaseHeader :title="'COMPUTER DETAIL'" />
+  <BaseButttonBack />
+
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <!-- 3 section -->
     <div class="gap-16  sm:flex sm:flex-row bg-white">
@@ -44,7 +39,6 @@
           </option>
         </select>
       </div>
-
       <!-- user info section -->
       <div class="flex flex-col  ">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Infomation</p>
@@ -63,8 +57,8 @@
         </div>
         <div v-else class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</div>
         <!-- editUser = true && user_name = true -->
-        <div v-if="editUser && user_name">
-          <p>Update Computer User</p>
+        <div v-if="editUser && user_name" class="bg-red-50/50 rounded-lg border-1 border-red-300 py-2 px-2 mt-4">
+          <p class=" pb-2">Update Computer User</p>
           <select v-model.trim="updateData.user_id" @change="handleChange" class=" w-full bg-sky-50 py-2 pr-2">
             <option :value="0" class="bg-sky-50 pr-4">FREE</option>
             <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="bg-sky-50 pr-4">
@@ -73,32 +67,10 @@
               }}
             </option>
           </select>
-          <p>Office BU </p>
+          <p class="py-2">Office BU </p>
           <div class="bg-sky-50  py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
         </div>
         <div v-else></div>
-
-
-        <!-- editUser == true -->
-        <!-- <div v-if="editUser">
-          <p>Change Computer User</p>
-          <select v-model.trim="updateData.user_id" class="bg-sky-50 py-2 pr-2">
-            <option :value="null">FREE</option>
-            <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="pr-4">
-              {{
-                item.fname + ' ' + item.lname.substring(0, 1) + '.' + ' ' + item.office_name.name
-              }}
-            </option>
-          </select>
-        </div> -->
-        <!-- <div v-else>
-          <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</p>
-        </div> -->
-        <!-- <select name="officeName" id="officeName" v-model.trim="updateData.office_id" class="bg-sky-50 py-2 pr-2">
-            <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
-              {{ office_name.name }}
-            </option>
-          </select> -->
 
         <!-- button section -->
         <form @submit.prevent="editSubmit">
@@ -138,6 +110,7 @@
 
   import { TrashIcon, BookmarkIcon, PencilSquareIcon } from '@heroicons/vue/20/solid'
   import BaseModal from '../BaseModal.vue'
+  import BaseHeader from '../BaseHeader.vue'
   import BaseButttonBack from '../BaseButttonBack.vue'
 
   const route = useRoute()
@@ -224,6 +197,7 @@
   const modalActive = ref(null)
   const toggleModal = () => {
     modalActive.value = !modalActive.value
+
   }
 
   async function editSubmit() {

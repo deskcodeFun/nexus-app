@@ -1,9 +1,11 @@
 <template>
-  <button @click="router.back()" type="button"
-    class="flex items-center justify-center bg-gray-50 text-black hover:bg-gray-200 hover:scale-102 hover:text-blue-900 py-1 px-4 mt-8 rounded-xl">
-    <ChevronDoubleLeftIcon class="h-4 w-4 mr-1" />
-    <span> Back </span>
-  </button>
+  <div class="bg-white sm:pl-8">
+    <button @click="router.back()"
+      class="flex items-center justify-center text-black bg-gray-100 border-1 border-gray-300 hover:bg-gray-300 hover:scale-110 hover:text-blue-900 py-1 px-4 rounded-xl">
+      <ChevronDoubleLeftIcon class="h-4 w-4 mr-1" />
+      <span> Back </span>
+    </button>
+  </div>
 </template>
 
 <script setup>
