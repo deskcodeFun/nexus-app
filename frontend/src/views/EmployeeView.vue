@@ -43,11 +43,11 @@
   // const selectChoice = ref(0)
 
   function handleChoice(value) {
-    if (value !== '0') {
+    if (value !== '0' && value !== null) {
       // use function from employee store
       employeeStore.getEmployee(value)
-    } else if (value == 0) {
-      employeeStore.getAllEmployee()
+    } else if (value == 0 || value == null) {
+      employeeStore.getEmployeeByOffice('0')
     }
   }
 
