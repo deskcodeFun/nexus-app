@@ -1,7 +1,4 @@
 <template>
-  <!-- <div
-    class="w-[300px] flex flex-row flex-wrap bg-white/65 border-1 border-gray-400 rounded-xl shadow-xl px-2 py-4 m-2 hover:transition-y-1 hover:scale-105"
-  > -->
   <!-- show data -->
   <div class="w-full flex justify-center">
     <table
@@ -38,23 +35,13 @@
       </tbody>
     </table>
   </div>
-
 </template>
 
 <script setup>
-
   import { useRouter } from 'vue-router'
   import { useComputerStore } from '@/stores/computerData'
 
-
-
   const router = useRouter()
   const store = useComputerStore()
-
-
-
-
-
-
 
 </script>

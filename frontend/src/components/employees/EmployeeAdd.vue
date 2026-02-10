@@ -1,9 +1,4 @@
 <template>
-  <!-- <header>
-    <div class="flex flex-col justify-between bg-white sm:justify-normal py-16 px-2">
-      <p class="text-lg tracking-widest mx-auto text-blue-900">ADD NEW USER</p>
-    </div>
-  </header> -->
   <BaseHeader :title="'ADD NEW USER'" />
   <BaseButttonBack />
   <main class="flex pl-8 py-4 bg-white">
@@ -17,14 +12,12 @@
         <input type="text" v-model.trim="newEmployee.email" class="bg-sky-50 text-md p-1" />
         <label for="department">Department</label>
         <input type="text" v-model.trim="newEmployee.department" class="bg-sky-50 text- p-1" />
-
         <label for="offie_id">Office</label>
         <select name="officeName" id="officeName" v-model.trim="newEmployee.office_id" class="bg-sky-50 py-2">
           <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
             {{ office_name.name }}
           </option>
         </select>
-
         <!-- Save Button -->
         <div class="flex flex-row justify-between">
           <button
@@ -41,7 +34,6 @@
 
 <script setup>
   import { BookmarkIcon } from '@heroicons/vue/20/solid'
-  // import { users } from '@/dataMockup/staff'
   import { useRouter } from 'vue-router'
   import { reactive } from 'vue'
   import { useEmployeeStore } from '@/stores/employeeData'
@@ -51,31 +43,30 @@
   import BaseHeader from '../BaseHeader.vue'
 
   const router = useRouter()
-
   const employeeStore = useEmployeeStore()
   const officeNameStore = useOfficeNameStore()
-  console.log('office name', officeNameStore)
+  // console.log('office name', officeNameStore)
   const newEmployee = reactive({
-    fname: String,
-    lname: String,
-    email: String,
-    department: String,
-    office_id: Number,
+    fname: '',
+    lname: '',
+    email: '',
+    department: '',
+    office_id: null,
   })
 
   async function addSubmit() {
     try {
-      const { error } = await employeeStore.addEmployee(newEmployee)
-
-      if (error) throw error
+      await employeeStore.addEmployee({ ...newEmployee })
     } catch (error) {
       console.error('Can not Add new Employee: ', error)
     } finally {
-      newEmployee.fname = ''
-      newEmployee.lname = ''
-      newEmployee.email = ''
-      newEmployee.department = ''
-      newEmployee.office_id = null
+      Object.assign(newEmployee, {
+        fname: '',
+        lname: '',
+        email: '',
+        department: '',
+        office_id: null,
+      })
       router.push('/employee')
     }
   }

@@ -11,25 +11,25 @@
         <div class="w-fit text-nowrap flex flex-col">
           <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
           <label for="asset_tag" class="label">Asset Tag</label>
-          <input type="text" v-model.trim="updateData.asset_tag" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.asset_tag" class="bg-sky-50 text-md p-1" />
           <label for="serial_tag" class="label">Serial</label>
-          <input type="text" v-model.trim="updateData.serial_tag" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.serial_tag" class="bg-sky-50 text-md p-1" />
           <label for="brand" class="label">Brand</label>
-          <input type="text" v-model.trim="updateData.brand" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.brand" class="bg-sky-50 text-md p-1" />
           <label for="model" class="label">Model</label>
-          <input type="text" v-model.trim="updateData.model" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.model" class="bg-sky-50 text-md p-1" />
         </div>
         <!-- computer spec. section -->
         <div class="flex flex-col">
           <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
           <label for="cpu" class="label">CPU</label>
-          <input type="text" v-model.trim="updateData.cpu" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.cpu" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Ram</label>
-          <input type="text" v-model.trim="updateData.ram" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.ram" class="bg-sky-50 text-md p-1" />
           <label for="harddisk" class="label">Hard disk</label>
-          <input type="text" v-model.trim="updateData.harddisk" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.harddisk" class="bg-sky-50 text-md p-1" />
           <p class="py-2 text-sm text-gray-500">Office Name</p>
-          <select name="officeName" id="officeName" v-model.trim="updateData.office_id" class="bg-sky-50 py-2 pr-2">
+          <select name="officeName" id="officeName" v-model.trim="newComputer.office_id" class="bg-sky-50 py-2 pr-2">
             <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
               {{ office_name.name }}
             </option>
@@ -62,7 +62,7 @@
   const router = useRouter()
   const store = useComputerStore()
   const officeNameStore = useOfficeNameStore()
-  const updateData = reactive({
+  const newComputer = reactive({
     // id: Number,
     asset_tag: '',
     serial_tag: '',
@@ -71,21 +71,27 @@
     cpu: '',
     ram: '',
     harddisk: '',
-    office_id: '',
+    office_id: null,
   })
 
   async function addSubmit() {
-    await store.addComputer(updateData)
-      // reset variable
-      ; ((updateData.asset_tag = ''),
-        (updateData.serial_tag = ''),
-        (updateData.brand = ''),
-        (updateData.model = ''),
-        (updateData.cpu = ''),
-        (updateData.ram = ''),
-        (updateData.harddisk = ''),
-        (updateData.office_id = null),
-        router.push('/assets'))
+    try {
+      await store.addComputer({ ...newComputer })
+    } catch (error) {
+      console.error('Can not Add new Computer: ', error)
+    } finally {
+      Object.assign(newComputer, {
+        asset_tag: '',
+        serial_tag: '',
+        brand: '',
+        model: '',
+        cpu: '',
+        ram: '',
+        harddisk: '',
+        office_id: null,
+      })
+      router.push('/assets')
+    }
   }
 </script>
 
