@@ -10,23 +10,36 @@
       <div class="w-fit text-nowrap flex flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
         <p class="py-2 text-sm text-gray-500 tracking-widest">Asset Tag</p>
-        <p class="bg-sky-50 text-md p-1 pr-4">{{ updateData.asset_tag }}</p>
+        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.asset_tag }}</p>
         <p class="py-2 text-sm text-gray-500 tracking-widest">Serial Number</p>
-        <p class="bg-sky-50 text-md p-1 pr-4">{{ updateData.serial_tag }}</p>
+        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.serial_tag }}</p>
         <p class="py-2 text-sm text-gray-500">Brand</p>
-        <div class="bg-sky-50 text-md p-1">{{ updateData.brand }}</div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.brand }}</div>
         <p class="py-2 text-sm text-gray-500">Model</p>
-        <div class="bg-sky-50 text-md p-1">{{ updateData.model }}</div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.model }}</div>
         <p class="py-2 text-sm text-gray-500">CPU</p>
-        <div class="bg-sky-50 text-md p-1">{{ updateData.cpu }}</div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.cpu }}</div>
+        <p class="py-2 text-sm text-gray-500">AI Chipset</p>
+        <div class="bg-gray-50 text-md p-1"> {{ updateData.ai }} </div>
+        <p class="py-2 text-sm text-gray-500">Graphic Chipset</p>
+        <div class="bg-gray-50 text-md p-1"> {{ updateData.graphic }} </div>
+        <p class="py-2 text-sm text-gray-500">Screen Size</p>
+        <div class="bg-gray-50 text-md p-1"> {{ updateData.screen_size }} </div>
+
       </div>
-      <!-- computer spec. section -->
-      <!-- TODO:
-          1. allow some field to edit 'ram','harddsik' 'user',office of computer
-          2. define auth to edit NOT allow to all user
-        -->
+      <!-- computer spec section -->
       <div class="flex flex-col">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
+        <p class="py-2 text-sm text-gray-500">Max Ram</p>
+        <div class="bg-gray-50 text-md p-1"> {{ updateData.max_ram }}" </div>
+        <p class="py-2 text-sm text-gray-500">Hard Disk slot</p>
+        <div class="bg-gray-50 text-md p-1"> {{ updateData.harddisk_slot }} </div>
+        <p class="py-2 text-sm text-gray-500">Lan</p>
+        <div class="bg-gray-50 text-md p-1"> {{ updateData.lan_port }} </div>
+        <p class="py-2 text-sm text-gray-500">Wireless</p>
+        <div class="bg-gray-50 text-md p-1"> {{ updateData.wireless }} </div>
+        <p class="py-2 text-sm text-gray-500">Bluetooth</p>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.bluetooth }} </div>
         <!-- can edit computer spec. section -->
         <p class="py-2 text-sm text-gray-500">RAM</p>
         <input type="text" v-model="updateData.ram" class="bg-sky-50 text-md p-1" />
@@ -126,6 +139,14 @@
     brand: '',
     model: '',
     cpu: '',
+    ai: '',
+    graphic: '',
+    screen_size: '',
+    max_ram: '',
+    harddisk_slot: '',
+    lan_port: '',
+    wireless: '',
+    bluetooth: '',
     ram: '',
     harddisk: '',
     office_id: '',
@@ -175,7 +196,15 @@
       updateData.brand = store.computerDetail[0].brand
       updateData.model = store.computerDetail[0].model
       updateData.cpu = store.computerDetail[0].cpu
-      updateData.ram = store.computerDetail[0].ram
+      updateData.ai = store.computerDetail[0].ai,
+        updateData.graphic = store.computerDetail[0].graphic,
+        updateData.screen_size = store.computerDetail[0].screen_size,
+        updateData.max_ram = store.computerDetail[0].max_ram,
+        updateData.harddisk_slot = store.computerDetail[0].harddisk_slot,
+        updateData.lan_port = store.computerDetail[0].lan_port,
+        updateData.wireless = store.computerDetail[0].wireless,
+        updateData.bluetooth = store.computerDetail[0].bluetooth,
+        updateData.ram = store.computerDetail[0].ram
       updateData.harddisk = store.computerDetail[0].harddisk
       updateData.office_id = store.computerDetail[0].office_id
       updateData.user_id = store.computerDetail[0].user_id

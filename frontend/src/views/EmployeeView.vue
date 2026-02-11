@@ -47,7 +47,7 @@
       // use function from employee store
       employeeStore.getEmployee(value)
     } else if (value == 0 || value == null) {
-      employeeStore.getEmployeeByOffice('0')
+      employeeStore.getAllEmployee()
     }
   }
 

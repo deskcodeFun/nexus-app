@@ -11,15 +11,12 @@
             type="button" @click="toggleModal">
             <TrashIcon class="h-4 w-4 mr-1 text-gray-400 hover:text-red-700" />
           </button>
-
         </div>
-
         <input type="text" v-model.trim="updateData.fname" class="bg-sky-50 text-md p-1" />
         <label for="lname">Last Name</label>
         <input type="text" v-model.trim="updateData.lname" class="bg-sky-50 text-md p-1" />
         <label for="email">Email</label>
         <input type="text" v-model.trim="updateData.email" class="bg-sky-50 text-md p-1" />
-
         <label for="department">Department</label>
         <input type="text" v-model.trim="updateData.department" class="bg-sky-50 text-md p-1" />
         <label for="offie_id">Office Name</label>
@@ -28,17 +25,13 @@
             {{ office_name.name }}
           </option>
         </select>
-        <!-- <input type="text" v-model.trim="updateData.office_id" class="bg-sky-50 text-md p-1" /> -->
-        <!-- Show button -->
         <div class="flex flex-row justify-between">
-
           <button
             class="flex items-center justify-center  text-white bg-blue-700  hover:bg-blue-900  hover:scale-110  py-1 px-4 my-4 rounded-xl"
             type="submit">
             <BookmarkIcon class="h-4 w-4 mr-2" />
             <span> Save </span>
           </button>
-
           <BaseModal :modalActive="modalActive" title="Delete user" @save-data="delEmployee(paramID)"
             @close-modal="modalActive = false">
             <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
@@ -46,10 +39,7 @@
         </div>
       </form>
     </div>
-
   </main>
-
-
 </template>
 
 <script setup>
@@ -69,11 +59,6 @@
   const officeNameStore = useOfficeNameStore()
   const store = useEmployeeStore()
   let paramID = +route.params.id
-  // console.log('paramID from route:', paramID)
-
-  // store.getStaffDetail(paramID)
-  // console.log('getstaffDetail: ', store.staffDetail[0])
-
   const updateData = reactive({
     id: paramID,
     fname: '',
@@ -82,12 +67,10 @@
     department: '',
     office_id: '',
   })
+
   onMounted(async () => {
-    // Await the completion of the getStaffDetail action
     await store.getEmployeeDetail(paramID)
     console.log('getstaffDetail: ', store.employeeDetail)
-
-    // After the data is loaded, populate updateData
     if (store.employeeDetail[0]) {
       updateData.fname = store.employeeDetail[0].fname
       updateData.lname = store.employeeDetail[0].lname
@@ -95,33 +78,24 @@
       updateData.department = store.employeeDetail[0].department
       updateData.office_id = store.employeeDetail[0].office_name.id
     } else {
-      // Handle the case where no staff detail is found (e.g., redirect or show an error)
       console.error(`ERROR Employee with ID ${paramID} not found.`)
-      // Example: Redirect to a 404 page or list page
-      // router.push('/staff');
     }
   })
+
   const modalActive = ref(null)
   const toggleModal = () => {
     modalActive.value = !modalActive.value
   }
 
-
-
   async function editSubmit() {
-    // TODO: validate data
-    // check value in updateUser
-    // console.log('updateUser in editSubmit() : ', updateData)
     await store.updateEmployee(paramID, updateData)
-    // console.log('After add user: ', staff)
     router.push('/employee')
   }
+
   function delEmployee(paramID) {
     console.log('store.deleteUser: ', paramID)
     store.deleteEmployee(paramID)
     store.getEmployee()
     router.push('/employee')
-
   }
-
 </script>
