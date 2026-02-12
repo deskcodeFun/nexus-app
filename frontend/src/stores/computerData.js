@@ -3,26 +3,9 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
 export const useComputerStore = defineStore('useComputerStore', () => {
-  let computer = ref(null)
-  // let computerByOffice = ref(null)
-  let computerDetail = ref(null)
+  const computer = ref(null)
+  const computerDetail = ref(null)
   const isLoading = ref(false)
-
-  // async function getAllComputer() {
-  //   try {
-  //     isLoading.value = true
-  //     let { data, error } = await supabase
-  //       .from('computer')
-  //       .select(`*,staff(*)`)
-  //       .order('id', { ascending: true })
-  //     computer.value = data
-  //     if (error) throw error
-  //   } catch (error) {
-  //     console.log('Error get all Computer', error)
-  //   } finally {
-  //     isLoading.value = false
-  //   }
-  // }
 
   async function getComputerByOffice(officeID) {
     if (officeID !== null && officeID !== '0') {
@@ -36,14 +19,14 @@ export const useComputerStore = defineStore('useComputerStore', () => {
         computer.value = data
         if (error) throw error
       } catch (error) {
-        console.log('Error filter computer by office', error)
+        console.error('Error filter computer by office', error)
       } finally {
         isLoading.value = false
       }
     } else if (officeID == '0') {
       try {
         isLoading.value = true
-        let { data, error } = await supabase.from('computer').select(`*, employee(*)`).order('id')
+        const { data, error } = await supabase.from('computer').select(`*, employee(*)`).order('id')
         computer.value = data
         if (error) throw error
       } catch (error) {
@@ -55,18 +38,16 @@ export const useComputerStore = defineStore('useComputerStore', () => {
   }
 
   async function getComputerDetail(paramID) {
-    let computerID = paramID
-    if (computerID !== undefined) {
+    const computerID = ref(paramID)
+    if (computerID.value !== undefined) {
       try {
         isLoading.value = true
         const { data, error } = await supabase
           .from('computer')
-          // .select(`*,staff(*,...office_name!inner(*))`)
           .select(`*,employee(*),office_name(*)`)
           .eq('id', computerID)
           .order('id')
         computerDetail.value = data
-        console.log('computer detail from store:', computerDetail)
         if (error) throw error
       } catch (error) {
         console.error('Error get computer detail :', error)
@@ -75,10 +56,13 @@ export const useComputerStore = defineStore('useComputerStore', () => {
       }
     }
   }
+
   async function addComputer(newComputer) {
     try {
       isLoading.value = true
-      const { error } = await supabase.from('computer').insert([newComputer])
+      const computerToInsert = { ...newComputer }
+      delete computerToInsert.id
+      const { error } = await supabase.from('computer').insert([computerToInsert])
       if (error) throw error
     } catch (error) {
       console.error('ERROR Add new computer fail: ', error)
@@ -86,8 +70,8 @@ export const useComputerStore = defineStore('useComputerStore', () => {
       isLoading.value = false
     }
   }
+
   async function updateComputer(computerID, updateData) {
-    console.log('updataData in computerData.js', computerID, updateData)
     try {
       isLoading.value = true
       const { error } = await supabase
@@ -105,8 +89,6 @@ export const useComputerStore = defineStore('useComputerStore', () => {
 
   async function deleteComputer(paramID) {
     try {
-      // const idToDelete = parseInt(paramID)
-      console.log('paramID:', paramID, typeof paramID)
       isLoading.value = true
       const { error } = await supabase.from('computer').delete().eq('id', paramID).select()
       if (error) throw error

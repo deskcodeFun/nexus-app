@@ -18,14 +18,31 @@
           <input type="text" v-model.trim="newComputer.brand" class="bg-sky-50 text-md p-1" />
           <label for="model" class="label">Model</label>
           <input type="text" v-model.trim="newComputer.model" class="bg-sky-50 text-md p-1" />
+          <label for="cpu" class="label">CPU</label>
+          <input type="text" v-model.trim="newComputer.cpu" class="bg-sky-50 text-md p-1" />
+          <label for="cpu" class="label">AI Chipset</label>
+          <input type="text" v-model.trim="newComputer.ai" class="bg-sky-50 text-md p-1" />
+          <label for="cpu" class="label">Graphic Chipset</label>
+          <input type="text" v-model.trim="newComputer.graphic" class="bg-sky-50 text-md p-1" />
+          <label for="cpu" class="label">Screen Size</label>
+          <input type="text" v-model.trim="newComputer.screen_size" class="bg-sky-50 text-md p-1" />
         </div>
         <!-- computer spec. section -->
         <div class="flex flex-col">
           <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
-          <label for="cpu" class="label">CPU</label>
-          <input type="text" v-model.trim="newComputer.cpu" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Ram</label>
           <input type="text" v-model.trim="newComputer.ram" class="bg-sky-50 text-md p-1" />
+          <label for="Ram" class="label">Max Ram</label>
+          <input type="text" v-model.trim="newComputer.max_ram" class="bg-sky-50 text-md p-1" />
+          <label for="Ram" class="label">Hard Disk slot</label>
+          <input type="text" v-model.trim="newComputer.harddisk_slot" class="bg-sky-50 text-md p-1" />
+          <label for="Ram" class="label">Lan</label>
+          <input type="text" v-model.trim="newComputer.lan_port" class="bg-sky-50 text-md p-1" />
+          <label for="Ram" class="label">Wireless</label>
+          <input type="text" v-model.trim="newComputer.wireless" class="bg-sky-50 text-md p-1" />
+          <label for="Ram" class="label">Bluetooth</label>
+          <input type="text" v-model.trim="newComputer.bluetooth" class="bg-sky-50 text-md p-1" />
+
           <label for="harddisk" class="label">Hard disk</label>
           <input type="text" v-model.trim="newComputer.harddisk" class="bg-sky-50 text-md p-1" />
           <p class="py-2 text-sm text-gray-500">Office Name</p>
@@ -69,27 +86,46 @@
     brand: '',
     model: '',
     cpu: '',
+    ai: '',
+    graphic: '',
+    screen_size: '',
+    max_ram: '',
+    harddisk_slot: '',
+    lan_port: '',
+    wireless: '',
+    bluetooth: '',
     ram: '',
     harddisk: '',
-    office_id: null,
+    user_id: null,
+    office_id: '',
   })
 
   async function addSubmit() {
+    console.log('newConmputer to add: ', newComputer)
     try {
-      await store.addComputer({ ...newComputer })
+      await store.addComputer(newComputer)
     } catch (error) {
       console.error('Can not Add new Computer: ', error)
     } finally {
-      Object.assign(newComputer, {
-        asset_tag: '',
-        serial_tag: '',
-        brand: '',
-        model: '',
-        cpu: '',
-        ram: '',
-        harddisk: '',
-        office_id: null,
-      })
+      // Object.assign(newComputer, {
+      //   asset_tag: '',
+      //   serial_tag: '',
+      //   brand: '',
+      //   model: '',
+      //   cpu: '',
+      //   ai: '',
+      //   graphic: '',
+      //   screen_size: '',
+      //   max_ram: '',
+      //   harddisk_slot: '',
+      //   lan_port: '',
+      //   wireless: '',
+      //   bluetooth: '',
+      //   ram: '',
+      //   harddisk: '',
+      //   user_id: null,
+      //   office_id: '',
+      // })
       router.push('/assets')
     }
   }
