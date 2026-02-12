@@ -15,7 +15,6 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         .from('employee')
         .select(`*,office_name(*)`)
         .order('fname', { ascending: true })
-      // const { data, error } = await supabase.from('employee').select(`id,name,short_name,office_name(id,name,short_name)`)
       employee.value = data
       if (error) throw error
     } catch (error) {
@@ -24,8 +23,8 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
       isLoading.value = false
     }
   }
+
   async function getEmployee(officeID) {
-    console.log('officeID parameter from employee store', officeID)
     if (officeID !== undefined && officeID !== 0) {
       try {
         isLoading.value = true
@@ -37,7 +36,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         employee.value = data
         if (error) throw error
       } catch (error) {
-        console.log('Error filter Employee: ', error)
+        console.error('Error filter Employee: ', error)
       } finally {
         isLoading.value = false
       }
@@ -94,7 +93,6 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
   }
 
   async function updateEmployee(employeeID, updateData) {
-    console.log('updateData in employee.js: ', employeeID, updateData)
     try {
       isLoading.value = true
       const { error } = await supabase
@@ -109,6 +107,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
       isLoading.value = false
     }
   }
+
   async function deleteEmployee(paramID) {
     try {
       isLoading.value = true
@@ -121,15 +120,11 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     }
   }
 
-  // getAllemployee()
   getAllEmployee()
-
   return {
     employee,
     employeeDetail,
     isLoading,
-    // employeeByOffice,
-    // getAllemployee,
     getEmployee,
     getAllEmployee,
     getEmployeeDetail,
