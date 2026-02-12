@@ -2,9 +2,7 @@
   <BaseHeader :title="'ADD NEW COMPUTER'" />
   <BaseButttonBack />
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
-    <!-- <div class="w-2/5"> -->
     <div class="gap-16 sm:flex sm:flex-row bg-white">
-      <!-- <form class="flex flex-col justify-center gap-2" @submit.prevent="addSubmit"> -->
       <!-- 3 section -->
       <div class="gap-16 sm:flex sm:flex-row bg-white">
         <!-- accounting section -->
@@ -51,6 +49,12 @@
               {{ office_name.name }}
             </option>
           </select>
+        </div>
+        <!-- Upload computer image  -->
+        <div class="flex flex-col">
+          <p class="pb-8">UPLOAD image</p>
+          <div class="flex flex-row w-[450px] h-50 bg-sky-50 border-1 border-blue-800 rounded-xl">
+          </div>
           <!-- button section -->
           <form @submit.prevent="addSubmit">
             <button

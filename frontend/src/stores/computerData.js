@@ -38,8 +38,8 @@ export const useComputerStore = defineStore('useComputerStore', () => {
   }
 
   async function getComputerDetail(paramID) {
-    const computerID = ref(paramID)
-    if (computerID.value !== undefined) {
+    let computerID = paramID
+    if (computerID !== undefined) {
       try {
         isLoading.value = true
         const { data, error } = await supabase

@@ -2,10 +2,17 @@
   <!-- Header -->
   <BaseHeader :title="'COMPUTER DETAIL'" />
   <BaseButttonBack />
+  <!-- show image gallery -->
+  <!-- show computer image  -->
+  <div class="flex flex-col bg-white px-8">
+    <p class="pb-4">image</p>
+    <div class="flex flex-row w-auto h-50 bg-sky-50 border-1 border-blue-800 rounded-xl"></div>
+
+  </div>
 
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <!-- 3 section -->
-    <div class="gap-16  sm:flex sm:flex-row bg-white">
+    <div class="gap-16 sm:flex sm:flex-row bg-white">
       <!-- accounting section -->
       <div class="w-fit text-nowrap flex flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
@@ -20,26 +27,25 @@
         <p class="py-2 text-sm text-gray-500">CPU</p>
         <div class="bg-gray-50 text-md p-1">{{ updateData.cpu }}</div>
         <p class="py-2 text-sm text-gray-500">AI Chipset</p>
-        <div class="bg-gray-50 text-md p-1"> {{ updateData.ai }} </div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.ai }}</div>
         <p class="py-2 text-sm text-gray-500">Graphic Chipset</p>
-        <div class="bg-gray-50 text-md p-1"> {{ updateData.graphic }} </div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.graphic }}</div>
         <p class="py-2 text-sm text-gray-500">Screen Size</p>
-        <div class="bg-gray-50 text-md p-1"> {{ updateData.screen_size }} </div>
-
+        <div class="bg-gray-50 text-md p-1">{{ updateData.screen_size }}</div>
       </div>
       <!-- computer spec section -->
       <div class="flex flex-col">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
         <p class="py-2 text-sm text-gray-500">Max Ram</p>
-        <div class="bg-gray-50 text-md p-1"> {{ updateData.max_ram }}" </div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.max_ram }}"</div>
         <p class="py-2 text-sm text-gray-500">Hard Disk slot</p>
-        <div class="bg-gray-50 text-md p-1"> {{ updateData.harddisk_slot }} </div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.harddisk_slot }}</div>
         <p class="py-2 text-sm text-gray-500">Lan</p>
-        <div class="bg-gray-50 text-md p-1"> {{ updateData.lan_port }} </div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.lan_port }}</div>
         <p class="py-2 text-sm text-gray-500">Wireless</p>
-        <div class="bg-gray-50 text-md p-1"> {{ updateData.wireless }} </div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.wireless }}</div>
         <p class="py-2 text-sm text-gray-500">Bluetooth</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.bluetooth }} </div>
+        <div class="bg-gray-50 text-md p-1">{{ updateData.bluetooth }}</div>
         <!-- can edit computer spec. section -->
         <p class="py-2 text-sm text-gray-500">RAM</p>
         <input type="text" v-model="updateData.ram" class="bg-sky-50 text-md p-1" />
@@ -53,7 +59,7 @@
         </select>
       </div>
       <!-- user info section -->
-      <div class="flex flex-col  ">
+      <div class="flex flex-col">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Infomation</p>
         <!-- header label and edit icon -->
         <div class="pb-2">
@@ -65,23 +71,21 @@
         <!-- Show userDetail -->
         <div v-if="user_name !== 'FREE'">
           <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</p>
-          <p class=" text-md text-gray-500">Office </p>
+          <p class="text-md text-gray-500">Office</p>
           <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
         </div>
         <div v-else class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</div>
         <!-- editUser = true && user_name = true -->
         <div v-if="editUser && user_name" class="bg-red-50/50 rounded-lg border-1 border-red-300 py-2 px-2 mt-4">
-          <p class=" pb-2">Update Computer User</p>
-          <select v-model.trim="updateData.user_id" @change="handleChange" class=" w-full bg-sky-50 py-2 pr-2">
+          <p class="pb-2">Update Computer User</p>
+          <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-sky-50 py-2 pr-2">
             <option :value="0" class="bg-sky-50 pr-4">FREE</option>
             <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="bg-sky-50 pr-4">
-              {{
-                item.fname + ' ' + item.lname
-              }}
+              {{ item.fname + ' ' + item.lname }}
             </option>
           </select>
-          <p class="py-2">Office BU </p>
-          <div class="bg-sky-50  py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
+          <p class="py-2">Office BU</p>
+          <div class="bg-sky-50 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
         </div>
         <div v-else></div>
 
@@ -169,7 +173,6 @@
     console.log('toggleUser value : ', editUser)
   }
 
-
   async function handleChange(event) {
     const value = event.target.value
     updateData.user_id = value
@@ -178,7 +181,6 @@
       await employeeStore.getEmployeeDetail(updateData.user_id)
       console.log('employee detail', employeeStore.employeeDetail)
       new_officeName.value = employeeStore.employeeDetail[0].office_name.name
-
     } else {
       editUser.value = false
       new_officeName.value = ''
@@ -186,7 +188,6 @@
       updateData.user_id = null
     }
   }
-
 
   onMounted(async () => {
     await store.getComputerDetail(paramID)
@@ -196,15 +197,15 @@
       updateData.brand = store.computerDetail[0].brand
       updateData.model = store.computerDetail[0].model
       updateData.cpu = store.computerDetail[0].cpu
-      updateData.ai = store.computerDetail[0].ai,
-        updateData.graphic = store.computerDetail[0].graphic,
-        updateData.screen_size = store.computerDetail[0].screen_size,
-        updateData.max_ram = store.computerDetail[0].max_ram,
-        updateData.harddisk_slot = store.computerDetail[0].harddisk_slot,
-        updateData.lan_port = store.computerDetail[0].lan_port,
-        updateData.wireless = store.computerDetail[0].wireless,
-        updateData.bluetooth = store.computerDetail[0].bluetooth,
-        updateData.ram = store.computerDetail[0].ram
+        ; ((updateData.ai = store.computerDetail[0].ai),
+          (updateData.graphic = store.computerDetail[0].graphic),
+          (updateData.screen_size = store.computerDetail[0].screen_size),
+          (updateData.max_ram = store.computerDetail[0].max_ram),
+          (updateData.harddisk_slot = store.computerDetail[0].harddisk_slot),
+          (updateData.lan_port = store.computerDetail[0].lan_port),
+          (updateData.wireless = store.computerDetail[0].wireless),
+          (updateData.bluetooth = store.computerDetail[0].bluetooth),
+          (updateData.ram = store.computerDetail[0].ram))
       updateData.harddisk = store.computerDetail[0].harddisk
       updateData.office_id = store.computerDetail[0].office_id
       updateData.user_id = store.computerDetail[0].user_id
@@ -213,7 +214,8 @@
       if (store.computerDetail[0].employee) {
         console.log('store.computerDetail[0].employee', store.computerDetail[0].employee)
         await employeeStore.getEmployeeDetail(store.computerDetail[0].user_id)
-        user_name.value = employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
+        user_name.value =
+          employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
         user_officeName.value = employeeStore.employeeDetail[0].office_name.name
       } else {
         // employee data is not available-> computer is available in stock, free computer
@@ -226,7 +228,6 @@
   const modalActive = ref(null)
   const toggleModal = () => {
     modalActive.value = !modalActive.value
-
   }
 
   async function editSubmit() {
