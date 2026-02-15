@@ -23,15 +23,15 @@
             </tr>
             <tr>
               <th scope="col">CPU</th>
-              <td>{{ item.cpu }}</td>
+              <td>{{ item.cpu.substring(0, 20) }}</td>
             </tr>
             <tr>
               <th scope="col">Ram</th>
-              <td>{{ item.ram }}</td>
+              <td>{{ item.ram.substring(0, 16) }}</td>
             </tr>
             <tr>
               <th scope="col">Hard Disk</th>
-              <td>{{ item.harddisk }}</td>
+              <td>{{ item.harddisk.substring(0, 18) }}</td>
             </tr>
             <tr>
               <th scope="col">User Name</th>
