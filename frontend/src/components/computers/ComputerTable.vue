@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)"
-          class="hover:shadow-gray-400 hover:shadow-2xl hover:scale-102 hover:font-bold  hover:bg-blue-50 hover:cursor-pointer  text-nowrap">
+          class="hover:shadow-2xl hover:scale-102 hover:font-bold  hover:bg-blue-50 hover:cursor-pointer  text-nowrap">
           <!-- <td class=" flex justify-center">{{ item.id }}</td> -->
           <td>{{ item.asset_tag }}</td>
           <td>{{ item.brand }}</td>
