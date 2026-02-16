@@ -8,12 +8,12 @@
     <p class="pb-4">image</p>
     <div v-if="store.computerDetail && store.computerDetail[0].image !== null"
       class="w-3/5 flex flex-row justify-around bg-sky-50 border-1 border-blue-800 rounded-xl">
-      <div v-for="(imageUrl, index) in store.computerDetail[0].image" :key="index">
-        <img :src="imageUrl" alt="" class="aspect-auto p-4 h-50 hover:scale-350 ">
+      <div v-for="(item, index) in store.computerDetail[0].image" :key="index">
+        <img :src="item" alt="" class="aspect-auto p-4 h-50" />
       </div>
     </div>
     <div v-else class="flex flex-row h-50 bg-sky-50 border-1 border-blue-800 rounded-xl">
-      <p class="p-8"> NO IMAGE</p>
+      <p class="p-8">NO IMAGE</p>
     </div>
   </div>
 
@@ -230,17 +230,14 @@
       }
       updateData.user_id = employeeStore.id
     }
+
   })
 
   const modalActive = ref(null)
   const toggleModal = () => {
     modalActive.value = !modalActive.value
   }
-  // const isZoom = ref(false)
-  // const toggleZoom = () => {
-  //   isZoom.value = !isZoom.value
-  //   console.log('isZoom value : ', isZoom)
-  // }
+
 
   async function editSubmit() {
     // TODO: validate data
@@ -255,20 +252,4 @@
   }
 </script>
 
-<style scoped>
-  .zoomed-Image {
-    /* Apply a scale transformation when the 'zoomed-image' class is active */
-    transform: scale(1.5);
-    /* Zooms the image to 150% of its original size */
-    transition: transform 0.3s ease;
-    /* Smooth transition for the zoom effect */
-    cursor: zoom-out;
-    /* Changes cursor when zoomed */
-  }
-
-  /* Default state */
-  img {
-    cursor: zoom-in;
-    transition: transform 0.3s ease;
-  }
-</style>
+<style scoped></style>
