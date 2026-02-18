@@ -2,24 +2,23 @@
   <!-- Header -->
   <BaseHeader :title="'COMPUTER DETAIL'" />
   <BaseButttonBack />
-  <!-- show image gallery -->
   <!-- show computer image  -->
-  <div class="flex flex-col bg-white px-8">
-    <p class="pb-4">image</p>
+  <div class="w-full text-nowrap bg-white px-8  ">
+    <p class="sm:pb-4 text-lg tracking-wide">Image</p>
     <div v-if="store.computerDetail && store.computerDetail[0].image !== null"
-      class="w-3/5 flex flex-row justify-around bg-sky-50 border-1 border-blue-800 rounded-xl">
-      <div v-for="(item, index) in store.computerDetail[0].image" :key="index">
-        <img :src="item" alt="" class="aspect-auto p-4 h-50" />
+      class="w-fit flex flex-row items-center ">
+      <div v-for="(imageURL, index) in store.computerDetail[0].image" :key="index">
+        <img :src="imageURL" alt="" class="w-auto h-20 flex aspect-auto p-4" @click="toggleZoom(index)"
+          :class="{ zoom: !isZoom[index] }" />
       </div>
     </div>
     <div v-else class="flex flex-row h-50 bg-sky-50 border-1 border-blue-800 rounded-xl">
       <p class="p-8">NO IMAGE</p>
     </div>
   </div>
-
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
-    <!-- 3 section -->
-    <div class="gap-16 sm:flex sm:flex-row bg-white">
+    <div class="gap-8 sm:flex sm:flex-row bg-white">
+      <!-- 3 section -->
       <!-- accounting section -->
       <div class="w-fit text-nowrap flex flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
@@ -198,46 +197,54 @@
 
   onMounted(async () => {
     await store.getComputerDetail(paramID)
+    console.log('computerDetail : ', store.computerDetail)
     if (store.computerDetail[0]) {
-      updateData.asset_tag = store.computerDetail[0].asset_tag
-      updateData.serial_tag = store.computerDetail[0].serial_tag
-      updateData.brand = store.computerDetail[0].brand
-      updateData.model = store.computerDetail[0].model
-      updateData.cpu = store.computerDetail[0].cpu
-        ; ((updateData.ai = store.computerDetail[0].ai),
-          (updateData.graphic = store.computerDetail[0].graphic),
-          (updateData.screen_size = store.computerDetail[0].screen_size),
-          (updateData.max_ram = store.computerDetail[0].max_ram),
-          (updateData.harddisk_slot = store.computerDetail[0].harddisk_slot),
-          (updateData.lan_port = store.computerDetail[0].lan_port),
-          (updateData.wireless = store.computerDetail[0].wireless),
-          (updateData.bluetooth = store.computerDetail[0].bluetooth),
-          (updateData.ram = store.computerDetail[0].ram))
-      updateData.harddisk = store.computerDetail[0].harddisk
-      updateData.office_id = store.computerDetail[0].office_id
-      updateData.user_id = store.computerDetail[0].user_id
-      // prepare user name and user's office name
-      // use user_id from computer table to get user detail from employee table
-      if (store.computerDetail[0].employee) {
-        console.log('store.computerDetail[0].employee', store.computerDetail[0].employee)
-        await employeeStore.getEmployeeDetail(store.computerDetail[0].user_id)
-        user_name.value =
-          employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
-        user_officeName.value = employeeStore.employeeDetail[0].office_name.name
-      } else {
-        // employee data is not available-> computer is available in stock, free computer
-        user_name.value = 'FREE' // Assign an empty string or a default value
-      }
-      updateData.user_id = employeeStore.id
+      ; ((updateData.asset_tag = store.computerDetail[0].asset_tag),
+        (updateData.serial_tag = store.computerDetail[0].serial_tag),
+        (updateData.brand = store.computerDetail[0].brand),
+        (updateData.model = store.computerDetail[0].model),
+        (updateData.cpu = store.computerDetail[0].cpu),
+        (updateData.ai = store.computerDetail[0].ai),
+        (updateData.graphic = store.computerDetail[0].graphic),
+        (updateData.screen_size = store.computerDetail[0].screen_size),
+        (updateData.max_ram = store.computerDetail[0].max_ram),
+        (updateData.harddisk_slot = store.computerDetail[0].harddisk_slot),
+        (updateData.lan_port = store.computerDetail[0].lan_port),
+        (updateData.wireless = store.computerDetail[0].wireless),
+        (updateData.bluetooth = store.computerDetail[0].bluetooth),
+        (updateData.ram = store.computerDetail[0].ram),
+        (updateData.harddisk = store.computerDetail[0].harddisk),
+        (updateData.office_id = store.computerDetail[0].office_id),
+        (updateData.user_id = store.computerDetail[0].user_id))
     }
-
-  })
+    if (store.computerDetail[0].employee) {
+      console.log('store.computerDetail[0].employee', store.computerDetail[0].employee)
+      await employeeStore.getEmployeeDetail(store.computerDetail[0].user_id)
+      user_name.value =
+        employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
+      user_officeName.value = employeeStore.employeeDetail[0].office_name.name
+    } else {
+      // employee data is not available-> computer is available in stock, free computer
+      user_name.value = 'FREE' // Assign an empty string or a default value
+    }
+    updateData.user_id = employeeStore.id
+  }) // END onMounted()
 
   const modalActive = ref(null)
   const toggleModal = () => {
     modalActive.value = !modalActive.value
   }
+  // create array of image from computerDetail
 
+  const isZoom = ref([ref('false'), ref('false'), ref('false'), ref('false'), ref('false')])
+  // const isZoom0 = ref(false)
+  // const isZoom1 = ref(false)
+
+  const toggleZoom = (index) => {
+    console.log('indexRef value on click : ', index, isZoom.value)
+    console.log('isZoom Value : ', isZoom.value)
+    isZoom.value[index] = !isZoom.value[index]
+  }
 
   async function editSubmit() {
     // TODO: validate data
@@ -252,4 +259,22 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+  .zoom {
+    width: auto;
+    height: 50%;
+    top: 30%;
+    left: 30%;
+    position: absolute;
+    padding: 0px;
+    transition: transform 0.5s ease-in-out;
+    transform: scale(1.5);
+  }
+
+  /* .img {
+    width: auto;
+    height: 50%;
+    padding: 8px;
+    margin: 8px
+  } */
+</style>
