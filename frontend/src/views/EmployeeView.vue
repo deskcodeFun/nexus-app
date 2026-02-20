@@ -1,12 +1,8 @@
 <template>
   <!-- Header -->
-  <header>
-    <div class="flex flex-col justify-between bg-white sm:justify-normal py-16 px-2">
-      <p class="text-lg tracking-widest text-blue-900">EMPLOYEE MANAGEMENT</p>
-    </div>
-  </header>
+  <BaseHeader :title="'EMPLOYEE MANAGEMENT'" />
   <!-- Sub Menu -->
-  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
+  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide px-2">
     <BaseOfficeDrop @select-option="handleChoice" />
     <!-- Add new user button -->
     <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
@@ -35,6 +31,7 @@
   import EmployeeCard from '@/components/employees/EmployeeCard.vue'
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
   import { useMonitorSize } from '@/composables/DeviceScreen'
+  import BaseHeader from '@/components/BaseHeader.vue'
 
   const employeeStore = useEmployeeStore()
 

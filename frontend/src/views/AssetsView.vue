@@ -1,7 +1,7 @@
 <template>
   <!-- Header -->
   <BaseHeader :title="'ASSETS ACCOUNTING'" />
-  <div class="py-4 bg-white flex flex-row text-blue-900 tracking-wide">
+  <div class="bg-white flex flex-row text-blue-900 tracking-wide">
     <button @click="toggleCom"
       class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100">
       COMPUTER
