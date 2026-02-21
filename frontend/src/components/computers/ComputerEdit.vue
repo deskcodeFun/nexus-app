@@ -3,7 +3,12 @@
   <BaseHeader :title="'COMPUTER DETAIL'" />
   <BaseButttonBack />
   <!-- show computer image  -->
-  <BaseImage v-if="store.computerDetail && store.computerDetail.length > 0" :images="store.computerDetail[0].image" />
+  <div v-if="store.computerDetail && store.computerDetail[0].image !== null">
+    <BaseImage :images="store.computerDetail[0].image" />
+  </div>
+  <div v-else class="bg-white px-8 w-full h-100px ">
+    <p class="py-8 px-4 bg-blue-50/20">No Image</p>
+  </div>
 
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <!-- 3 section -->
@@ -185,7 +190,6 @@
     }
   }
 
-
   onMounted(async () => {
     await store.getComputerDetail(paramID)
     // console.log('computerDetail : ', store.computerDetail)
@@ -225,7 +229,6 @@
   const toggleModal = () => {
     modalActive.value = !modalActive.value
   }
-
 
   async function editSubmit() {
     // TODO: validate data
