@@ -8,7 +8,7 @@
           class="[&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
           <tbody>
             <tr>
-              <th>Asset ID</th>
+              <th>ID</th>
               <td>
                 {{ item.id }}
               </td>

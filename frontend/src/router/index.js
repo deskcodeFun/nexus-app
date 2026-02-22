@@ -7,11 +7,14 @@ import AssetsView from '@/views/AssetsView.vue'
 // import UserAdd from '@/components/users/UserAdd.vue'
 
 import EmployeeView from '@/views/EmployeeView.vue'
+import EmployeeAdd from '@/components/employees/EmployeeAdd.vue'
 import EmployeeEdit from '@/components/employees/EmployeeEdit.vue'
+
 import ComputerAdd from '@/components/computers/ComputerAdd.vue'
 import ComputerEdit from '@/components/computers/ComputerEdit.vue'
+
+import PrinterAdd from '@/components/printers/PrinterAdd.vue'
 import PrinterEdit from '@/components/printers/PrinterEdit.vue'
-import EmployeeAdd from '@/components/employees/EmployeeAdd.vue'
 
 // import ComputerAdd from '@/components/computer/ComputerAdd.vue'
 
@@ -47,6 +50,11 @@ const router = createRouter({
       component: ComputerEdit,
     },
     {
+      path: '/addPrinter',
+      name: 'add-printer',
+      component: PrinterAdd,
+    },
+    {
       path: '/editPrinter/:id',
       name: 'edit-printer',
 
@@ -77,6 +85,7 @@ const router = createRouter({
 
       component: EmployeeEdit,
     },
+
     {
       path: '/:catchAll(.*)',
       name: 'not-found',

@@ -141,7 +141,7 @@
     padding-bottom: 0.5rem;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.1rem;
     color: #6b7280;
   }
 </style>
