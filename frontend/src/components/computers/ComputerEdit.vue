@@ -84,7 +84,7 @@
               {{ item.fname + ' ' + item.lname }}
             </option>
           </select>
-          <p class="py-2">Office BU</p>
+          <p class="py-2">User Office</p>
           <div class="bg-sky-50 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
         </div>
         <div v-else></div>
@@ -194,23 +194,23 @@
     await store.getComputerDetail(paramID)
     // console.log('computerDetail : ', store.computerDetail)
     if (store.computerDetail[0]) {
-      ; ((updateData.asset_tag = store.computerDetail[0].asset_tag),
-        (updateData.serial_tag = store.computerDetail[0].serial_tag),
-        (updateData.brand = store.computerDetail[0].brand),
-        (updateData.model = store.computerDetail[0].model),
-        (updateData.cpu = store.computerDetail[0].cpu),
-        (updateData.ai = store.computerDetail[0].ai),
-        (updateData.graphic = store.computerDetail[0].graphic),
-        (updateData.screen_size = store.computerDetail[0].screen_size),
-        (updateData.max_ram = store.computerDetail[0].max_ram),
-        (updateData.harddisk_slot = store.computerDetail[0].harddisk_slot),
-        (updateData.lan_port = store.computerDetail[0].lan_port),
-        (updateData.wireless = store.computerDetail[0].wireless),
-        (updateData.bluetooth = store.computerDetail[0].bluetooth),
-        (updateData.ram = store.computerDetail[0].ram),
-        (updateData.harddisk = store.computerDetail[0].harddisk),
-        (updateData.office_id = store.computerDetail[0].office_id),
-        (updateData.user_id = store.computerDetail[0].user_id))
+      updateData.asset_tag = store.computerDetail[0].asset_tag
+      updateData.serial_tag = store.computerDetail[0].serial_tag
+      updateData.brand = store.computerDetail[0].brand
+      updateData.model = store.computerDetail[0].model
+      updateData.cpu = store.computerDetail[0].cpu
+      updateData.ai = store.computerDetail[0].ai
+      updateData.graphic = store.computerDetail[0].graphic
+      updateData.screen_size = store.computerDetail[0].screen_size
+      updateData.max_ram = store.computerDetail[0].max_ram
+      updateData.harddisk_slot = store.computerDetail[0].harddisk_slot
+      updateData.lan_port = store.computerDetail[0].lan_port
+      updateData.wireless = store.computerDetail[0].wireless
+      updateData.bluetooth = store.computerDetail[0].bluetooth
+      updateData.ram = store.computerDetail[0].ram
+      updateData.harddisk = store.computerDetail[0].harddisk
+      updateData.office_id = store.computerDetail[0].office_id
+      updateData.user_id = store.computerDetail[0].user_id
     }
     if (store.computerDetail[0].employee) {
       // console.log('store.computerDetail[0].employee', store.computerDetail[0].employee)
