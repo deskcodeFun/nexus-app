@@ -1,6 +1,6 @@
 <template>
   <!-- Header -->
-  <BaseHeader :title="'PRINTER DETAIL'" />
+  <BaseHeader title='PRINTER DETAIL' />
   <BaseButttonBack />
   <!-- show computer image  -->
   <div v-if="printerStore.printerDetail && printerStore.printerDetail[0].image !== null">

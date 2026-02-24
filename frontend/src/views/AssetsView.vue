@@ -1,6 +1,6 @@
 <template>
   <!-- Header -->
-  <BaseHeader :title="'ASSETS ACCOUNTING'" />
+  <BaseHeader title="ASSETS ACCOUNTING" />
   <div class="bg-white flex flex-row text-blue-900 tracking-wide">
     <button @click="toggleCom"
       class="px-2 py-1 rounded-xl hover:scale-105 hover:cursor-pointer focus:bg-sky-100 active:bg-sky-100">
@@ -19,7 +19,7 @@
   <main class="bg-white pt-4">
     <ComputerView v-if="showCom"></ComputerView>
     <PrinterView v-if="showPrinter"></PrinterView>
-    <PrinterView v-if="showOther"></PrinterView>
+    <OtherView v-if="showOther"></OtherView>
   </main>
 </template>
 
@@ -28,6 +28,7 @@
   import ComputerView from './ComputerView.vue'
   import PrinterView from './PrinterView.vue'
   import BaseHeader from '@/components/BaseHeader.vue'
+  import OtherView from './OtherView.vue'
 
   const showCom = ref(true)
   const showPrinter = ref(false)

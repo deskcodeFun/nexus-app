@@ -1,5 +1,5 @@
 <template>
-  <BaseHeader :title="'ADD NEW COMPUTER'" />
+  <BaseHeader title='ADD NEW COMPUTER' />
   <BaseButttonBack />
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <div class="gap-16 sm:flex sm:flex-row bg-white">

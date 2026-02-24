@@ -1,6 +1,6 @@
 <template>
   <!-- Header -->
-  <BaseHeader :title="'COMPUTER DETAIL'" />
+  <BaseHeader title='COMPUTER DETAIL' />
   <BaseButttonBack />
   <!-- show computer image  -->
   <div v-if="store.computerDetail && store.computerDetail[0].image !== null">

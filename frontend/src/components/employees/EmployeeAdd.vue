@@ -1,5 +1,5 @@
 <template>
-  <BaseHeader :title="'ADD NEW USER'" />
+  <BaseHeader title='ADD NEW USER' />
   <BaseButttonBack />
   <main class="flex pl-8 py-4 bg-white">
     <div>

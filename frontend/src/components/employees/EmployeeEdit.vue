@@ -1,5 +1,5 @@
 <template>
-  <BaseHeader :title="'EDIT USER'" />
+  <BaseHeader title='EDIT USER' />
   <BaseButttonBack />
   <main class="flex pl-8 pt-8 bg-white">
     <div class=" bg-white">
