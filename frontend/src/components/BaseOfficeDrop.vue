@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
     <div id="selct-bu" class="flex flex-row w-fit">
-      <p class="pr-4">SELETECT BU</p>
+      <p class="pr-4">Select Bu</p>
       <select v-model="selectChoice" @change="handleChange" class="bg-blue-50/25 ml-4">
         <option v-for="item in officeStores.officeAllName" :key="item.id" :value="item.id">
           {{ item.short_name }}

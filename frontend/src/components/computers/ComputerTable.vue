@@ -2,9 +2,9 @@
   <!-- show data -->
   <div class="w-full flex justify-center">
     <table
-      class="w-11/12 bg-white/30 [&_th]:p-2 [&_th]:text-left [&_th]:align-baseline  [&_th]:text-md [&_th]:text-gray-600 [&_td]:text-blue-900 [&_td]:py-4 [&_td]:px-2 [&_td]:mx-auto">
+      class="w-full [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline  [&_td]:text-blue-900 [&_td]:py-5 [&_td]:px-2 [&_td]:border-b [&_td]:border-slate-300 [&_td]:mx-auto">
       <thead>
-        <tr class="border-b border-gray-400 text-nowrap">
+        <tr class="border-b border-gray-300  bg-sky-100 text-nowrap">
           <!-- <th scope="col">Asset ID</th> -->
           <th scope="col">Asset Tag</th>
           <th scope="col">Brand</th>
@@ -19,7 +19,7 @@
         <tr v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)"
           class="hover:shadow-2xl hover:scale-102 hover:font-bold  hover:bg-blue-50 hover:cursor-pointer  text-nowrap">
           <!-- <td class=" flex justify-center">{{ item.id }}</td> -->
-          <td>{{ item.asset_tag }}</td>
+          <td class="font-bold">{{ item.asset_tag }}</td>
           <td>{{ item.brand }}</td>
           <td>{{ item.cpu.substring(0, 18) }}</td>
           <td>{{ item.ram.substring(0, 18) }}</td>
