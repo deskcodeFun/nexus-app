@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <section class="hero absolute inset-0 bg-[url(../assets/hero-bg2.jpg)] bg-conver bg-center z-0">
+  <div class="container">
+    <section class="hero  inset-0 bg-[url(../assets/hero-bg2.jpg)] bg-conver bg-center">
       <div class="hero-text container ml-8">
         <h4>Nexus Property Consultants.</h4>
         <hr />
@@ -20,8 +20,8 @@
   .hero {
     /* background-image: url('../assets/hero-bg.jpg'); */
     background-attachment: absolute;
-    position: relative;
-    height: 85vh;
+    position: absolute;
+    height: 99vh;
     /*
   img {
     object-fit: cover;

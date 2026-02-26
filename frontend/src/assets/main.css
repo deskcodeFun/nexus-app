@@ -2,6 +2,8 @@
 
 body {
   background: #dae1f03b;
+  font-size: 14px;
+  overflow: hidden;
 }
 .hide-scroll::-webkit-scrollbar {
   display: none;
@@ -30,7 +32,6 @@ body {
   justify-content: end;
   align-items: top;
   backdrop-filter: blur(4px);
-
 }
 /* transition: 10s ease-in-out; */
 /* class for <Transition name="slide-fade" using in <Thetopbar.vue */
@@ -38,7 +39,6 @@ body {
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
   right: 100%;
-
 }
 .slide-fade-leave-active {
   transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
@@ -72,12 +72,13 @@ body {
 }
 
 .slide-right-to-left-enter-from, /* Starting state for entering */
-.slide-right-to-left-leave-to { /* Ending state for leaving */
+.slide-right-to-left-leave-to {
+  /* Ending state for leaving */
   transform: translateX(100%); /* Start off-screen to the right */
 }
 
 .slide-right-to-left-enter-to, /* Ending state for entering */
-.slide-right-to-left-leave-from { /* Starting state for leaving */
+.slide-right-to-left-leave-from {
+  /* Starting state for leaving */
   transform: translateX(0); /* End at its natural position */
 }
-

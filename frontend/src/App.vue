@@ -1,14 +1,19 @@
+<!-- <div class="w-full min-h-screen bg-linear-180 from-indigo-100 to-red-100"> -->
 <template>
-  <!-- <div class="w-full min-h-screen bg-linear-180 from-indigo-100 to-red-100"> -->
-  <div class="w-full min-h-screen sm:mr-8">
-    <header>
-      <TheTopbar />
-    </header>
-    <main class="sm:pl-8 sm:mr-8">
-      <RouterView />
-    </main>
-  </div>
+  <header class="fixed top-0 left-0 right-0 z-1000">
+    <TheTopbar />
+  </header>
+  <main class="inset-0 mt-18 sm:pl-8 sm:mr-8  z-0">
+    <RouterView />
+  </main>
+
 </template>
+<!-- <template>
+  <div class="container">
+    <TheTopbar />
+    <RouterView />
+  </div>
+</template> -->
 
 <script setup>
   import { ref } from 'vue'
