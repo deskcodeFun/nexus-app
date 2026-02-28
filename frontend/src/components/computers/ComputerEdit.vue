@@ -1,9 +1,9 @@
 <template>
   <!-- Header -->
   <BaseHeader title="COMPUTER DETAIL" />
-  <main class="h-[530px] pt-2 bg-white flex flex-row text-blue-900 ">
+  <main class="h-screen pt-2 bg-white flex flex-row text-blue-900 ">
     <!-- 5 section -->
-    <div class="gap-12 sm:flex sm:flex-row">
+    <div class="sm:gap-12 gap-4 flex flex-col h-screen overflow-y-scroll sm:flex-row">
       <!-- show computer image  -->
       <div class="w-fit text-nowrap flex flex-col pb-4 px-4">
         <p class="sm:pb-4 text-lg tracking-wide">Gallery</p>
@@ -28,7 +28,7 @@
         <BaseBox label="Asset Tag" :data=updateData.asset_tag />
       </div>
       <!-- computer spec section -->
-      <div class="flex flex-col pb-4">
+      <div class="w-fit text-nowrap px-4 flex flex-col pb-2">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Specification</p>
         <BaseBox label="Graphic Chipset" :data=updateData.graphic />
         <BaseBox label="Screen Size" :data=updateData.screen_size />
@@ -39,7 +39,7 @@
         <BaseBox label="Bluetooth" :data=updateData.bluetooth />
       </div>
       <!-- can edit computer spec. section -->
-      <div class="flex flex-col pb-4">
+      <div class="w-fit text-nowrap px-4 flex flex-col pb-2">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Upgrade</p>
         <p class="py-2 text-sm text-gray-500">RAM</p>
         <input type="text" v-model="updateData.ram" class="bg-blue-100  p-2" />
@@ -54,7 +54,7 @@
         </select>
       </div>
       <!-- user info section -->
-      <div class="flex flex-col">
+      <div class="w-fit text-nowrap px-4 flex flex-col pb-2">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
         <!-- header label and edit icon -->
         <div class="pb-2">
@@ -64,28 +64,32 @@
           </div>
         </div>
         <!-- Show userDetail -->
-        <div v-if="user_name !== 'FREE'">
-          <p class="bg-blue-100 text-md py-2 px-2 mb-2">{{ user_name }}</p>
-          <p class="text-md text-gray-500">Office</p>
-          <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
-        </div>
-        <div v-else class="bg-blue-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
-        <!-- editUser = true && user_name = true -->
-        <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border-1 border-blue-300 py-2 px-2 mt-4">
-          <p class="pb-2">Update User</p>
-          <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-blue-100 py-2 text-md ">
-            <option :value="0" class="bg-blue-100 ">FREE</option>
-            <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="text-lg bg-blue-100">
-              {{ item.fname + ' ' + item.lname }}
-            </option>
-          </select>
-          <div v-if="editUser && updateData.user_id > '0'">
-            <p class="py-2">User Office</p>
-            <div class="text-md text-blue-900 bg-blue-100 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
-
+        <div class="contain h-[380px]">
+          <div v-if="user_name !== 'FREE'">
+            <p class="bg-blue-100 text-md py-2 px-2 mb-2">{{ user_name }}</p>
+            <p class="text-md text-gray-500">Office</p>
+            <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
           </div>
+          <div v-else class="bg-blue-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
+          <!-- editUser = true && user_name = true -->
+          <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border-1 border-blue-300 py-2 px-2 mt-4">
+            <p class="pb-2">Update User</p>
+            <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-blue-100 py-2 text-md ">
+              <option :value="0" class="bg-blue-100 ">FREE</option>
+              <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id"
+                class="text-lg bg-blue-100">
+                {{ item.fname + ' ' + item.lname }}
+              </option>
+            </select>
+            <div v-if="editUser && updateData.user_id > '0'">
+              <p class="py-2">User Office</p>
+              <div class="text-md text-blue-900 bg-blue-100 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
+
+            </div>
+          </div>
+          <div v-else></div>
+
         </div>
-        <div v-else></div>
 
         <!-- button section -->
         <form @submit.prevent="editSubmit">

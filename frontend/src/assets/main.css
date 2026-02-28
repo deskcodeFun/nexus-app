@@ -3,9 +3,14 @@
 body {
   background: white;
   font-size: 14px;
+  overflow: hidden;
 }
 .hide-scroll::-webkit-scrollbar {
   display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .modal {
