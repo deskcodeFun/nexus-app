@@ -1,58 +1,53 @@
 <template>
   <!-- Header -->
-  <BaseHeader title='COMPUTER DETAIL' />
-  <BaseButttonBack />
-  <!-- show computer image  -->
-  <div v-if="store.computerDetail && store.computerDetail[0].image !== null">
-    <BaseImage :images="store.computerDetail[0].image" />
-  </div>
-  <div v-else class="bg-white px-8 w-full h-100px ">
-    <p class="py-8 px-4 bg-blue-50/20">No Image</p>
-  </div>
-
-  <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
-    <!-- 3 section -->
-    <div class="gap-8 sm:flex sm:flex-row bg-white">
+  <BaseHeader title="COMPUTER DETAIL" />
+  <main class="h-[530px] pt-2 bg-white flex flex-row text-blue-900 ">
+    <!-- 5 section -->
+    <div class="gap-12 sm:flex sm:flex-row">
+      <!-- show computer image  -->
+      <div class="w-fit text-nowrap flex flex-col pb-4 px-4">
+        <p class="sm:pb-4 text-lg tracking-wide">Gallery</p>
+        <div class="w-fit text-nowrap flex flex-col pb-4">
+          <div v-if="store.computerDetail && store.computerDetail[0].image !== null">
+            <BaseImage :images="store.computerDetail[0].image" />
+          </div>
+          <div v-else>
+            <p class="w-[100px] text-lg italic text-gray-400">No Image</p>
+          </div>
+        </div>
+      </div>
       <!-- accounting section -->
-      <div class="w-fit text-nowrap flex flex-col">
-        <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
-        <p class="py-2 text-sm text-gray-500 tracking-widest">Asset Tag</p>
-        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.asset_tag }}</p>
-        <p class="py-2 text-sm text-gray-500 tracking-widest">Serial Number</p>
-        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.serial_tag }}</p>
-        <p class="py-2 text-sm text-gray-500">Brand</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.brand }}</div>
-        <p class="py-2 text-sm text-gray-500">Model</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.model }}</div>
-        <p class="py-2 text-sm text-gray-500">CPU</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.cpu }}</div>
-        <p class="py-2 text-sm text-gray-500">AI Chipset</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.ai }}</div>
-        <p class="py-2 text-sm text-gray-500">Graphic Chipset</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.graphic }}</div>
-        <p class="py-2 text-sm text-gray-500">Screen Size</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.screen_size }}</div>
+      <div class="w-fit text-nowrap px-4 flex flex-col pb-2">
+        <p class="sm:pb-4 text-lg tracking-wide">Asset information</p>
+        <BaseBox label="Asset Tag" :data=updateData.asset_tag />
+        <BaseBox label="S/N" :data=updateData.serial_tag />
+        <BaseBox label="Brand" :data=updateData.brand />
+        <BaseBox label="Model" :data=updateData.model />
+        <BaseBox label="CPU" :data=updateData.cpu />
+        <BaseBox label="AI Chipset" :data=updateData.ai />
+        <BaseBox label="Asset Tag" :data=updateData.asset_tag />
       </div>
       <!-- computer spec section -->
-      <div class="flex flex-col">
-        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
-        <p class="py-2 text-sm text-gray-500">Max Ram</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.max_ram }}"</div>
-        <p class="py-2 text-sm text-gray-500">Hard Disk slot</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.harddisk_slot }}</div>
-        <p class="py-2 text-sm text-gray-500">Lan</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.lan_port }}</div>
-        <p class="py-2 text-sm text-gray-500">Wireless</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.wireless }}</div>
-        <p class="py-2 text-sm text-gray-500">Bluetooth</p>
-        <div class="bg-gray-50 text-md p-1">{{ updateData.bluetooth }}</div>
-        <!-- can edit computer spec. section -->
+      <div class="flex flex-col pb-4">
+        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Specification</p>
+        <BaseBox label="Graphic Chipset" :data=updateData.graphic />
+        <BaseBox label="Screen Size" :data=updateData.screen_size />
+        <BaseBox label="Max Ram" :data=updateData.max_ram />
+        <BaseBox label="Hard Disk slo" :data=updateData.harddisk_slot />
+        <BaseBox label="Lan" :data=updateData.lan_port />
+        <BaseBox label="Wireless" :data=updateData.wireless />
+        <BaseBox label="Bluetooth" :data=updateData.bluetooth />
+      </div>
+      <!-- can edit computer spec. section -->
+      <div class="flex flex-col pb-4">
+        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Upgrade</p>
         <p class="py-2 text-sm text-gray-500">RAM</p>
-        <input type="text" v-model="updateData.ram" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model="updateData.ram" class="bg-blue-100  p-2" />
         <p class="py-2 text-sm text-gray-500">Hard Disk</p>
-        <input type="text" v-model="updateData.harddisk" class="bg-sky-50 text-md p-1" />
+        <input type="text" v-model="updateData.harddisk" class="bg-blue-100 p-2" />
         <p class="py-2 text-sm text-gray-500">Office Name</p>
-        <select name="officeName" id="officeName" v-model.trim="updateData.office_id" class="bg-sky-50 py-2 pr-2">
+        <select name="officeName" id="officeName" v-model.trim="updateData.office_id"
+          class="text-md bg-blue-100 py-2 pl-1 pr-2">
           <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
             {{ office_name.name }}
           </option>
@@ -70,22 +65,25 @@
         </div>
         <!-- Show userDetail -->
         <div v-if="user_name !== 'FREE'">
-          <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</p>
+          <p class="bg-blue-100 text-md py-2 px-2 mb-2">{{ user_name }}</p>
           <p class="text-md text-gray-500">Office</p>
-          <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
+          <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
         </div>
-        <div v-else class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</div>
+        <div v-else class="bg-blue-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
         <!-- editUser = true && user_name = true -->
-        <div v-if="editUser && user_name" class="bg-red-50/50 rounded-lg border-1 border-red-300 py-2 px-2 mt-4">
-          <p class="pb-2">Update Computer User</p>
-          <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-sky-50 py-2 pr-2">
-            <option :value="0" class="bg-sky-50 pr-4">FREE</option>
-            <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="bg-sky-50 pr-4">
+        <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border-1 border-blue-300 py-2 px-2 mt-4">
+          <p class="pb-2">Update User</p>
+          <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-blue-100 py-2 text-md ">
+            <option :value="0" class="bg-blue-100 ">FREE</option>
+            <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="text-lg bg-blue-100">
               {{ item.fname + ' ' + item.lname }}
             </option>
           </select>
-          <p class="py-2">User Office</p>
-          <div class="bg-sky-50 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
+          <div v-if="editUser && updateData.user_id > '0'">
+            <p class="py-2">User Office</p>
+            <div class="text-md text-blue-900 bg-blue-100 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
+
+          </div>
         </div>
         <div v-else></div>
 
@@ -128,8 +126,8 @@
   import { TrashIcon, BookmarkIcon, PencilSquareIcon } from '@heroicons/vue/20/solid'
   import BaseModal from '../BaseModal.vue'
   import BaseHeader from '../BaseHeader.vue'
-  import BaseButttonBack from '../BaseButttonBack.vue'
   import BaseImage from '../BaseImage.vue'
+  import BaseBox from '../BaseBox.vue'
 
   const route = useRoute()
   const router = useRouter()
@@ -243,4 +241,15 @@
   }
 </script>
 
-<style scoped></style>
+
+<style scoped>
+  .label {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.1rem;
+    color: #37383a;
+  }
+
+</style>

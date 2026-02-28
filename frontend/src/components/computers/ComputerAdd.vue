@@ -18,15 +18,9 @@
           <input type="text" v-model.trim="newComputer.model" class="bg-sky-50 text-md p-1" />
           <label for="cpu" class="label">CPU</label>
           <input type="text" v-model.trim="newComputer.cpu" class="bg-sky-50 text-md p-1" />
-          <label for="cpu" class="label">AI Chipset</label>
-          <input type="text" v-model.trim="newComputer.ai" class="bg-sky-50 text-md p-1" />
-          <label for="cpu" class="label">Graphic Chipset</label>
-          <input type="text" v-model.trim="newComputer.graphic" class="bg-sky-50 text-md p-1" />
-          <label for="cpu" class="label">Screen Size</label>
-          <input type="text" v-model.trim="newComputer.screen_size" class="bg-sky-50 text-md p-1" />
         </div>
         <!-- computer spec. section -->
-        <div class="flex flex-col">
+        <div class="w-fit text-nowrap flex flex-col">
           <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
           <label for="Ram" class="label">Ram</label>
           <input type="text" v-model.trim="newComputer.ram" class="bg-sky-50 text-md p-1" />
@@ -40,11 +34,19 @@
           <input type="text" v-model.trim="newComputer.wireless" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Bluetooth</label>
           <input type="text" v-model.trim="newComputer.bluetooth" class="bg-sky-50 text-md p-1" />
-
+        </div>
+        <div class="w-fit pt-11 text-nowrap flex flex-col">
           <label for="harddisk" class="label">Hard disk</label>
           <input type="text" v-model.trim="newComputer.harddisk" class="bg-sky-50 text-md p-1" />
+          <label for="cpu" class="label">AI Chipset</label>
+          <input type="text" v-model.trim="newComputer.ai" class="bg-sky-50 text-md p-1" />
+          <label for="cpu" class="label">Graphic Chipset</label>
+          <input type="text" v-model.trim="newComputer.graphic" class="bg-sky-50 text-md p-1" />
+          <label for="cpu" class="label">Screen Size</label>
+          <input type="text" v-model.trim="newComputer.screen_size" class="bg-sky-50 text-md p-1" />
           <p class="py-2 text-sm text-gray-500">Office Name</p>
-          <select name="officeName" id="officeName" v-model.trim="newComputer.office_id" class="bg-sky-50 py-2 pr-2">
+          <select name="officeName" id="officeName" v-model.trim="newComputer.office_id"
+            class="text-lg bg-blue-100 py-2 px-4">
             <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
               {{ office_name.name }}
             </option>
@@ -111,25 +113,6 @@
     } catch (error) {
       console.error('Can not Add new Computer: ', error)
     } finally {
-      // Object.assign(newComputer, {
-      //   asset_tag: '',
-      //   serial_tag: '',
-      //   brand: '',
-      //   model: '',
-      //   cpu: '',
-      //   ai: '',
-      //   graphic: '',
-      //   screen_size: '',
-      //   max_ram: '',
-      //   harddisk_slot: '',
-      //   lan_port: '',
-      //   wireless: '',
-      //   bluetooth: '',
-      //   ram: '',
-      //   harddisk: '',
-      //   user_id: null,
-      //   office_id: '',
-      // })
       router.push('/assets')
     }
   }
@@ -142,6 +125,14 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     letter-spacing: 0.1rem;
-    color: #6b7280;
+    color: #37383a;
+  }
+
+  input {
+    font-size: large;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    background-color: #dbeafe;
+    border-radius: 8px;
   }
 </style>

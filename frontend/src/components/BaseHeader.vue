@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <div class="flex flex-col bg-white pt-8 pb-8 px-2">
-      <p class="text-2xl  tracking-widest  text-blue-900">{{ title }}</p>
+  <div class="flex flex-row items-baseline py-2 ">
+    <BaseButttonBack />
+    <div class="px-2">
+      <p class="text-lg  tracking-widest  text-blue-900">{{ title }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
+  import BaseButttonBack from './BaseButttonBack.vue';
   defineProps({
     title: String
   })

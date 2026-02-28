@@ -1,9 +1,9 @@
 <template>
   <div class="bg-white ">
     <button @click="router.back()"
-      class="flex items-center justify-center border-1 border-gray-100 hover:bg-gray-300 hover:scale-110 hover:text-blue-900 py-1 px-4 rounded-xl">
-      <ChevronDoubleLeftIcon class="h-4 w-4 mr-1" />
-      <span> Back </span>
+      class="h-8 w-8 flex items-center justify-center text-blue-900 font-bold bg-blue-100 hover:bg-blue-900 hover:text-blue-100 rounded-full">
+      <ChevronDoubleLeftIcon class="h-5 w-5" />
+      <!-- <span> Back </span> -->
     </button>
   </div>
 </template>

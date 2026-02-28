@@ -2,9 +2,9 @@
   <!-- Header -->
   <BaseHeader title="ASSETS ACCOUNTING" />
 
-  <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
+  <div class="p-1 grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
     <div v-for="option in options" :key="option.id" @click="selectCard(option.id)" :value="option.id" :class="[
-      'border-2 rounded-lg p-4 cursor-pointer transition-all',
+      'border-2 rounded-lg p-2 cursor-pointer transition-all',
       selectedId === option.id
         ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
         : 'border-gray-200 hover:border-blue-300'
@@ -15,7 +15,7 @@
 
   </div>
 
-  <main class="bg-white pt-4">
+  <main class="bg-white ">
     <ComputerView v-if="selectedId == '1'"></ComputerView>
     <PrinterView v-if="selectedId == '2'"></PrinterView>
     <OtherView v-if="selectedId == '3'"></OtherView>

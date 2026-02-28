@@ -15,7 +15,7 @@
     </div>
   </div>
   <!-- show data -->
-  <main class="bg-white px-2">
+  <main class="w-full min-h-screen  px-2">
     <component :is="activeComponent"></component>
   </main>
 </template>
