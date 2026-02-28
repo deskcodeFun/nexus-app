@@ -3,7 +3,6 @@
 body {
   background: white;
   font-size: 14px;
-  overflow: hidden;
 }
 .hide-scroll::-webkit-scrollbar {
   display: none;

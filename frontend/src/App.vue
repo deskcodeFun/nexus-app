@@ -3,47 +3,42 @@
   <header class="fixed top-0 left-0 right-0 z-1000">
     <TheTopbar />
   </header>
-  <main class="inset-0 mt-18 sm:pl-8 sm:mr-8  z-0">
+  <main class="inset-0 mt-18 sm:pl-8 sm:mr-8 z-0">
     <RouterView />
   </main>
-
 </template>
-<!-- <template>
-  <div class="container">
-    <TheTopbar />
-    <RouterView />
-  </div>
-</template> -->
 
 <script setup>
   import { ref } from 'vue'
   import { RouterView } from 'vue-router'
   import TheTopbar from '@/components/TheTopbar.vue'
-  import { supabase } from './lib/supabaseClient.js';
-  const isConnected = ref(false);
-  const error = ref(null);
+  import { supabase } from './lib/supabaseClient.js'
+  const isConnected = ref(false)
+  const error = ref(null)
 
   async function checkConnection() {
     try {
       // Attempt a simple, lightweight request, like checking the current session
-      const { data: { session }, error: authError } = await supabase.auth.getSession();
+      const {
+        data: { session },
+        error: authError,
+      } = await supabase.auth.getSession()
       if (authError) {
-        throw authError;
+        throw authError
       }
 
       // If the request succeeds without throwing an error, the connection is working
-      isConnected.value = true;
-      console.log('Supabase connection successful. User session:', session);
-
+      isConnected.value = true
+      console.log('Supabase connection successful. User session:', session)
     } catch (err) {
       // This block catches network errors or auth errors
-      isConnected.value = false;
-      error.value = err.message;
-      console.error('Supabase connection failed:', err.message);
+      isConnected.value = false
+      error.value = err.message
+      console.error('Supabase connection failed:', err.message)
       // Common errors might be "connection refused" or "network request failed"
     }
   }
 
   // Check connection when the component mounts
-  checkConnection();
+  checkConnection()
 </script>

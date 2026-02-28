@@ -1,6 +1,6 @@
 <template>
   <BaseHeader title='ADD NEW COMPUTER' />
-  <BaseButttonBack />
+
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <div class="gap-16 sm:flex sm:flex-row bg-white">
       <!-- 3 section -->
@@ -79,7 +79,6 @@
   import { useComputerStore } from '@/stores/computerData'
   import { useOfficeNameStore } from '@/stores/officeData'
 
-  import BaseButttonBack from '../BaseButttonBack.vue'
   import BaseHeader from '../BaseHeader.vue'
 
   const router = useRouter()
