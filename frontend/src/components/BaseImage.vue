@@ -33,7 +33,7 @@
 <style scoped>
   .image-container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column;*/
     flex-wrap: wrap;
     /* padding-left: 8px; */
     background: white;

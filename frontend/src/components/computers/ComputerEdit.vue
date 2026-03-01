@@ -1,13 +1,15 @@
 <template>
   <!-- Header -->
   <BaseHeader title="COMPUTER DETAIL" />
-  <main class="h-screen pt-2 bg-white flex flex-row text-blue-900 ">
+  <main class="h-screen pt-4 bg-white  text-blue-900 ">
     <!-- 5 section -->
-    <div class="sm:gap-12 gap-4 flex flex-col h-screen overflow-y-scroll sm:flex-row">
+    <div class="sm:gap-12  flex sm:items-baseline flex-col sm:flex-row  h-screen overflow-scroll xl:overflow-hidden ">
       <!-- show computer image  -->
-      <div class="w-fit text-nowrap flex flex-col pb-4 px-4">
-        <p class="sm:pb-4 text-lg tracking-wide">Gallery</p>
-        <div class="w-fit text-nowrap flex flex-col pb-4">
+      <div class="pb-4 px-4 flex-row sm:flex-col ">
+        <p class="border-b border-gray-300   sm:border-0 sm:pb-4 text-lg tracking-wide ">
+          Gallery
+        </p>
+        <div class="w-full flex flex-col text-nowrap mx-auto ">
           <div v-if="store.computerDetail && store.computerDetail[0].image !== null">
             <BaseImage :images="store.computerDetail[0].image" />
           </div>
@@ -17,77 +19,89 @@
         </div>
       </div>
       <!-- accounting section -->
-      <div class="w-fit text-nowrap px-4 flex flex-col pb-2">
-        <p class="sm:pb-4 text-lg tracking-wide">Asset information</p>
-        <BaseBox label="Asset Tag" :data=updateData.asset_tag />
-        <BaseBox label="S/N" :data=updateData.serial_tag />
-        <BaseBox label="Brand" :data=updateData.brand />
-        <BaseBox label="Model" :data=updateData.model />
-        <BaseBox label="CPU" :data=updateData.cpu />
-        <BaseBox label="AI Chipset" :data=updateData.ai />
-        <BaseBox label="Asset Tag" :data=updateData.asset_tag />
+      <div class="text-nowrap px-4 flex flex-col pb-2">
+        <p class="border-b border-gray-300  sm:border-0 sm:pb-4 text-lg tracking-wide">Asset information</p>
+        <div class="pl-4 pt-2 sm:pt-0 sm:pl-0">
+          <BaseBox label="Asset Tag" :data=updateData.asset_tag />
+          <BaseBox label="S/N" :data=updateData.serial_tag />
+          <BaseBox label="Brand" :data=updateData.brand />
+          <BaseBox label="Model" :data=updateData.model />
+          <BaseBox label="CPU" :data=updateData.cpu />
+          <BaseBox label="AI Chipset" :data=updateData.ai />
+          <BaseBox label="Asset Tag" :data=updateData.asset_tag />
+
+        </div>
       </div>
       <!-- computer spec section -->
-      <div class="w-fit text-nowrap px-4 flex flex-col pb-2">
-        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Specification</p>
-        <BaseBox label="Graphic Chipset" :data=updateData.graphic />
-        <BaseBox label="Screen Size" :data=updateData.screen_size />
-        <BaseBox label="Max Ram" :data=updateData.max_ram />
-        <BaseBox label="Hard Disk slo" :data=updateData.harddisk_slot />
-        <BaseBox label="Lan" :data=updateData.lan_port />
-        <BaseBox label="Wireless" :data=updateData.wireless />
-        <BaseBox label="Bluetooth" :data=updateData.bluetooth />
+      <div class="text-nowrap px-4 flex flex-col pb-2">
+        <p class="border-b border-gray-300  sm:border-0  sm:pb-4 text-lg tracking-wide">Specification</p>
+        <div class="pl-4 sm:pl-0 pt-2 sm:pt-0 ">
+          <BaseBox label="Graphic Chipset" :data=updateData.graphic />
+          <BaseBox label="Screen Size" :data=updateData.screen_size />
+          <BaseBox label="Max Ram" :data=updateData.max_ram />
+          <BaseBox label="Hard Disk slo" :data=updateData.harddisk_slot />
+          <BaseBox label="Lan" :data=updateData.lan_port />
+          <BaseBox label="Wireless" :data=updateData.wireless />
+          <BaseBox label="Bluetooth" :data=updateData.bluetooth />
+        </div>
+
       </div>
       <!-- can edit computer spec. section -->
-      <div class="w-fit text-nowrap px-4 flex flex-col pb-2">
-        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Upgrade</p>
-        <p class="py-2 text-sm text-gray-500">RAM</p>
-        <input type="text" v-model="updateData.ram" class="bg-blue-100  p-2" />
-        <p class="py-2 text-sm text-gray-500">Hard Disk</p>
-        <input type="text" v-model="updateData.harddisk" class="bg-blue-100 p-2" />
-        <p class="py-2 text-sm text-gray-500">Office Name</p>
-        <select name="officeName" id="officeName" v-model.trim="updateData.office_id"
-          class="text-md bg-blue-100 py-2 pl-1 pr-2">
-          <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
-            {{ office_name.name }}
-          </option>
-        </select>
+      <div class=" text-nowrap px-4 flex flex-col pb-2">
+        <p class="border-b border-gray-300  sm:border-0 sm:pb-4 text-lg tracking-wide">Upgrade</p>
+        <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
+          <p class="py-2 text-sm text-gray-500">RAM</p>
+          <input type="text" v-model="updateData.ram" class="bg-blue-100  p-2" />
+          <p class="py-2 text-sm text-gray-500">Hard Disk</p>
+          <input type="text" v-model="updateData.harddisk" class="bg-blue-100 p-2" />
+          <p class="py-2 text-sm text-gray-500">Office Name</p>
+          <select name="officeName" id="officeName" v-model.trim="updateData.office_id"
+            class="text-md bg-blue-100 py-2 pl-1 pr-2">
+            <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
+              {{ office_name.name }}
+            </option>
+          </select>
+
+        </div>
       </div>
       <!-- user info section -->
-      <div class="w-fit text-nowrap px-4 flex flex-col pb-2">
-        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
+      <div class=" text-nowrap px-4 flex flex-col pb-2">
+        <p class="pt-4 sm:pt-0 border-b border-gray-300  sm:border-0  sm:pb-4 text-lg tracking-wide">User Information
+        </p>
         <!-- header label and edit icon -->
-        <div class="pb-2">
-          <div class="flex fles-row justify-between">
-            <p>{{ userNameLabel }}</p>
-            <PencilSquareIcon @click="toggleUser" class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800" />
-          </div>
-        </div>
-        <!-- Show userDetail -->
-        <div class="contain h-[380px]">
-          <div v-if="user_name !== 'FREE'">
-            <p class="bg-blue-100 text-md py-2 px-2 mb-2">{{ user_name }}</p>
-            <p class="text-md text-gray-500">Office</p>
-            <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
-          </div>
-          <div v-else class="bg-blue-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
-          <!-- editUser = true && user_name = true -->
-          <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border-1 border-blue-300 py-2 px-2 mt-4">
-            <p class="pb-2">Update User</p>
-            <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-blue-100 py-2 text-md ">
-              <option :value="0" class="bg-blue-100 ">FREE</option>
-              <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id"
-                class="text-lg bg-blue-100">
-                {{ item.fname + ' ' + item.lname }}
-              </option>
-            </select>
-            <div v-if="editUser && updateData.user_id > '0'">
-              <p class="py-2">User Office</p>
-              <div class="text-md text-blue-900 bg-blue-100 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
-
+        <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
+          <div class="pb-2">
+            <div class="flex fles-row justify-between">
+              <p>{{ userNameLabel }}</p>
+              <PencilSquareIcon @click="toggleUser" class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800" />
             </div>
           </div>
-          <div v-else></div>
+          <!-- Show userDetail -->
+          <div class="contain h-[380px]">
+            <div v-if="user_name !== 'FREE'">
+              <p class="bg-blue-100 text-md py-2 px-2 mb-2">{{ user_name }}</p>
+              <p class="text-md text-gray-500">Office</p>
+              <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
+            </div>
+            <div v-else class="bg-blue-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
+            <!-- editUser = true && user_name = true -->
+            <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border-1 border-blue-300 py-2 px-2 mt-4">
+              <p class="pb-2">Update User</p>
+              <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-blue-100 py-2 text-md ">
+                <option :value="0" class="bg-blue-100 ">FREE</option>
+                <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id"
+                  class="text-lg bg-blue-100">
+                  {{ item.fname + ' ' + item.lname }}
+                </option>
+              </select>
+              <div v-if="editUser && updateData.user_id > '0'">
+                <p class="py-2">User Office</p>
+                <div class="text-md text-blue-900 bg-blue-100 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
+
+              </div>
+            </div>
+            <div v-else></div>
+          </div>
 
         </div>
 
