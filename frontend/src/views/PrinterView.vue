@@ -15,13 +15,18 @@
     </div>
   </div>
   <!-- show data -->
-  <div>
-    <component :is="activeComponent"></component>
-  </div>
+  <main class="w-full min-h-screen  px-2">
+    <div v-if="isMobile">
+      <PrinterCard />
+    </div>
+    <div v-else>
+      <PrinterTable />
+    </div>
+  </main>
 </template>
 
 <script setup>
-  import { computed } from 'vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
 
   import { usePrinterStore } from '@/stores/printerData'
 
@@ -30,12 +35,25 @@
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
   import { PlusIcon } from '@heroicons/vue/24/outline'
   // detect screen
-  import { useMonitorSize } from '@/composables/DeviceScreen'
+  // import { useMonitorSize } from '@/composables/DeviceScreen'
 
   const printerStores = usePrinterStore()
   printerStores.getPrinterByOffice('0')
 
-  const sizes = useMonitorSize()
+
+  const isMobile = ref(false)
+  const breakpoint = 768
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth <= breakpoint
+  }
+  onMounted(() => {
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+  })
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkMobile)
+  })
 
   function handleChoice(value) {
     console.log('select choice in ComputerView', value)
@@ -47,9 +65,6 @@
       printerStores.getPrinterByOffice('0')
     }
   }
-  const activeComponent = computed(() => {
-    return sizes.isMobile.value ? PrinterCard : PrinterTable
-  })
 </script>
 
 <style lang="scss" scoped></style>

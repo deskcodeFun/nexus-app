@@ -16,25 +16,43 @@
   </div>
   <!-- show data -->
   <main class="w-full min-h-screen  px-2">
-    <component :is="activeComponent"></component>
+    <div v-if="isMobile">
+      <ComputerCard />
+    </div>
+    <div v-else>
+      <ComputerTable />
+    </div>
   </main>
 </template>
 
 <script setup>
-  import { computed } from 'vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
 
   import { useComputerStore } from '@/stores/computerData'
 
   import ComputerCard from '@/components/computers/ComputerCard.vue'
   import ComputerTable from '@/components/computers/ComputerTable.vue'
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
-  import { useMonitorSize } from '@/composables/DeviceScreen'
+  // import { useMonitorSize } from '@/composables/DeviceScreen'
   import { PlusIcon } from '@heroicons/vue/20/solid'
 
   const computerStores = useComputerStore()
   computerStores.getComputerByOffice('0')
 
-  const sizes = useMonitorSize()
+
+  const isMobile = ref(false)
+  const breakpoint = 768
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth <= breakpoint
+  }
+  onMounted(() => {
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+
+  })
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkMobile)
+  })
 
   function handleChoice(value) {
     console.log('select choice in ComputerView', value)
@@ -46,7 +64,4 @@
       computerStores.getComputerByOffice('0')
     }
   }
-  const activeComponent = computed(() => {
-    return sizes.isMobile.value ? ComputerCard : ComputerTable
-  })
 </script>

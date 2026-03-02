@@ -39,7 +39,8 @@
 </script>
 
 <template>
-  <div class="w-full z-2000 fixed flex sm:flex-row justify-between py-4 sm:pr-8 bg-[#dfc2b5]/40">
+  <div
+    class="w-full z-2000 fixed flex sm:flex-row justify-between py-4  pr-0 sm:pr-8 bg-[#dfc2b5]/40 overflow-y-hidden">
     <!-- Logo -->
     <p class="pb-2 font-semibold pl-2 sm:pl-8 text-2xl text-blue-900 text-shadow-lg">
       Ne<span class="text-red-800">x</span>us Service

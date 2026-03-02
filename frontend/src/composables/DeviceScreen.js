@@ -12,7 +12,7 @@ export function useMonitorSize() {
     sizes.isMobile = isMobile()
   }
   const isMobile = () => {
-    return window.innerWidth <= 1280 ? true : false
+    return window.innerWidth <= 1024 ? true : false
   }
   onMounted(() => {
     window.addEventListener('resize', browserResized)
