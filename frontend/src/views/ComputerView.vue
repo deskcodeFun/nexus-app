@@ -15,8 +15,8 @@
     </div>
   </div>
   <!-- show data -->
-  <main class="w-full min-h-screen  px-2">
-    <div v-if="isMobile">
+  <main class="w-full  px-2 h-[768px] overflow-visible overflow-y-scroll">
+    <div v-if="isMobile" class="">
       <ComputerCard />
     </div>
     <div v-else>

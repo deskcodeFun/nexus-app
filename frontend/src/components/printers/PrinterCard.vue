@@ -1,19 +1,18 @@
 <template>
-  <div class="flex justify-center flex-row flex-wrap ">
+  <div class="h-[630px]  flex flex-row flex-wrap justify-around overflow-hidden overflow-y-scroll">
     <div v-for="item in printerStore.printer" :key="item.id" @click="router.push(`/editPrinter/${item.id}`)"
-      class="sm:flex-row sm:flex-wrap justify-center">
+      class="m-4">
       <!-- each card layout -->
       <BaseCard>
         <table
           class="[&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
           <tbody>
-            <tr>
+            <!-- <tr>
               <th>ID</th>
-              <!-- <td>{{ currentUser.fname + ' ' + currentUser.lname }}</td> -->
               <td>
                 {{ item.id }}
               </td>
-            </tr>
+            </tr> -->
             <tr>
               <th>Asset Tag</th>
               <!-- <td>{{ props.currentAsset.fname + ' ' + props.currentAsset.lname }}</td> -->

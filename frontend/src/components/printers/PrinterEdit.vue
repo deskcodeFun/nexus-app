@@ -1,93 +1,101 @@
 <template>
   <!-- Header -->
-  <BaseHeader title='PRINTER DETAIL' />
-  <BaseButttonBack />
-  <!-- show computer image  -->
-  <div v-if="printerStore.printerDetail && printerStore.printerDetail[0].image !== null">
-    <BaseImage :images="printerStore.printerDetail[0].image" />
-  </div>
-  <div v-else class="bg-white px-8 w-full h-100px">
-    <p class="py-8 px-4 bg-blue-50/20">No Image</p>
-  </div>
-
-  <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
-    <!-- accounting section -->
-    <div class="w-fit text-nowrap flex flex-col">
-      <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Accounting Information</p>
-      <label for="asset_tag" class="label">Asset Tag</label>
-      <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.asset_tag }}</p>
-      <label for="asset-tag" class="label">Serial Tag</label>
-      <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.serial_tag }}</p>
-      <label for="asset-tag" class="label">Brand</label>
-      <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.brand }}</p>
-      <label for="asset-tag" class="label">Model</label>
-      <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.model }}</p>
-      <label for="asset-tag" class="label">Black Cartridge</label>
-      <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.black_cartridge }}</p>
-      <label for="asset-tag" class="label">Coler Cartridge</label>
-      <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.color_cartridge }}</p>
-      <p class="py-2 text-sm text-gray-500">Office Name</p>
-      <select name="officeName" id="officeName" v-model.trim="updateData.office_id" class="bg-sky-50 py-2 pr-2">
-        <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
-          {{ office_name.name }}
-        </option>
-      </select>
-    </div>
-
-    <!-- user info section -->
-    <div class="flex flex-col">
-      <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
-      <!-- header label and edit icon -->
-      <div class="pb-2">
-        <div class="flex fles-row justify-between">
-          <p>{{ userNameLabel }}</p>
-          <PencilSquareIcon @click="toggleUser" class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800" />
+  <BaseHeader title="PRINTER DETAIL" />
+  <main class="h-screen pt-4 bg-white  text-blue-900 ">
+    <!-- 5 section  -->
+    <div class="sm:gap-12 flex sm:items-baseline flex-col sm:flex-row h-screen overflow-scroll xl:overflow-hidden">
+      <!-- show printer image -->
+      <div class="pb-4 px-4 flex-row sm:flex-col">
+        <p class="border-b border-gray-300 sm:border-0 sm:pb-4 text-lg tracking-wide ">
+          Gallery
+        </p>
+        <div class="w-full flex flex-col text-nowrap mx-auto">
+          <div v-if="printerStore.printerDetail && printerStore.printerDetail[0].image !== null">
+            <BaseImage :images="printerStore.printerDetail[0].image" />
+          </div>
+          <div v-else>
+            <p class="w-[100px] text-lg italic text-gray-400">No Image</p>
+          </div>
         </div>
       </div>
-      <!-- show user detail -->
-      <div v-if="user_name !== 'FREE'">
-        <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</p>
-        <p class="text-md text-gray-500">Office</p>
-        <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
-      </div>
-      <div v-else class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</div>
-      <!-- editUser = true && user_name = true -->
-      <div v-if="editUser && user_name" class="bg-red-50/50 rounded-lg border-1 border-red-300 py-2 px-2 mt-4">
-        <p class="pb-2">Update Printer User</p>
-        <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-sky-50 py-2 pr-2">
-          <option :value="0" class="bg-sky-50 pr-4">FREE</option>
-          <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="bg-sky-50 pr-4">
-            {{ item.fname + ' ' + item.lname }}
+      <!-- accounting section -->
+      <div class="w-fit text-nowrap flex flex-col">
+        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Accounting Information</p>
+        <label for="asset_tag" class="label">Asset Tag</label>
+        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.asset_tag }}</p>
+        <label for="asset-tag" class="label">Serial Tag</label>
+        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.serial_tag }}</p>
+        <label for="asset-tag" class="label">Brand</label>
+        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.brand }}</p>
+        <label for="asset-tag" class="label">Model</label>
+        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.model }}</p>
+        <label for="asset-tag" class="label">Black Cartridge</label>
+        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.black_cartridge }}</p>
+        <label for="asset-tag" class="label">Coler Cartridge</label>
+        <p class="bg-gray-50 text-md p-1 pr-4">{{ updateData.color_cartridge }}</p>
+        <p class="py-2 text-sm text-gray-500">Office Name</p>
+        <select name="officeName" id="officeName" v-model.trim="updateData.office_id" class="bg-sky-50 py-2 pr-2">
+          <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
+            {{ office_name.name }}
           </option>
         </select>
-        <p class="py-2">User Office</p>
-        <div class="bg-sky-50 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
       </div>
-      <div v-else></div>
 
-      <!-- button section -->
-      <form @submit.prevent="editSubmit">
-        <!-- Show button -->
-        <div class="flex flex-row justify-between gap-24">
-          <button
-            class="flex items-center justify-center border-1 bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
-            type="button" @click="toggleModal">
-            <TrashIcon class="h-4 w-4 mr-2" /> Delete
-          </button>
-          <!-- <BaseButttonBack /> -->
-          <button
-            class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
-            type="submit">
-            <BookmarkIcon class="h-4 w-4 mr-2" />
-            <span> Save </span>
-          </button>
-
-          <BaseModal :modalActive="modalActive" title="Delete" @save-data="deleteAssets(paramID)"
-            @close-modal="modalActive = false">
-            <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
-          </BaseModal>
+      <!-- user info section -->
+      <div class="flex flex-col">
+        <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
+        <!-- header label and edit icon -->
+        <div class="pb-2">
+          <div class="flex fles-row justify-between">
+            <p>{{ userNameLabel }}</p>
+            <PencilSquareIcon @click="toggleUser" class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800" />
+          </div>
         </div>
-      </form>
+        <!-- show user detail -->
+        <div v-if="user_name !== 'FREE'">
+          <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</p>
+          <p class="text-md text-gray-500">Office</p>
+          <p class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
+        </div>
+        <div v-else class="bg-sky-50 text-md py-2 px-1 mb-2">{{ user_name }}</div>
+        <!-- editUser = true && user_name = true -->
+        <div v-if="editUser && user_name" class="bg-red-50/50 rounded-lg border-1 border-red-300 py-2 px-2 mt-4">
+          <p class="pb-2">Update Printer User</p>
+          <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-sky-50 py-2 pr-2">
+            <option :value="0" class="bg-sky-50 pr-4">FREE</option>
+            <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id" class="bg-sky-50 pr-4">
+              {{ item.fname + ' ' + item.lname }}
+            </option>
+          </select>
+          <p class="py-2">User Office</p>
+          <div class="bg-sky-50 py-2 px-1 mb-2">{{ new_officeName || ' - ' }}</div>
+        </div>
+        <div v-else></div>
+
+        <!-- button section -->
+        <form @submit.prevent="editSubmit">
+          <!-- Show button -->
+          <div class="flex flex-row justify-between gap-24">
+            <button
+              class="flex items-center justify-center border-1 bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
+              type="button" @click="toggleModal">
+              <TrashIcon class="h-4 w-4 mr-2" /> Delete
+            </button>
+            <!-- <BaseButttonBack /> -->
+            <button
+              class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+              type="submit">
+              <BookmarkIcon class="h-4 w-4 mr-2" />
+              <span> Save </span>
+            </button>
+
+            <BaseModal :modalActive="modalActive" title="Delete" @save-data="deleteAssets(paramID)"
+              @close-modal="modalActive = false">
+              <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
+            </BaseModal>
+          </div>
+        </form>
+      </div>
     </div>
   </main>
 </template>
@@ -99,7 +107,7 @@
 
   import { TrashIcon, BookmarkIcon, PencilSquareIcon } from '@heroicons/vue/20/solid'
   import BaseModal from '../BaseModal.vue'
-  import BaseButttonBack from '../BaseButttonBack.vue'
+
   import BaseHeader from '../BaseHeader.vue'
   import BaseImage from '../BaseImage.vue'
   import { useOfficeNameStore } from '@/stores/officeData'

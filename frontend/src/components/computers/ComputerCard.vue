@@ -1,6 +1,7 @@
 <template>
-  <div class="h-[630px]  flex flex-row flex-wrap justify-around overflow-hidden overflow-y-scroll">
-    <div v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)" class="m-4">
+  <!--h-[630px]  -->
+  <div class="flex flex-row flex-wrap justify-start-end ">
+    <div v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)" class="mx-4">
       <!-- each card layout -->
       <BaseCard>
         <!-- show data in each card -->
