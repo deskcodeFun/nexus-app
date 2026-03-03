@@ -1,5 +1,4 @@
 <template>
-  <!-- <div v-if="computer.isLoading" class="text-green-600 text-2xl text-center">Loading...</div> -->
   <!-- sub menu -->
   <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2">
     <BaseOfficeDrop @select-option="handleChoice" />
@@ -15,8 +14,8 @@
     </div>
   </div>
   <!-- show data -->
-  <main class="w-full  px-2 h-[768px] overflow-visible overflow-y-scroll">
-    <div v-if="isMobile" class="">
+  <main class="w-full h-full px-2 ">
+    <div v-if="isMobile">
       <ComputerCard />
     </div>
     <div v-else>
@@ -41,7 +40,7 @@
 
 
   const isMobile = ref(false)
-  const breakpoint = 768
+  const breakpoint = 1024
   const checkMobile = () => {
     isMobile.value = window.innerWidth <= breakpoint
   }
