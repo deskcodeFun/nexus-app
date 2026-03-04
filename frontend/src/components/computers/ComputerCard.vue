@@ -1,12 +1,12 @@
 <template>
   <!--h-[630px]  -->
-  <div class="h-[630px] flex flex-row flex-wrap justify-start-end  overflow-y-auto">
+  <div class="h-full max-h-100 flex flex-row flex-wrap justify-start-end  overflow-y-auto">
     <div v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)">
       <!-- each card layout -->
       <BaseCard>
         <!-- show data in each card -->
         <table
-          class="table-auto [&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
+          class="table-auto h-fit w-full [&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
           <tbody>
             <tr>
               <th>ID</th>

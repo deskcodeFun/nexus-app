@@ -1,11 +1,10 @@
 <template>
-  <div class="h-[630px]  flex flex-row flex-wrap justify-around overflow-hidden overflow-y-scroll">
-    <div v-for="item in printerStore.printer" :key="item.id" @click="router.push(`/editPrinter/${item.id}`)"
-      class="m-4">
+  <div class="h-full max-h-100 flex flex-row flex-wrap justify-begin-end overflow-hidden overflow-y-scroll">
+    <div v-for="item in printerStore.printer" :key="item.id" @click="router.push(`/editPrinter/${item.id}`)">
       <!-- each card layout -->
       <BaseCard>
         <table
-          class="[&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
+          class="table-auto h-fit w-full [&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
           <tbody>
             <!-- <tr>
               <th>ID</th>

@@ -1,6 +1,6 @@
 <template>
   <!-- show data -->
-  <div class="h-[430px] flex justify-center overflow-y-scroll overflow-x-hidden">
+  <div class="h-full max-h-150 flex justify-center overflow-y-scroll overflow-x-hidden">
     <table
       class="table-auto h-fit w-full  [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline  [&_td]:text-blue-900 [&_td]:py-3 [&_td]:px-4 [&_td]:border-b [&_td]:border-slate-300">
       <thead class="table-header-group sticky top-0">
