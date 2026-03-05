@@ -1,6 +1,6 @@
 <template>
   <!-- show data h-[430px] -->
-  <div class="h-full max-h-150 flex justify-center overflow-y-scroll overflow-x-hidden">
+  <div class="h-[clamp(100px,70vh,630px] flex justify-center overflow-y-scroll overflow-x-hidden">
     <table
       class="table-auto h-fit w-full [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline  [&_td]:text-blue-900 [&_td]:py-3 [&_td]:px-4 [&_td]:border-b [&_td]:border-slate-300">
       <!-- Table Header -->
@@ -37,7 +37,15 @@
       </tbody>
     </table>
   </div>
-  <p class="flex flex-col text-wrap">{{ store.asset }} </p>
+  <h2>Asset specification</h2>
+  <div v-for="(item, index) in store.asset" :key="index">
+    <p>{{ item.asset_tag }}</p>
+    <div v-for="(data, label) in item.spec" :key="label" class="flex flex-row ">
+      <p class="px-4">{{ label }}</p>
+      <div>{{ data }}</div>
+    </div>
+  </div>
+
 
 </template>
 
@@ -45,9 +53,18 @@
 
   import { useRouter } from 'vue-router'
   import { useAssetStore } from '@/stores/assetsData';
+  import { computed } from 'vue';
 
   const router = useRouter()
   const store = useAssetStore()
+  store.getAssetByOffice('0')
 
+
+  // label
+  const itemLabel = computed(() => {
+    return Object.keys(store.asset[0].spec)[1]
+  })
+  console.log('ITEM label is: ', itemLabel)
+  // data
 
 </script>

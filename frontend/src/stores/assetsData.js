@@ -17,7 +17,6 @@ export const useAssetStore = defineStore('useAssetStore', () => {
           .eq('office_id', officeID)
           .order('id')
         asset.value = data
-
         if (error) throw error
       } catch (error) {
         console.error('Error filter asstet by office', error)
@@ -60,6 +59,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
         isLoading.value = false
       }
     }
+    console.log('Data getAssetDetail :', assetDetail)
   }
 
   async function addComputer(newComputer) {
@@ -105,6 +105,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
   }
 
   getAssetByOffice('0')
+  getAssetDetail('1')
 
   return {
     asset,
