@@ -1,6 +1,6 @@
 <template>
   <!-- Header -->
-  <BaseHeader title="COMPUTER DETAIL" />
+  <BaseHeader title="ASSET DETAIL" />
   <main class="h-screen pt-4 bg-white  text-blue-900 ">
     <!-- 5 section -->
     <div class="sm:gap-12  flex sm:items-baseline flex-col sm:flex-row  h-screen overflow-scroll xl:overflow-hidden ">

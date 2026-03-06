@@ -1,52 +1,69 @@
 <template>
   <!-- Header -->
   <BaseHeader title="ASSETS ACCOUNTING" />
-
-  <div class="p-1 grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
-    <div v-for="option in options" :key="option.id" @click="selectCard(option.id)" :value="option.id" :class="[
-      'border-2 rounded-lg p-2 cursor-pointer transition-all',
-      selectedId === option.id
-        ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
-        : 'border-gray-200 hover:border-blue-300'
-    ]">
-      <h3 class="font-bold text-lg">{{ option.title }}</h3>
-      <p class="text-gray-600">{{ option.description }}</p>
+  <!-- Sub Menu -->
+  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide px-2">
+    <BaseOfficeDrop @select-option="handleChoice" />
+    <!-- Add new user button -->
+    <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
+      <RouterLink
+        class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
+        to="/addEmployee">
+        <div class="flex flex-row">
+          <PlusIcon class="h-6 w-6" />
+          <p>Add Asset</p>
+        </div>
+      </RouterLink>
     </div>
-
   </div>
-
-  <main class="bg-white ">
-    <ComputerView v-if="selectedId == '1'"></ComputerView>
-    <PrinterView v-if="selectedId == '2'"></PrinterView>
-    <OtherView v-if="selectedId == '3'"></OtherView>
+  <!-- show data -->
+  <main class=" px-2 ">
+    <div v-if="isMobile">
+      <AssetCard />
+    </div>
+    <div v-else>
+      <AssetTable />
+    </div>
   </main>
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue'
-  import ComputerView from './ComputerView.vue'
-  import PrinterView from './PrinterView.vue'
+  import { ref, onMounted, onUnmounted } from 'vue';
   import BaseHeader from '@/components/BaseHeader.vue'
-  import OtherView from './OtherView.vue'
+  import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue';
+  import { PlusIcon } from '@heroicons/vue/20/solid'
 
+  import AssetTable from '@/components/assets/AssetTable.vue';
+  import AssetCard from '@/components/assets/AssetCard.vue';
+  import { useAssetStore } from '@/stores/assetsData';
 
-  // const computer = ref(null)
+  const assetStore = useAssetStore()
+  assetStore.getAssetByOffice('0')
 
+  // detect screen
+  const isMobile = ref(false)
+  const breakpoint = 1024
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth <= breakpoint
+  }
+
+  // select dropdown BU
+  function handleChoice(value) {
+    checkMobile()
+    if (value !== 0 && value !== null) {
+      assetStore.getAssetByOffice(value)
+    }
+    if (value == 0 || value == null) {
+      assetStore.getAssetByOffice('0')
+    }
+  }
   onMounted(() => {
-    selectedId.value = 1;
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
   })
-  // replace button with selected card
-  const options = ref([
-    { id: 1, title: 'Computer', description: 'NoteBook, PC, All-in-One' },
-    { id: 2, title: 'Printer', description: 'inkjet, laser, All-in-One printer' },
-    { id: 3, title: 'Other', description: 'Network Device, Spare Part, Acessory' },
-  ]);
-
-  const selectedId = ref(null);
-
-  const selectCard = (id) => {
-    selectedId.value = id;
-  };
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkMobile)
+  })
 </script>
 
 <style scoped>

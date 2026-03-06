@@ -1,12 +1,12 @@
 <template>
   <!--h-[630px]  -->
-  <div class="h-full max-h-150  flex flex-row flex-wrap justify-start-end  overflow-y-auto">
-    <div v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)">
+  <div class="h-full max-h-180 flex flex-row flex-wrap justify-start overflow-y-auto">
+    <div v-for="item in store.asset" :key="item.id" @click="router.push(`/editComputer/${item.id}`)" class="my-2 mx-4 ">
       <!-- each card layout -->
       <BaseCard>
         <!-- show data in each card -->
         <table
-          class="table-auto h-fit w-full [&_th]:pt-1 [&_th]:text-left [&_th]:align-baseline [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
+          class="table-auto h-fit  [&_th]:pt-1 [&_th]:text-left [&_tr]:align-baseline [&_tr]:h-6 [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
           <tbody>
             <tr>
               <th>ID</th>
@@ -16,23 +16,23 @@
             </tr>
             <tr>
               <th>Asset Tag</th>
-              <td>{{ item.asset_tag.substring(0, 13) }}</td>
+              <td class="font-bold">{{ item.asset_tag.substring(0, 13) }}</td>
+            </tr>
+            <tr>
+              <th scope="col">Serial Number</th>
+              <td>{{ item.serial_tag.substring(0, 13) + '...' }}</td>
             </tr>
             <tr>
               <th scope="col">Brand</th>
               <td>{{ item.brand }}</td>
             </tr>
             <tr>
-              <th scope="col">CPU</th>
-              <td>{{ item.cpu.substring(0, 20) }}</td>
+              <th scope="col">Model</th>
+              <td>{{ item.model.substring(0, 13) + '...' }}</td>
             </tr>
             <tr>
-              <th scope="col">Ram</th>
-              <td>{{ item.ram.substring(0, 16) }}</td>
-            </tr>
-            <tr>
-              <th scope="col">Hard Disk</th>
-              <td>{{ item.harddisk.substring(0, 18) }}</td>
+              <th scope="col">Office </th>
+              <td>{{ item.office_name.short_name }}</td>
             </tr>
             <tr>
               <th scope="col">User Name</th>
@@ -53,9 +53,9 @@
 
 <script setup>
   import { useRouter } from 'vue-router'
-  import { useComputerStore } from '@/stores/computerData.js'
   import BaseCard from '../BaseCard.vue'
+  import { useAssetStore } from '@/stores/assetsData'
 
   const router = useRouter()
-  const store = useComputerStore()
+  const store = useAssetStore()
 </script>

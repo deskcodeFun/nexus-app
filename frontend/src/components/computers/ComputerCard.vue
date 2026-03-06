@@ -1,6 +1,6 @@
 <template>
   <!--h-[630px]  -->
-  <div class="h-full max-h-100 flex flex-row flex-wrap justify-start-end  overflow-y-auto">
+  <div class="h-full max-h-150 flex flex-row flex-wrap justify-start-end  overflow-y-auto">
     <div v-for="item in store.computer" :key="item.id" @click="router.push(`/editComputer/${item.id}`)">
       <!-- each card layout -->
       <BaseCard>

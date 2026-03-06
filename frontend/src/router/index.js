@@ -4,6 +4,7 @@ import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import ServiceView from '@/views/ServiceView.vue'
 import AssetsView from '@/views/AssetsView.vue'
+import AssetEdit from '@/components/assets/AssetEdit.vue'
 // import UserAdd from '@/components/users/UserAdd.vue'
 
 import EmployeeView from '@/views/EmployeeView.vue'
@@ -12,7 +13,6 @@ import EmployeeEdit from '@/components/employees/EmployeeEdit.vue'
 
 import ComputerAdd from '@/components/computers/ComputerAdd.vue'
 import ComputerEdit from '@/components/computers/ComputerEdit.vue'
-
 import PrinterAdd from '@/components/printers/PrinterAdd.vue'
 import PrinterEdit from '@/components/printers/PrinterEdit.vue'
 
@@ -36,6 +36,12 @@ const router = createRouter({
       path: '/assets',
       name: 'assets',
       component: AssetsView,
+    },
+    {
+      path: '/editAsset/:id',
+      name: 'edit-asset',
+
+      component: AssetEdit,
     },
 
     {
