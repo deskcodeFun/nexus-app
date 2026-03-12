@@ -8,7 +8,7 @@
     <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
       <RouterLink
         class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
-        to="/addEmployee">
+        to="/addAsset">
         <div class="flex flex-row">
           <PlusIcon class="h-6 w-6" />
           <p>Add Asset</p>

@@ -1,5 +1,22 @@
 <template>
-  <BaseHeader title='ADD NEW COMPUTER' />
+
+  <BaseHeader title='ADD NEW ASSET' />
+
+
+
+  <p class="p-8 bg-gray-100 text-xl italic pt-6 text-red-800">Work in process: idea is add by catalog or User key pair
+    of label-
+    value</p>
+
+  <!-- catalog menu, computer, printer etc.. -->
+  <div class="px-8  flex flex-row gap-4">
+    <p class="font-semibold text-blue-800">Select Catalog : </p>
+    <p class=" text-blue-600 hover:scale-102 hover:font-bold" @click="toggleShow">Computer</p>
+    <p class=" text-blue-600 hover:scale-102 hover:font-bold" @click="toggleShow">Other</p>
+    <p class=" text-blue-600 ">Printer</p>
+    <p class=" text-blue-600 ">Equipment</p>
+
+  </div>
 
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <div class="gap-16 sm:flex sm:flex-row bg-white">
@@ -20,11 +37,71 @@
           <input type="text" v-model.trim="newComputer.cpu" class="bg-sky-50 text-md p-1" />
         </div>
         <!-- computer spec. section -->
-        <div class="w-fit text-nowrap flex flex-col">
-          <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
-          <label for="Ram" class="label">Ram</label>
-          <input type="text" v-model.trim="newComputer.ram" class="bg-sky-50 text-md p-1" />
-          <label for="Ram" class="label">Max Ram</label>
+        <div v-if="showOther === true" class="flex flex-row gap-8">
+          <div class="w-fit text-nowrap flex flex-col">
+            <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Specification</p>
+            <label for="Ram" class="label">Ram</label>
+            <input type="text" v-model.trim="newComputer.ram" class="bg-sky-50 text-md p-1" />
+            <label for="Ram" class="label">Max Ram</label>
+            <input type="text" v-model.trim="newComputer.max_ram" class="bg-sky-50 text-md p-1" />
+            <label for="Ram" class="label">Hard Disk slot</label>
+            <input type="text" v-model.trim="newComputer.harddisk_slot" class="bg-sky-50 text-md p-1" />
+            <label for="Ram" class="label">Lan</label>
+            <input type="text" v-model.trim="newComputer.lan_port" class="bg-sky-50 text-md p-1" />
+            <label for="Ram" class="label">Wireless</label>
+            <input type="text" v-model.trim="newComputer.wireless" class="bg-sky-50 text-md p-1" />
+            <label for="Ram" class="label">Bluetooth</label>
+            <input type="text" v-model.trim="newComputer.bluetooth" class="bg-sky-50 text-md p-1" />
+          </div>
+          <div class="w-fit pt-11 text-nowrap flex flex-col">
+            <label for="harddisk" class="label">Hard disk</label>
+            <input type="text" v-model.trim="newComputer.harddisk" class="bg-sky-50 text-md p-1" />
+            <label for="cpu" class="label">AI Chipset</label>
+            <input type="text" v-model.trim="newComputer.ai" class="bg-sky-50 text-md p-1" />
+            <label for="cpu" class="label">Graphic Chipset</label>
+            <input type="text" v-model.trim="newComputer.graphic" class="bg-sky-50 text-md p-1" />
+            <label for="cpu" class="label">Screen Size</label>
+            <input type="text" v-model.trim="newComputer.screen_size" class="bg-sky-50 text-md p-1" />
+            <p class="py-2 text-sm text-gray-500">Office Name</p>
+            <select name="officeName" id="officeName" v-model.trim="newComputer.office_id"
+              class="text-lg bg-blue-100 py-2 px-4">
+              <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
+                {{ office_name.name }}
+              </option>
+            </select>
+          </div>
+          <!-- Upload computer image  -->
+          <div class="flex flex-col">
+            <p class="pb-8">UPLOAD image</p>
+            <div class="flex flex-row w-[450px] h-50 bg-sky-50 border-1 border-blue-800 rounded-xl">
+            </div>
+            <!-- button section -->
+            <form @submit.prevent="addSubmit">
+              <button
+                class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+                type="submit">
+                <BookmarkIcon class="h-4 w-4 mr-2" />
+                <span> Save </span>
+              </button>
+            </form>
+          </div>
+        </div>
+        <!-- user key in label : value -->
+        <div v-else>
+          <div class="w-fit text-nowrap flex flex-col"></div>
+          <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Specification</p>
+          <div class="flex flex-row gap-16">
+            <p>Property</p>
+            <p>Value</p>
+          </div>
+          <div class=" flex flex-row gap-4">
+            <input type="text" class="w-24 bg-sky-50 text-md p-1" />
+            <input type="text" class="bg-sky-50 text-md p-1" />
+            <PlusCircleIcon class="h-6 w-6 mt-2 text-gray-500" />
+
+
+          </div>
+          <!-- <label for="Ram" class="label">Max Ram</label>
           <input type="text" v-model.trim="newComputer.max_ram" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Hard Disk slot</label>
           <input type="text" v-model.trim="newComputer.harddisk_slot" class="bg-sky-50 text-md p-1" />
@@ -33,47 +110,18 @@
           <label for="Ram" class="label">Wireless</label>
           <input type="text" v-model.trim="newComputer.wireless" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Bluetooth</label>
-          <input type="text" v-model.trim="newComputer.bluetooth" class="bg-sky-50 text-md p-1" />
-        </div>
-        <div class="w-fit pt-11 text-nowrap flex flex-col">
-          <label for="harddisk" class="label">Hard disk</label>
-          <input type="text" v-model.trim="newComputer.harddisk" class="bg-sky-50 text-md p-1" />
-          <label for="cpu" class="label">AI Chipset</label>
-          <input type="text" v-model.trim="newComputer.ai" class="bg-sky-50 text-md p-1" />
-          <label for="cpu" class="label">Graphic Chipset</label>
-          <input type="text" v-model.trim="newComputer.graphic" class="bg-sky-50 text-md p-1" />
-          <label for="cpu" class="label">Screen Size</label>
-          <input type="text" v-model.trim="newComputer.screen_size" class="bg-sky-50 text-md p-1" />
-          <p class="py-2 text-sm text-gray-500">Office Name</p>
-          <select name="officeName" id="officeName" v-model.trim="newComputer.office_id"
-            class="text-lg bg-blue-100 py-2 px-4">
-            <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
-              {{ office_name.name }}
-            </option>
-          </select>
-        </div>
-        <!-- Upload computer image  -->
-        <div class="flex flex-col">
-          <p class="pb-8">UPLOAD image</p>
-          <div class="flex flex-row w-[450px] h-50 bg-sky-50 border-1 border-blue-800 rounded-xl">
-          </div>
-          <!-- button section -->
-          <form @submit.prevent="addSubmit">
-            <button
-              class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
-              type="submit">
-              <BookmarkIcon class="h-4 w-4 mr-2" />
-              <span> Save </span>
-            </button>
-          </form>
+          <input type="text" v-model.trim="newComputer.bluetooth" class="bg-sky-50 text-md p-1" /> -->
         </div>
       </div>
     </div>
+
   </main>
 </template>
 
 <script setup>
-  import { BookmarkIcon } from '@heroicons/vue/20/solid'
+  import { ref } from 'vue'
+
+  import { BookmarkIcon, PlusCircleIcon } from '@heroicons/vue/20/solid'
   import { reactive } from 'vue'
   import { useRouter } from 'vue-router'
   import { useComputerStore } from '@/stores/computerData'
@@ -81,6 +129,11 @@
 
   import BaseHeader from '../BaseHeader.vue'
 
+  const showOther = ref(true)
+  const toggleShow = () => {
+    showOther.value = !showOther.value
+    console.log('ShowOther value : ', showOther)
+  }
   const router = useRouter()
   const store = useComputerStore()
   const officeNameStore = useOfficeNameStore()

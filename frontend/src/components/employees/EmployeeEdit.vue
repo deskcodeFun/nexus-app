@@ -1,6 +1,6 @@
 <template>
   <BaseHeader title='EDIT USER' />
-  <BaseButttonBack />
+
   <main class="flex pl-8 pt-8 bg-white">
     <div class=" bg-white">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="editSubmit">
@@ -51,7 +51,6 @@
 
   import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
   import BaseModal from '../BaseModal.vue'
-  import BaseButttonBack from '../BaseButttonBack.vue'
   import BaseHeader from '../BaseHeader.vue'
 
   const route = useRoute()

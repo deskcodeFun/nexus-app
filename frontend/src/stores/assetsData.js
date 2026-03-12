@@ -76,17 +76,13 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     }
   }
 
-  async function updateComputer(computerID, updateData) {
+  async function updateAsset(assetID, updateData) {
     try {
       isLoading.value = true
-      const { error } = await supabase
-        .from('computer')
-        .update(updateData)
-        .eq('id', computerID)
-        .select()
+      const { error } = await supabase.from('asset').update(updateData).eq('id', assetID).select()
       if (error) throw error
     } catch (error) {
-      console.error('update Computer Assets error: ', error)
+      console.error('update  Assets error: ', error)
     } finally {
       isLoading.value = false
     }
@@ -116,7 +112,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     getAssetByOffice,
     getAssetDetail,
     addComputer,
-    updateComputer,
+    updateAsset,
     deleteComputer,
   }
 })

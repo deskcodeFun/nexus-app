@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
+
 import ServiceView from '@/views/ServiceView.vue'
+
 import AssetsView from '@/views/AssetsView.vue'
 import AssetEdit from '@/components/assets/AssetEdit.vue'
-// import UserAdd from '@/components/users/UserAdd.vue'
+import AssetAdd from '@/components/assets/AssetAdd.vue'
 
 import EmployeeView from '@/views/EmployeeView.vue'
 import EmployeeAdd from '@/components/employees/EmployeeAdd.vue'
@@ -40,8 +42,12 @@ const router = createRouter({
     {
       path: '/editAsset/:id',
       name: 'edit-asset',
-
       component: AssetEdit,
+    },
+    {
+      path: '/addAsset/',
+      name: 'add-asset',
+      component: AssetAdd,
     },
 
     {

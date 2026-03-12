@@ -54,18 +54,18 @@
 
   import { useRouter } from 'vue-router'
   import { useAssetStore } from '@/stores/assetsData';
-  import { computed } from 'vue';
+  // import { computed } from 'vue';
 
   const router = useRouter()
   const store = useAssetStore()
-  store.getAssetByOffice('0')
+  // store.getAssetByOffice('0')
 
 
   // label
-  const itemLabel = computed(() => {
-    return Object.keys(store.asset[0].spec)[1]
-  })
-  console.log('ITEM label is: ', itemLabel)
+  // const itemLabel = computed(() => {
+  //   return Object.keys(store.asset[0].spec)[1]
+  // })
+  // console.log('ITEM label is: ', itemLabel)
   // data
 
 </script>
