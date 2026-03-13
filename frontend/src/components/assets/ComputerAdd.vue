@@ -1,17 +1,5 @@
 <template>
 
-  <BaseHeader title='ADD NEW ASSET' />
-
-
-
-  <!-- catalog menu, computer, printer etc.. -->
-  <div class="px-8  flex flex-row gap-4">
-    <p class="font-semibold text-blue-800">Select Catalog : </p>
-    <p class=" text-blue-600 hover:scale-102 hover:font-bold">Computer</p>
-    <p class=" text-blue-600 hover:scale-102 hover:font-bold">Printer</p>
-    <p class=" text-blue-600 hover:scale-102 hover:font-bold">Equipment</p>
-
-  </div>
 
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <div class="gap-16 sm:flex sm:flex-row bg-white">
@@ -91,7 +79,7 @@
   import { useComputerStore } from '@/stores/computerData'
   import { useOfficeNameStore } from '@/stores/officeData'
 
-  import BaseHeader from '../BaseHeader.vue'
+
 
   const router = useRouter()
   const store = useComputerStore()
