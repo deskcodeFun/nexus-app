@@ -106,7 +106,7 @@
   })
 
   async function addSubmit() {
-    console.log('newConmputer to add: ', newComputer)
+    // console.log('newConmputer to add: ', newComputer)
     try {
       await store.addComputer(newComputer)
     } catch (error) {

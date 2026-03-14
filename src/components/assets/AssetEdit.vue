@@ -192,15 +192,15 @@
   })
   const toggleUser = () => {
     editUser.value = !editUser.value
-    console.log('toggleUser value : ', editUser)
+    // console.log('toggleUser value : ', editUser)
   }
   async function handleChange(event) {
     const value = event.target.value
     updateData.user_id = value
-    console.log('updateData.user_id value', value)
+    // console.log('updateData.user_id value', value)
     if (updateData.user_id !== '0') {
       await employeeStore.getEmployeeDetail(updateData.user_id)
-      console.log('employee detail', employeeStore.employeeDetail)
+      // console.log('employee detail', employeeStore.employeeDetail)
       new_officeName.value = employeeStore.employeeDetail[0].office_name.name
     } else {
       editUser.value = false
@@ -212,7 +212,7 @@
 
   onMounted(async () => {
     await store.getAssetDetail(paramID)
-    console.log('computerDetail : ', store.assetDetail)
+    // console.log('computerDetail : ', store.assetDetail)
     if (store.assetDetail[0]) {
       updateData.asset_tag = store.assetDetail[0].asset_tag
       updateData.serial_tag = store.assetDetail[0].serial_tag
@@ -244,7 +244,7 @@
 
   async function editSubmit() {
     // TODO: validate data
-    console.log('UpdateData before call editsubmit : ', updateData)
+    // console.log('UpdateData before call editsubmit : ', updateData)
     await store.updateAsset(paramID, updateData)
     router.push('/assets')
   }

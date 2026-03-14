@@ -69,7 +69,7 @@
 
   onMounted(async () => {
     await store.getEmployeeDetail(paramID)
-    console.log('getstaffDetail: ', store.employeeDetail)
+    // console.log('getstaffDetail: ', store.employeeDetail)
     if (store.employeeDetail[0]) {
       updateData.fname = store.employeeDetail[0].fname
       updateData.lname = store.employeeDetail[0].lname
@@ -92,7 +92,7 @@
   }
 
   function delEmployee(paramID) {
-    console.log('store.deleteUser: ', paramID)
+    // console.log('store.deleteUser: ', paramID)
     store.deleteEmployee(paramID)
     store.getEmployee()
     router.push('/employee')

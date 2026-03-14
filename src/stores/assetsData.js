@@ -38,7 +38,6 @@ export const useAssetStore = defineStore('useAssetStore', () => {
         isLoading.value = false
       }
     }
-    console.log('Asset data : ', asset)
   }
 
   async function getAssetDetail(paramID) {
@@ -59,7 +58,6 @@ export const useAssetStore = defineStore('useAssetStore', () => {
         isLoading.value = false
       }
     }
-    console.log('Data getAssetDetail :', assetDetail)
   }
 
   async function addComputer(newComputer) {

@@ -18,7 +18,7 @@
 
 <style scoped>
   .hero {
-    background-image: url("/hero-bg2.jpg");
+    background-image: url("../images/hero-bg2.jpg");
     background-attachment: absolute;
     background-size: cover;
     position: absolute;

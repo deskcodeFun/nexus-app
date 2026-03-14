@@ -54,7 +54,7 @@
   })
 
   function handleChoice(value) {
-    console.log('select choice in ComputerView', value)
+    // console.log('select choice in ComputerView', value)
     if (value !== 0 && value !== null) {
       computerStores.getComputerByOffice(value)
       // computerStores.computer
