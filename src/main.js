@@ -4,7 +4,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-import './assets/main.css'
+import './images/main.css'
 // Tostification plugin
 import Tost from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
