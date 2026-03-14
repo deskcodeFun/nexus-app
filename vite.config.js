@@ -8,7 +8,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  publicPath: 'https://deskcodefun.github.io/gh-pages/',
+  publicPath: 'https://deskcodefun.github.io/nexus-app/gh-pages/',
   plugins: [vue(), vueDevTools(), tailwindcss()],
   resolve: {
     alias: {
