@@ -31,7 +31,7 @@ li[data-v-3ddd68c1] {
   transform: rotate(90deg);
 }
 .hero[data-v-51e1bdc3] {
-  background-image: url(/dist/hero-bg2.jpg);
+  background-image: url(/dist/assets/hero-bg2.jpg);
   background-attachment: absolute;
   background-size: cover;
   position: absolute;
