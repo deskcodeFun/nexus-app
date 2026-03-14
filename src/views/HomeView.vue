@@ -25,8 +25,6 @@
     height: 99vh;
     inset: 0;
 
-
-
     .hero-text {
       height: 100%;
       display: flex;
