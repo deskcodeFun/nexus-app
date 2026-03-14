@@ -21,7 +21,8 @@ import PrinterEdit from '@/components/printers/PrinterEdit.vue'
 // import ComputerAdd from '@/components/computer/ComputerAdd.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
