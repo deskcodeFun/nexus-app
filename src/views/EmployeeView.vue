@@ -5,7 +5,8 @@
   <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide px-2">
     <BaseOfficeDrop @select-option="handleChoice" />
     <!-- Add new user button -->
-    <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
+    <BaseButtonAdd Link="/addEmployee"></BaseButtonAdd>
+    <!-- <div class=" flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
       <RouterLink
         class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
         to="/addEmployee">
@@ -14,7 +15,7 @@
           <p>Add Employee</p>
         </div>
       </RouterLink>
-    </div>
+    </div> -->
   </div>
   <!-- show data -->
   <main class="px-2">
@@ -31,7 +32,7 @@
   import { ref, onMounted, onUnmounted } from 'vue'
   import BaseHeader from '@/components/BaseHeader.vue'
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
-  import { PlusIcon } from '@heroicons/vue/20/solid'
+  import BaseButtonAdd from '@/components/BaseButtonAdd.vue'
 
   import EmployeeTable from '@/components/employees/EmployeeTable.vue'
   import EmployeeCard from '@/components/employees/EmployeeCard.vue'

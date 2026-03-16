@@ -2,22 +2,22 @@
   <!-- Header -->
   <BaseHeader title="ASSETS ACCOUNTING" />
   <!-- Sub Menu -->
-  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide px-2">
+  <div class="flex flex-row justify-between bg-white text-blue-900 tracking-wide px-2">
     <BaseOfficeDrop @select-option="handleChoice" />
     <!-- Add new user button -->
-    <div class="flex flex-row bg-white text-blue-900 tracking-wide sm:px-2 pb-4 gap-4">
-      <RouterLink
-        class="w-fit flex flex-row mx-2 px-2 py-1 rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
+    <BaseButtonAdd Link="/addAsset"></BaseButtonAdd>
+    <!-- <div class=" bg-white text-blue-900">
+      <RouterLink class="w-fit flex flex-row rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
         to="/addAsset">
-        <div class="flex flex-row">
-          <PlusIcon class="h-6 w-6" />
-          <p>Add Asset</p>
+        <div class="inline-flex py-2 px-4 ">
+          <PlusIcon class="h-4 w-4 pt-1" />
+          <p class="">Add Asset</p>
         </div>
       </RouterLink>
-    </div>
+    </div> -->
   </div>
   <!-- show data -->
-  <main class=" px-2 ">
+  <main class=" px-2 py-2 ">
     <div v-if="isMobile">
       <AssetCard />
     </div>
@@ -31,11 +31,12 @@
   import { ref, onMounted, onUnmounted } from 'vue';
   import BaseHeader from '@/components/BaseHeader.vue'
   import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue';
-  import { PlusIcon } from '@heroicons/vue/20/solid'
+
 
   import AssetTable from '@/components/assets/AssetTable.vue';
   import AssetCard from '@/components/assets/AssetCard.vue';
   import { useAssetStore } from '@/stores/assetsData';
+  import BaseButtonAdd from '@/components/BaseButtonAdd.vue';
 
   const assetStore = useAssetStore()
   assetStore.getAssetByOffice('0')
