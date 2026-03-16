@@ -2,7 +2,7 @@
   <!-- Header -->
   <BaseHeader title='EMPLOYEE MANAGEMENT' />
   <!-- Sub Menu -->
-  <div class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide px-2">
+  <div class="flex flex-row justify-between bg-white text-blue-900 tracking-wide px-2">
     <BaseOfficeDrop @select-option="handleChoice" />
     <BaseButtonAdd Link="/addEmployee" label="Add Employee"></BaseButtonAdd>
   </div>

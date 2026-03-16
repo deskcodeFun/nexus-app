@@ -38,16 +38,6 @@
       </tbody>
     </table>
   </div>
-  <!-- <h2>Asset specification</h2>
-  <div v-for="(item, index) in store.asset" :key="index">
-    <p>{{ item.asset_tag }}</p>
-    <div v-for="(data, label) in item.spec" :key="label" class="flex flex-row ">
-      <p class="px-4 capitalize">{{ label }}</p>
-      <div>{{ data }}</div>
-    </div>
-  </div> -->
-
-
 </template>
 
 <script setup>

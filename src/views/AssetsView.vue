@@ -7,7 +7,7 @@
     <BaseButtonAdd Link="/addAsset" label="Add Asset"></BaseButtonAdd>
   </div>
   <!-- show data -->
-  <main class=" px-2 py-2 ">
+  <main class="px-2 py-2 ">
     <div v-if="isMobile">
       <AssetCard />
     </div>
