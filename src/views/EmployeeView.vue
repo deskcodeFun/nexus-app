@@ -7,7 +7,7 @@
     <BaseButtonAdd Link="/addEmployee" label="Add Employee"></BaseButtonAdd>
   </div>
   <!-- show data -->
-  <main class="px-2">
+  <main class="px-2 py-2">
     <div v-if="isMobile">
       <EmployeeCard />
     </div>

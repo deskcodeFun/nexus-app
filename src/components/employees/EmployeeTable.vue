@@ -13,12 +13,12 @@
 
       <tbody class="p-4 text-blue-900 overflow-hidden">
         <tr v-for="employee in store.employee" :key="employee.id" @click="router.push(`/editEmployee/${employee.id}`)"
-          class="table-row hover:shadow-2xl hover:scale-102 hover:font-bold hover:bg-blue-50 hover:text-center hover:cursor-pointer text-nowrap">
+          class="table-row hover:shadow-2xl hover:bg-blue-50  hover:cursor-pointer text-nowrap">
           <td class="table-cell font-bold">{{ employee.fname + ' ' + employee.lname }}</td>
           <td class="table-cell">{{ employee.email }}</td>
           <td class="table-cell">{{ employee.department }}</td>
           <!-- <td class="m-2 p-2">{{ employee.office_id}}</td> -->
-          <td class="m-2 p-2">{{ employee.office_name.name }}</td>
+          <td class="table-cell m-2 p-2">{{ employee.office_name.name }}</td>
         </tr>
       </tbody>
     </table>
