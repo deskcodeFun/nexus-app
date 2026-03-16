@@ -1,7 +1,7 @@
 <template>
   <!--h-[630px]  -->
   <div class="h-full max-h-180 flex flex-row flex-wrap justify-start overflow-y-auto">
-    <div v-for="item in store.asset" :key="item.id" @click="router.push(`/editComputer/${item.id}`)" class="my-2 mx-4 ">
+    <div v-for="item in store.asset" :key="item.id" @click="router.push(`/editAsset/${item.id}`)" class="my-4 mx-4 ">
       <!-- each card layout -->
       <BaseCard>
         <!-- show data in each card -->

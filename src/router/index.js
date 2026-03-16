@@ -23,9 +23,6 @@ import PrinterEdit from '@/components/printers/PrinterEdit.vue'
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
   history: createMemoryHistory(import.meta.env.BASE_URL),
-
-
-
   routes: [
     {
       path: '/',

@@ -86,8 +86,8 @@
             </RouterLink>
 
 
-            <RouterLink to="/user" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen">User</RouterLink>
+            <RouterLink to="/employee" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
+              @click="navOpen = !navOpen">Employee</RouterLink>
             <RouterLink to="/services" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
               @click="navOpen = !navOpen">
               Services

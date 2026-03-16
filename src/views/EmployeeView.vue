@@ -17,29 +17,39 @@
     </div>
   </div>
   <!-- show data -->
-  <main class="bg-white px-8">
-    <component :is="activeComponent"></component>
+  <main class="px-2">
+    <div v-if="isMobile">
+      <EmployeeCard />
+    </div>
+    <div v-else>
+      <EmployeeTable />
+    </div>
   </main>
 </template>
 
 <script setup>
-  import { computed } from 'vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
+  import BaseHeader from '@/components/BaseHeader.vue'
+  import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
   import { PlusIcon } from '@heroicons/vue/20/solid'
 
-  import { useEmployeeStore } from '@/stores/employeeData.js'
   import EmployeeTable from '@/components/employees/EmployeeTable.vue'
   import EmployeeCard from '@/components/employees/EmployeeCard.vue'
-  import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
-  import { useMonitorSize } from '@/composables/DeviceScreen'
-  import BaseHeader from '@/components/BaseHeader.vue'
+  import { useEmployeeStore } from '@/stores/employeeData.js'
+
 
   const employeeStore = useEmployeeStore()
 
   // detect screen
-  const sizes = useMonitorSize()
+  const isMobile = ref(false)
+  const breakpoint = 1024
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth <= breakpoint
+  }
   // const selectChoice = ref(0)
 
   function handleChoice(value) {
+    checkMobile()
     if (value !== '0' && value !== null) {
       // use function from employee store
       employeeStore.getEmployee(value)
@@ -47,8 +57,13 @@
       employeeStore.getAllEmployee()
     }
   }
-
-  const activeComponent = computed(() => {
-    return sizes.isMobile.value ? EmployeeCard : EmployeeTable
+  onMounted(() => {
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
   })
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkMobile)
+  })
+
+
 </script>

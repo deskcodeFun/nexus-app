@@ -1,8 +1,7 @@
 <template>
-  <div class="flex justify-center flex-row flex-wrap ">
-
+  <div class="h-full max-h-180 flex flex-row flex-wrap justify-start overflow-y-auto">
     <div v-for="employee in store.employee" :key="employee.id" @click="router.push(`/editEmployee/${employee.id}`)"
-      class="flex justify-center mx-2">
+      class="my-4 mx-2">
       <BaseCard>
         <!-- show data -->
         <table
