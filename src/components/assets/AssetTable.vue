@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <!-- Table body data -->
-      <tbody class="p-4 text-blue-900 overflow-hidden  ">
+      <tbody class="p-4 text-blue-900 overflow-hidden">
         <tr v-for="item in store.asset" :key="item.id" @click="router.push(`/editAsset/${item.id}`)"
           class="table-row  hover:shadow-2xl hover:scale-102 hover:font-bold  hover:bg-blue-50 hover:text-center hover:cursor-pointer text-nowrap">
           <!-- <td class=" flex justify-center">{{ item.id }}</td> -->

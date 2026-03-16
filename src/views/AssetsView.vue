@@ -4,17 +4,7 @@
   <!-- Sub Menu -->
   <div class="flex flex-row justify-between bg-white text-blue-900 tracking-wide px-2">
     <BaseOfficeDrop @select-option="handleChoice" />
-    <!-- Add new user button -->
-    <BaseButtonAdd Link="/addAsset"></BaseButtonAdd>
-    <!-- <div class=" bg-white text-blue-900">
-      <RouterLink class="w-fit flex flex-row rounded-full bg-blue-50/25 hover:text-white hover:bg-blue-800"
-        to="/addAsset">
-        <div class="inline-flex py-2 px-4 ">
-          <PlusIcon class="h-4 w-4 pt-1" />
-          <p class="">Add Asset</p>
-        </div>
-      </RouterLink>
-    </div> -->
+    <BaseButtonAdd Link="/addAsset" label="Add Asset"></BaseButtonAdd>
   </div>
   <!-- show data -->
   <main class=" px-2 py-2 ">
