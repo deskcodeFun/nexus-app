@@ -3,7 +3,7 @@
   <BaseHeader title="ASSET DETAIL" />
   <main class="h-screen pt-8 bg-white text-blue-900">
     <!-- 5 section -->
-    <div class="sm:gap-12 flex sm:items-baseline flex-col sm:flex-row h-screen overflow-scroll xl:overflow-hidden">
+    <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row h-screen overflow-scroll xl:overflow-hidden">
       <!-- show computer image  -->
       <div class="pb-4 px-4 flex-row sm:flex-col">
         <p class="sm:pb-4 font-semibold text-lg tracking-wide">Gallery</p>
@@ -12,7 +12,7 @@
             <BaseImage :images="store.assetDetail[0].image" />
           </div>
           <div v-else>
-            <p class="w-[100px] text-lg italic text-gray-400">No Image</p>
+            <p class="w-25 text-lg italic text-gray-400">No Image</p>
           </div>
         </div>
         <br />
@@ -23,13 +23,12 @@
         <div v-if="store.assetDetail && store.assetDetail.length > 0">
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
             <BaseBox :label="label" :data="data"></BaseBox>
-            <!-- <input type="text" v-model="updateData"> -->
           </div>
         </div>
         <div v-else>Loading data....</div>
         <br />
       </div>
-      <!-- asset spec section -->
+      <!-- asset spec section, replace JSONB key with label-->
       <div class="text-nowrap px-4 flex flex-col pb-2">
         <p class="sm:border-0 sm:pb-4 text-lg tracking-wide">Specification</p>
         <div v-if="store.assetDetail && store.assetDetail.length > 0">
@@ -39,7 +38,6 @@
         </div>
         <br />
       </div>
-
       <!-- can edit computer spec. section -->
       <div v-show="(updateData.spec.ram && updateData.spec.harddisk)" class="text-nowrap px-4 flex flex-col pb-2">
         <p class="sm:border-0 sm:pb-4 text-lg tracking-wide">Upgrade</p>
@@ -60,8 +58,9 @@
       </div>
       <!-- user info section -->
       <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="pt-4 sm:pt-0 sm:border-0 sm:pb-4 text-lg tracking-wide">User Information</p>
-
+        <p class="pt-4 sm:pt-0 sm:border-0 sm:pb-4 text-lg tracking-wide">
+          User Information
+        </p>
         <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
           <div class="pb-2">
             <div class="flex justify-between">
@@ -70,16 +69,17 @@
             </div>
           </div>
         </div>
-        <div class="contain h-[380px]">
+        <div class="contain h-95">
           <div v-if="user_name !== 'FREE'">
             <p class="bg-blue-100 text-md py-2 px-2 mb-2">{{ user_name }}</p>
             <p class="text-md text-gray-500">Office</p>
             <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
           </div>
           <div v-else class="bg-blue-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
-          <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border-1 border-blue-300 py-2 px-2 mt-4">
+          <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border border-blue-300 py-2 px-2 mt-4">
             <p class="pb-2">Update User</p>
-            <select v-model.trim="updateData.user_id" @change="handleChange" class="w-full bg-blue-100 py-2 text-md">
+            <select v-model.trim="updateData.user_id" @change="handleUpdateUser"
+              class="w-full bg-blue-100 py-2 text-md">
               <option :value="0" class="bg-blue-100">FREE</option>
               <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id"
                 class="text-lg bg-blue-100">
@@ -98,7 +98,7 @@
         <form @submit.prevent="editSubmit">
           <div class="flex flex-row justify-between gap-24">
             <button
-              class="flex items-center justify-center border-1 bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
+              class="flex items-center justify-center border bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
               type="button" @click="toggleModal">
               <TrashIcon class="h-4 w-4 mr-2" /> Delete
             </button>
@@ -194,7 +194,7 @@
     editUser.value = !editUser.value
     // console.log('toggleUser value : ', editUser)
   }
-  async function handleChange(event) {
+  async function handleUpdateUser(event) {
     const value = event.target.value
     updateData.user_id = value
     // console.log('updateData.user_id value', value)

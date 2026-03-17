@@ -29,7 +29,6 @@
 
     </div>
   </main>
-  <!-- accounting section -->
 </template>
 
 <script setup>

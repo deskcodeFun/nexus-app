@@ -1,7 +1,7 @@
 <template>
   <BaseHeader title="ADD NEW ASSET" />
 
-  <p class="p-8 bg-gray-100 text-xl italic pt-6 text-red-800">
+  <p class="p-2 bg-gray-100 text-xl italic  text-red-800">
     Work in process: idea is add by catalog: computer , printer
     or User key pair of label-value
   </p>

@@ -55,7 +55,7 @@
         <!-- Upload computer image  -->
         <div class="flex flex-col">
           <p class="pb-8">UPLOAD image</p>
-          <div class="flex flex-row w-[450px] h-50 bg-sky-50 border-1 border-blue-800 rounded-xl">
+          <div class="flex flex-row w-md h-50 bg-sky-50 border border-blue-800 rounded-xl">
           </div>
           <!-- button section -->
           <form @submit.prevent="addSubmit">
