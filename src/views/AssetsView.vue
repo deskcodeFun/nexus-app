@@ -56,36 +56,3 @@
     window.removeEventListener('resize', checkMobile)
   })
 </script>
-
-<style scoped>
-  .catalog {
-    margin-right: 1rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    border-radius: 0.75rem;
-    border: none;
-    font-size: 14px;
-  }
-
-  .catalog:hover {
-    transform: scale(1.1);
-    font-weight: bold;
-    cursor: pointer;
-    background-color: #E0F2FE;
-  }
-
-  .catalog:active {
-    background-color: #E0F2FE;
-    border: none;
-  }
-
-
-  .catalog:focus {
-    background-color: #E0F2FE;
-    border: none;
-  }
-
-
-</style>
