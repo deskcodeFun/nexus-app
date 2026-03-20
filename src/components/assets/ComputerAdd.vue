@@ -106,7 +106,7 @@
   async function addSubmit() {
     console.log('newConmputer to add: ', newComputer)
     try {
-      await store.addComputer(newComputer)
+      await store.addAsset(newComputer)
 
     } catch (error) {
       console.error('Can not Add new Computer : ', error)

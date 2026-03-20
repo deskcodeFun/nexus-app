@@ -60,17 +60,17 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     }
   }
 
-  async function addComputer(newComputer) {
+  async function addAsset(newAsset) {
     try {
       isLoading.value = true
       const { error } = await supabase
         .from('asset')
         .insert([
           {
-            ...newComputer,
-            office_id: newComputer.office_id || null,
-            user_id: newComputer.user_id || null,
-            spec: newComputer.spec,
+            ...newAsset,
+            office_id: newAsset.office_id || null,
+            user_id: newAsset.user_id || null,
+            spec: newAsset.spec,
           },
         ])
         .select()
@@ -117,7 +117,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     // getAllasset,
     getAssetByOffice,
     getAssetDetail,
-    addComputer,
+    addAsset,
     updateAsset,
     deleteAsset,
   }

@@ -24,21 +24,22 @@
       <div class="flex flex-col">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Specification</p>
         <label for="asset-tag" class="label">Black Cartridge</label>
-        <input type="text" v-model.trim="newPrinter.black_cartridge" class="bg-sky-50 text-md p-1">
+        <input type="text" v-model.trim="newPrinter.spec.black_cartridge" class="bg-sky-50 text-md p-1">
         <label for="asset-tag" class="label">Color Cartridge</label>
-        <input type="text" v-model.trim="newPrinter.color_cartridge" class="bg-sky-50 text-md p-1">
+        <input type="text" v-model.trim="newPrinter.spec.color_cartridge" class="bg-sky-50 text-md p-1">
         <label for="asset-tag" class="label">Port</label>
-        <input type="text" v-model.trim="newPrinter.port" class="bg-sky-50 text-md p-1">
+        <input type="text" v-model.trim="newPrinter.spec.port" class="bg-sky-50 text-md p-1">
         <label for="asset-tag" class="label">Type</label>
-        <input type="text" v-model.trim="newPrinter.type" class="bg-sky-50 text-md p-1">
+        <input type="text" v-model.trim="newPrinter.spec.type" class="bg-sky-50 text-md p-1">
+        <p class="py-2 text-sm text-gray-500">Office Name</p>
+        <select name="officeName" id="officeName" v-model.trim="newPrinter.office_id"
+          class="text-lg bg-blue-100 py-2 px-4">
+          <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
+            {{ office_name.name }}
+          </option>
+        </select>
       </div>
-      <!-- user information -->
-      <!-- <div class="flex flex-col">
-        <label for="asset-tag" class="label">Use By</label>
-        <input type="text" v-model.trim="newPrinter.user_id" class="bg-sky-50 text-md p-1">
-        <label for="asset-tag" class="label">User Office</label>
-        <input type="text" v-model.trim="newPrinter.office_id" class="bg-sky-50 text-md p-1">
-      </div> -->
+
       <!-- Upload computer image  -->
       <div class="flex flex-col">
         <p class="pb-8">UPLOAD image</p>
@@ -62,13 +63,15 @@
   import { BookmarkIcon } from '@heroicons/vue/24/outline';
   import { reactive } from 'vue';
   import { useRouter } from 'vue-router';
-  import { usePrinterStore } from '@/stores/printerData';
+
   import { useOfficeNameStore } from '@/stores/officeData';
+  import { useAssetStore } from '@/stores/assetsData'
+
 
 
 
   const router = useRouter()
-  const printerStore = usePrinterStore()
+  const store = useAssetStore()
   const officeNameStore = useOfficeNameStore()
   const newPrinter = reactive({
     // id: Number,
@@ -76,18 +79,20 @@
     serial_tag: '',
     brand: '',
     model: '',
-    black_cartridge: '',
-    color_cartridge: '',
-    port: '',
-    type: '',
-    user_id: null,
-    office_id: '',
+    user_id: Number,
+    office_id: Number,
+    spec: {
+      black_cartridge: '',
+      color_cartridge: '',
+      port: '',
+      type: '',
+    }
   })
 
   async function addSubmit() {
-    // console.log('New Printer to Add: ', newPrinter)
+    console.log('New Printer to Add: ', newPrinter)
     try {
-      await printerStore.addPrinter(newPrinter)
+      await store.addAsset(newPrinter)
 
     } catch (error) {
       console.error('Can not Add new Printer : ', error)
