@@ -63,9 +63,17 @@ export const useAssetStore = defineStore('useAssetStore', () => {
   async function addComputer(newComputer) {
     try {
       isLoading.value = true
-      const computerToInsert = { ...newComputer }
-      delete computerToInsert.id
-      const { error } = await supabase.from('computer').insert([computerToInsert])
+      const { error } = await supabase
+        .from('asset')
+        .insert([
+          {
+            ...newComputer,
+            office_id: newComputer.office_id || null,
+            user_id: newComputer.user_id || null,
+            spec: newComputer.spec,
+          },
+        ])
+        .select()
       if (error) throw error
     } catch (error) {
       console.error('ERROR Add new computer fail: ', error)
@@ -86,10 +94,10 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     }
   }
 
-  async function deleteComputer(paramID) {
+  async function deleteAsset(paramID) {
     try {
       isLoading.value = true
-      const { error } = await supabase.from('computer').delete().eq('id', paramID).select()
+      const { error } = await supabase.from('asset').delete().eq('id', paramID).select()
       if (error) throw error
     } catch (error) {
       console.error('Detele Computer assets error :', error, paramID)
@@ -111,6 +119,6 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     getAssetDetail,
     addComputer,
     updateAsset,
-    deleteComputer,
+    deleteAsset,
   }
 })

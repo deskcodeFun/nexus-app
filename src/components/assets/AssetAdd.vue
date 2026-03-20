@@ -1,10 +1,5 @@
 <template>
   <BaseHeader title="ADD NEW ASSET" />
-  <!-- <div class="w-auto h-24 flex flex-row text-base ">
-    <p class="pt-6 ml-8 italic bg-red-50 text-red-800">
-      Work in process: idea is add by catalog: computer , printer or User key pair of label-value
-    </p>
-  </div> -->
   <!-- catalog menu, computer, printer etc.. -->
   <div class="px-8 py-4 flex flex-row gap-4">
     <p class="font-semibold text-blue-800">Select Catalog :</p>

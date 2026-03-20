@@ -1,6 +1,4 @@
 <template>
-
-
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <div class="gap-16 sm:flex sm:flex-row bg-white">
       <!-- 3 section -->
@@ -17,33 +15,33 @@
           <label for="model" class="label">Model</label>
           <input type="text" v-model.trim="newComputer.model" class="bg-sky-50 text-md p-1" />
           <label for="cpu" class="label">CPU</label>
-          <input type="text" v-model.trim="newComputer.cpu" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.cpu" class="bg-sky-50 text-md p-1" />
         </div>
         <!-- computer spec. section -->
         <div class="w-fit text-nowrap flex flex-col">
           <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
           <label for="Ram" class="label">Ram</label>
-          <input type="text" v-model.trim="newComputer.ram" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.ram" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Max Ram</label>
-          <input type="text" v-model.trim="newComputer.max_ram" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.max_ram" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Hard Disk slot</label>
-          <input type="text" v-model.trim="newComputer.harddisk_slot" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.harddisk_slot" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Lan</label>
-          <input type="text" v-model.trim="newComputer.lan_port" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.lan_port" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Wireless</label>
-          <input type="text" v-model.trim="newComputer.wireless" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.wireless" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Bluetooth</label>
-          <input type="text" v-model.trim="newComputer.bluetooth" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.bluetooth" class="bg-sky-50 text-md p-1" />
         </div>
         <div class="w-fit pt-11 text-nowrap flex flex-col">
           <label for="harddisk" class="label">Hard disk</label>
-          <input type="text" v-model.trim="newComputer.harddisk" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.harddisk" class="bg-sky-50 text-md p-1" />
           <label for="cpu" class="label">AI Chipset</label>
-          <input type="text" v-model.trim="newComputer.ai" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.ai" class="bg-sky-50 text-md p-1" />
           <label for="cpu" class="label">Graphic Chipset</label>
-          <input type="text" v-model.trim="newComputer.graphic" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.graphic" class="bg-sky-50 text-md p-1" />
           <label for="cpu" class="label">Screen Size</label>
-          <input type="text" v-model.trim="newComputer.screen_size" class="bg-sky-50 text-md p-1" />
+          <input type="text" v-model.trim="newComputer.spec.screen_size" class="bg-sky-50 text-md p-1" />
           <p class="py-2 text-sm text-gray-500">Office Name</p>
           <select name="officeName" id="officeName" v-model.trim="newComputer.office_id"
             class="text-lg bg-blue-100 py-2 px-4">
@@ -55,8 +53,7 @@
         <!-- Upload computer image  -->
         <div class="flex flex-col">
           <p class="pb-8">UPLOAD image</p>
-          <div class="flex flex-row w-md h-50 bg-sky-50 border border-blue-800 rounded-xl">
-          </div>
+          <div class="flex flex-row w-md h-50 bg-sky-50 border border-blue-800 rounded-xl"></div>
           <!-- button section -->
           <form @submit.prevent="addSubmit">
             <button
@@ -76,41 +73,43 @@
   import { BookmarkIcon } from '@heroicons/vue/20/solid'
   import { reactive } from 'vue'
   import { useRouter } from 'vue-router'
-  import { useComputerStore } from '@/stores/computerData'
+
   import { useOfficeNameStore } from '@/stores/officeData'
-
-
+  import { useAssetStore } from '@/stores/assetsData'
 
   const router = useRouter()
-  const store = useComputerStore()
+  const store = useAssetStore()
   const officeNameStore = useOfficeNameStore()
   const newComputer = reactive({
-    // id: Number,
+    // id: '',
     asset_tag: '',
     serial_tag: '',
     brand: '',
     model: '',
-    cpu: '',
-    ai: '',
-    graphic: '',
-    screen_size: '',
-    max_ram: '',
-    harddisk_slot: '',
-    lan_port: '',
-    wireless: '',
-    bluetooth: '',
-    ram: '',
-    harddisk: '',
-    user_id: null,
-    office_id: '',
+    user_id: Number,
+    office_id: Number,
+    spec: {
+      ai: '',
+      cpu: '',
+      graphic: '',
+      screen_size: '',
+      max_ram: '',
+      harddisk_slot: '',
+      lan_port: '',
+      wireless: '',
+      bluetooth: '',
+      ram: '',
+      harddisk: '',
+    },
   })
 
   async function addSubmit() {
-    // console.log('newConmputer to add: ', newComputer)
+    console.log('newConmputer to add: ', newComputer)
     try {
       await store.addComputer(newComputer)
+
     } catch (error) {
-      console.error('Can not Add new Computer: ', error)
+      console.error('Can not Add new Computer : ', error)
     } finally {
       router.push('/assets')
     }

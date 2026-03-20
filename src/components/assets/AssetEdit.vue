@@ -109,7 +109,7 @@
               <span> Save </span>
             </button>
 
-            <BaseModal :modalActive="modalActive" title="Delete" @save-data="deleteAssets(paramID)"
+            <BaseModal :modalActive="modalActive" title="Delete" @save-data="deleteAsset(paramID)"
               @close-modal="modalActive = false">
               <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
             </BaseModal>
@@ -249,9 +249,9 @@
     router.push('/assets')
   }
 
-  function deleteAssets(paramID) {
+  function deleteAsset(paramID) {
     store.deleteComputer(paramID)
-    store.getComputerByOffice('0')
+    store.getAssetByOffice('0')
     router.push('/assets')
   }
 </script>
