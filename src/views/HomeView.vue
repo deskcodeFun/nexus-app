@@ -22,7 +22,7 @@
     background-attachment: absolute;
     background-size: cover;
     position: absolute;
-    height: 99vh;
+    /* height: 99vh; */
     inset: 0;
 
     .hero-text {
