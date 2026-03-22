@@ -1,12 +1,12 @@
 <template>
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" />
-  <main class="h-screen pt-8 bg-white text-blue-900">
+  <main class="h-screen pt-2 bg-white text-blue-900">
     <!-- 5 section -->
     <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row h-screen overflow-scroll xl:overflow-hidden">
       <!-- show computer image  -->
       <div class="pb-4 px-4 flex-row sm:flex-col">
-        <p class="sm:pb-4 font-semibold text-lg tracking-wide">Gallery</p>
+        <p class="sm:pb-4 font- text-lg tracking-wide">Gallery</p>
         <div class="w-full text-nowrap mx-auto">
           <div v-if="store.assetDetail && store.assetDetail[0].image !== null">
             <BaseImage :images="store.assetDetail[0].image" />
@@ -15,39 +15,34 @@
             <p class="w-25 text-lg italic text-gray-400">No Image</p>
           </div>
         </div>
-        <br />
-      </div>
-      <!-- accounting section -->
-      <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="sm:border-0 sm:pb-4 text-lg tracking-wide">Asset information</p>
-        <div v-if="store.assetDetail && store.assetDetail.length > 0">
+        <!-- accounting section -->
+        <div class="text-nowrap mt-12 flex flex-col pb-2">
+          <p class=" sm:pb-4 text-lg tracking-wide">Asset information</p>
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
             <BaseBox :label="label" :data="data"></BaseBox>
           </div>
         </div>
-        <div v-else>Loading data....</div>
-        <br />
+
       </div>
       <!-- asset spec section, replace JSONB key with label-->
       <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="sm:border-0 sm:pb-4 text-lg tracking-wide">Specification</p>
-        <div v-if="store.assetDetail && store.assetDetail.length > 0">
-          <div v-for="(data, label) in updateData.spec" :key="label" class="pl-4 sm:pl-0 pt-2 sm:pt-0">
-            <BaseBox :label="label" :data="data"></BaseBox>
-          </div>
+        <p class=" sm:pb-4 text-lg tracking-wide">Specification</p>
+        <div v-for="(data, label) in updateData.spec" :key="label" class="pl-4 sm:pl-0 pt-2 sm:pt-0">
+          <BaseBox :label="label" :data="data"></BaseBox>
         </div>
         <br />
       </div>
       <!-- can edit computer spec. section -->
-      <div v-show="(updateData.spec.ram && updateData.spec.harddisk)" class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="sm:border-0 sm:pb-4 text-lg tracking-wide">Upgrade</p>
+      <div v-show="(updateData.spec.ram && updateData.spec.harddisk !== null)"
+        class="text-nowrap px-4 flex flex-col pb-2">
+        <p class=" sm:pb-4 text-lg tracking-wide">Upgrade</p>
         <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
           <p class="py-2 text-sm text-gray-500">RAM</p>
-          <input type="text" v-model="updateData.spec.ram" class="bg-blue-100 p-2" />
+          <input type="text" v-model="updateRAM" class="bg-blue-100 p-2" />
           <p class="py-2 text-sm text-gray-500">Hard Disk</p>
-          <input type="text" v-model="updateData.spec.harddisk" class="bg-blue-100 p-2" />
-          <p class="py-2 text-sm text-gray-500">Office Name</p>
-          <select name="officeName" id="officeName" v-model.trim="store.assetDetail[0].office_id"
+          <input type="text" v-model="updateHarddisk" class="bg-blue-100 p-2" />
+          <p class="py-2 text-sm text-gray-500">Change BU asset</p>
+          <select name="officeName" id="officeName" v-model.trim="updateData.office_id"
             class="text-md bg-blue-100 py-2 pl-1 pr-2">
             <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
               {{ office_name.name }}
@@ -58,9 +53,7 @@
       </div>
       <!-- user info section -->
       <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="pt-4 sm:pt-0 sm:border-0 sm:pb-4 text-lg tracking-wide">
-          User Information
-        </p>
+        <p class="pt-4 sm:pt-0  sm:pb-4 text-lg tracking-wide">User Information</p>
         <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
           <div class="pb-2">
             <div class="flex justify-between">
@@ -147,42 +140,46 @@
         'S/N': store.assetDetail[0].serial_tag,
         Brand: store.assetDetail[0].brand,
         Model: store.assetDetail[0].model,
-        officeName: store.assetDetail[0].office_name.name
+        officeName: store.assetDetail[0].office_name.name,
       }
     }
     return {}
   })
   // const specData = computed(() => {
-  //   if (store.assetDetail && store.assetDetail[0]) {
-  //     const spec = store.assetDetail[0].spec
+  //   if (store.assetDetail[0] && updateData.spec) {
+  //     const spec = updateData.spec
+  //     console.log('spec before filter: ', spec)
   //     const filtered = {}
-  //     for (const [key, value] of Object.entries(spec)) {
+  //     for (const [key, value] of Object.entries(updateData.spec)) {
   //       filtered[key] = value
   //       if (key !== 'ram' && key !== 'harddisk') {
   //         filtered[key] = value
   //       }
   //     }
-  //     console.log('specData is : ', specData)
+  //     console.log('Filter specData is : ', filtered)
   //     return filtered
   //   }
   //   console.log('specData is : ', specData)
   //   return {}
   // })
+
   const updateData = reactive({
     id: paramID,
     asset_tag: '',
     serial_tag: '',
     brand: '',
     model: '',
-    office_id: '',
-    user_id: '',
-    spec: {} // JSONB column
+    office_id: Number,
+    user_id: Number,
+    spec: {}, // JSONB column
   })
   // separate user from updateDATA to save edit
   const user_name = ref('')
   const user_officeName = ref('')
   const new_officeName = ref('')
   const editUser = ref(false)
+  const updateRAM = ref('')
+  const updateHarddisk = ref('')
   const userNameLabel = computed(() => {
     if (user_name.value === 'FREE') {
       return 'Status'
@@ -194,6 +191,7 @@
     editUser.value = !editUser.value
     // console.log('toggleUser value : ', editUser)
   }
+
   async function handleUpdateUser(event) {
     const value = event.target.value
     updateData.user_id = value
@@ -245,12 +243,17 @@
   async function editSubmit() {
     // TODO: validate data
     // console.log('UpdateData before call editsubmit : ', updateData)
+    // upgrade ram and harddisk
+    if (updateRAM.value !== '' || updateHarddisk.value !== '')
+      updateData.spec.ram = updateRAM.value
+    updateData.spec.harddisk = updateHarddisk.value
     await store.updateAsset(paramID, updateData)
+
     router.push('/assets')
   }
 
   function deleteAsset(paramID) {
-    store.deleteComputer(paramID)
+    store.deleteAsset(paramID)
     store.getAssetByOffice('0')
     router.push('/assets')
   }

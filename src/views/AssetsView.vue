@@ -1,13 +1,13 @@
 <template>
   <!-- Header -->
   <BaseHeader title="ASSETS ACCOUNTING" />
-  <!-- Sub Menu -->
-  <div class="flex flex-row justify-between bg-white text-blue-900 tracking-wide px-2">
-    <BaseOfficeDrop @select-option="handleChoice" />
-    <BaseButtonAdd Link="/addAsset" label="Add Asset"></BaseButtonAdd>
-  </div>
-  <!-- show data -->
   <main class="px-2 py-2 ">
+    <!-- Sub Menu -->
+    <div class="flex flex-row justify-between bg-white text-blue-900 tracking-wide px-2">
+      <BaseOfficeDrop @select-option="handleChoice" />
+      <BaseButtonAdd Link="/addAsset" label="Add Asset"></BaseButtonAdd>
+    </div>
+    <!-- show data -->
     <div v-if="isMobile">
       <AssetCard />
     </div>
