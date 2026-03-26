@@ -96,7 +96,7 @@
   })
 
   async function addSubmit() {
-    console.log('New Printer to Add: ', newPrinter)
+    // console.log('New Printer to Add: ', newPrinter)
     try {
       await store.addAsset(newPrinter)
 
