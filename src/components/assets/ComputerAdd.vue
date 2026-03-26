@@ -14,12 +14,17 @@
           <input type="text" v-model.trim="newComputer.brand" class="bg-sky-50 text-md p-1" />
           <label for="model" class="label">Model</label>
           <input type="text" v-model.trim="newComputer.model" class="bg-sky-50 text-md p-1" />
-          <label for="cpu" class="label">CPU</label>
-          <input type="text" v-model.trim="newComputer.spec.cpu" class="bg-sky-50 text-md p-1" />
+
+          <label for="color" class="label">Color</label>
+          <input type="text" v-model.trim="newComputer.color" class="bg-sky-50 text-md p-1" />
+          <label for="description" class="label">Description</label>
+          <textarea row="6" v-model.trim="newComputer.description" class="bg-sky-50 text-md p-1" />
         </div>
         <!-- computer spec. section -->
         <div class="w-fit text-nowrap flex flex-col">
           <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Computer Specification</p>
+          <label for="cpu" class="label">CPU</label>
+          <input type="text" v-model.trim="newComputer.spec.cpu" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Ram</label>
           <input type="text" v-model.trim="newComputer.spec.ram" class="bg-sky-50 text-md p-1" />
           <label for="Ram" class="label">Max Ram</label>
@@ -86,6 +91,8 @@
     serial_tag: '',
     brand: '',
     model: '',
+    color: '',
+    description: '',
     user_id: Number,
     office_id: Number,
     spec: {

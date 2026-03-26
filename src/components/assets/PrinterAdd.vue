@@ -7,13 +7,17 @@
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Accounting Information</p>
         <label for="asset_tag" class="label">Asset Tag</label>
         <input type="text" v-model.trim="newPrinter.asset_tag" class="bg-sky-50 text-md p-1">
-        <label for="asset-tag" class="label">Serial Tag</label>
+        <label for="serial_tag" class="label">Serial Tag</label>
         <input type="text" v-model.trim="newPrinter.serial_tag" class="bg-sky-50 text-md p-1">
-        <label for="asset-tag" class="label">Brand</label>
+        <label for="brand" class="label">Brand</label>
         <input type="text" v-model.trim="newPrinter.brand" class="bg-sky-50 text-md p-1">
-        <label for="asset-tag" class="label">Model</label>
+        <label for="Model" class="label">Model</label>
         <input type="text" v-model.trim="newPrinter.model" class="bg-sky-50 text-md p-1">
-        <label for="asset-tag" class="label">Office</label>
+        <label for="color" class="label">Color</label>
+        <input type="text" v-model.trim="newPrinter.color" class="bg-sky-50 text-md p-1">
+        <label for="description" class="label">Description</label>
+        <textarea row="6" v-model.trim="newPrinter.description" class="bg-sky-50 text-md p-1" />
+        <label for="" class="label">Office</label>
         <select name="officeName" id="officeName" v-model.trim="newPrinter.office_id" class="bg-sky-50 py-2 pr-2">
           <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
             {{ office_name.name }}
@@ -31,13 +35,13 @@
         <input type="text" v-model.trim="newPrinter.spec.port" class="bg-sky-50 text-md p-1">
         <label for="asset-tag" class="label">Type</label>
         <input type="text" v-model.trim="newPrinter.spec.type" class="bg-sky-50 text-md p-1">
-        <p class="py-2 text-sm text-gray-500">Office Name</p>
+        <!-- <p class="py-2 text-sm text-gray-500">Office Name</p>
         <select name="officeName" id="officeName" v-model.trim="newPrinter.office_id"
           class="text-lg bg-blue-100 py-2 px-4">
           <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
             {{ office_name.name }}
           </option>
-        </select>
+        </select> -->
       </div>
 
       <!-- Upload computer image  -->
@@ -79,6 +83,8 @@
     serial_tag: '',
     brand: '',
     model: '',
+    color: '',
+    description: '',
     user_id: Number,
     office_id: Number,
     spec: {

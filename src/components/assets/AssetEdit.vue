@@ -19,7 +19,10 @@
         <div class="text-nowrap mt-12 flex flex-col pb-2">
           <p class=" sm:pb-4 text-lg tracking-wide">Asset information</p>
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
-            <BaseBox :label="label" :data="data"></BaseBox>
+            <div v-if="(data !== null)">
+              <BaseBox :label="label" :data="data"></BaseBox>
+
+            </div>
           </div>
         </div>
 
@@ -28,7 +31,9 @@
       <div class="text-nowrap px-4 flex flex-col pb-2">
         <p class=" sm:pb-4 text-lg tracking-wide">Specification</p>
         <div v-for="(data, label) in updateData.spec" :key="label" class="pl-4 sm:pl-0 pt-2 sm:pt-0">
+
           <BaseBox :label="label" :data="data"></BaseBox>
+
         </div>
         <br />
       </div>
@@ -140,6 +145,8 @@
         'S/N': store.assetDetail[0].serial_tag,
         Brand: store.assetDetail[0].brand,
         Model: store.assetDetail[0].model,
+        Color: store.assetDetail[0].color,
+        Description: store.assetDetail[0].description,
         officeName: store.assetDetail[0].office_name.name,
       }
     }
