@@ -1,4 +1,8 @@
 <template>
+  <!-- TODO:
+        fix disable delete button for first row of specification
+        add save data button to DB
+  -->
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <div class="gap-16 sm:flex sm:flex-row bg-white">
       <div class="w-fit text-nowrap flex flex-col">
@@ -27,44 +31,52 @@
       <!-- add spec key:value -->
       <div class="w-fit text-nowrap flex flex-col">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Specification</p>
-        <!-- header lable -->
+        <!-- header label -->
         <div class="flex flex-row gap-45">
           <label class="label">Property</label>
           <label class="label">Value</label>
         </div>
         <div class="flex flex-col">
           <!-- loop for each pair key:value -->
-          <div v-for="(data, label) in specRow" :key="label" class="flex flex-row mb-4">
+          <div v-for="(field, index) in specRow" :key="index" class="flex flex-row mb-9">
             <div class="flex flex-col mr-8">
-              <input type="text" class="input" v-model.trim="data.label">
+              <input type="text" class="input" v-model.trim="field.key">
             </div>
             <div class="flex flex-col">
-              <input type="text" class="input" v-model.trim="data.value" />
+              <input type="text" class="input" v-model.trim="field.value" />
             </div>
-            <button @click="addSpecRow">
+            <button @click="addSpecRow()">
               <PlusCircleIcon class="h-6 w-6  ml-4 text-green-700" />
             </button>
-            <button @click="removeSpecRow(label)">
+            <button v-show="index !== 0" @click="removeSpecRow(index)">
               <MinusCircleIcon class="h-6 w-6  ml-4 text-red-700" />
             </button>
-
           </div>
         </div>
       </div>
-
+      <form @submit.prevent="addSubmit">
+        <button
+          class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+          type="submit">
+          <BookmarkIcon class="h-4 w-4 mr-2" />
+          <span> Save </span>
+        </button>
+      </form>
     </div>
   </main>
 </template>
 
 <script setup>
   import { ref, reactive } from 'vue';
+  import { useRouter } from 'vue-router'
+
   import { useOfficeNameStore } from '@/stores/officeData'
   import { useAssetStore } from '@/stores/assetsData'
 
-  import { PlusCircleIcon, MinusCircleIcon } from '@heroicons/vue/20/solid';
+  import { PlusCircleIcon, MinusCircleIcon, BookmarkIcon } from '@heroicons/vue/20/solid';
 
 
-
+  const router = useRouter()
   const store = useAssetStore()
   const officeNameStore = useOfficeNameStore()
   const newAsset = reactive({
@@ -76,18 +88,40 @@
     description: '',
     user_id: Number,
     office_id: Number,
-    spec: {}
+    spec: JSON,
   })
 
-  const specRow = ref([{ property: '', value: '' }])
+  // const specRow = ref([{ property: '', value: '' }])
+  const specRow = ref([{ key: '', value: '' }])
   const addSpecRow = () => {
-    specRow.value.push({ property: '', value: '' })
+    specRow.value.push({ key: '', value: '' })
   }
   const removeSpecRow = (index) => specRow.value.splice(index, 1)
 
-  const addSpec = () => {
+  // const addSpec = () => {
+  //   console.log('add spec click', specRow)
+  //   newAsset.spec.value = specRow.value
+  //   console.log('newAsset before Add to DB : ', newAsset)
+  // }
 
+  async function addSubmit() {
+    const specObject = Object.fromEntries(
+      specRow.value
+        .filter(item => item.key)
+        .map(item => [item.key, item.value])
+    )
+    console.log('newConmputer to add: ', specObject)
     console.log('add spec click', specRow)
+    newAsset.spec = specObject
+    console.log('newAsset before Add to DB : ', newAsset)
+    try {
+      await store.addAsset(newAsset)
+
+    } catch (error) {
+      console.error('Can not Add new Computer : ', error)
+    } finally {
+      router.push('/assets')
+    }
   }
 </script>
 
