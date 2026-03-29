@@ -1,9 +1,9 @@
 <template>
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" />
-  <main class="h-screen pt-2 bg-white text-blue-900">
+  <main class="h-screen pt-2 bg-white text-blue-900 ">
     <!-- 5 section -->
-    <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row h-screen overflow-scroll xl:overflow-hidden">
+    <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row h-screen  ">
       <!-- show computer image  -->
       <div class="pb-4 px-4 flex-row sm:flex-col">
         <p class="sm:pb-4 font- text-lg tracking-wide">Gallery</p>
@@ -16,49 +16,54 @@
           </div>
         </div>
         <!-- accounting section -->
-        <div class="text-nowrap mt-12 flex flex-col pb-2">
-          <p class=" sm:pb-4 text-lg tracking-wide">Asset information</p>
+        <div class="text-nowrap mt-12 flex flex-wrap flex-col pb-2">
+          <p class="sm:pb-4 text-lg tracking-wide">Asset information</p>
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
-            <div v-if="(data !== null)">
+            <div v-if="data !== null">
               <BaseBox :label="label" :data="data"></BaseBox>
-
             </div>
           </div>
         </div>
-
       </div>
       <!-- asset spec section, replace JSONB key with label-->
-      <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class=" sm:pb-4 text-lg tracking-wide">Specification</p>
+      <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2">
+        <p class="sm:pb-4 text-lg tracking-wide">Specification</p>
         <div v-for="(data, label) in updateData.spec" :key="label" class="pl-4 sm:pl-0 pt-2 sm:pt-0">
-
           <BaseBox :label="label" :data="data"></BaseBox>
-
         </div>
         <br />
       </div>
       <!-- can edit computer spec. section -->
-      <div v-show="(updateData.spec.ram && updateData.spec.harddisk !== null)"
-        class="text-nowrap px-4 flex flex-col pb-2">
-        <p class=" sm:pb-4 text-lg tracking-wide">Upgrade</p>
-        <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
-          <p class="py-2 text-sm text-gray-500">RAM</p>
-          <input type="text" v-model="updateRAM" class="bg-blue-100 p-2" />
-          <p class="py-2 text-sm text-gray-500">Hard Disk</p>
-          <input type="text" v-model="updateHarddisk" class="bg-blue-100 p-2" />
-          <p class="py-2 text-sm text-gray-500">Change BU asset</p>
+      <div class="text-nowrap px-4 flex flex-col pb-2 ">
+        <p class="sm:pb-4 text-lg tracking-wide"> Update / Upgrade</p>
+        <div v-if="updateData.spec.ram && updateData.spec.harddisk !== null" class="pl-4 sm:pl-0 pt-2 sm:pt-0">
+          <p class="mb-1 text-sm text-gray-500">RAM</p>
+          <input type="text" v-model="updateRAM" class="bg-green-100 py-1 px-2 mb-2" />
+          <p class="mb-1 text-sm text-gray-500">Hard Disk</p>
+          <input type="text" v-model="updateHarddisk" class="bg-green-100 py-1 px-2 mb-2" />
+          <p class="mb-1 text-sm text-gray-500">Change BU asset</p>
           <select name="officeName" id="officeName" v-model.trim="updateData.office_id"
-            class="text-md bg-blue-100 py-2 pl-1 pr-2">
+            class="text-md bg-green-100 py-2 pl-1 pr-2">
             <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
               {{ office_name.name }}
             </option>
           </select>
         </div>
-        <br />
+        <div v-else>
+          <p class="py-2 text-sm text-gray-500">Change BU asset</p>
+          <select name="officeName" id="officeName" v-model.trim="updateData.office_id"
+            class="text-md bg-green-100 py-2 pl-1 pr-2">
+            <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
+              {{ office_name.name }}
+            </option>
+          </select>
+        </div>
       </div>
+      <br />
+
       <!-- user info section -->
       <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="pt-4 sm:pt-0  sm:pb-4 text-lg tracking-wide">User Information</p>
+        <p class="pt-4 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
         <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
           <div class="pb-2">
             <div class="flex justify-between">
@@ -69,24 +74,24 @@
         </div>
         <div class="contain h-95">
           <div v-if="user_name !== 'FREE'">
-            <p class="bg-blue-100 text-md py-2 px-2 mb-2">{{ user_name }}</p>
+            <p class="bg-blue-50 text-md py-2 px-2 mb-2">{{ user_name }}</p>
             <p class="text-md text-gray-500">Office</p>
             <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
           </div>
-          <div v-else class="bg-blue-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
+          <div v-else class="bg-green-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
           <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border border-blue-300 py-2 px-2 mt-4">
             <p class="pb-2">Update User</p>
             <select v-model.trim="updateData.user_id" @change="handleUpdateUser"
-              class="w-full bg-blue-100 py-2 text-md">
-              <option :value="0" class="bg-blue-100">FREE</option>
+              class="w-full bg-green-100 py-2 text-md">
+              <option :value="0" class="bg-green-100">FREE</option>
               <option v-for="item in employeeStore.employee" :key="item.id" :value="item.id"
-                class="text-lg bg-blue-100">
+                class="text-lg bg-green-100">
                 {{ item.fname + ' ' + item.lname }}
               </option>
             </select>
             <div v-if="editUser && updateData.user_id > '0'">
               <p class="py-2">User Office</p>
-              <div class="text-md text-blue-900 bg-blue-100 py-2 px-1 mb-2">
+              <div class="text-md text-blue-900 bg-green-100 py-2 px-1 mb-2">
                 {{ new_officeName || ' - ' }}
               </div>
             </div>
@@ -251,9 +256,10 @@
     // TODO: validate data
     // console.log('UpdateData before call editsubmit : ', updateData)
     // upgrade ram and harddisk
-    if (updateRAM.value !== '' || updateHarddisk.value !== '')
+    if (updateRAM.value !== '' || updateHarddisk.value !== '') {
       updateData.spec.ram = updateRAM.value
-    updateData.spec.harddisk = updateHarddisk.value
+      updateData.spec.harddisk = updateHarddisk.value
+    }
     await store.updateAsset(paramID, updateData)
 
     router.push('/assets')

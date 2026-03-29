@@ -8,6 +8,6 @@
 <script setup>
   defineProps({
     label: String,
-    data: null
+    data: String
   })
 </script>

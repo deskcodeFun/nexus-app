@@ -1,7 +1,6 @@
 <template>
   <!-- TODO:
-        fix disable delete button for first row of specification
-        add save data button to DB
+        fix edit Mode
   -->
   <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
     <div class="gap-16 sm:flex sm:flex-row bg-white">
@@ -54,14 +53,20 @@
           </div>
         </div>
       </div>
-      <form @submit.prevent="addSubmit">
-        <button
-          class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
-          type="submit">
-          <BookmarkIcon class="h-4 w-4 mr-2" />
-          <span> Save </span>
-        </button>
-      </form>
+      <!-- Upload computer image  -->
+      <div class="flex flex-col">
+        <p class="pb-8">UPLOAD image</p>
+        <div class="flex flex-row w-md h-50 bg-sky-50 border border-blue-800 rounded-xl"></div>
+        <!-- button section -->
+        <form @submit.prevent="addSubmit">
+          <button
+            class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+            type="submit">
+            <BookmarkIcon class="h-4 w-4 mr-2" />
+            <span> Save </span>
+          </button>
+        </form>
+      </div>
     </div>
   </main>
 </template>
