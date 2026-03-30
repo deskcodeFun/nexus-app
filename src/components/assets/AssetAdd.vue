@@ -6,9 +6,9 @@
     <CatalogMenu @changeView="updateView" />
   </div>
 
-  <main>
+  <div class="h-full pb-60 overflow-scroll">
     <component :is="currentComponent" />
-  </main>
+  </div>
 </template>
 
 <script setup>

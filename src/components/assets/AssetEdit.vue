@@ -1,9 +1,9 @@
 <template>
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" />
-  <main class="h-screen pt-2 bg-white text-blue-900 ">
+  <div class="h-full pb-50 overflow-scroll pt-2  text-blue-900 ">
     <!-- 5 section -->
-    <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row h-screen  ">
+    <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row">
       <!-- show computer image  -->
       <div class="pb-4 px-4 flex-row sm:flex-col">
         <p class="sm:pb-4 font- text-lg tracking-wide">Gallery</p>
@@ -120,7 +120,7 @@
         </form>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup>

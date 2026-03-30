@@ -1,34 +1,32 @@
 <template>
-  <!-- TODO:
-        fix edit Mode
-  -->
-  <main class="py-4 px-8 bg-white flex flex-row text-blue-900">
-    <div class="gap-16 sm:flex sm:flex-row bg-white">
-      <div class="w-fit text-nowrap flex flex-col">
+  <div class=" py-4 px-8 bg-white flex flex-row text-blue-900">
+    <!-- 3 section -->
+    <div class="w-fit h-full gap-16 sm:flex sm:flex-row bg-white">
+      <!-- accounting section -->
+      <div class=" text-nowrap flex flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
         <label for="asset_tag" class="label">Asset Tag</label>
-        <input type="text" class="input" v-model.trim="newAsset.asset_tag" />
-        <label for="serial_tag" class="label">Serial</label>
-        <input type="text" class="input" v-model.trim="newAsset.serial_tag" />
+        <input type="text" v-model.trim="newAsset.asset_tag" class="input" />
+        <label for="serial_tag" class="label">Serial Tag</label>
+        <input type="text" v-model.trim="newAsset.serial_tag" class="input" />
         <label for="brand" class="label">Brand</label>
-        <input type="text" class="input" v-model.trim="newAsset.brand" />
+        <input type="text" v-model.trim="newAsset.brand" class="input" />
         <label for="model" class="label">Model</label>
-        <input type="text" class="input" v-model.trim="newAsset.model" />
+        <input type="text" v-model.trim="newAsset.model" class="input" />
         <label for="color" class="label">Color</label>
-        <input type="text" class="input" v-model.trim="newAsset.color" />
+        <input type="text" v-model.trim="newAsset.color" class="input" />
         <label for="description" class="label">Description</label>
-        <textarea rows="4" cols="50" class="input" v-model.trim="newAsset.description" />
-        <!-- office BU owner of assets field use select -->
+        <textarea row="3" cols="30" v-model.trim="newAsset.description" class="input" />
         <p class="py-2 text-sm text-gray-500">Office Name</p>
         <select name="officeName" id="officeName" v-model.trim="newAsset.office_id"
-          class="text-lg bg-blue-100 py-2 px-2">
+          class="text-lg bg-blue-100 py-2 px-4">
           <option v-for="office_name in officeNameStore.officeName" :key="office_name" :value="office_name.id">
             {{ office_name.name }}
           </option>
         </select>
       </div>
       <!-- add spec key:value -->
-      <div class="w-fit text-nowrap flex flex-col">
+      <div class="text-nowrap flex flex-col">
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Specification</p>
         <!-- header label -->
         <div class="flex flex-row gap-45">
@@ -68,7 +66,7 @@
         </form>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup>
@@ -142,10 +140,9 @@
   }
 
   .input {
-    font-size: 1rem;
+    font-size: large;
     padding-left: 8px;
     padding-bottom: 8px;
-    padding-top: 8px;
     background-color: #dbeafe;
     border-radius: 8px;
   }
