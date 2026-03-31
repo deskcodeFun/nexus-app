@@ -48,6 +48,7 @@
 
   const router = useRouter()
   const store = useEmployeeStore()
+  store.getAllEmployee()
 
 
 </script>

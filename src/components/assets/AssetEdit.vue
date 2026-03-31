@@ -190,8 +190,8 @@
   const user_officeName = ref('')
   const new_officeName = ref('')
   const editUser = ref(false)
-  const updateRAM = ref('')
-  const updateHarddisk = ref('')
+  const updateRAM = ref(store.assetDetail[0].spec.ram)
+  const updateHarddisk = ref(store.assetDetail[0].spec.harddisk)
   const userNameLabel = computed(() => {
     if (user_name.value === 'FREE') {
       return 'Status'

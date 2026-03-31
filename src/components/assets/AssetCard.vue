@@ -31,7 +31,7 @@
               <td>{{ item.model.substring(0, 13) + '...' }}</td>
             </tr>
             <tr>
-              <th scope="col">Office </th>
+              <th scope="col">Asset BU </th>
               <td>{{ item.office_name.short_name }}</td>
             </tr>
             <tr>
@@ -58,4 +58,6 @@
 
   const router = useRouter()
   const store = useAssetStore()
+  store.getAssetByOffice('0')
+
 </script>

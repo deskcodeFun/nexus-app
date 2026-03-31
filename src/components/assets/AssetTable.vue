@@ -12,7 +12,7 @@
           <th scope="col" class=" text-left text-base p-2 font-bold text-blue-900">Model</th>
           <th scope="col" class=" text-left text-base p-2 font-bold text-blue-900">Used By</th>
           <th scope="col" class=" text-left text-base p-2  font-bold text-blue-900">
-            Office</th>
+            Asset BU</th>
         </tr>
       </thead>
       <!-- Table body data -->
@@ -48,7 +48,7 @@
 
   const router = useRouter()
   const store = useAssetStore()
-  // store.getAssetByOffice('0')
+  store.getAssetByOffice('0')
 
 
   // label
