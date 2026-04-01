@@ -15,8 +15,8 @@ import EmployeeEdit from '@/components/employees/EmployeeEdit.vue'
 
 // import ComputerAdd from '@/components/computers/ComputerAdd.vue'
 // import ComputerEdit from '@/components/computers/ComputerEdit.vue'
-import PrinterAdd from '@/components/printers/PrinterAdd.vue'
-import PrinterEdit from '@/components/printers/PrinterEdit.vue'
+// import PrinterAdd from '@/components/printers/PrinterAdd.vue'
+// import PrinterEdit from '@/components/printers/PrinterEdit.vue'
 
 // import ComputerAdd from '@/components/computer/ComputerAdd.vue'
 
@@ -62,17 +62,17 @@ const router = createRouter({
 
     //   component: ComputerEdit,
     // },
-    {
-      path: '/addPrinter',
-      name: 'add-printer',
-      component: PrinterAdd,
-    },
-    {
-      path: '/editPrinter/:id',
-      name: 'edit-printer',
+    // {
+    //   path: '/addPrinter',
+    //   name: 'add-printer',
+    //   component: PrinterAdd,
+    // },
+    // {
+    //   path: '/editPrinter/:id',
+    //   name: 'edit-printer',
 
-      component: PrinterEdit,
-    },
+    //   component: PrinterEdit,
+    // },
 
     {
       path: '/services',

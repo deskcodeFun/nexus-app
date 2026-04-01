@@ -19,6 +19,7 @@
     },
   })
 
+
   const previewImage = ref(null)
 
   const showPreview = (image) => {
@@ -36,13 +37,17 @@
     /* flex-direction: column;*/
     flex-wrap: wrap;
     /* padding-left: 8px; */
+    justify-content: space-between;
     background: white;
+
   }
 
   .image-container img {
-    width: 90px;
+    width: 30%;
     height: auto;
-    margin: 10px;
+    aspect-ratio: 4/3;
+    object-fit: contain;
+    margin: 0px;
     cursor: pointer;
   }
 
@@ -53,7 +58,7 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 80%;
+    height: 95%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.8);
   }
@@ -62,11 +67,12 @@
     display: block;
     width: 50%;
     height: auto;
+    aspect-ratio: 4/3;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10%;
+    margin-top: 4%;
     margin-bottom: auto;
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 
   .close {

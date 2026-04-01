@@ -12,12 +12,27 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted, onUnmounted } from 'vue'
   import { RouterView } from 'vue-router'
   import TheTopbar from '@/components/TheTopbar.vue'
   import { supabase } from './lib/supabaseClient.js'
+
   const isConnected = ref(false)
   const error = ref(null)
+
+  // detect screen
+  const isMobile = ref(false)
+  const breakpoint = 1024
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth <= breakpoint
+  }
+  onMounted(() => {
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+  })
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkMobile)
+  })
 
   async function checkConnection() {
     try {

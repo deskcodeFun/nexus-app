@@ -1,41 +1,51 @@
 <script setup>
   import { RouterLink } from 'vue-router'
-  import { onMounted, ref } from 'vue'
+  import { onMounted, onUnmounted, ref } from 'vue'
   import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
-  const scrolledNav = ref(null)
+  // const scrolledNav = ref(null)
   const mobileNav = ref(null)
-  const mobile = ref(null)
-  const windowWidth = ref(null)
+  // const mobile = ref(null)
+  // const windowWidth = ref(null)
   const navOpen = ref(false)
+
+  // detect screen
+  const isMobile = ref(true)
+  const breakpoint = 1024
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth <= breakpoint
+  }
 
   const toggleMobileNav = () => {
     mobileNav.value = !mobileNav.value
     navOpen.value = !navOpen.value
   }
   onMounted(() => {
-    window.addEventListener('resize', checkScreen)
-    window.addEventListener('scroll', updateScroll)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
   })
-  const checkScreen = () => {
-    windowWidth.value = window.innerWidth
-    if (windowWidth.value <= 931) {
-      mobile.value = true
-      return
-    }
-    mobile.value = false
-    mobileNav.value = false
-    return
-  }
-  const updateScroll = () => {
-    const scrollPosition = window.scrollY
-    if (scrollPosition > 50) {
-      scrolledNav.value = true
-      return
-    }
-    scrolledNav.value = false
-    return
-  }
+  onUnmounted(() => {
+    window.removeEventListener('resize', checkMobile)
+  })
+  // const checkScreen = () => {
+  //   windowWidth.value = window.innerWidth
+  //   if (windowWidth.value <= 1024) {
+  //     mobile.value = true
+  //     return
+  //   }
+  //   mobile.value = false
+  //   mobileNav.value = false
+  //   return
+  // }
+  // const updateScroll = () => {
+  //   const scrollPosition = window.scrollY
+  //   if (scrollPosition > 50) {
+  //     scrolledNav.value = true
+  //     return
+  //   }
+  //   scrolledNav.value = false
+  //   return
+  // }
 </script>
 
 <template>
@@ -46,7 +56,8 @@
       Ne<span class="text-red-800">x</span>us Service
     </p>
     <!-- show menu item row  -->
-    <ul v-show="!mobile" class="flex items-center justify-end ">
+    <!-- <ul v-show="!mobile" class="flex items-center justify-end "> -->
+    <ul v-if="!isMobile" class="flex items-center justify-end ">
       <li>
         <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'home' }">Home</RouterLink>
       </li>
@@ -64,7 +75,7 @@
       </li>
     </ul>
     <!-- show icon menu -->
-    <div v-show="mobile" class="pr-4">
+    <div v-else class="pr-4">
       <button @click="toggleMobileNav">
         <Bars3Icon :class="navOpen ? 'hidden' : ''"
           class="h-6 w-6 mt-1 rounded-full text-blue-900 hover:cursor-pointer" />
@@ -74,7 +85,7 @@
     <Transition name="slide-right-to-left">
       <Teleport to="body">
         <div v-if="navOpen" class="modal-menu  mt-14" @click.self="navOpen = false">
-          <nav class="flex flex-col w-fit px-4 pt-4 bg-gray-100 shadow-2xl text-blue-900">
+          <nav class="flex flex-col w-1/2 px-4 pt-4 bg-gray-100 shadow-2xl text-blue-900">
             <RouterLink to="/" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
               @click="navOpen = !navOpen">
               Home

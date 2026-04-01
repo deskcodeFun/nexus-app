@@ -7,7 +7,7 @@
       <!-- show computer image  -->
       <div class="pb-4 px-4 flex-row sm:flex-col">
         <p class="sm:pb-4 font- text-lg tracking-wide">Gallery</p>
-        <div class="w-full text-nowrap mx-auto">
+        <div class="w-64 text-nowrap mx-auto">
           <div v-if="store.assetDetail && store.assetDetail[0].image !== null">
             <BaseImage :images="store.assetDetail[0].image" />
           </div>
@@ -224,6 +224,7 @@
     await store.getAssetDetail(paramID)
     // console.log('computerDetail : ', store.assetDetail)
     if (store.assetDetail[0]) {
+      console.log('store.assetDetail[0]', store.assetDetail[0])
       updateData.asset_tag = store.assetDetail[0].asset_tag
       updateData.serial_tag = store.assetDetail[0].serial_tag
       updateData.brand = store.assetDetail[0].brand
