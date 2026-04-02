@@ -72,13 +72,15 @@
             </div>
           </div>
         </div>
-        <div class="contain h-95">
+        <!-- show user name 2 state 'FREE' or user_name -->
+        <div>
           <div v-if="user_name !== 'FREE'">
             <p class="bg-blue-50 text-md py-2 px-2 mb-2">{{ user_name }}</p>
             <p class="text-md text-gray-500">Office</p>
             <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
           </div>
           <div v-else class="bg-green-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
+          <!-- change user name section  -->
           <div v-if="editUser && user_name" class="bg-blue-50/50 rounded-lg border border-blue-300 py-2 px-2 mt-4">
             <p class="pb-2">Update User</p>
             <select v-model.trim="updateData.user_id" @change="handleUpdateUser"
@@ -89,6 +91,7 @@
                 {{ item.fname + ' ' + item.lname }}
               </option>
             </select>
+            <!-- show office name of user if user name !== 'FREE' -->
             <div v-if="editUser && updateData.user_id > '0'">
               <p class="py-2">User Office</p>
               <div class="text-md text-blue-900 bg-green-100 py-2 px-1 mb-2">
@@ -98,6 +101,7 @@
           </div>
           <div v-else></div>
         </div>
+        <!-- Action button for 'save' 'delete' button -->
         <form @submit.prevent="editSubmit">
           <div class="flex flex-row justify-between gap-24">
             <button
@@ -111,7 +115,7 @@
               <BookmarkIcon class="h-4 w-4 mr-2" />
               <span> Save </span>
             </button>
-
+            <!-- show BaseModal for confirm delete action -->
             <BaseModal :modalActive="modalActive" title="Delete" @save-data="deleteAsset(paramID)"
               @close-modal="modalActive = false">
               <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
@@ -224,7 +228,7 @@
     await store.getAssetDetail(paramID)
     // console.log('computerDetail : ', store.assetDetail)
     if (store.assetDetail[0]) {
-      console.log('store.assetDetail[0]', store.assetDetail[0])
+      // console.log('store.assetDetail[0]', store.assetDetail[0])
       updateData.asset_tag = store.assetDetail[0].asset_tag
       updateData.serial_tag = store.assetDetail[0].serial_tag
       updateData.brand = store.assetDetail[0].brand
@@ -266,9 +270,9 @@
     router.push('/assets')
   }
 
-  function deleteAsset(paramID) {
-    store.deleteAsset(paramID)
-    store.getAssetByOffice('0')
+  async function deleteAsset(paramID) {
+    await store.deleteAsset(paramID)
+    await store.getAssetByOffice('0')
     router.push('/assets')
   }
 </script>
