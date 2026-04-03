@@ -1,8 +1,8 @@
 <template>
   <!-- show data h-[430px] -->
-  <div class=" max-h-150 flex mx-8  overflow-y-scroll overflow-x-hidden">
+  <div class=" max-h-150 flex mx-2 mt-2  overflow-y-scroll overflow-x-hidden">
     <table
-      class="table-fixed h-fit w-full [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline  [&_td]:text-blue-900 [&_td]:py-3 [&_td]:px-4 [&_td]:border-b [&_td]:border-slate-300">
+      class="table-fixed h-fit w-full [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline  [&_td]:text-blue-900 [&_td]:py-4 [&_td]:px-2 [&_td]:border-b [&_td]:border-slate-300">
       <!-- Table Header -->
       <thead class="table-header-group sticky top-0">
         <tr class=" border-b border-gray-300  bg-sky-100 text-nowrap">
@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <!-- Table body data -->
-      <tbody class="p-4 text-blue-900 overflow-hidden">
+      <tbody class="text-blue-900 overflow-hidden">
         <tr v-for="item in store.asset" :key="item.id" @click="router.push(`/editAsset/${item.id}`)"
           class="table-row  hover:shadow-2xl hover:bg-blue-50  hover:cursor-pointer text-nowrap">
           <!-- <td class=" flex justify-center">{{ item.id }}</td> -->
