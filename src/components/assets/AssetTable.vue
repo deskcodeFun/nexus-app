@@ -1,6 +1,6 @@
 <template>
   <!-- show data h-[430px] -->
-  <div class="max-h-screen m-2 overflow-clip  rounded-lg">
+  <div class="max-h-screen mt-2 rounded-lg">
     <!-- Table Header -->
     <table class="table-fixed w-full [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline  ">
       <thead class=" sticky top-0 overflow-y-hidden bg-sky-100  z-10">
@@ -16,9 +16,9 @@
       </thead>
     </table>
     <!-- Table body data -->
-    <div class="flex-1 max-h-screen overflow-y-scroll">
+    <div class="flex h-[calc(100vh-320px)] overflow-y-scroll">
       <table
-        class="w-full table-fixed [&_td]:text-blue-900 [&_td]:py-4 [&_td]:px-2 [&_td]:border-b [&_td]:border-slate-300">
+        class="w-full table-auto [&_td]:text-blue-900 [&_td]:py-4 [&_td]:px-2 [&_td]:border-b [&_td]:border-slate-300">
         <tbody class="text-blue-900">
           <tr v-for="item in store.asset" :key="item.id" @click="router.push(`/editAsset/${item.id}`)"
             class="table-row  hover:shadow-2xl hover:bg-blue-50  hover:cursor-pointer text-nowrap">
