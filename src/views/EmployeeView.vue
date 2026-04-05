@@ -1,13 +1,14 @@
 <template>
-  <!-- Header -->
-  <BaseHeader title='EMPLOYEE MANAGEMENT' />
-  <!-- Sub Menu -->
-  <div class="flex flex-row justify-between bg-white text-blue-900 tracking-wide px-2">
-    <BaseOfficeDrop @select-option="handleChoice" />
-    <BaseButtonAdd Link="/addEmployee" label="Add Employee"></BaseButtonAdd>
-  </div>
-  <!-- show data -->
-  <main class="px-2 py-2">
+  <header>
+    <BaseHeader title="EMPLOYEE MANAGEMENT" />
+  </header>
+  <main class="min-h-screen w-full my-2">
+    <!-- Sub Menu -->
+    <div class="flex flex-row justify-between bg-white text-blue-900 tracking-wide px-2">
+      <BaseOfficeDrop @select-option="handleChoice" />
+      <BaseButtonAdd Link="/addEmployee" label="Add Employee"></BaseButtonAdd>
+    </div>
+    <!-- show data -->
     <div v-if="isMobile">
       <EmployeeCard />
     </div>
@@ -26,7 +27,6 @@
   import EmployeeTable from '@/components/employees/EmployeeTable.vue'
   import EmployeeCard from '@/components/employees/EmployeeCard.vue'
   import { useEmployeeStore } from '@/stores/employeeData.js'
-
 
   const employeeStore = useEmployeeStore()
 
@@ -54,6 +54,4 @@
   onUnmounted(() => {
     window.removeEventListener('resize', checkMobile)
   })
-
-
 </script>

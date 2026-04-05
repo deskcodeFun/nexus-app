@@ -1,7 +1,9 @@
 <template>
   <!-- Header -->
-  <BaseHeader title="ASSETS ACCOUNTING" />
-  <main class="px-2 py-2 ">
+  <header>
+    <BaseHeader title="ASSETS ACCOUNTING" />
+  </header>
+  <main class="min-h-screen w-full my-2">
     <!-- Sub Menu -->
     <div class="flex flex-row justify-between bg-white text-blue-900 tracking-wide px-2">
       <BaseOfficeDrop @select-option="handleChoice" />

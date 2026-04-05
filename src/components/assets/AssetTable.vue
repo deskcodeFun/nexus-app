@@ -1,17 +1,17 @@
 <template>
   <!-- show data h-[430px] -->
-  <div class=" max-h-150 flex mx-2 mt-2  overflow-y-scroll overflow-x-hidden">
+  <div class=" max-h-screen flex m-2 overflow-y-scroll overflow-x-hidden">
     <table
-      class="table-fixed h-fit w-full [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline  [&_td]:text-blue-900 [&_td]:py-4 [&_td]:px-2 [&_td]:border-b [&_td]:border-slate-300">
+      class="table-auto h-fit w-full [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline  [&_td]:text-blue-900 [&_td]:py-4 [&_td]:px-2 [&_td]:border-b [&_td]:border-slate-300">
       <!-- Table Header -->
       <thead class="table-header-group sticky top-0">
         <tr class=" border-b border-gray-300  bg-sky-100 text-nowrap">
-          <th scope="col" class=" text-left text-base p-2 font-bold text-blue-900">Asset Tag</th>
-          <th scope="col" class=" text-left text-base p-2 font-bold text-blue-900">Serial</th>
-          <th scope="col" class=" text-left text-base p-2 font-bold text-blue-900">Brand</th>
-          <th scope="col" class=" text-left text-base p-2 font-bold text-blue-900">Model</th>
-          <th scope="col" class=" text-left text-base p-2 font-bold text-blue-900">Used By</th>
-          <th scope="col" class=" text-left text-base p-2  font-bold text-blue-900">
+          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">Asset Tag</th>
+          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">Serial</th>
+          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">Brand</th>
+          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">Model</th>
+          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">Used By</th>
+          <th scope="col" class=" text-left text-base p-2 font-bold text-blue-900">
             Asset BU</th>
         </tr>
       </thead>
@@ -26,7 +26,7 @@
           <td class="table-cell">{{ item.model }}</td>
 
           <!-- User Full name -->
-          <td class="table-cell">
+          <td class="table-cell ">
             <p v-if="item.employee">
               {{ item.employee.fname + ' ' + item.employee.lname }}
             </p>
