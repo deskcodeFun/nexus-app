@@ -1,12 +1,9 @@
 <script setup>
   import { RouterLink } from 'vue-router'
   import { onMounted, onUnmounted, ref } from 'vue'
-  import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+  import { Bars3Icon, XMarkIcon, HomeIcon, ServerStackIcon, UsersIcon, WrenchScrewdriverIcon, InformationCircleIcon } from '@heroicons/vue/24/outline'
 
-  // const scrolledNav = ref(null)
   const mobileNav = ref(null)
-  // const mobile = ref(null)
-  // const windowWidth = ref(null)
   const navOpen = ref(false)
 
   // detect screen
@@ -20,6 +17,7 @@
     mobileNav.value = !mobileNav.value
     navOpen.value = !navOpen.value
   }
+
   onMounted(() => {
     checkMobile()
     window.addEventListener('resize', checkMobile)
@@ -27,55 +25,50 @@
   onUnmounted(() => {
     window.removeEventListener('resize', checkMobile)
   })
-  // const checkScreen = () => {
-  //   windowWidth.value = window.innerWidth
-  //   if (windowWidth.value <= 1024) {
-  //     mobile.value = true
-  //     return
-  //   }
-  //   mobile.value = false
-  //   mobileNav.value = false
-  //   return
-  // }
-  // const updateScroll = () => {
-  //   const scrollPosition = window.scrollY
-  //   if (scrollPosition > 50) {
-  //     scrolledNav.value = true
-  //     return
-  //   }
-  //   scrolledNav.value = false
-  //   return
-  // }
 </script>
 
 <template>
-  <div
-    class="w-full z-2000 fixed flex sm:flex-row justify-between py-4  pr-0 sm:pr-8 bg-[#dfc2b5]/50 overflow-y-hidden">
+  <div class="w-full fixed flex justify-between py-6 pr-4 bg-[#dfc2b5]/50">
     <!-- Logo -->
-    <p class="pb-2 font-semibold pl-2 sm:pl-8 text-2xl text-blue-900 text-shadow-lg">
+    <p class="pb-2 font-semibold pl-8 text-2xl text-blue-900 text-shadow-lg">
       Ne<span class="text-red-800">x</span>us Service
     </p>
-    <!-- show menu item row  -->
-    <!-- <ul v-show="!mobile" class="flex items-center justify-end "> -->
+    <!-- show Desktop menu  -->
     <ul v-if="!isMobile" class="flex items-center justify-end ">
       <li>
-        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'home' }">Home</RouterLink>
+        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'home' }">
+          <HomeIcon class="h-6 w-6" />
+          <p class="px-4 mt-1">Home</p>
+        </RouterLink>
       </li>
       <li>
-        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'assets' }">Assets</RouterLink>
+        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'assets' }">
+          <ServerStackIcon class="h-6 w-6" />
+          <p class="px-4 mt-1">Assets</p>
+        </RouterLink>
       </li>
       <li>
-        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'employee' }">Employee</RouterLink>
+        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'employee' }">
+          <UsersIcon class="h-6 w-6" />
+          <p class="px-4 mt-1">Employee</p>
+        </RouterLink>
       </li>
       <li>
-        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'service' }">Services</RouterLink>
+        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'service' }">
+          <WrenchScrewdriverIcon class="h-6 w-6" />
+          <p class="px-4 mt-1">Services</p>
+        </RouterLink>
       </li>
       <li>
-        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'about' }">About</RouterLink>
+        <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'about' }">
+          <InformationCircleIcon class="h-6 w-6" />
+          <p class="px-4 mt-1">about</p>
+        </RouterLink>
       </li>
     </ul>
-    <!-- show icon menu -->
+    <!-- show Mobile menu icon -->
     <div v-else class="pr-4">
+      <!-- toggle menu icon-->
       <button @click="toggleMobileNav">
         <Bars3Icon :class="navOpen ? 'hidden' : ''"
           class="h-6 w-6 mt-1 rounded-full text-blue-900 hover:cursor-pointer" />
@@ -84,28 +77,34 @@
     </div>
     <Transition name="slide-right-to-left">
       <Teleport to="body">
-        <div v-if="navOpen" class="modal-menu  mt-14" @click.self="navOpen = false">
-          <nav class="flex flex-col w-1/2 px-4 pt-4 bg-gray-100 shadow-2xl text-blue-900">
-            <RouterLink to="/" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen">
-              Home
+        <div v-if="navOpen" class="modal-menu mt-18" @click.self="navOpen = false">
+          <nav class="flex flex-col w-9/12  bg-amber-50/70 shadow-2xl text-blue-900">
+            <RouterLink to="/" class=" flex flex-row  text-xl py-8 px-6 border-b border-neutral-400"
+              active-class="bg-sky-100 rounded-lg text-blue-900" @click="navOpen = !navOpen">
+              <HomeIcon class="h-6 w-6  text-blue-800" />
+              <p class="px-4">Home</p>
             </RouterLink>
 
-            <RouterLink to="/assets" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen">
-              Assets
+            <RouterLink to="/assets" class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              active-class="bg-sky-50 rounded-lg text-blue-900" @click="navOpen = !navOpen">
+              <ServerStackIcon class="h-6 w-6 text-blue-800" />
+              <p class="px-4">Assets</p>
             </RouterLink>
-
-
-            <RouterLink to="/employee" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen">Employee</RouterLink>
-            <RouterLink to="/services" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen">
-              Services
+            <RouterLink to="/employee" class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              active-class="bg-sky-50 rounded-lg text-blue-900" @click="navOpen = !navOpen">
+              <UsersIcon class="h-6 w-6 text-blue-800" />
+              <p class="px-4">Employee</p>
             </RouterLink>
-            <RouterLink to="/about" class="link" active-class="bg-sky-50 rounded-lg  hover:bg-sky-100 text-blue-900"
-              @click="navOpen = !navOpen">
-              About
+            <RouterLink to="/services" class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              active-class="bg-sky-50 rounded-lg text-blue-900" @click="navOpen = !navOpen">
+              <WrenchScrewdriverIcon class="h-6 w-6 text-blue-800" />
+              <p class="px-4">Services</p>Services
+            </RouterLink>
+            <RouterLink to="/about" class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              active-class="bg-sky-50 rounded-lg text-blue-900" @click="navOpen = !navOpen">
+              <InformationCircleIcon class="h-6 w-6 text-blue-800" />
+
+              <p class="px-4">About</p>
             </RouterLink>
           </nav>
         </div>
@@ -127,29 +126,12 @@
     transition: 0.05s ease all;
     padding: 8px 12px 8px 12px;
     border-radius: 0.5rem;
+    display: flex;
+    direction: row;
 
     &:hover {
       color: white;
       background-color: #1e3a8a;
     }
-  }
-
-  .icon {
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 0;
-    right: 24px;
-    height: 100%;
-
-    i {
-      cursor: pointer;
-      font-size: 24px;
-      transition: 0.8s ease all;
-    }
-  }
-
-  .icon-active {
-    transform: rotate(90deg);
   }
 </style>
