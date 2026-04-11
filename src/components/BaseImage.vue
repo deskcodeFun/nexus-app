@@ -18,17 +18,14 @@
       type: Array,
     },
   })
-
-
   const previewImage = ref(null)
-
   const showPreview = (image) => {
     previewImage.value = image
   }
-
   const closePreview = () => {
     previewImage.value = !previewImage.value
   }
+
 </script>
 
 <style scoped>
@@ -45,8 +42,6 @@
   .image-container img {
     width: 30%;
     height: auto;
-    aspect-ratio: 4/3;
-    object-fit: contain;
     margin: 0px;
     cursor: pointer;
   }
@@ -67,7 +62,6 @@
     display: block;
     width: 50%;
     height: auto;
-    aspect-ratio: 4/3;
     margin-left: auto;
     margin-right: auto;
     margin-top: 4%;

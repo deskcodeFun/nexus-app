@@ -161,23 +161,6 @@
     }
     return {}
   })
-  // const specData = computed(() => {
-  //   if (store.assetDetail[0] && updateData.spec) {
-  //     const spec = updateData.spec
-  //     console.log('spec before filter: ', spec)
-  //     const filtered = {}
-  //     for (const [key, value] of Object.entries(updateData.spec)) {
-  //       filtered[key] = value
-  //       if (key !== 'ram' && key !== 'harddisk') {
-  //         filtered[key] = value
-  //       }
-  //     }
-  //     console.log('Filter specData is : ', filtered)
-  //     return filtered
-  //   }
-  //   console.log('specData is : ', specData)
-  //   return {}
-  // })
 
   const updateData = reactive({
     id: paramID,

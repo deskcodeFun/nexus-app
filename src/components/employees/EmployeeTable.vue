@@ -1,13 +1,13 @@
 <template>
-  <div class="max-h-screen  m-2 overflow-clip">
+  <div class="max-h-screen mt-2">
     <!-- Table Header -->
-    <table class="table-fixed w-full [&_th]:p-4 [&_th]:text-left [&_th]:align-baseline ">
+    <table class="table-fixed w-full mb-2 [&_th]:py-6 ">
       <thead class="table-header-group sticky top-0">
         <tr class="border-b border-gray-300 bg-sky-100 text-nowrap">
-          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">User Name</th>
-          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">Email</th>
-          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">Department</th>
-          <th scope="col" class="text-left text-base p-2 font-bold text-blue-900">Office</th>
+          <th scope="col" class="text-left text-base pl-2 font-bold text-blue-900">User Name</th>
+          <th scope="col" class="text-left text-base font-bold text-blue-900">Email</th>
+          <th scope="col" class="text-left text-base font-bold text-blue-900">Department</th>
+          <th scope="col" class="text-left text-base font-bold text-blue-900">Office</th>
         </tr>
       </thead>
     </table>
