@@ -1,7 +1,7 @@
 <template>
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" />
-  <div class="h-full pb-50 overflow-scroll pt-2  text-blue-900 ">
+  <div class="h-full pb-50 overflow-scroll pt-2 text-blue-900">
     <!-- 5 section -->
     <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row">
       <!-- show computer image  -->
@@ -31,16 +31,17 @@
         <div v-for="(data, label) in updateData.spec" :key="label" class="pl-4 sm:pl-0 pt-2 sm:pt-0">
           <BaseBox :label="label" :data="data"></BaseBox>
         </div>
-        <br />
       </div>
       <!-- can edit computer spec. section -->
-      <div class="text-nowrap px-4 flex flex-col pb-2 ">
-        <p class="sm:pb-4 text-lg tracking-wide"> Update / Upgrade</p>
+      <div class="text-nowrap px-4 flex flex-col pb-2">
+        <p class="sm:pb-4 text-lg tracking-wide">Update / Upgrade</p>
         <div v-if="updateData.spec.ram && updateData.spec.harddisk !== null" class="pl-4 sm:pl-0 pt-2 sm:pt-0">
           <p class="mb-1 text-sm text-gray-500">RAM</p>
           <input type="text" v-model="updateRAM" class="bg-green-100 py-1 px-2 mb-2" />
           <p class="mb-1 text-sm text-gray-500">Hard Disk</p>
           <input type="text" v-model="updateHarddisk" class="bg-green-100 py-1 px-2 mb-2" />
+          <p class="mb-1 text-sm text-gray-500">Description</p>
+          <textarea type="text" rows="4" cols="35" v-model="updateDescription" class="bg-green-100 py-1 px-2 mb-2" />
           <p class="mb-1 text-sm text-gray-500">Change BU asset</p>
           <select name="officeName" id="officeName" v-model.trim="updateData.office_id"
             class="text-md bg-green-100 py-2 pl-1 pr-2">
@@ -168,6 +169,7 @@
     serial_tag: '',
     brand: '',
     model: '',
+    description: '',
     office_id: Number,
     user_id: Number,
     spec: {}, // JSONB column
@@ -177,8 +179,9 @@
   const user_officeName = ref('')
   const new_officeName = ref('')
   const editUser = ref(false)
-  const updateRAM = ref(store.assetDetail[0].spec.ram)
-  const updateHarddisk = ref(store.assetDetail[0].spec.harddisk)
+  const updateRAM = ref('')
+  const updateHarddisk = ref('')
+  const updateDescription = ref('')
   const userNameLabel = computed(() => {
     if (user_name.value === 'FREE') {
       return 'Status'
@@ -216,9 +219,13 @@
       updateData.serial_tag = store.assetDetail[0].serial_tag
       updateData.brand = store.assetDetail[0].brand
       updateData.model = store.assetDetail[0].model
+      updateData.description = store.assetDetail[0].description
       updateData.office_id = store.assetDetail[0].office_id
       updateData.user_id = store.assetDetail[0].user_id
       updateData.spec = store.assetDetail[0].spec
+      updateRAM.value = store.assetDetail[0].spec.ram
+      updateHarddisk.value = store.assetDetail[0].spec.harddisk
+      updateDescription.value = store.assetDetail[0].description
     }
     if (store.assetDetail[0].employee) {
       // console.log('store.computerDetail[0].employee', store.computerDetail[0].employee)
@@ -239,7 +246,6 @@
   const toggleModal = () => {
     modalActive.value = !modalActive.value
   }
-
   async function editSubmit() {
     // TODO: validate data
     // console.log('UpdateData before call editsubmit : ', updateData)
@@ -247,9 +253,17 @@
     if (updateRAM.value !== '' || updateHarddisk.value !== '') {
       updateData.spec.ram = updateRAM.value
       updateData.spec.harddisk = updateHarddisk.value
+    } else {
+      updateData.spec.ram = store.assetDetail[0].spec.ram
+      updateData.spec.harddisk = store.assetDetail[0].spec.harddisk
+      updateData.description = ref(null)
+    }
+    if (updateDescription.value !== '') {
+      updateData.description = updateDescription.value
+    } else {
+      updateData.description = null
     }
     await store.updateAsset(paramID, updateData)
-
     router.push('/assets')
   }
 
