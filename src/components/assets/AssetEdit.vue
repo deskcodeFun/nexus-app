@@ -256,7 +256,7 @@
     } else {
       updateData.spec.ram = store.assetDetail[0].spec.ram
       updateData.spec.harddisk = store.assetDetail[0].spec.harddisk
-      updateData.description = ref(null)
+      // updateData.description = ref(null)
     }
     if (updateDescription.value !== '') {
       updateData.description = updateDescription.value
