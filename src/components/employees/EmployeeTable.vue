@@ -1,5 +1,5 @@
 <template>
-  <div class="max-h-screen mt-2">
+  <div class="mt-2">
     <!-- Table Header -->
     <table class="table-fixed w-full mb-2 [&_th]:py-6 ">
       <thead class="table-header-group sticky top-0">
@@ -12,7 +12,7 @@
       </thead>
     </table>
     <!-- Table body data -->
-    <div class="flex h-[calc(100vh-320px)] overflow-y-scroll">
+    <div class="flex max-h-[calc(100vh-320px)] overflow-y-scroll">
       <table
         class="w-full table-fixed [&_td]:text-blue-900 [&_td]:py-4 [&_td]:px-2 [&_td]:border-b [&_td]:border-slate-300">
         <tbody class="text-blue-900">
