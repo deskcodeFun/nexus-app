@@ -1,91 +1,102 @@
 <template>
+  <!-- input directory  -->
   <div class="mt-28">
-    <label for="file-input" class="border px-4 py-2 bg-amber-50">Upload File</label>
-    <input type="file" id="file-input" accept="image/*" @change="handleFileSelect" multiple hidden />
+    <label for="directory-name">Directory :</label>
+    <input type="text" id="directory-name" v-model="dirName" class="mx-4 bg-sky-50" />
   </div>
-
-  <div class="bg-sky-100 p-12 mt-4 flex flex-row ">
-    <div class="flex flex-row gap-12">
-      <div v-for="(url, index) in previews" :key="index" class="flex flex-col items-center gap-3">
-        <img :src="url" alt="Selected image preview" class="w-25 h-25 object-cover" />
-        <p class="flex ">{{ files[index].name }}</p>
+  <!-- input multiple image file with <input> attribute multiple -->
+  <div class="mt-8">
+    <label
+      for="file-input"
+      class="border borer-blue-800 px-4 py-1 rounded-full text-blue-800 text-sm bg-sky-50"
+      >Selecte File</label
+    >
+    <input
+      type="file"
+      id="file-input"
+      accept="image/*"
+      @change="handleFileSelect"
+      multiple
+      hidden
+    />
+  </div>
+  <!-- show each image preview -->
+  <div class="bg-sky-50 p-12 mt-4 flex flex-row">
+    <div class="flex flex-row flex-wrap gap-4">
+      <div v-for="(image, index) in previewImages" :key="index" class="flex flex-col">
+        <div class="flex flex-col items-end relative">
+          <XCircleIcon
+            class="h-4 w-4 text-end rounded-full text-red-400 cursor-pointer"
+            @click="removeImage(index)"
+          />
+          <img :src="image.url" alt="Selected image preview" class="w-auto h-30 object-fill" />
+        </div>
+        <p class="flex justify-center">
+          {{ image.file.name }}
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-  import { ref } from 'vue'
-  const files = ref([])
-  const previews = ref([])
+import { ref } from 'vue'
+import { XCircleIcon } from '@heroicons/vue/24/outline'
 
-  function handleFileSelect(event) {
-    const input = event.target
-    const filesAsArray = Array.from(input?.files || [])
-    files.value = files.value.concat(filesAsArray)
-    console.log(' filesAsArray: ', filesAsArray)
-    console.log(' files: ', files)
-    const newPreviews = filesAsArray.map((file) => URL.createObjectURL(file))
-    previews.value = previews.value.concat(newPreviews)
+const isUploaded = ref(false)
+const previewImages = ref([])
+const dirName = ref('')
+// const fileName = ref('')
+// const fileExt = ref('')
+// const filePath = ref('')
+
+async function handleFileSelect(event) {
+  try {
+    isUploaded.value = true
+    const files = event.target.files
+    if (!files || files.length === 0) {
+      throw new Error('No files selected')
+    }
+    const uploadPromises = Array.from(files).map(async (file) => {
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${file.name}.${fileExt}`
+      // const filePath = dirName.value ? `${dirName.value}/${fileName}` : fileName
+      const filePath = `${dirName.value}/${fileName}`
+      console.log(' fileName: ', fileName)
+      console.log(' filePath: ', filePath)
+
+      // preview image storage on local , not upload to supabase storage
+      const previewUrl = URL.createObjectURL(file)
+      previewImages.value.push({ url: previewUrl, file })
+
+      // upload file to supabase storage
+      // const { error } = await supabase.storage.from('test').upload(filePath, file)
+      // if (error) throw error
+      // const { data } = await supabase.storage.from('test').getPublicUrl(filePath)
+      // previewImages.value.push({ url: data.publicUrl, file })
+      // console.log(' data: ', data)
+      console.log('previewImages:', previewImages.value)
+      return
+    })
+    await Promise.all(uploadPromises)
+  } catch (error) {
+    console.error('Error uploading file:', error.message)
+  } finally {
+    isUploaded.value = false
   }
-  // const fetchImages = async () => {
-  //   // 1. List all files in the bucket
-  //   const { data, error } = await supabase.storage.from('test').list()
-  //   console.log('fetch images error: ', error)
-  //   if (data) {
-  //     // 2. Generate public URLs for each file
-  //     images.value = data.map((file) => {
-  //       const {
-  //         data: { publicUrl },
-  //       } = supabase.storage.from('test').getPublicUrl(file.name)
-  //       return { name: file.name, url: publicUrl }
-  //     })
-  //   }
-  // }
-
-  // const uploadImage = async (event) => {
-  //   const file = event.target.files[0]
-  //   const fileName = `${file.name}`
-
-  //   const { data, error } = await supabase.storage
-  //     .from('test')
-  //     .upload(fileName, file)
-  //   console.log('data to uploadImage', data)
-  //   if (error) console.error('Upload error:', error.message)
-  //   else fetchImages() // Refresh test after upload
-  // }
-
-  // function uploadImage(e) {
-  //   const file = e.target.files[0]
-  //   console.log('file to upload is: ', file)
-  //   try {
-  //     isLoading.value = true
-  //     const { data, error } = supabase
-  //       .storage
-  //       .from('test')
-  //       .upload(file)
-  //     // .upload(userId + "/"+uuid4(), file)
-  //     if (data) {
-  //       getImage()
-  //     }
-  //     if (error) throw error
-  //   } catch (error) {
-  //     console.log('ERROR upload image: ', error)
-  //   } finally {
-  //     isLoading.value = false
-
-  //   }
-  // }
-
-  // filesAsArray.forEach((file) => {
-  //   const reader = new FileReader()
-  //   reader.onload = (event) => {
-  //     const content = event.target.result
-  //     console.log('contensts of file: ', content)
-  //   }
-  //   reader.onerror = (error) => console.error('Error reading file: ', error)
-
-  // })
+}
+const removeImage = (index) => {
+  previewImages.value.splice(index, 1)
+  console.log('previewImages after DELETE:', previewImages.value)
+}
 </script>
-
-<style lang="scss" scoped></style>
+<!-- function handleFileSelect(event) {
+  const input = event.target
+  const filesAsArray = Array.from(input?.files || [])
+  files.value = files.value.concat(filesAsArray)
+  console.log(' filesAsArray: ', filesAsArray)
+  console.log(' files: ', files)
+  const newPreviews = filesAsArray.map((file) => URL.createObjectURL(file))
+  previews.value = previews.value.concat(newPreviews)
+  console.log(' previews: ', previews)
+} -->
