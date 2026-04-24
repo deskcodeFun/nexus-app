@@ -41,6 +41,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { supabase } from '@/lib/supabaseClient'
 import { XCircleIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
@@ -72,16 +73,16 @@ async function handleFileSelect(event) {
       console.log(' filePath: ', filePath)
 
       // preview image storage on local , not upload to supabase storage
-      const previewUrl = URL.createObjectURL(file)
-      previewImages.value.push({ url: previewUrl, file })
+      // const previewUrl = URL.createObjectURL(file)
+      // previewImages.value.push({ url: previewUrl, file })
 
       // upload file to supabase storage
-      // const { error } = await supabase.storage.from('test').upload(filePath, file)
-      // if (error) throw error
-      // const { data } = await supabase.storage.from('test').getPublicUrl(filePath)
-      // previewImages.value.push({ url: data.publicUrl, file })
-      // console.log(' data: ', data)
-      console.log('previewImages:', previewImages.value)
+      const { error } = await supabase.storage.from('test').upload(filePath, file)
+      if (error) throw error
+      const { data } = supabase.storage.from('test').getPublicUrl(filePath)
+      previewImages.value.push({ url: data.publicUrl, file })
+      console.log(' data: ', data)
+      console.log('previewImages:', previewImages)
       return
     })
     await Promise.all(uploadPromises)

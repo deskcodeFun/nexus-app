@@ -70,6 +70,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
             ...newAsset,
             office_id: newAsset.office_id || null,
             user_id: newAsset.user_id || null,
+            image: newAsset.image || null,
             spec: newAsset.spec,
           },
         ])
