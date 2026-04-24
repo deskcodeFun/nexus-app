@@ -61,6 +61,7 @@
         <label for="cpu" class="label">Screen Size</label>
         <input type="text" v-model.trim="newComputer.spec.screen_size" class="input" />
       </div>
+
       <!-- Upload computer image and button submit section -->
       <div class="flex flex-col">
         <!-- upload image -->
@@ -70,6 +71,7 @@
           <label for="directory-name">Directory :</label>
           <input type="text" id="directory-name" v-model="dirName" class="mx-4 bg-sky-50" />
         </div>
+
         <!-- input multiple image file with <input> attribute multiple -->
         <div class="mt-8">
           <label
@@ -124,7 +126,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { BookmarkIcon } from '@heroicons/vue/20/solid'
@@ -164,7 +166,7 @@ const newComputer = reactive({
 })
 const isUploaded = ref(false)
 const previewImages = ref([])
-const dirName = ref('')
+const dirName = computed(() => newComputer.asset_tag)
 
 async function handleFileSelect(event) {
   try {
