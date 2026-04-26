@@ -1,7 +1,12 @@
 <template>
   <!--h-[630px]  -->
   <div class="h-full max-h-screen flex flex-row flex-wrap justify-around overflow-y-auto">
-    <div v-for="item in store.asset" :key="item.id" @click="router.push(`/editAsset/${item.id}`)" class="my-4 mx-4">
+    <div
+      v-for="item in store.asset"
+      :key="item.id"
+      @click="router.push(`/editAsset/${item.id}`)"
+      class="my-4 mx-4"
+    >
       <!-- each card layout -->
       <BaseCard>
         <!-- show image in each card -->
@@ -15,7 +20,8 @@
         </div>
         <!-- show data in each card -->
         <table
-          class="[&_th]:pt-1 [&_th]:text-left [&_tr]:align-baseline [&_tr]:h-6 [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
+          class="[&_th]:pt-1 [&_th]:text-left [&_tr]:align-baseline [&_tr]:h-6 [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4"
+        >
           <tbody>
             <tr>
               <th>Asset Tag</th>
@@ -46,15 +52,14 @@
 </template>
 
 <script setup>
-  import { useRouter } from 'vue-router'
-  import BaseCard from '../BaseCard.vue'
-  // import BaseImage from '../BaseImage.vue'
-  import { useAssetStore } from '@/stores/assetsData'
-  import { PhotoIcon } from "@heroicons/vue/24/outline";
+import { useRouter } from 'vue-router'
+import BaseCard from '../BaseCard.vue'
+// import BaseImage from '../BaseImage.vue'
+import { useAssetStore } from '@/stores/assetsData'
+import { PhotoIcon } from '@heroicons/vue/24/outline'
 
-
-  const router = useRouter()
-  const store = useAssetStore()
-  store.getAssetByOffice('0')
-  console.log('asset property', store.asset)
+const router = useRouter()
+const store = useAssetStore()
+store.getAssetByOffice('0')
+// console.log('asset property', store.asset)
 </script>

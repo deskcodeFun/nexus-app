@@ -1,4 +1,9 @@
 <template>
+  <!-- TODO :
+    1. remove image
+    2. add more image
+    3. when delete asset, remove image and directory in backend
+    -->
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" />
   <div class="h-full pb-50 overflow-scroll pt-2 text-blue-900">
@@ -323,7 +328,7 @@ async function deleteAsset(paramID) {
 }
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .label {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -332,4 +337,4 @@ async function deleteAsset(paramID) {
   letter-spacing: 0.1rem;
   color: #37383a;
 }
-</style>
+</style> -->
