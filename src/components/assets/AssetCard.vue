@@ -1,11 +1,13 @@
 <template>
   <!--h-[630px]  -->
-  <div class="h-full max-h-screen flex flex-row flex-wrap justify-around overflow-y-auto">
+  <div
+    class="max-h-screen pb-60 flex flex-row flex-wrap justify-around items-start overflow-y-auto"
+  >
     <div
       v-for="item in store.asset"
       :key="item.id"
       @click="router.push(`/editAsset/${item.id}`)"
-      class="my-4 mx-4"
+      class="m-4 cursor-pointer"
     >
       <!-- each card layout -->
       <BaseCard>
