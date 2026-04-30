@@ -5,7 +5,7 @@
     3. when delete asset, remove image and directory in backend
     -->
   <!-- Header -->
-  <BaseHeader title="ASSET DETAIL" />
+  <BaseHeader title="ASSET DETAIL" :isShow="true" />
   <div class="h-full pb-50 overflow-scroll pt-2 text-blue-900">
     <!-- 5 section -->
     <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row">
