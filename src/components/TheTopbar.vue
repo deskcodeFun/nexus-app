@@ -1,7 +1,8 @@
 <script setup>
 import { RouterLink, useRouter } from 'vue-router'
 import { onMounted, onUnmounted, ref } from 'vue'
-import { supabase } from '@/lib/supabaseClient'
+
+import { useAuth } from '@/stores/useAuth'
 import {
   Bars3Icon,
   XMarkIcon,
@@ -13,6 +14,7 @@ import {
   ArrowRightStartOnRectangleIcon,
 } from '@heroicons/vue/24/outline'
 
+const { user, logout } = useAuth()
 const router = useRouter()
 const mobileNav = ref(null)
 const navOpen = ref(false)
@@ -28,23 +30,15 @@ const toggleMobileNav = () => {
   mobileNav.value = !mobileNav.value
   navOpen.value = !navOpen.value
 }
-async function signOut() {
-  try {
-    const { error } = await supabase.auth.signOut()
-    // Clear the auth token from local storage
-    // localStorage.removeItem('authToken')
-    console.log('User signed out successfully.')
-    if (error) throw error
-    // Optionally, you can redirect the user to the sign-in page after signing out
-    router.push('/sign-in')
-  } catch (error) {
-    console.error('Error signing out:', error.message)
-  }
+const handleLogout = async () => {
+  await logout()
+  router.push({ name: 'home' }) // redirect to home page after logout
 }
 
 onMounted(() => {
   checkMobile()
   window.addEventListener('resize', checkMobile)
+  // localStorage.removeItem('supabase.auth.token') // clear token on page refresh to prevent auto-login
 })
 onUnmounted(() => {
   window.removeEventListener('resize', checkMobile)
@@ -85,10 +79,20 @@ onUnmounted(() => {
         <InformationCircleIcon class="h-6 w-6" />
         <p class="px-1 mt-1">about</p>
       </RouterLink>
-      <RouterLink class="link" active-class="bg-sky-100 rounded-lg" :to="{ name: 'sign-in' }">
+      <!-- sign in/out button -->
+      <RouterLink
+        v-if="!user"
+        class="link"
+        active-class="bg-sky-100 rounded-lg"
+        :to="{ name: 'sign-in' }"
+      >
         <ArrowRightStartOnRectangleIcon class="h-6 w-6" />
-        <p @click="signOut" class="px-1 mt-1">Log Out</p>
+        <p class="mt-1 px-1">Log in</p>
       </RouterLink>
+      <button v-else @click="handleLogout" class="link">
+        <ArrowRightStartOnRectangleIcon class="h-6 w-6" />
+        <p class="mt-1 px-1">Log out</p>
+      </button>
     </nav>
     <!-- show Mobile menu icon -->
     <div v-else class="pr-4">

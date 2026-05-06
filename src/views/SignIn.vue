@@ -40,7 +40,7 @@
           </a>
         </div>
       </form>
-      <div class="flex flex-col font-light text-xs items-center justify-center">
+      <div class="flex flex-col font-light text-xs text-slate-300 items-center justify-center">
         <p>&copy; 2026 All rights reserved.</p>
         <p>Nexus Web Application.</p>
       </div>
