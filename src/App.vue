@@ -1,9 +1,11 @@
 <template>
-  <div class="fixed top-0 right-0 z-1000 w-full">
-    <TheTopbar />
-  </div>
-  <div class="w-full mt-24">
-    <RouterView />
+  <div class="fixed h-screen w-full">
+    <div class="fixed top-0 left-0 right-0 z-1000">
+      <TheTopbar />
+    </div>
+    <div class="h-screen mt-18 sm:pl-8 sm:mr-8 z-0">
+      <RouterView />
+    </div>
   </div>
 </template>
 

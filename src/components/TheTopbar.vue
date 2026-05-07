@@ -160,6 +160,25 @@ onUnmounted(() => {
 
               <p class="px-4">About</p>
             </RouterLink>
+            <!-- sign in/out button -->
+            <RouterLink
+              v-if="!user"
+              @click="navOpen = !navOpen"
+              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              active-class="bg-sky-50 rounded-lg text-blue-900"
+              :to="{ name: 'sign-in' }"
+            >
+              <ArrowRightStartOnRectangleIcon class="h-6 w-6 text-blue-800" />
+              <p class="px-4">Log in</p>
+            </RouterLink>
+            <button
+              v-else
+              @click="handleLogout"
+              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+            >
+              <ArrowRightStartOnRectangleIcon class="h-6 w-6 text-blue-800" />
+              <p @click="navOpen = !navOpen" class="px-4">Log out</p>
+            </button>
           </nav>
         </div>
       </Teleport>
