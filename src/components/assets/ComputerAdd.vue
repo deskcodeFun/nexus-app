@@ -15,6 +15,10 @@
         <input type="text" v-model.trim="newComputer.model" class="input" />
         <label for="color" class="label">Color</label>
         <input type="text" v-model.trim="newComputer.color" class="input" />
+        <label for="color" class="label">Warranty End</label>
+        <input type="text" v-model.trim="newComputer.warranty_end" class="input" />
+        <label for="color" class="label">Store Location</label>
+        <input type="text" v-model.trim="newComputer.store_location" class="input" />
         <label for="description" class="label">Description</label>
         <textarea row="3" cols="30" v-model.trim="newComputer.description" class="input" />
         <p class="py-2 text-sm text-gray-500">Office Name</p>
@@ -147,6 +151,8 @@ const newComputer = reactive({
   model: '',
   color: '',
   description: '',
+  warranty_end: '',
+  store_location: '',
   user_id: Number,
   office_id: Number,
   image: [],
