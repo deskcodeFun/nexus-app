@@ -210,17 +210,17 @@ const accountData = computed(() => {
   if (store.assetDetail && store.assetDetail[0]) {
     return {
       'Asset Tag': store.assetDetail[0].asset_tag,
-      'Stock in': store.assetDetail[0].stock_in,
-      price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(
-        store.assetDetail[0].price,
-      ),
       'S/N': store.assetDetail[0].serial_tag,
       Brand: store.assetDetail[0].brand,
       Model: store.assetDetail[0].model,
       Color: store.assetDetail[0].color,
+      Description: store.assetDetail[0].description,
       'Warranty End': store.assetDetail[0].warranty_end,
       'Store Location': store.assetDetail[0].store_location,
-      Description: store.assetDetail[0].description,
+      'Stock in': store.assetDetail[0].stock_in,
+      Price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(
+        store.assetDetail[0].price,
+      ),
       officeName: store.assetDetail[0].office_name.name,
     }
   }
