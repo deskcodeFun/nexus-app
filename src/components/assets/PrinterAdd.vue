@@ -7,6 +7,11 @@
         <p class="pt-8 sm:pt-0 sm:pb-4 text-lg tracking-wide">Accounting Information</p>
         <label for="asset_tag" class="label">Asset Tag</label>
         <input type="text" v-model.trim="newPrinter.asset_tag" class="input" />
+        <label for="asset_tag" class="label">Stock in</label>
+        <input type="date" v-model.trim="newPrinter.stock_in" class="input" />
+        <label for="asset_tag" class="label">Price</label>
+        <input type="text" v-model.trim="newPrinter.price" class="input" />
+
         <label for="serial_tag" class="label">Serial Tag</label>
         <input type="text" v-model.trim="newPrinter.serial_tag" class="input" />
         <label for="brand" class="label">Brand</label>
@@ -15,6 +20,10 @@
         <input type="text" v-model.trim="newPrinter.model" class="input" />
         <label for="color" class="label">Color</label>
         <input type="text" v-model.trim="newPrinter.color" class="input" />
+        <label for="color" class="label">Warranty End</label>
+        <input type="text" v-model.trim="newPrinter.warranty_end" class="input" />
+        <label for="color" class="label">Store Location</label>
+        <input type="text" v-model.trim="newPrinter.store_location" class="input" />
         <label for="description" class="label">Description</label>
         <textarea row="3" cols="30" class="input" v-model.trim="newPrinter.description" />
         <p class="py-2 text-sm text-gray-500">Office Name</p>
@@ -130,6 +139,10 @@ const newPrinter = reactive({
   model: '',
   color: '',
   description: '',
+  warranty_end: '',
+  store_location: '',
+  stock_in: new Date(),
+  price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(0),
   user_id: Number,
   office_id: Number,
   image: [],

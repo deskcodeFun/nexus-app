@@ -7,6 +7,11 @@
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
         <label for="asset_tag" class="label">Asset Tag</label>
         <input type="text" v-model.trim="newComputer.asset_tag" class="input" />
+        <label for="asset_tag" class="label">Stock in</label>
+        <input type="date" v-model.trim="newComputer.stock_in" class="input" />
+        <label for="asset_tag" class="label">Price</label>
+        <input type="text" v-model.trim="newComputer.price" class="input" />
+
         <label for="serial_tag" class="label">Serial Tag</label>
         <input type="text" v-model.trim="newComputer.serial_tag" class="input" />
         <label for="brand" class="label">Brand</label>
@@ -153,6 +158,8 @@ const newComputer = reactive({
   description: '',
   warranty_end: '',
   store_location: '',
+  stock_in: new Date(),
+  price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(0),
   user_id: Number,
   office_id: Number,
   image: [],
