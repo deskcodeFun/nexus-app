@@ -27,10 +27,12 @@
             <div v-if="data !== null">
               <BaseBox :label="label" :data="data"></BaseBox>
             </div>
-            div v-else>
-            <BaseBox :label="label" data="-"></BaseBox>
+            <div v-else>
+              <BaseBox :label="label" data="-"></BaseBox>
+            </div>
           </div>
         </div>
+        ``
       </div>
       <!-- asset spec section, replace JSONB key with label-->
       <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2">
