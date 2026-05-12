@@ -27,6 +27,8 @@
             <div v-if="data !== null">
               <BaseBox :label="label" :data="data"></BaseBox>
             </div>
+            div v-else>
+            <BaseBox :label="label" data="-"></BaseBox>
           </div>
         </div>
       </div>
@@ -229,6 +231,11 @@ const updateData = reactive({
   serial_tag: '',
   brand: '',
   model: '',
+  color: '',
+  warranty_end: '',
+  store_location: '',
+  stock_in: new Date(),
+  price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(0),
   description: '',
   office_id: Number,
   user_id: Number,
