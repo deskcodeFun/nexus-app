@@ -4,7 +4,7 @@ import { ref } from 'vue'
 
 export const useAuth = defineStore('auth', () => {
   const user = ref(null)
-  const session = ref(supabase.auth.user() ? supabase.auth.session() : null)
+  const session = ref(null)
   const isInitialized = ref(false)
   const isLoggedIn = ref(false)
 
@@ -16,9 +16,10 @@ export const useAuth = defineStore('auth', () => {
     user.value = data.session?.user || null
     isInitialized.value = true
     //2 listen for future chnages (loing, logout)
-    supabase.auth.onAuthStateChange((_event, session) => {
-      session.value = session
-      user.value = session?.user || null
+    supabase.auth.onAuthStateChange((event, currentSession) => {
+      console.log('Auth state changed:', event, currentSession)
+      session.value = currentSession
+      user.value = currentSession?.user || null
     })
   }
 
@@ -29,13 +30,22 @@ export const useAuth = defineStore('auth', () => {
     return data
   }
   // handle logout
-  async function logout() {
-    const { error } = await supabase.auth.signOut()
-    if (error) throw error
-    isLoggedIn.value = false
-    user.value = null
-    session.value = null
+  function logout() {
+    // check session before trying to log out
+    if (!session.value) return
+    try {
+      const { error } = supabase.auth.signOut()
+      if (error && error.status === 403) throw error
+      isLoggedIn.value = false
+      user.value = null
+      session.value = null
+      window.localStorage.removeItem('supabase.auth.token') // Clear token from localStorage
+      window.sessionStorage.removeItem('supabase.auth.token') // Clear token from sessionStorage
+    } catch (error) {
+      console.error('Logout error:', error.email)
+    }
   }
+  initAuth() // call it once when store is created
   return {
     user,
     isLoggedIn,

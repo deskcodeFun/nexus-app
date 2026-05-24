@@ -63,10 +63,8 @@ const handleSignin = async () => {
       email: email.value,
       password: password.value,
     })
-    console.log('Sign-in attempt:', { email: email.value })
-    console.log('Sign-in attempt:', localStorage.getItem('authToken'))
     if (error) throw error
-    router.push('/')
+    router.push('/assets')
   } catch (error) {
     alert(error.error_description || error.message)
   }

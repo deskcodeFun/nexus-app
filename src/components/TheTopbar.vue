@@ -14,7 +14,7 @@ import {
   ArrowRightStartOnRectangleIcon,
 } from '@heroicons/vue/24/outline'
 
-const { user } = useAuth()
+const store = useAuth()
 const router = useRouter()
 const mobileNav = ref(null)
 const navOpen = ref(false)
@@ -30,14 +30,9 @@ const toggleMobileNav = () => {
   mobileNav.value = !mobileNav.value
   navOpen.value = !navOpen.value
 }
-const handleLogout = async () => {
-  await useAuth.logout()
-  console.log('session storage item before logout:', sessionStorage.getItem('supabase.auth.token')) // Debug: Check token before logout
-  console.log('local storage item before logout:', localStorage.getItem('supabase.auth.token')) // Debug: Check token before logout
-  sessionStorage.removeItem('supabase.auth.token') // Clear token from sessionStorage
-  localStorage.removeItem('supabase.auth.token') // Clear token from localStorage
-  console.log('session storage item after logout:', sessionStorage.getItem('supabase.auth.token')) // Debug: Check token after logout
-  console.log('local storage item after logout:', localStorage.getItem('supabase.auth.token')) // Debug: Check token after logout
+const handleLogout = () => {
+  store.logout()
+
   router.push({ name: 'home' }) // redirect to home page after logout
 }
 
@@ -87,7 +82,7 @@ onUnmounted(() => {
       </RouterLink>
       <!-- sign in/out button -->
       <RouterLink
-        v-if="!user"
+        v-if="!store.user"
         class="link"
         active-class="bg-sky-100 rounded-lg"
         :to="{ name: 'sign-in' }"
@@ -168,7 +163,7 @@ onUnmounted(() => {
             </RouterLink>
             <!-- sign in/out button -->
             <RouterLink
-              v-if="!user"
+              v-if="!store.isLoggedIn"
               @click="navOpen = !navOpen"
               class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
               active-class="bg-sky-50 rounded-lg text-blue-900"
@@ -178,7 +173,7 @@ onUnmounted(() => {
               <p class="px-4">Log in</p>
             </RouterLink>
             <button
-              v-else
+              v-if="store.isLoggedIn"
               @click="handleLogout"
               class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
             >
