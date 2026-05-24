@@ -14,7 +14,7 @@ import {
   ArrowRightStartOnRectangleIcon,
 } from '@heroicons/vue/24/outline'
 
-const { user, logout } = useAuth()
+const { user } = useAuth()
 const router = useRouter()
 const mobileNav = ref(null)
 const navOpen = ref(false)
@@ -31,7 +31,13 @@ const toggleMobileNav = () => {
   navOpen.value = !navOpen.value
 }
 const handleLogout = async () => {
-  await logout()
+  await useAuth.logout()
+  console.log('session storage item before logout:', sessionStorage.getItem('supabase.auth.token')) // Debug: Check token before logout
+  console.log('local storage item before logout:', localStorage.getItem('supabase.auth.token')) // Debug: Check token before logout
+  sessionStorage.removeItem('supabase.auth.token') // Clear token from sessionStorage
+  localStorage.removeItem('supabase.auth.token') // Clear token from localStorage
+  console.log('session storage item after logout:', sessionStorage.getItem('supabase.auth.token')) // Debug: Check token after logout
+  console.log('local storage item after logout:', localStorage.getItem('supabase.auth.token')) // Debug: Check token after logout
   router.push({ name: 'home' }) // redirect to home page after logout
 }
 
