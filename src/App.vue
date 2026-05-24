@@ -24,6 +24,12 @@ const checkMobile = () => {
 onMounted(() => {
   checkMobile()
   window.addEventListener('resize', checkMobile)
+  // check token session login
+  const token = sessionStorage.getItem('supabase.auth.token')
+  console.log('Token on mount:', token)
+  if (token) {
+    this.$router.push('/')
+  }
 })
 onUnmounted(() => {
   window.removeEventListener('resize', checkMobile)
