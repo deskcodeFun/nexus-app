@@ -13,17 +13,19 @@
             v-model="email"
           />
         </div>
-        <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-            Password
-          </label>
+        <!-- icon -->
+        <div class="relative h-fit">
           <input
-            class="border rounded w-full py-2 px-3 text-gray-700 hover:bg-white focus:bg-white focus:outline-none focus:shadow-outline"
+            class="border rounded w-full py-2 px-3 text-gray-700 mb-3 bg-white/60 hover:bg-white focus:bg-white"
             id="password"
-            type="password"
+            :type="passwordVisible ? 'text' : 'password'"
             placeholder="*********"
             v-model="password"
           />
+          <span class="absolute inset-y-0 right-0 pr-2 flex mt-2.5 cursor-pointer">
+            <EyeIcon v-if="!passwordVisible" class="h-5 w-5 text-red-900" @click="togglePassword" />
+            <EyeSlashIcon v-else class="h-5 w-5 text-red-900" @click="togglePassword" />
+          </span>
         </div>
         <div class="flex items-center justify-between">
           <button
@@ -53,8 +55,11 @@ import { ref } from 'vue'
 import router from '../router/index'
 import { supabase } from '@/lib/supabaseClient'
 
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
+
 const email = ref('')
 const password = ref('')
+const passwordVisible = ref(false)
 
 const handleSignin = async () => {
   try {
@@ -68,5 +73,9 @@ const handleSignin = async () => {
   } catch (error) {
     alert(error.error_description || error.message)
   }
+}
+
+const togglePassword = () => {
+  passwordVisible.value = !passwordVisible.value
 }
 </script>
