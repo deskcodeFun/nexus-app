@@ -79,9 +79,9 @@ import router from '../router/index'
 import { supabase } from '@/lib/supabaseClient'
 
 import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
-
-const email = ref('')
-const password = ref('')
+// Pre-filled credentials for testing purposes. In production, these should be removed or handled securely.
+const email = ref('panya.korkusol@gmail.com')
+const password = ref('pkok4050')
 const passwordVisible = ref(false)
 
 const handleSignin = async () => {

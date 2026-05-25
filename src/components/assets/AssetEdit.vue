@@ -6,13 +6,12 @@
     -->
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" :isShow="true" />
-  <div class="h-full pb-50 overflow-scroll pt-2 text-blue-900">
-    <!-- 5 section -->
-    <div class="sm:gap-4 flex sm:items-baseline flex-col sm:flex-row">
-      <!-- show computer image  -->
-      <div class="pb-4 px-4 flex-row sm:flex-col">
-        <p class="sm:pb-4 font- text-lg tracking-wide">Gallery</p>
-        <div class="w-64 text-nowrap mx-auto">
+  <div class="h-full pb-50 mx-auto overflow-scroll pt-2 text-blue-900">
+    <!-- show computer image and information -->
+    <div class="flex flex-col sm:flex-row gap-8">
+      <div class="pb-4 px-4 flex-row">
+        <p class="mb-4 text-lg tracking-wide">Gallery</p>
+        <div class="w-64 text-nowrap mx-auto sm:flex-row">
           <div v-if="store.assetDetail && store.assetDetail[0].image !== null">
             <BaseImage :images="store.assetDetail[0].image" />
           </div>
@@ -20,9 +19,11 @@
             <p class="w-25 text-lg italic text-gray-400">No Image</p>
           </div>
         </div>
-        <!-- accounting section -->
-        <div class="text-nowrap mt-12 flex flex-wrap flex-col pb-2">
-          <p class="sm:pb-4 text-lg tracking-wide">Asset information</p>
+      </div>
+      <!-- accounting section -->
+      <div class="text-nowrap flex flex-wrap flex-col">
+        <p class="sm:pb-4text-lg tracking-wide ml-4">Accounting information</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-1">
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
             <div v-if="data !== null">
               <BaseBox :label="label" :data="data"></BaseBox>
@@ -32,75 +33,8 @@
             </div>
           </div>
         </div>
-        ``
       </div>
-      <!-- asset spec section, replace JSONB key with label-->
-      <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2">
-        <p class="sm:pb-4 text-lg tracking-wide">Specification</p>
-        <div
-          v-for="(data, label) in updateData.spec"
-          :key="label"
-          class="pl-4 sm:pl-0 pt-2 sm:pt-0"
-        >
-          <BaseBox :label="label" :data="data"></BaseBox>
-        </div>
-      </div>
-      <!-- can edit computer spec. section -->
-      <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="sm:pb-4 text-lg tracking-wide">Update / Upgrade</p>
-        <div
-          v-if="updateData.spec.ram && updateData.spec.harddisk !== null"
-          class="pl-4 sm:pl-0 pt-2 sm:pt-0"
-        >
-          <p class="mb-1 text-sm text-gray-500">RAM</p>
-          <input type="text" v-model="updateRAM" class="bg-green-100 py-1 px-2 mb-2" />
-          <p class="mb-1 text-sm text-gray-500">Hard Disk</p>
-          <input type="text" v-model="updateHarddisk" class="bg-green-100 py-1 px-2 mb-2" />
-          <p class="mb-1 text-sm text-gray-500">Description</p>
-          <textarea
-            type="text"
-            rows="4"
-            cols="35"
-            v-model="updateDescription"
-            class="bg-green-100 py-1 px-2 mb-2"
-          />
-          <p class="mb-1 text-sm text-gray-500">Change BU asset</p>
-          <select
-            name="officeName"
-            id="officeName"
-            v-model.trim="updateData.office_id"
-            class="text-md bg-green-100 py-2 pl-1 pr-2"
-          >
-            <option
-              v-for="office_name in officeNameStore.officeName"
-              :key="office_name"
-              :value="office_name.id"
-            >
-              {{ office_name.name }}
-            </option>
-          </select>
-        </div>
-        <div v-else>
-          <p class="py-2 text-sm text-gray-500">Change BU asset</p>
-          <select
-            name="officeName"
-            id="officeName"
-            v-model.trim="updateData.office_id"
-            class="text-md bg-green-100 py-2 pl-1 pr-2"
-          >
-            <option
-              v-for="office_name in officeNameStore.officeName"
-              :key="office_name"
-              :value="office_name.id"
-            >
-              {{ office_name.name }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <br />
-
-      <!-- user info section -->
+      <!-- user section -->
       <div class="text-nowrap px-4 flex flex-col pb-2">
         <p class="pt-4 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
         <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
@@ -119,9 +53,13 @@
           <div v-if="user_name !== 'FREE'">
             <p class="bg-blue-50 text-md py-2 px-2 mb-2">{{ user_name }}</p>
             <p class="text-md text-gray-500">Office</p>
-            <p class="text-gray-500 text-md py-2 px-1 mb-2">{{ user_officeName }}</p>
+            <p class="text-gray-500 text-md py-2 px-1 mb-2">
+              {{ user_officeName }}
+            </p>
           </div>
-          <div v-else class="bg-green-100 text-lg py-2 px-1 mb-2">{{ user_name }}</div>
+          <div v-else class="bg-green-100 text-lg py-2 px-1 mb-2">
+            {{ user_name }}
+          </div>
           <!-- change user name section  -->
           <div
             v-if="editUser && user_name"
@@ -183,6 +121,90 @@
         </form>
       </div>
     </div>
+
+    <BaseAccordion title="Service Log">
+      <div v-for="service in serviceLog" :key="service.id" class="flex flex-row gap-4 ml-6 mt-8">
+        <!-- <p type="date">{{ service.created_at.toLocaleDateString() }}</p> -->
+        <p>
+          {{
+            new Date(service.created_at).toLocaleDateString('en-EN', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })
+          }}
+        </p>
+        <p>{{ service.detail }}</p>
+      </div>
+    </BaseAccordion>
+
+    <BaseAccordion title="Specifiction">
+      <!-- asset spec section, replace JSONB key with label-->
+      <!-- <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2"> -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-x-16 gap-y-1">
+        <div
+          v-for="(data, label) in updateData.spec"
+          :key="label"
+          class="pl-4 sm:pl-0 pt-2 sm:pt-0"
+        >
+          <BaseBox :label="label" :data="data"></BaseBox>
+        </div>
+      </div>
+    </BaseAccordion>
+
+    <BaseAccordion title="Update / Upgrade">
+      <div class="grid grid-col-2 gap-x-16 gap-y1">
+        <div
+          v-if="updateData.spec.ram && updateData.spec.harddisk !== null"
+          class="pl-4 sm:pl-0 pt-2 sm:pt-0"
+        >
+          <p class="mb-1 text-sm text-gray-500">RAM</p>
+          <input type="text" v-model="updateRAM" class="bg-green-100 py-1 px-2 mb-2" />
+          <p class="mb-1 text-sm text-gray-500">Hard Disk</p>
+          <input type="text" v-model="updateHarddisk" class="bg-green-100 py-1 px-2 mb-2" />
+          <p class="mb-1 text-sm text-gray-500">Description</p>
+          <textarea
+            type="text"
+            rows="4"
+            cols="35"
+            v-model="updateDescription"
+            class="bg-green-100 py-1 px-2 mb-2"
+          />
+          <p class="mb-1 text-sm text-gray-500">Change BU asset</p>
+          <select
+            name="officeName"
+            id="officeName"
+            v-model.trim="updateData.office_id"
+            class="text-md bg-green-100 py-2 pl-1 pr-2"
+          >
+            <option
+              v-for="office_name in officeNameStore.officeName"
+              :key="office_name"
+              :value="office_name.id"
+            >
+              {{ office_name.name }}
+            </option>
+          </select>
+        </div>
+        <div v-else>
+          <p class="py-2 text-sm text-gray-500">Change BU asset</p>
+          <select
+            name="officeName"
+            id="officeName"
+            v-model.trim="updateData.office_id"
+            class="text-md bg-green-100 py-2 pl-1 pr-2"
+          >
+            <option
+              v-for="office_name in officeNameStore.officeName"
+              :key="office_name"
+              :value="office_name.id"
+            >
+              {{ office_name.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </BaseAccordion>
   </div>
 </template>
 
@@ -194,11 +216,14 @@ import { useAssetStore } from '@/stores/assetsData'
 import { useOfficeNameStore } from '@/stores/officeData'
 import { useEmployeeStore } from '@/stores/employeeData'
 
+import { useServiceLog } from '@/stores/service_log.js'
+
 import { TrashIcon, BookmarkIcon, PencilSquareIcon } from '@heroicons/vue/20/solid'
 import BaseModal from '../BaseModal.vue'
 import BaseHeader from '../BaseHeader.vue'
 import BaseImage from '../BaseImage.vue'
 import BaseBox from '../BaseBox.vue'
+import BaseAccordion from '../BaseAccordion.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -218,9 +243,10 @@ const accountData = computed(() => {
       'Warranty End': store.assetDetail[0].warranty_end,
       'Store Location': store.assetDetail[0].store_location,
       'Stock in': store.assetDetail[0].stock_in,
-      Price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(
-        store.assetDetail[0].price,
-      ),
+      Price: Intl.NumberFormat('th-TH', {
+        style: 'currency',
+        currency: 'THB',
+      }).format(store.assetDetail[0].price),
       officeName: store.assetDetail[0].office_name.name,
     }
   }
@@ -237,7 +263,10 @@ const updateData = reactive({
   warranty_end: '',
   store_location: '',
   stock_in: new Date(),
-  price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(0),
+  price: Intl.NumberFormat('th-TH', {
+    style: 'currency',
+    currency: 'THB',
+  }).format(0),
   description: '',
   office_id: Number,
   user_id: Number,
@@ -251,6 +280,21 @@ const editUser = ref(false)
 const updateRAM = ref('')
 const updateHarddisk = ref('')
 const updateDescription = ref('')
+const serviceStore = useServiceLog()
+const serviceLog = computed(() => {
+  if (!store.assetDetail[0] || store.assetDetail[0].asset_tag === null) {
+    return []
+  }
+  return serviceStore.serviceLog.filter(
+    (service) => service.asset_tag === store.assetDetail[0].asset_tag,
+  )
+})
+// const serviceDate = computed(() => {
+//   return serviceLog.value.map((service) => {
+//     return new Date(service.created_at).toLocaleDateString()
+//   })
+// })
+
 const userNameLabel = computed(() => {
   if (user_name.value === 'FREE') {
     return 'Status'

@@ -7,7 +7,7 @@
       <div v-else>
         <ChevronUpIcon class="h-4 w-4 mt-1 bg-white/50 hover:cursor-pointer" />
       </div>
-      <p class="text-md pl-2">{{ props.title }}</p>
+      <p class="text-lg font-semibold tracking-wide pl-2">{{ props.title }}</p>
     </div>
     <div class="border-t border-blue-900 mt-4"></div>
     <Transition name="slide-down">
