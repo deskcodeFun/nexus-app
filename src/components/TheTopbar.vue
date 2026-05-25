@@ -33,7 +33,7 @@ const toggleMobileNav = () => {
 const handleLogout = () => {
   store.logout()
 
-  router.push({ name: 'home' }) // redirect to home page after logout
+  router.push({ name: 'sign-in' }) // redirect to home page after logout
 }
 
 onMounted(() => {

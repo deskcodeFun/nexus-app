@@ -1,20 +1,12 @@
 <template>
-  <div class="hero">
-    <div class="hero-text">
-      <h4>Nexus Property Consultants.</h4>
-      <hr />
-      <h2>
-        IT Service<br />
-        Web Application
-      </h2>
-      <hr />
-    </div>
+  <div class="h-screen w-full bg-amber-50">
+    <p class="text-3xl font-semibold text-center pt-24 mt-10">Home View</p>
   </div>
 </template>
 
 <script setup></script>
 
-<style scoped>
+<!-- <style scoped>
 .hero {
   background-image: url('../images/hero-bg2.jpg');
   background-attachment: absolute;
@@ -63,4 +55,4 @@
     }
   }
 }
-</style>
+</style> -->

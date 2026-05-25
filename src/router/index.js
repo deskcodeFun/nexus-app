@@ -23,12 +23,12 @@ const router = createRouter({
   history: createMemoryHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/sign-in',
+      path: '/',
       name: 'sign-in',
       component: SignIn,
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: HomeView,
     },

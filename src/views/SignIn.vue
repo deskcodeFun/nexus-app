@@ -1,50 +1,73 @@
 <template>
-  <div class="absolute bg-[url('@/images/hero-bg2.jpg')] bg-cover inset-0">
-    <div class="mt-40 max-w-sm mx-auto rounded-3xl bg-white/10 backdrop-blur-2xl p-8">
-      <form class="px-8 pt-6 pb-8 mb-4" @submit.prevent="handleSignin">
-        <p class="text-xl text-center text-blue-900 font-bold pb-8">Sign In</p>
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="email"> Email </label>
-          <input
-            class="border rounded w-full py-2 px-3 text-gray-700 hover:bg-white focus:bg-white focus:outline-none focus:shadow-outline"
-            id="email"
-            type="email"
-            placeholder="email"
-            v-model="email"
-          />
+  <div class="absolute bg-[url('@/images/hero-bg2.jpg')] bg-cover inset-0 z-0">
+    <div class="flex flex-col sm:flex-row mx-auto sm:justify-between sm:items-center h-screen">
+      <div class="h-full flex flex-col justify-center text-left text-white p-8 z-10">
+        <p class="sm:text-[22px] uppercase font-semibold pb-2 ml-2">Nexus Property Consultants.</p>
+        <hr class="max-w-91.25 mb-4 ml-1" />
+        <div class="text-4xl sm:text-[80px]">
+          <p class="sm:mb-8">IT Service</p>
+          <p class="sm:mb-4">Application</p>
         </div>
-        <!-- icon -->
-        <div class="relative h-fit">
-          <input
-            class="border rounded w-full py-2 px-3 text-gray-700 mb-3 bg-white/60 hover:bg-white focus:bg-white"
-            id="password"
-            :type="passwordVisible ? 'text' : 'password'"
-            placeholder="*********"
-            v-model="password"
-          />
-          <span class="absolute inset-y-0 right-0 pr-2 flex mt-2.5 cursor-pointer">
-            <EyeIcon v-if="!passwordVisible" class="h-5 w-5 text-red-900" @click="togglePassword" />
-            <EyeSlashIcon v-else class="h-5 w-5 text-red-900" @click="togglePassword" />
-          </span>
+        <hr class="border-2 max-w-30 mt-4 ml-1" />
+      </div>
+      <!-- Sign In Form -->
+      <div
+        class="w-fit sm:mt-0 sm:w-120 mx-auto sm:mx-8 rounded-3xl bg-white/30 backdrop-blur-2xl p-4"
+      >
+        <form class="px-8 pt-6 pb-8 mb-4" @submit.prevent="handleSignin">
+          <p class="text-3xl text-center text-blue-900 font-semibold pb-8">Sign In</p>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email"> Email </label>
+            <input
+              class="border rounded w-full py-2 px-3 text-gray-700 hover:bg-white focus:bg-white focus:outline-none focus:shadow-outline"
+              id="email"
+              type="email"
+              placeholder="email"
+              v-model="email"
+            />
+          </div>
+          <!-- icon -->
+          <div class="relative h-fit">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+              Password
+            </label>
+            <div class="relative">
+              <input
+                class="border rounded w-full py-2 px-3 text-gray-700 mb-3 bg-white/60 hover:bg-white focus:bg-white"
+                id="password"
+                :type="passwordVisible ? 'text' : 'password'"
+                placeholder="*********"
+                v-model="password"
+              />
+              <span class="absolute inset-y-0 right-0 pr-2 flex mt-2.5 cursor-pointer">
+                <EyeIcon
+                  v-if="!passwordVisible"
+                  class="h-5 w-5 text-red-900"
+                  @click="togglePassword"
+                />
+                <EyeSlashIcon v-else class="h-5 w-5 text-red-900" @click="togglePassword" />
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Sign In
+            </button>
+            <a
+              class="inline-block align-baseline font-light text-sm text-blue-900 hover:text-blue-800"
+              href="#"
+            >
+              Forgot Password?
+            </a>
+          </div>
+        </form>
+        <div class="flex flex-col font-light text-xs text-slate-300 items-center justify-center">
+          <p>&copy; 2026 All rights reserved.</p>
+          <p>Nexus Web Application.</p>
         </div>
-        <div class="flex items-center justify-between">
-          <button
-            class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Sign In
-          </button>
-          <a
-            class="inline-block align-baseline font-light text-sm text-blue-900 hover:text-blue-800"
-            href="#"
-          >
-            Forgot Password?
-          </a>
-        </div>
-      </form>
-      <div class="flex flex-col font-light text-xs text-slate-300 items-center justify-center">
-        <p>&copy; 2026 All rights reserved.</p>
-        <p>Nexus Web Application.</p>
       </div>
     </div>
   </div>
@@ -79,3 +102,45 @@ const togglePassword = () => {
   passwordVisible.value = !passwordVisible.value
 }
 </script>
+<style scoped>
+.hero-text {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  color: #eaf3ff;
+  margin-left: 8px;
+
+  h4 {
+    text-transform: uppercase;
+    font-size: 22px;
+    padding-bottom: 4px;
+    margin-left: 8px;
+  }
+
+  h2 {
+    font-size: 50px;
+    margin-left: 8px;
+
+    @media (min-width: 550px) {
+      font-size: 80px;
+      justify-content: center;
+    }
+  }
+
+  hr:nth-child(2) {
+    max-width: 365px;
+    margin-bottom: 16px;
+    margin-left: 8px;
+  }
+
+  hr:nth-child(4) {
+    height: 6px;
+    background-color: #fff;
+    border: none;
+    max-width: 85px;
+    margin-top: 16px;
+    margin-left: 8px;
+  }
+}
+</style>
