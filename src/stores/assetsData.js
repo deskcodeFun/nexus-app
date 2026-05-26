@@ -4,8 +4,23 @@ import { ref } from 'vue'
 
 export const useAssetStore = defineStore('useAssetStore', () => {
   const asset = ref(null)
+  const assetAll = ref('')
   const assetDetail = ref(null)
   const isLoading = ref(false)
+
+  async function fetchAsset() {
+    try {
+      isLoading.value = true
+      const { data, error } = await supabase.from('asset').select(`*,employee(*),office_name(*)`)
+
+      assetAll.value = data
+      if (error) throw error
+    } catch (error) {
+      console.error('Fetch all asset error', error)
+    } finally {
+      isLoading.value = false
+    }
+  }
 
   async function getAssetByOffice(officeID) {
     if (officeID !== null && officeID !== '0') {
@@ -109,13 +124,16 @@ export const useAssetStore = defineStore('useAssetStore', () => {
 
   getAssetByOffice('0')
   getAssetDetail('1')
+  fetchAsset()
 
   return {
+    assetAll,
     asset,
     isLoading,
     assetDetail,
     // assetByOffice,
     // getAllasset,
+    fetchAsset,
     getAssetByOffice,
     getAssetDetail,
     addAsset,

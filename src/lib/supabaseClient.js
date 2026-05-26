@@ -8,4 +8,4 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     persistSession: false,
   },
 })
-console.log('Supabase client initialized:', supabase)
+// console.log('Supabase client initialized:', supabase)

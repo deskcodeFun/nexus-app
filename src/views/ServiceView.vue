@@ -3,7 +3,8 @@
   <Transition name="slide-fade">
     <Teleport to="body">
       <div v-if="showForm" class="modal" @click.self="showForm = false">
-        <ServiceForm @toggle-showForm="showForm = false" class="overflow-scroll" />
+        <ServiceForm @close-form="showForm = false" />
+        <!-- <ServiceForm @toggle-showForm="showForm = false" class="overflow-scroll" /> -->
       </div>
     </Teleport>
   </Transition>
@@ -102,7 +103,7 @@ import { PlusCircleIcon } from '@heroicons/vue/24/outline'
 
 const store = useServiceLog()
 store.fetchService()
-console.log('service log: ', store.serviceLog)
+// console.log('service log: ', store.serviceLog)
 
 // store.serviceStore
 

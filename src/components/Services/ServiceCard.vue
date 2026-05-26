@@ -20,26 +20,26 @@
         {{ dateFormat(props.item.appointment_date) }}
       </span>
     </div>
-    <p class="w-full  text-mm text-teal-800 text-wrap">
+    <p class="w-full text-mm text-teal-800 text-wrap">
       {{ props.item.detail }}
     </p>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import ServiceEdit from "./ServiceEdit.vue";
+import { ref } from 'vue'
+import ServiceEdit from './ServiceEdit.vue'
 
-const open = ref(false);
+const open = ref(false)
 const props = defineProps({
   item: Object,
-});
-console.log("item in ServiceCard: ", props.item);
-const fullName = computed(() => {
-  return props.item.fname + " " + props.item.lname.substring(0, 1);
-});
+})
+// console.log('item in ServiceCard: ', props.item)
+// const fullName = computed(() => {
+//   return props.item.fname + " " + props.item.lname.substring(0, 1);
+// });
 const dateFormat = (dateString) => {
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  return new Date(dateString).toLocaleDateString("en-EN", options);
-};
+  const options = { year: 'numeric', month: 'short', day: 'numeric' }
+  return new Date(dateString).toLocaleDateString('en-EN', options)
+}
 </script>

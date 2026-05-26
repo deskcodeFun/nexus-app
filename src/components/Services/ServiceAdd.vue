@@ -1,10 +1,16 @@
 <template>
-  <div class="w-11/12 mt-24 px-8 bg-teal-500  rounded-xl ">
+  <div class="w-11/12 mt-24 px-8 bg-teal-500 rounded-xl">
     <!-- Header Form: every form have same header -->
     <div>
       <p class="text-blue-900 mt-24 text-xl py-2 pb-4">
         User infomation
-        <button type="button" @click="$emit('toggle-showForm')" class="mt-0.5  text-lg  w-8 h-8 rounded-full bg-gray-50 hover:bg-sky-200 float-end">x</button>
+        <button
+          type="button"
+          @click="$emit('toggle-showForm')"
+          class="mt-0.5 text-lg w-8 h-8 rounded-full float-end"
+        >
+          x
+        </button>
       </p>
 
       <p class="text-gray-600 text-md align-text-bottom">
@@ -14,12 +20,7 @@
 
       <p class="text-gray-600 text-md align-text-bottom my-2">
         User Name :
-        <input
-          type="text"
-          value="userName"
-          v-model="userName"
-          class="mx-13 px-2 text-lg border"
-        />
+        <input type="text" value="userName" v-model="userName" class="mx-13 px-2 text-lg border" />
       </p>
       <p class="text-gray-600 text-md align-text-bottom my-2">
         Departmant :
@@ -227,5 +228,3 @@ const selected = ref(0)
 const checkList = ref([])
 const mapDrive = ref([])
 </script>
-
-
