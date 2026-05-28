@@ -17,8 +17,8 @@
       <div class="text-blue-800 border-b border-gray-400">
         <p class="text-center mb-2">
           Notify
-          <PlusCircleIcon
-            class="h-6 w-6 mr-1 text-gray-500 float-end rounded-full hover:bg-blue-600 hover:text-white cursor-pointer"
+          <PlusIcon
+            class="h-5 w-5 mt-1 mr-1 border text-gray-500 float-end rounded-full hover:bg-blue-600 hover:text-white cursor-pointer"
             @click="isShowForm()"
           />
         </p>
@@ -99,7 +99,7 @@ import BaseHeader from '@/components/BaseHeader.vue'
 import ServiceForm from '@/components/Services/ServiceForm.vue'
 import ServiceCard from '@/components/Services/ServiceCard.vue'
 
-import { PlusCircleIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon } from '@heroicons/vue/24/outline'
 
 const store = useServiceLog()
 store.fetchService()

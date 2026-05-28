@@ -4,13 +4,13 @@
       <BaseHeader title="SERVICE FORM" />
       <XMarkIcon
         @click="$emit('close-form')"
-        class="h-6 w-6 mt-8 text-gray-400 font-extrabold hover:text-red-800 hover:cursor-pointer"
+        class="h-6 w-6 mt-8 text-gray-400 font-extrabold border rounded-full hover:text-red-800 hover:cursor-pointer"
       />
     </div>
     <hr class="border-gray-300 mb-8" />
 
     <!-- asset and employee infomation -->
-    <div class="w-125 mx-8 grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-0">
+    <div class="mx-8 grid grid-cols-1 md:grid-cols-2 gap-y-2">
       <label for="dateAppoint" class="label">Appointment Date</label>
       <input type="date" class="input" v-model.trim="newServiceLog.dateAppoint" />
       <label for="asset_tag" class="label">Asset Tag</label>
@@ -23,7 +23,7 @@
     <!-- employee detail -->
     <div
       v-if="selectAsset !== null || undefined"
-      class="w-125 mx-8 mt-4 grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-0"
+      class="mx-8 mt-4 grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-0"
     >
       <label for="employeeName" class="label">User Name</label>
       <p class="input">{{ selectAsset.employee.fname + ' ' + selectAsset.employee.lname }}</p>
@@ -347,9 +347,6 @@ const addSubmit = () => {
 }
 
 .input {
-  font-size: large;
-  padding-left: 8px;
-  padding-bottom: 8px;
   background-color: #dbeafe;
   border-radius: 8px;
 }

@@ -1,9 +1,9 @@
 <template>
-  <div class=" bg-green-50 p-4 w-200 rounded-xl border border-green-900">
+  <div class="bg-green-50 p-4 w-200 rounded-xl border border-green-900">
     <div class="flex justify-end">
       <XMarkIcon
         @click="$emit('toggle-open')"
-        class="w-6 h-6 mb-2 rounded-full text-red-900 hover:bg-red-100 "
+        class="h-6 w-6 text-gray-400 font-extrabold border rounded-full hover:text-red-800 hover:cursor-pointer"
       />
     </div>
 
@@ -21,7 +21,9 @@
     <p class="flex flex-row text-wrap text-sm text-blue-900 font-bold mt-4 mb-1 justify-between">
       DETAIL:
       <span class="justify-end flex flex-row">
-        <PencilSquareIcon  class="w-6 h-6 inline-block -mt-1 mx-2  text-green-900 hover:bg-green-100 "/>
+        <PencilSquareIcon
+          class="w-6 h-6 inline-block -mt-1 mx-2 text-green-900 hover:bg-green-100"
+        />
         <TrashIcon class="w-6 h-6 inline-block -mt-1 mx-2 stroke-red-800 hover:bg-red-100" />
       </span>
     </p>
@@ -38,15 +40,9 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue'
-
-import { XMarkIcon,PencilSquareIcon,TrashIcon } from '@heroicons/vue/24/outline'
-
+import { XMarkIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
 
 // const emit = defineEmits('open')
 const props = defineProps({ itemDetail: Object })
 console.log(props.itemDetail)
-
 </script>
-
-
