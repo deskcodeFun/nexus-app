@@ -8,10 +8,10 @@
   <BaseHeader title="ASSET DETAIL" :isShow="true" />
   <div class="h-full pb-50 mx-auto overflow-scroll pt-2 text-blue-900">
     <!-- show computer image and information -->
-    <div class="flex flex-col sm:flex-row gap-8">
+    <div class="flex flex-col lg:flex-row gap-8">
       <div class="pb-4 px-4 flex-row">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
-        <div class="w-64 text-nowrap mx-auto sm:flex-row">
+        <div class="sm:flex-row">
           <div v-if="store.assetDetail && store.assetDetail[0].image !== null">
             <BaseImage :images="store.assetDetail[0].image" />
           </div>
@@ -22,7 +22,7 @@
       </div>
       <!-- accounting section -->
       <div class="text-nowrap flex flex-wrap flex-col">
-        <p class="sm:pb-4text-lg tracking-wide ml-4">Accounting information</p>
+        <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-1">
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
             <div v-if="data !== null">
@@ -35,33 +35,31 @@
         </div>
       </div>
       <!-- user section -->
-      <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="pt-4 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
-        <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
-          <div class="pb-2">
-            <div class="flex justify-between">
-              <p>{{ userNameLabel }}</p>
-              <PencilSquareIcon
+      <div class="text-nowrap px-4 flex flex-col">
+        <p class="sm:pb-4 text-lg tracking-wide">User Information</p>
+        <div class="sm:pl-0 pt-2 sm:pt-0">
+          <div class="capitalize text-gray-500 text-sm mb-1">
+            <p>{{ userNameLabel }}</p>
+            <!-- <PencilSquareIcon
                 @click="toggleUser"
                 class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800"
-              />
-            </div>
+              /> -->
           </div>
         </div>
         <!-- show user name 2 state 'FREE' or user_name -->
         <div>
           <div v-if="user_name !== 'FREE'">
-            <p class="bg-blue-50 text-md py-2 px-2 mb-2">{{ user_name }}</p>
-            <p class="text-md text-gray-500">Office</p>
+            <p class="w-72 px py-1 px-2 mt-1 font-semibold bg-blue-50 text-wrap">{{ user_name }}</p>
+            <!-- <p class="text-md text-gray-500">Office</p>
             <p class="text-gray-500 text-md py-2 px-1 mb-2">
               {{ user_officeName }}
-            </p>
+            </p>-->
           </div>
-          <div v-else class="bg-green-100 text-lg py-2 px-1 mb-2">
+          <div v-else class="font-semibold bg-green-100 py-1 px-2 mb-2 mt-1">
             {{ user_name }}
           </div>
           <!-- change user name section  -->
-          <div
+          <!-- <div
             v-if="editUser && user_name"
             class="bg-blue-50/50 rounded-lg border border-blue-300 py-2 px-2 mt-4"
           >
@@ -80,19 +78,19 @@
               >
                 {{ item.fname + ' ' + item.lname }}
               </option>
-            </select>
-            <!-- show office name of user if user name !== 'FREE' -->
-            <div v-if="editUser && updateData.user_id > '0'">
+            </select> -->
+          <!-- show office name of user if user name !== 'FREE' -->
+          <!-- <div v-if="editUser && updateData.user_id > '0'">
               <p class="py-2">User Office</p>
               <div class="text-md text-blue-900 bg-green-100 py-2 px-1 mb-2">
                 {{ new_officeName || ' - ' }}
               </div>
             </div>
-          </div>
-          <div v-else></div>
+          </div> -->
+          <!-- <div v-else></div> -->
         </div>
         <!-- Action button for 'save' 'delete' button -->
-        <form @submit.prevent="editSubmit">
+        <!-- <form @submit.prevent="editSubmit">
           <div class="flex flex-row justify-between gap-24">
             <button
               class="flex items-center justify-center border bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
@@ -107,9 +105,9 @@
             >
               <BookmarkIcon class="h-4 w-4 mr-2" />
               <span> Save </span>
-            </button>
-            <!-- show BaseModal for confirm delete action -->
-            <BaseModal
+            </button> -->
+        <!-- show BaseModal for confirm delete action -->
+        <!-- <BaseModal
               :modalActive="modalActive"
               title="Delete"
               @save-data="deleteAsset(paramID)"
@@ -118,7 +116,7 @@
               <p class="flex justify-center pt-4 text-blue-900 text-lg">Are you sure to delete ?</p>
             </BaseModal>
           </div>
-        </form>
+        </form> -->
       </div>
     </div>
 
@@ -153,7 +151,8 @@
     </BaseAccordion>
 
     <BaseAccordion title="Update / Upgrade">
-      <div class="grid grid-col-2 gap-x-16 gap-y1">
+      <!-- <div class="grid grid-row-2 gap-x-16 gap-y-1"> -->
+      <div class="flex flex-col sm:flex-row gap-8">
         <div
           v-if="updateData.spec.ram && updateData.spec.harddisk !== null"
           class="pl-4 sm:pl-0 pt-2 sm:pt-0"
@@ -202,6 +201,94 @@
               {{ office_name.name }}
             </option>
           </select>
+        </div>
+        <!-- change user name section  -->
+        <div class="text-nowrap px-4 flex flex-col">
+          <p class="sm:pb-4 text-lg tracking-wide">User Information</p>
+          <div class="sm:pl-0 pt-2 sm:pt-0">
+            <div class="flex flex-row justify-between capitalize text-gray-500 text-sm mb-1">
+              <p>{{ userNameLabel }}</p>
+              <PencilSquareIcon
+                @click="toggleUser"
+                class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800"
+              />
+            </div>
+          </div>
+          <!-- show user name 2 state 'FREE' or user_name -->
+          <div>
+            <div v-if="user_name !== 'FREE'">
+              <p class="w-72 px py-1 px-2 mt-1 font-semibold bg-blue-50 text-wrap">
+                {{ user_name }}
+              </p>
+              <!-- <p class="text-md text-gray-500">Office</p>
+              <p class="text-gray-500 text-md py-2 px-1 mb-2">
+                {{ user_officeName }}
+              </p> -->
+            </div>
+            <div v-else class="font-semibold bg-green-100 py-1 px-2 mb-2 mt-1">
+              {{ user_name }}
+            </div>
+            <!-- change user name section  -->
+            <div
+              v-if="editUser && user_name"
+              class="bg-blue-50/50 rounded-lg border border-blue-300 py-2 px-2 mt-4"
+            >
+              <p class="pb-2">Update User</p>
+              <select
+                v-model.trim="updateData.user_id"
+                @change="handleUpdateUser"
+                class="w-full bg-green-100 py-2 text-md"
+              >
+                <option :value="0" class="bg-green-100">FREE</option>
+                <option
+                  v-for="item in employeeStore.employee"
+                  :key="item.id"
+                  :value="item.id"
+                  class="text-lg bg-green-100"
+                >
+                  {{ item.fname + ' ' + item.lname }}
+                </option>
+              </select>
+              <!-- show office name of user if user name !== 'FREE' -->
+              <div v-if="editUser && updateData.user_id > '0'">
+                <p class="py-2">User Office</p>
+                <div class="text-md text-blue-900 bg-green-100 py-2 px-1 mb-2">
+                  {{ new_officeName || ' - ' }}
+                </div>
+              </div>
+            </div>
+            <!-- <div v-else></div> -->
+          </div>
+          <!-- Action button for 'save' 'delete' button -->
+          <form @submit.prevent="editSubmit">
+            <div class="flex flex-row justify-between gap-24">
+              <button
+                class="flex items-center justify-center border bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
+                type="button"
+                @click="toggleModal"
+              >
+                <TrashIcon class="h-4 w-4 mr-2" /> Delete
+              </button>
+              <button
+                class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+                type="submit"
+              >
+                <BookmarkIcon class="h-4 w-4 mr-2" />
+                <span> Save </span>
+              </button>
+              <!-- show BaseModal for confirm delete action -->
+              <BaseModal
+                :modalActive="modalActive"
+                title="Delete"
+                @save-data="deleteAsset(paramID)"
+                @close-modal="modalActive = false"
+              >
+                <p class="flex justify-center pt-4 text-blue-900 text-lg">
+                  Are you sure to delete ?
+                </p>
+              </BaseModal>
+            </div>
+          </form>
         </div>
       </div>
     </BaseAccordion>
