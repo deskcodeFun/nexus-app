@@ -23,7 +23,7 @@
       <!-- accounting section -->
       <div class="text-wrap flex flex-wrap flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-16 gap-y-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
             <BaseBox :label="label" :data="data"></BaseBox>
           </div>
