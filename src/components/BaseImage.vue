@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="flex flex-col sm:flex-row justify-center">
+    <div class="flex flex-row lg:flex-col md:justify-around overflow-y-auto">
       <img
         v-for="(image, index) in images"
         :key="index"
         :src="image"
         alt="Image"
         @click="showPreview(image)"
-        class="w-30 h-auto mx-2 my-4 cursor-pointer"
+        class="w-30 h-auto mx-4 my-4 cursor-pointer"
       />
     </div>
     <div class="modal" v-if="previewImage">
