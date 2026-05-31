@@ -1,27 +1,17 @@
 <template>
   <BaseHeader title="IT SERVICE" />
-  <Transition name="slide-fade">
-    <Teleport to="body">
-      <div v-if="showForm" class="modal" @click.self="showForm = false">
-        <ServiceForm @close-form="showForm = false" />
-        <!-- <ServiceForm @toggle-showForm="showForm = false" class="overflow-scroll" /> -->
-      </div>
-    </Teleport>
-  </Transition>
 
   <!-- show Service table -->
+  <div class="flex flex-row justify-between">
+    <p class="text-xl text-blue-900">Service stage</p>
+    <BaseButtonAdd Link="/addService" label="Add Service" @click="isShowForm" />
+  </div>
   <div class="relative w-full grid grid-row-3 gap-4 sm:grid-cols-3 sm:gap-2">
-    <!-- Drop zone 1 -->
     <div class="bg-sky-50/30">
+      <!-- Drop zone 1 -->
       <!-- Header Table -->
       <div class="text-blue-800 border-b border-gray-400">
-        <p class="text-center mb-2">
-          Notify
-          <PlusIcon
-            class="h-5 w-5 mt-1 mr-1 border text-gray-500 float-end rounded-full hover:bg-blue-600 hover:text-white cursor-pointer"
-            @click="isShowForm()"
-          />
-        </p>
+        <p class="text-center mb-2">Notify</p>
       </div>
       <!-- Content Notify -->
       <div
@@ -96,10 +86,9 @@ import { ref } from 'vue'
 import { useServiceLog } from '@/stores/service_log.js'
 
 import BaseHeader from '@/components/BaseHeader.vue'
-import ServiceForm from '@/components/Services/ServiceForm.vue'
 import ServiceCard from '@/components/Services/ServiceCard.vue'
 
-import { PlusIcon } from '@heroicons/vue/24/outline'
+import BaseButtonAdd from '@/components/BaseButtonAdd.vue'
 
 const store = useServiceLog()
 store.fetchService()

@@ -17,6 +17,8 @@ import EmployeeEdit from '@/components/employees/EmployeeEdit.vue'
 import SignIn from '@/views/SignIn.vue'
 
 import { supabase } from '@/lib/supabaseClient'
+// import ServiceAdd from '@/components/Services/ServiceAdd.vue'
+import ServiceForm from '@/components/Services/ServiceForm.vue'
 
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +43,12 @@ const router = createRouter({
       path: '/services',
       name: 'service',
       component: ServiceView,
+    },
+    {
+      path: '/addService',
+      name: 'add-service',
+      // component: ServiceAdd,
+      component: ServiceForm,
     },
     {
       path: '/assets',
