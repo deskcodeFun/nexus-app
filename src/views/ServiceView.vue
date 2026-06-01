@@ -3,12 +3,15 @@
 
   <!-- show Service table -->
   <div class="flex flex-row justify-between">
-    <p class="text-xl text-blue-900">Service stage</p>
-    <BaseButtonAdd Link="/addService" label="Add Service" @click="isShowForm" />
+    <p class="text-lg text-blue-900">Service status</p>
+    <BaseButtonAdd Link="/addService" label="Add Service" />
   </div>
-  <div class="relative w-full grid grid-row-3 gap-4 sm:grid-cols-3 sm:gap-2">
+
+  <div
+    class="bg-purple-200 relative h-[clamp(300px,70dvh,600px)] grid grid-row-3 gap-8 sm:grid-cols-3 overflow-x-scroll lg:overflow-hidden"
+  >
+    <!-- Drop zone 1 -->
     <div class="bg-sky-50/30">
-      <!-- Drop zone 1 -->
       <!-- Header Table -->
       <div class="text-blue-800 border-b border-gray-400">
         <p class="text-center mb-2">Notify</p>
@@ -18,7 +21,7 @@
         @drop="onDrop($event, 1)"
         @dragenter.prevent
         @dragover.prevent
-        class="overflow-y-scroll hide-scroll w-full h-80 md:h-140 md:w-auto mx-1 md:mx-4 min-h-50px"
+        class="overflow-y-scroll hide-scroll w-full md:w-auto mx-1 md:mx-4"
       >
         <!-- get item state notify from DB -->
         <div
@@ -27,7 +30,7 @@
           draggable="true"
           @dragstart="startDrag($event, item)"
         >
-          <ServiceCard :item="item" class="bg-sky-50" />
+          <ServiceCard :item="item" class="bg-sky-50 mx-4 md:mx-0" />
         </div>
       </div>
     </div>
@@ -50,7 +53,7 @@
           draggable="true"
           @dragstart="startDrag($event, item)"
         >
-          <ServiceCard :item="item" class="bg-red-50" />
+          <ServiceCard :item="item" class="bg-red-50 mx-4 md:mx-0" />
           <!-- {{ item.id + ' ' + item.detail + ' ' + item.state }} -->
         </div>
       </div>
@@ -74,7 +77,7 @@
           draggable="true"
           @dragstart="startDrag($event, item)"
         >
-          <ServiceCard :item="item" class="bg-green-50" />
+          <ServiceCard :item="item" class="bg-green-50 mx-4 md:mx-0" />
         </div>
       </div>
     </div>
@@ -82,7 +85,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+// import { ref } from 'vue'
 import { useServiceLog } from '@/stores/service_log.js'
 
 import BaseHeader from '@/components/BaseHeader.vue'
@@ -119,10 +122,5 @@ const onDrop = (event, list) => {
   // console.log('update state onDrop', store.computerLog)
   item.state = list
   // item.state = store.updateComputerLog(list, itemID)
-}
-
-let showForm = ref(false)
-const isShowForm = () => {
-  return (showForm.value = !showForm.value)
 }
 </script>
