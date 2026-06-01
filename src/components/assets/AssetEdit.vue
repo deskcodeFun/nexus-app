@@ -6,9 +6,9 @@
     -->
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" :isShow="true" />
-  <div class="h-full pb-50 mx-auto overflow-scroll pt-2 text-blue-900">
+  <div class="h-full pb-50 overflow-scroll pt-2 text-blue-900">
     <!-- show computer image and information -->
-    <div class="flex flex-col lg:flex-row mx-auto">
+    <div class="flex flex-col lg:flex-row">
       <div class="pb-4 px-4 flex-row">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
         <div class="px-4 sm:flex-row">
@@ -21,25 +21,29 @@
         </div>
       </div>
       <!-- accounting section -->
-      <div class="w-fit text-wrap flex flex-wrap flex-col">
-        <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
+      <div class="w-80 lg:w-180 text-nowrap flex flex-wrap flex-col">
+        <p class="ml-4 sm:ml-0 sm:pb-4 text-lg tracking-wide">Accounting information</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-1 mb-8">
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
             <BaseBox :label="label" :data="data"></BaseBox>
             <!-- user section -->
           </div>
-          <BaseBox :label="userNameLabel" :data="user_name"></BaseBox>
+          <BaseBox
+            :label="userNameLabel"
+            :data="user_name"
+            class="pl-4 pt-2 sm:pt-0 sm:pl-0"
+          ></BaseBox>
         </div>
       </div>
-      <div class="flex flex-col ml-12">
-        <BaseAccordion title="Update / Upgrade">
+      <div class="flex flex-col">
+        <BaseAccordion title="Update">
           <!-- <div class="grid grid-row-2 gap-x-16 gap-y-1"> -->
-          <div class="flex flex-col sm:flex-row gap-8">
+          <div class="flex flex-col gap-8">
             <div
               v-if="updateData.spec.ram && updateData.spec.harddisk !== null"
               class="pl-4 sm:pl-0 pt-2 sm:pt-0"
             >
-              <p class="mb-1 text-sm text-gray-500">RAM</p>
+              <p class="mt-4 mb-1 text-sm text-gray-500">RAM</p>
               <input type="text" v-model="updateRAM" class="bg-green-100 py-1 px-2 mb-2" />
               <p class="mb-1 text-sm text-gray-500">Hard Disk</p>
               <input type="text" v-model="updateHarddisk" class="bg-green-100 py-1 px-2 mb-2" />
@@ -178,10 +182,10 @@
           <div
             v-for="service in serviceLog"
             :key="service.id"
-            class="flex flex-row gap-4 ml-6 mt-8"
+            class="flex flex-row gap-4 ml-6 mt-4"
           >
             <!-- <p type="date">{{ service.created_at.toLocaleDateString() }}</p> -->
-            <p>
+            <p class="text-nowrap">
               {{
                 new Date(service.created_at).toLocaleDateString('en-EN', {
                   year: 'numeric',
@@ -190,25 +194,24 @@
                 })
               }}
             </p>
-            <p>{{ service.detail }}</p>
-          </div>
-        </BaseAccordion>
-
-        <BaseAccordion title="Specifiction">
-          <!-- asset spec section, replace JSONB key with label-->
-          <!-- <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2"> -->
-          <div class="w-fit grid grid-cols-1 sm:grid-cols-2 mt-4 gap-x-24 gap-y-1">
-            <div
-              v-for="(data, label) in updateData.spec"
-              :key="label"
-              class="pl-4 sm:pl-0 pt-2 sm:pt-0"
-            >
-              <BaseBox :label="label" :data="data"></BaseBox>
-            </div>
+            <p class="text-wrap flex flex-wrap">{{ service.detail }}</p>
           </div>
         </BaseAccordion>
       </div>
     </div>
+    <BaseAccordion title="Specifiction">
+      <!-- asset spec section, replace JSONB key with label-->
+      <!-- <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2"> -->
+      <div class="w-fit grid grid-cols-1 sm:grid-cols-2 mt-4 gap-x-24 gap-y-1">
+        <div
+          v-for="(data, label) in updateData.spec"
+          :key="label"
+          class="pl-4 sm:pl-0 pt-2 sm:pt-0"
+        >
+          <BaseBox :label="label" :data="data"></BaseBox>
+        </div>
+      </div>
+    </BaseAccordion>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-fit flex-col mx-8 mb-8">
+  <div class="flex-col mx-2 lg:mx-8 mb-8">
     <div @click="toggleVisible" class="flex flex-row">
       <div v-if="visible">
         <ChevronDownIcon class="h-4 w-4 mt-1 bg-white/50 hover:cursor-pointer" />
@@ -7,9 +7,9 @@
       <div v-else>
         <ChevronUpIcon class="h-4 w-4 mt-1 bg-white/50 hover:cursor-pointer" />
       </div>
-      <p class="text-lg font-semibold tracking-wide pl-2">{{ props.title }}</p>
+      <p class="text-lg text-nowrap font-semibold tracking-wide pl-2">{{ props.title }}</p>
     </div>
-    <div class="w-120 border-t border-blue-900 mt-4"></div>
+    <div class="border-t border-blue-900 mt-2"></div>
     <Transition name="slide-down">
       <div v-if="visible">
         <slot />
