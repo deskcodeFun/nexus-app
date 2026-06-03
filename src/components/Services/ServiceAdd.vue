@@ -1,19 +1,21 @@
 <template>
   <BaseHeader title="ADD Service" :isShow="true" class="bg-teal-200" />
   <!-- container -->
-  <div class="flex flex-col mx-4 lg:flex-row gap-4 lg:gap-24">
+  <div
+    class="h-[clamp(300px,70dvh,600px)] overflow-y-auto flex flex-col mx-4 lg:flex-row gap-4 lg:gap-24"
+  >
     <!-- asset and employee infomation -->
     <div class="w-xs bg-amber-50">
       <p class="text-blue-900 text-lg">Asset Information</p>
 
       <div class="flex flex-col justify-between">
-        <div class="flex flex-col md:flex-row justify-between py-2">
-          <p class="text-nowrap pb-1">Appointment Date</p>
+        <div class="flex flex-row justify-between py-2">
+          <p class="pb-1">Appointment Date</p>
           <input type="date" class="w-fit bg-blue-50" v-model.trim="newServiceLog.dateAppoint" />
         </div>
-        <div class="flex flex-col md:flex-row justify-between py-2">
+        <div class="flex flex-row justify-between py-2">
           <p class="pb-1">Asset Tag</p>
-          <select v-model.trim="selectAsset" @change="handleAssetTag" class="w-fit bg-blue-50">
+          <select v-model.trim="selectAsset" @change="handleAssetTag" class="w-auto bg-blue-50">
             <option
               v-for="selectAsset in assetStore.assetAll"
               :key="selectAsset.id"
@@ -45,11 +47,11 @@
       </div>
     </div>
     <!-- Service type selected -->
-    <div class="max-w-md md:max-w-xl lg:max-w-3xl">
-      <!-- Header -->
-      <p class="flex sm:items-center text-blue-900 text-xl py-2">Service Type :</p>
+    <div class="max-w-md md:max-w-xl lg:max-w-3xl gap-4">
       <!-- Service type options -->
-      <div class="flex flex-col sm:flex-row ml-4 sm:ml-0">
+      <div class="flex flex-col md:flex-row items-baseline">
+        <!-- Header -->
+        <p class="flex sm:items-center text-blue-900 mr-4">Service Type :</p>
         <!-- Error -->
         <div>
           <input type="radio" id="1" value="1" v-model="selectType" class="mr-1" />
@@ -72,239 +74,263 @@
         </div>
       </div>
       <!-- Form fields for each service type -->
-      <!-- Error type form -->
-      <div v-if="selectType == 1" class="w-full max-w-md md:max-w-xl lg:max-w-3xl">
-        <p class="mt-4 mb-2">Error Detail</p>
-        <textarea
-          rows="6"
-          cols=""
-          class="w-full max-w-md md:max-w-xl lg:max-w-3xl border bg-stone-50"
-        ></textarea>
-      </div>
-      <!-- Reformat type form -->
-      <div v-else-if="selectType == 2" class="w-full max-w-md md:max-w-xl lg:max-w-3xl">
-        <p class="text-blue-900 text-xl mt-4 mb-2">Application</p>
-        <hr />
-        <p class="p-2">Check Program List {{ checkList }}</p>
-        <ul class="flex flex-row gap-8">
-          <!-- column 1 -->
-          <div>
-            <li>
-              <input
-                type="checkbox"
-                id="msOffice"
-                value="msOffice"
-                v-model="checkList"
-                class="mr-1"
-              />
-              <label for="msOffice" class="">Microsoft Office</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="acrobat"
-                value="acrobat"
-                v-model="checkList"
-                class="mr-1"
-              />
-              <label for="acrobat">Acrobat Reader</label>
-            </li>
-          </div>
-          <!-- column 2 -->
-          <div>
-            <li>
-              <input
-                type="checkbox"
-                id="printerNexus"
-                value="printerNexus"
-                v-model="checkList"
-                class="mr-1"
-              />
-              <label for="printeNexus">Printer Toshiba - Nexus</label>
-            </li>
-            <li>
-              <input
-                type="checkbox"
-                id="printerNra"
-                value="printerNra"
-                v-model="checkList"
-                class="mr-1"
-              />
-              <label for="printerNra">Printer Toshiba - NRA</label>
-            </li>
-          </div>
-        </ul>
-        <div>
-          <p class="mt-4 mb-2">Other Program</p>
-          <textarea rows="6" class="w-full border bg-stone-50" v-model.trim="other_prog"></textarea>
+      <div class="flex flex-col overflow-auto">
+        <!-- Error type form -->
+        <div v-if="selectType == 1" class="w-full max-w-md md:max-w-xl lg:max-w-3xl">
+          <p class="mt-4 mb-2">Error Detail</p>
+          <textarea
+            rows="6"
+            class="w-full max-w-md md:max-w-xl lg:max-w-3xl border bg-blue-50"
+          ></textarea>
         </div>
-
-        <!-- map drive section -->
-        <div>
-          <p class="text-blue-900 text-xl my-2">Map Drive</p>
+        <!-- Reformat type form -->
+        <div v-else-if="selectType == 2" class="w-full max-w-md md:max-w-xl lg:max-w-3xl">
+          <p class="text-blue-900 mt-4 mb-2">Application</p>
           <hr />
-          <p class="p-2">Map Drive:{{ mapDriveName }}</p>
-          <div class="w-fit flex flex-col gap-2">
-            <!-- select BU first -->
-            <div class="flex flex-row items-baseline">
-              <p class="text-blue-900 text-md py-2 pr-4">Select BU</p>
-              <input type="radio" id="map1" value="map1" v-model="selectBU" class="mr-1" />
-              <label for="map1" class="mr-6">NPA</label>
-              <input type="radio" id="map2" value="map2" v-model="selectBU" class="mr-1" />
-              <label for="map2" class="mr-6">Admin</label>
-              <input type="radio" id="map3" value="map3" v-model="selectBU" class="mr-1" />
-              <label for="map3" class="mr-6">NPM</label>
-              <input type="radio" id="map4" value="map4" v-model="selectBU" class="mr-1" />
-              <label for="map4" class="mr-6">NRA</label>
-              <input type="radio" id="4" value="map5" v-model="selectBU" class="mr-1" />
-              <label for="map5" class="mr-6">Conspire</label>
+          <p class="p-2">Check Program List {{ checkList }}</p>
+          <ul class="flex flex-row gap-8">
+            <!-- column 1 -->
+            <div>
+              <li>
+                <input
+                  type="checkbox"
+                  id="msOffice"
+                  value="msOffice"
+                  v-model="checkList"
+                  class="mr-1"
+                />
+                <label for="msOffice" class="">Microsoft Office</label>
+              </li>
+              <li>
+                <input
+                  type="checkbox"
+                  id="acrobat"
+                  value="acrobat"
+                  v-model="checkList"
+                  class="mr-1"
+                />
+                <label for="acrobat">Acrobat Reader</label>
+              </li>
             </div>
-            <!-- show map drive npa -->
-            <p>{{ selectBU }}</p>
-            <div v-if="selectBU == 'map1'">
-              <p>NPA</p>
-              <ul class="flex flex-row gap-2">
-                <li>
-                  <input type="checkbox" id="mapD1" value="mapD1" v-model="mapDriveName" />
-                  <label for="mapD1" class="px-1">Agency</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD2" value="mapD2" v-model="mapDriveName" />
-                  <label for="mapD2" class="px-1">Brokerage-Service</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD3" value="mapD3" v-model="mapDriveName" />
-                  <label for="mapD3" class="px-1">Investment</label>
-                </li>
-              </ul>
+            <!-- column 2 -->
+            <div>
+              <li>
+                <input
+                  type="checkbox"
+                  id="printerNexus"
+                  value="printerNexus"
+                  v-model="checkList"
+                  class="mr-1"
+                />
+                <label for="printeNexus">Printer Toshiba - Nexus</label>
+              </li>
+              <li>
+                <input
+                  type="checkbox"
+                  id="printerNra"
+                  value="printerNra"
+                  v-model="checkList"
+                  class="mr-1"
+                />
+                <label for="printerNra">Printer Toshiba - NRA</label>
+              </li>
             </div>
-            <div v-if="selectBU == 'map2'">
-              <p>Admin</p>
-              <ul class="flex flex-col flex-wrap gap-2">
-                <li>
-                  <input type="checkbox" id="mapD4" value="mapD4" v-model="mapDriveName" />
-                  <label for="mapD4" class="pl-2">Administator</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD5" value="mapD5" v-model="mapDriveName" />
-                  <label for="mapD5" class="pl-2">Central Admin</label>>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD6" value="mapD6" v-model="mapDriveName" />
-                  <label for="mapD6" class="pl-2">Finance Management</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD7" value="mapD7" v-model="mapDriveName" />
-                  <label for="mapD7" class="pl-2">Finance&Accounting</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD8" value="mapD8" v-model="mapDriveName" />
-                  <label for="mapD8" class="pl-2">Humen Resource</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD9" value="mapD9" v-model="mapDriveName" />
-                  <label for="mapD9" class="pl-2">Management Team</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD10" value="mapD10" v-model="mapDriveName" />
-                  <label for="mapD10" class="pl-2">Template</label>
-                </li>
-              </ul>
-            </div>
-            <div v-if="selectBU == 'map3'">
-              <p>NPM</p>
-              <ul>
-                <li>
-                  <input type="checkbox" id="mapD11" value="mapD11" v-model="mapDriveName" />
-                  <label for="mapD11" class="pl-2">Mailing list</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD12" value="mapD12" v-model="mapDriveName" />
-                  <label for="mapD12" class="pl-2">Real Estate Sulution</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD13" value="mapD13" v-model="mapDriveName" />
-                  <label for="mapD13" class="pl-2">Real Estate Sulution2</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD14" value="mapD14" v-model="mapDriveName" />
-                  <label for="mapD14" class="pl-2">Sales</label>
-                </li>
-              </ul>
-            </div>
-            <div v-if="selectBU == 'map4'">
-              <p>NRA</p>
-              <ul>
-                <li>
-                  <input type="checkbox" id="mapD15" value="mapD15" v-model="mapDriveName" />
-                  <label for="mapD15" class="pl-2">Advisory</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD16" value="mapD16" v-model="mapDriveName" />
-                  <label for="mapD16" class="pl-2">Corporate Client</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD17" value="mapD17" v-model="mapDriveName" />
-                  <label for="mapD17" class="pl-2">General Admin</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD18" value="mapD18" v-model="mapDriveName" />
-                  <label for="mapD18" class="pl-2">Investment</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD19" value="mapD19" v-model="mapDriveName" />
-                  <label for="mapD19" class="pl-2">Research</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD20" value="mapD20" v-model="mapDriveName" />
-                  <label for="mapD20" class="pl-2">Valuation</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="mapD21" value="mapD21" v-model="mapDriveName" />
-                  <label for="mapD21" class="pl-2">OLD NRA</label>
-                </li>
-              </ul>
-            </div>
-            <div v-if="selectBU == 'map5'">
-              <p>Conspire</p>
-              <div>
-                <input type="checkbox" id="mapD22" value="mapD22" v-model="mapDriveName" />
-                <label for="mapD22" class="pl-2">Conspire</label>
+          </ul>
+          <div>
+            <p class="mt-4 mb-2">Other Program</p>
+            <textarea
+              rows="6"
+              class="w-full border bg-stone-50"
+              v-model.trim="other_prog"
+            ></textarea>
+          </div>
+
+          <!-- map drive section -->
+          <div>
+            <p class="text-blue-900 my-2"></p>
+            <p class="p-2">Map Drive :{{ 'list' + ' ' + mapDriveName }}</p>
+            <hr />
+            <div class="w-fit flex flex-col">
+              <!-- select BU first -->
+              <p class="text-blue-900 text-nowrap">Select BU</p>
+              <div class="flex items-baseline">
+                <div class="flex flex-col md:flex-row gap-2">
+                  <div class="flex flex-row">
+                    <input type="radio" id="map1" value="map1" v-model="selectBU" class="mr-1" />
+                    <label for="map1" class="mr-6">NPA</label>
+                  </div>
+                  <div class="flex flex-row">
+                    <input type="radio" id="map2" value="map2" v-model="selectBU" class="mr-1" />
+                    <label for="map2" class="mr-6">Admin</label>
+                  </div>
+                  <div class="flex flex-row">
+                    <input type="radio" id="map3" value="map3" v-model="selectBU" class="mr-1" />
+                    <label for="map3" class="mr-6">NPM</label>
+                  </div>
+                  <div class="flex flex-row">
+                    <input type="radio" id="map4" value="map4" v-model="selectBU" class="mr-1" />
+                    <label for="map4" class="mr-6">NRA</label>
+                  </div>
+                  <div class="flex flex-row">
+                    <input type="radio" id="4" value="map5" v-model="selectBU" class="mr-1" />
+                    <label for="map5" class="mr-6">Conspire</label>
+                  </div>
+                </div>
+              </div>
+              <!-- show map drive npa -->
+              <!-- <p>{{ selectBU }}</p> -->
+              <div v-if="selectBU == 'map1'">
+                <p>NPA</p>
+                <ul class="flex flex-row gap-2">
+                  <li>
+                    <input type="checkbox" id="mapD1" value="mapD1" v-model="mapDriveName" />
+                    <label for="mapD1" class="px-1">Agency</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD2" value="mapD2" v-model="mapDriveName" />
+                    <label for="mapD2" class="px-1">Brokerage-Service</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD3" value="mapD3" v-model="mapDriveName" />
+                    <label for="mapD3" class="px-1">Investment</label>
+                  </li>
+                </ul>
+              </div>
+              <div v-if="selectBU == 'map2'">
+                <p>Admin</p>
+                <ul class="flex flex-col flex-wrap gap-2">
+                  <li>
+                    <input type="checkbox" id="mapD4" value="mapD4" v-model="mapDriveName" />
+                    <label for="mapD4" class="pl-2">Administator</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD5" value="mapD5" v-model="mapDriveName" />
+                    <label for="mapD5" class="pl-2">Central Admin</label>>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD6" value="mapD6" v-model="mapDriveName" />
+                    <label for="mapD6" class="pl-2">Finance Management</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD7" value="mapD7" v-model="mapDriveName" />
+                    <label for="mapD7" class="pl-2">Finance&Accounting</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD8" value="mapD8" v-model="mapDriveName" />
+                    <label for="mapD8" class="pl-2">Humen Resource</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD9" value="mapD9" v-model="mapDriveName" />
+                    <label for="mapD9" class="pl-2">Management Team</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD10" value="mapD10" v-model="mapDriveName" />
+                    <label for="mapD10" class="pl-2">Template</label>
+                  </li>
+                </ul>
+              </div>
+              <div v-if="selectBU == 'map3'">
+                <p>NPM</p>
+                <ul>
+                  <li>
+                    <input type="checkbox" id="mapD11" value="mapD11" v-model="mapDriveName" />
+                    <label for="mapD11" class="pl-2">Mailing list</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD12" value="mapD12" v-model="mapDriveName" />
+                    <label for="mapD12" class="pl-2">Real Estate Sulution</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD13" value="mapD13" v-model="mapDriveName" />
+                    <label for="mapD13" class="pl-2">Real Estate Sulution2</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD14" value="mapD14" v-model="mapDriveName" />
+                    <label for="mapD14" class="pl-2">Sales</label>
+                  </li>
+                </ul>
+              </div>
+              <div v-if="selectBU == 'map4'">
+                <p>NRA</p>
+                <ul>
+                  <li>
+                    <input type="checkbox" id="mapD15" value="mapD15" v-model="mapDriveName" />
+                    <label for="mapD15" class="pl-2">Advisory</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD16" value="mapD16" v-model="mapDriveName" />
+                    <label for="mapD16" class="pl-2">Corporate Client</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD17" value="mapD17" v-model="mapDriveName" />
+                    <label for="mapD17" class="pl-2">General Admin</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD18" value="mapD18" v-model="mapDriveName" />
+                    <label for="mapD18" class="pl-2">Investment</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD19" value="mapD19" v-model="mapDriveName" />
+                    <label for="mapD19" class="pl-2">Research</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD20" value="mapD20" v-model="mapDriveName" />
+                    <label for="mapD20" class="pl-2">Valuation</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" id="mapD21" value="mapD21" v-model="mapDriveName" />
+                    <label for="mapD21" class="pl-2">OLD NRA</label>
+                  </li>
+                </ul>
+              </div>
+              <div v-if="selectBU == 'map5'">
+                <p>Conspire</p>
+                <div>
+                  <input type="checkbox" id="mapD22" value="mapD22" v-model="mapDriveName" />
+                  <label for="mapD22" class="pl-2">Conspire</label>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- Change Computer type form -->
-      <div v-else-if="selectType == 3">
-        <div class="flex flex-row pr-4 mt-8">
-          <p class="pt-2 pr-4">Chnage to New User Name</p>
-          <select v-model.trim="selectEmployee" @change="handleEmployee" class="input">
-            <option v-for="user in employeeStore.employee" :key="user.id" :value="user">
-              {{ user.fname + ' ' + user.lname }}
-            </option>
-          </select>
+        <!-- Change Computer type form -->
+        <div v-else-if="selectType == 3">
+          <div class="flex flex-row pr-4 mt-8">
+            <p class="pt-2 pr-4">Chnage to New User Name</p>
+            <select v-model.trim="selectEmployee" @change="handleEmployee" class="input">
+              <option v-for="user in employeeStore.employee" :key="user.id" :value="user">
+                {{ user.fname + ' ' + user.lname }}
+              </option>
+            </select>
+          </div>
         </div>
+        <!-- Other type form -->
+        <div v-else-if="selectType == 4">
+          <p class="mt-4 mb-2">Detail</p>
+          <textarea rows="6" cols="50" class="border bg-stone-50"></textarea>
+        </div>
+        <div v-else></div>
+
+        <!-- button section -->
+        <form @submit.prevent="addSubmit" class="flex flex-row justify-end gap-16">
+          <button
+            class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+            type="submit"
+          >
+            <BookmarkIcon class="h-4 w-4 mr-2" />
+            <span> Save </span>
+          </button>
+          <button
+            class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
+            type="submit"
+          >
+            <BookmarkIcon class="h-4 w-4 mr-2" />
+            <span> close </span>
+          </button>
+        </form>
       </div>
-      <!-- Other type form -->
-      <div v-else-if="selectType == 4">
-        <p class="mt-4 mb-2">Detail</p>
-        <textarea rows="6" cols="50" class="border bg-stone-50"></textarea>
-      </div>
-      <div v-else></div>
     </div>
   </div>
-
-  <!-- button section -->
-  <form @submit.prevent="addSubmit" class="flex flex-row">
-    <button
-      class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
-      type="submit"
-    >
-      <BookmarkIcon class="h-4 w-4 mr-2" />
-      <span> Save </span>
-    </button>
-  </form>
 </template>
 
 <script setup>
@@ -359,3 +385,4 @@ const addSubmit = () => {
   console.log('submit form')
 }
 </script>
+<style scoped></style>
