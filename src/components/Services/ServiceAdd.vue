@@ -7,11 +7,11 @@
       <p class="text-blue-900 text-lg">Asset Information</p>
 
       <div class="flex flex-col justify-between">
-        <div class="flex flex-row justify-between py-2">
+        <div class="flex flex-col md:flex-row justify-between py-2">
           <p class="text-nowrap pb-1">Appointment Date</p>
           <input type="date" class="w-fit bg-blue-50" v-model.trim="newServiceLog.dateAppoint" />
         </div>
-        <div class="flex flex-row justify-between py-2">
+        <div class="flex flex-col md:flex-row justify-between py-2">
           <p class="pb-1">Asset Tag</p>
           <select v-model.trim="selectAsset" @change="handleAssetTag" class="w-fit bg-blue-50">
             <option
@@ -45,7 +45,7 @@
       </div>
     </div>
     <!-- Service type selected -->
-    <div class="w-full max-w-md md:max-w-xl lg:max-w-3xl">
+    <div class="max-w-md md:max-w-xl lg:max-w-3xl">
       <!-- Header -->
       <p class="flex sm:items-center text-blue-900 text-xl py-2">Service Type :</p>
       <!-- Service type options -->
