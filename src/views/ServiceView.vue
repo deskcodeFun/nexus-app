@@ -1,14 +1,14 @@
 <template>
+  <!-- Header page and table -->
   <BaseHeader title="IT SERVICE" />
-
-  <!-- show Service table -->
-  <div class="flex flex-row justify-between">
+  <div class="flex flex-row justify-between items-baseline mx-2 md:mx-0">
     <p class="text-lg text-blue-900">Service status</p>
     <BaseButtonAdd Link="/addService" label="Add Service" />
   </div>
 
+  <!-- show Service table -->
   <div
-    class="bg-purple-200 relative h-[clamp(300px,70dvh,600px)] grid grid-row-3 gap-8 sm:grid-cols-3 overflow-x-scroll lg:overflow-hidden"
+    class="relative w-full h-[clamp(300px,70dvh,600px)] mx-2 md:mx-0 grid grid-row-3 gap-8 sm:grid-cols-3 overflow-auto"
   >
     <!-- Drop zone 1 -->
     <div class="bg-sky-50/30">
@@ -21,7 +21,7 @@
         @drop="onDrop($event, 1)"
         @dragenter.prevent
         @dragover.prevent
-        class="overflow-y-scroll hide-scroll w-full md:w-auto mx-1 md:mx-4"
+        class="overflow-y-auto overflow-auto w-full h-80 md:h-140 md:w-auto mx-1 md:mx-4 min-h-50px"
       >
         <!-- get item state notify from DB -->
         <div
@@ -30,7 +30,7 @@
           draggable="true"
           @dragstart="startDrag($event, item)"
         >
-          <ServiceCard :item="item" class="bg-sky-50 mx-4 md:mx-0" />
+          <ServiceCard :item="item" class="bg-sky-50" />
         </div>
       </div>
     </div>
@@ -45,8 +45,9 @@
         @drop="onDrop($event, 2)"
         @dragenter.prevent
         @dragover.prevent
-        class="overflow-y-scroll hide-scroll w-full h-80 md:h-140 md:w-auto mx-1 md:mx-4 min-h-50px"
+        class="overflow-y-auto overflow-auto w-full h-80 md:h-140 md:w-auto mx-1 md:mx-4 min-h-50px"
       >
+        <!-- class="overflow-y-scroll hide-scroll w-full h-80 md:h-140 md:w-auto mx-1 md:mx-4 min-h-50px" -->
         <div
           v-for="item in getList(2)"
           :key="item.id"
@@ -69,7 +70,7 @@
         @drop="onDrop($event, 3)"
         @dragenter.prevent
         @dragover.prevent
-        class="overflow-y-scroll hide-scroll w-full h-80 md:h-140 md:w-auto mx-1 md:mx-4 min-h-50px"
+        class="overflow-y-auto overflow-auto w-full h-80 md:h-140 md:w-auto mx-1 md:mx-4 min-h-50px"
       >
         <div
           v-for="item in getList(3)"
