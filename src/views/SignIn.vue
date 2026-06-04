@@ -1,19 +1,19 @@
 <template>
   <div class="absolute bg-[url('@/images/hero-bg2.jpg')] bg-cover inset-0 z-0">
-    <div class="flex flex-col sm:flex-row mx-auto sm:justify-between sm:items-center h-screen">
-      <div class="h-full flex flex-col justify-center text-left text-white p-8 z-10">
-        <p class="sm:text-[22px] uppercase font-semibold pb-2 ml-2">Nexus Property Consultants.</p>
-        <hr class="max-w-91.25 mb-4 ml-1" />
+    <div class="flex flex-col md:flex-row mx-auto md:justify-between md:items-center h-screen">
+      <div
+        class="mt-36 md:mt-0 md:h-full flex flex-col justify-center text-left text-white px-2 z-10"
+      >
+        <p class="lg:text-[22px] uppercase font-semibold pb-2 ml-2">Nexus Property Consultants.</p>
+        <hr class="max-w-91.25 ml-1" />
         <div class="text-4xl sm:text-[80px]">
-          <p class="sm:mb-8">IT Service</p>
-          <p class="sm:mb-4">Application</p>
+          <p class="lg:mb-8">IT Service</p>
+          <p class="lg:mb-4">Application</p>
         </div>
         <hr class="border-2 max-w-30 mt-4 ml-1" />
       </div>
       <!-- Sign In Form -->
-      <div
-        class="w-fit sm:mt-0 sm:w-120 mx-auto sm:mx-8 rounded-3xl bg-white/30 backdrop-blur-2xl p-4"
-      >
+      <div class="mx-4 mt-8 lg:w-120 rounded-3xl bg-white/30 backdrop-blur-2xl">
         <form class="px-8 pt-6 pb-8 mb-4" @submit.prevent="handleSignin">
           <p class="text-3xl text-center text-blue-900 font-semibold pb-8">Sign In</p>
           <div class="mb-4">

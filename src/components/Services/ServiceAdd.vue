@@ -1,21 +1,25 @@
 <template>
-  <BaseHeader title="ADD Service" :isShow="true" class="bg-teal-200" />
+  <BaseHeader title="ADD Service" :isShow="true" />
   <!-- container -->
   <div
-    class="h-[clamp(300px,70dvh,600px)] overflow-y-auto flex flex-col mx-4 lg:flex-row gap-4 lg:gap-24"
+    class="h-[clamp(300px,70dvh,600px)] overflow-y-auto flex flex-col mx-2 lg:flex-row gap-4 lg:gap-24"
   >
     <!-- asset and employee infomation -->
-    <div class="w-xs bg-amber-50">
+    <div class="w-sm md:w-md">
       <p class="text-blue-900 text-lg">Asset Information</p>
 
       <div class="flex flex-col justify-between">
-        <div class="flex flex-row justify-between py-2">
-          <p class="pb-1">Appointment Date</p>
-          <input type="date" class="w-fit bg-blue-50" v-model.trim="newServiceLog.dateAppoint" />
+        <div class="flex flex-row justify-between items-baseline py-2">
+          <p>Appointment Date</p>
+          <input
+            type="date"
+            class="w-fit px-2 bg-blue-50"
+            v-model.trim="newServiceLog.dateAppoint"
+          />
         </div>
-        <div class="flex flex-row justify-between py-2">
+        <div class="flex flex-row justify-between items-baseline py-2">
           <p class="pb-1">Asset Tag</p>
-          <select v-model.trim="selectAsset" @change="handleAssetTag" class="w-auto bg-blue-50">
+          <select v-model.trim="selectAsset" @change="handleAssetTag" class="w-fit px-2 bg-blue-50">
             <option
               v-for="selectAsset in assetStore.assetAll"
               :key="selectAsset.id"
