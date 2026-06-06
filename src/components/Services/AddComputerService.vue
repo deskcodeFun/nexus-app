@@ -1,5 +1,5 @@
 <template>
-  <BaseHeader title="ADD Service" :isShow="true" />
+  <BaseHeader title="Add Computer Service" :isShow="true"></BaseHeader>
   <!-- container -->
   <div
     class="h-[clamp(300px,70dvh,600px)] overflow-y-auto flex flex-col mx-2 lg:flex-row gap-4 lg:gap-24"
@@ -370,7 +370,7 @@
             class="flex items-center justify-center bg-blue-700 hover:bg-blue-900 hover:scale-102 text-white py-1 px-4 mt-8 rounded-xl"
             type="submit"
           >
-            <BookmarkIcon class="h-4 w-4 mr-2" />
+            <XMarkIcon class="h-4 w-4 mr-2" />
             <span> close </span>
           </button>
         </form>
@@ -380,19 +380,14 @@
     <!-- end container -->
   </div>
 </template>
-
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 
 // import { useServiceLog } from '@/stores/service_log'
 import { useAssetStore } from '@/stores/assetsData'
 import { useEmployeeStore } from '@/stores/employeeData'
-
-import { BookmarkIcon } from '@heroicons/vue/24/solid'
-
-import BaseHeader from '@/components/BaseHeader.vue'
-
-// const serviceLogStore = useServiceLog()
+import { BookmarkIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import BaseHeader from '../BaseHeader.vue'
 
 const assetStore = useAssetStore()
 const employeeStore = useEmployeeStore()
@@ -436,4 +431,3 @@ const addSubmit = () => {
   console.log('submit form')
 }
 </script>
-<style scoped></style>

@@ -6,6 +6,7 @@ import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 
 import ServiceView from '@/views/ServiceView.vue'
+import AddComputerService from '@/components/Services/AddComputerService.vue'
 
 import AssetsView from '@/views/AssetsView.vue'
 import AssetEdit from '@/components/assets/AssetEdit.vue'
@@ -43,6 +44,12 @@ const router = createRouter({
       path: '/services',
       name: 'service',
       component: ServiceView,
+    },
+    {
+      path: '/addComputerService',
+      name: 'add-compuerService',
+      component: AddComputerService,
+      // component: ServiceForm,
     },
     {
       path: '/addService',

@@ -1,6 +1,4 @@
 <template>
-  <BaseHeader title="ADD NEW USER" :isShow="true" />
-
   <main class="flex pl-8 py-4 bg-white">
     <div>
       <form class="flex flex-col justify-center gap-2" @submit.prevent="addSubmit">
@@ -48,8 +46,6 @@ import { useRouter } from 'vue-router'
 import { reactive } from 'vue'
 import { useEmployeeStore } from '@/stores/employeeData'
 import { useOfficeNameStore } from '@/stores/officeData'
-
-import BaseHeader from '../BaseHeader.vue'
 
 const router = useRouter()
 const employeeStore = useEmployeeStore()

@@ -1,9 +1,11 @@
 <template>
   <!-- Header page and table -->
   <BaseHeader title="IT SERVICE" />
-  <div class="flex flex-row justify-between items-baseline mx-2 md:mx-0">
-    <p class="text-lg text-blue-900">Service status</p>
-    <BaseButtonAdd Link="/addService" label="Add Service" />
+  <div class="w-fit flex flex-row mb-8 border-blue-800 gap-4 md:mx-0">
+    <p class="text-lg mt-1 text-blue-900">Service Type</p>
+    <BaseButtonAdd Link="/addComputerService" label="Computer Service" />
+    <BaseButtonAdd Link="/addAsset" label="Assest" />
+    <BaseButtonAdd Link="/addEmployee" label="Employee" />
   </div>
 
   <!-- show Service table -->
