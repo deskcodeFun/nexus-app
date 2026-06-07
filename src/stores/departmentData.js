@@ -23,7 +23,7 @@ export const useDepartmentStore = defineStore('useDepartmentStore', () => {
   async function getDepartmnetName() {
     try {
       isLoading.value = true
-      let { data, error } = await supabase.from('deparment_name').select('*').neq('id', 0)
+      let { data, error } = await supabase.from('department_name').select('*').neq('id', 0)
       departmentName.value = data
       if (error) throw error
     } catch (error) {
