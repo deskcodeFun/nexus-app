@@ -79,7 +79,7 @@ import { reactive, ref, onMounted } from 'vue'
 
 import { useEmployeeStore } from '@/stores/employeeData'
 import { useOfficeNameStore } from '@/stores/officeData'
-import { useDepartmentStore } from '@/stores/deparmentData.js'
+import { useDepartmentStore } from '@/stores/departmentData.js'
 
 import { TrashIcon, BookmarkIcon } from '@heroicons/vue/20/solid'
 import BaseModal from '../BaseModal.vue'
