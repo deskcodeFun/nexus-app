@@ -13,7 +13,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
       isLoading.value = true
       const { data, error } = await supabase
         .from('employee')
-        .select(`*,office_name(*)`)
+        .select(`*,office_name(*),department_name(*)`)
         .order('fname', { ascending: true })
       employee.value = data
       if (error) throw error
@@ -30,7 +30,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         isLoading.value = true
         const { data, error } = await supabase
           .from('employee')
-          .select('*, office_name(*)')
+          .select('*, office_name(*),department_name(*)')
           .eq('office_id', officeID)
           .order('fname', { ascending: true })
         employee.value = data
@@ -45,7 +45,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         isLoading.value = true
         const { data, error } = await supabase
           .from('employee')
-          .select('*,office_name(*)')
+          .select('*,office_name(*),department_name(*)')
           .order('fname', { ascending: true })
         // const { data, error } = await supabase.from('employee').select(`id,name,short_name,office_name(id,name,short_name)`)
         employee.value = data
@@ -64,10 +64,11 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         isLoading.value = true
         const { data, error } = await supabase
           .from('employee')
-          .select('*,office_name(*)')
+          .select(`*,office_name(*),department_name(*)`)
           .eq('id', userID)
           .order('fname', { ascending: true })
         employeeDetail.value = data
+        console.log('getEmployeeDetail', employeeDetail)
         if (error) throw error
       } catch (error) {
         console.error('error get Employee detail:', error)
@@ -120,7 +121,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     }
   }
 
-  getAllEmployee()
+  // getAllEmployee()
   return {
     employee,
     employeeDetail,

@@ -1,11 +1,16 @@
 <template>
   <div class="h-full max-h-180 flex flex-row flex-wrap justify-start overflow-y-auto">
-    <div v-for="employee in store.employee" :key="employee.id" @click="router.push(`/editEmployee/${employee.id}`)"
-      class="my-4 mx-4">
+    <div
+      v-for="employee in store.employee"
+      :key="employee.id"
+      @click="router.push(`/editEmployee/${employee.id}`)"
+      class="my-4 mx-4"
+    >
       <BaseCard>
         <!-- show data -->
         <table
-          class="table-auto h-fit my-4  [&_th]:pt-1 [&_th]:text-left [&_tr]:align-baseline [&_tr]:h-6 [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4">
+          class="table-auto h-fit my-4 [&_th]:pt-1 [&_th]:text-left [&_tr]:align-baseline [&_tr]:h-6 [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4"
+        >
           <tbody>
             <tr>
               <th>User ID</th>
@@ -27,7 +32,7 @@
             </tr>
             <tr>
               <th scope="col">Department</th>
-              <td>{{ employee.department }}</td>
+              <td>{{ employee.department_name?.name || 'No department' }}</td>
             </tr>
             <tr>
               <th scope="col">Office</th>
@@ -41,14 +46,11 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+import { useEmployeeStore } from '@/stores/employeeData'
+import BaseCard from '../BaseCard.vue'
 
-  import { useRouter } from 'vue-router'
-  import { useEmployeeStore } from '@/stores/employeeData'
-  import BaseCard from '../BaseCard.vue'
-
-  const router = useRouter()
-  const store = useEmployeeStore()
-  store.getAllEmployee()
-
-
+const router = useRouter()
+const store = useEmployeeStore()
+store.getAllEmployee()
 </script>

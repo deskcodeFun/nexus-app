@@ -7,6 +7,7 @@ import NotFoundView from '@/views/NotFoundView.vue'
 
 import ServiceView from '@/views/ServiceView.vue'
 import AddComputerService from '@/components/Services/AddComputerService.vue'
+import AddEmailService from '@/components/Services/AddEmailService.vue'
 
 import AssetsView from '@/views/AssetsView.vue'
 import AssetEdit from '@/components/assets/AssetEdit.vue'
@@ -18,7 +19,7 @@ import EmployeeEdit from '@/components/employees/EmployeeEdit.vue'
 import SignIn from '@/views/SignIn.vue'
 
 import { supabase } from '@/lib/supabaseClient'
-import ServiceAdd from '@/components/Services/ServiceAdd.vue'
+// import ServiceAdd from '@/components/Services/ServiceAdd.vue'
 // import ServiceForm from '@/components/Services/ServiceForm.vue'
 
 const router = createRouter({
@@ -52,9 +53,9 @@ const router = createRouter({
       // component: ServiceForm,
     },
     {
-      path: '/addService',
-      name: 'add-service',
-      component: ServiceAdd,
+      path: '/addEmailService',
+      name: 'add-emailService',
+      component: AddEmailService,
       // component: ServiceForm,
     },
     {
