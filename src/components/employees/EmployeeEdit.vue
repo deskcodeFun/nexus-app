@@ -1,7 +1,9 @@
 <template>
   <BaseHeader title="EDIT USER" :isShow="true" />
 
-  <main class="flex pl-8 pt-8 bg-white">
+  <main
+    class="w-full h-[clamp(300px,70dvh,900px)] mx-2 overflow-y-auto flex flex-col md:flex-row md:gap-x-8"
+  >
     <div class="bg-white">
       <form class="flex flex-col justify-center gap-2" @submit.prevent="editSubmit">
         <div class="flex flex-row justify-between">

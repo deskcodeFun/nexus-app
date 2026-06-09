@@ -1,9 +1,9 @@
 <template>
   <div class="h-full max-h-180 flex flex-row flex-wrap justify-start overflow-y-auto">
     <div
-      v-for="employee in store.employee"
-      :key="employee.id"
-      @click="router.push(`/editEmployee/${employee.id}`)"
+      v-for="items in employeeStore.employee"
+      :key="items.id"
+      @click="router.push(`/editEmployee/${items.id}`)"
       class="my-4 mx-4"
     >
       <BaseCard>
@@ -12,31 +12,31 @@
           class="table-auto h-fit my-4 [&_th]:pt-1 [&_th]:text-left [&_tr]:align-baseline [&_tr]:h-6 [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4"
         >
           <tbody>
-            <tr>
+            <!-- <tr>
               <th>User ID</th>
-              <!-- <td>{{ currentUser.fname + ' ' + currentUser.lname }}</td> -->
               <td>
                 {{ employee.id }}
               </td>
-            </tr>
+            </tr> -->
             <tr>
               <th>User Name</th>
               <td class="font-bold">
-                {{ employee.fname + ' ' + employee.lname.substring(0, 1) + '.' }}
+                {{ items.fname + ' ' + items.lname.substring(0, 1) + '.' }}
               </td>
             </tr>
-
             <tr>
-              <th scope="col">Email</th>
-              <td>{{ employee.email }}</td>
+              <th>Job Title</th>
+              <td class="font-bold">
+                {{ items.job_title ?? 'No Title' }}
+              </td>
             </tr>
             <tr>
               <th scope="col">Department</th>
-              <td>{{ employee.department_name?.name || 'No department' }}</td>
+              <td>{{ items.department_name?.name || 'No department' }}</td>
             </tr>
             <tr>
               <th scope="col">Office</th>
-              <td>{{ employee.office_name.short_name }}</td>
+              <td>{{ items.office_name?.short_name || 'No office' }}</td>
             </tr>
           </tbody>
         </table>
@@ -51,6 +51,6 @@ import { useEmployeeStore } from '@/stores/employeeData'
 import BaseCard from '../BaseCard.vue'
 
 const router = useRouter()
-const store = useEmployeeStore()
-store.getAllEmployee()
+const employeeStore = useEmployeeStore()
+employeeStore.getAllEmployee()
 </script>

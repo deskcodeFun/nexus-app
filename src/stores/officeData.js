@@ -20,6 +20,7 @@ export const useOfficeNameStore = defineStore('useOfficeNameStore', () => {
       isLoading.value = true
       const { data, error } = await supabase.from('email_group').select('*')
       emailGroupName.value = data
+      // console.log('email group name', emailGroupName)
       if (error) throw error
     } catch (error) {
       console.error('ERROR: get email group name', error)
