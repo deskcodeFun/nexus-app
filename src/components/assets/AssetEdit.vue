@@ -17,13 +17,19 @@
         </div>
       </div>
       <!-- accounting section -->
-      <div class="w-80 lg:w-180 text-nowrap flex flex-wrap flex-col">
+      <div class="w-lg text-nowrap flex flex-wrap flex-col">
         <p class="ml-4 sm:ml-0 sm:pb-4 text-lg tracking-wide">Accounting information</p>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-1 mb-8">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-1 mb-8">
           <!-- get data from JSONB column -->
-          <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
-            <BaseBox :label="label" :data="data"></BaseBox>
-          </div>
+          <BaseBox label="'Asset Tag'" :data="updateData.asset_tag"></BaseBox>
+          <BaseBox label="'S/N'" :data="updateData.serial_tag"></BaseBox>
+          <BaseBox label="Brand" :data="updateData.brand"></BaseBox>
+          <BaseBox label="Color" :data="updateData.color"></BaseBox>
+          <BaseBox label="'Warranty End'" :data="updateData.warranty_end"></BaseBox>
+          <BaseBox label="Description" :data="updateData.description"></BaseBox>
+          <BaseBox label="'Store Location'" :data="updateData.store_location"></BaseBox>
+          <BaseBox label="'Stock in Date'" :data="updateData.stock_in"></BaseBox>
+          <BaseBox label="Price" :data="updateData.price"></BaseBox>
           <!-- user section -->
           <BaseBox
             :label="userNameLabel"
@@ -34,7 +40,20 @@
           <BaseBox label="Asset BU" :data="updateData.assetBU"> </BaseBox>
         </div>
       </div>
-      <div class="flex flex-col">
+      <div>
+        <BaseAccordion title="Specification">
+          <!-- asset spec section, replace JSONB key with label-->
+          <!-- <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2"> -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-x-8 gap-y-1">
+            <div
+              v-for="(data, label) in updateData.spec"
+              :key="label"
+              class="pl-4 sm:pl-0 pt-2 sm:pt-0"
+            >
+              <BaseBox :label="label" :data="data"></BaseBox>
+            </div>
+          </div>
+        </BaseAccordion>
         <BaseAccordion title="Update">
           <div class="flex flex-col gap-8">
             <div
@@ -177,19 +196,6 @@
         </BaseAccordion>
       </div>
     </div>
-    <BaseAccordion title="Specifiction">
-      <!-- asset spec section, replace JSONB key with label-->
-      <!-- <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2"> -->
-      <div class="w-fit grid grid-cols-1 sm:grid-cols-2 mt-4 gap-x-24 gap-y-1">
-        <div
-          v-for="(data, label) in updateData.spec"
-          :key="label"
-          class="pl-4 sm:pl-0 pt-2 sm:pt-0"
-        >
-          <BaseBox :label="label" :data="data"></BaseBox>
-        </div>
-      </div>
-    </BaseAccordion>
   </div>
 </template>
 
@@ -216,44 +222,48 @@ let paramID = +route.params.id
 const store = useAssetStore()
 const officeNameStore = useOfficeNameStore()
 const employeeStore = useEmployeeStore()
-const accountData = computed(() => {
-  if (store.assetDetail && store.assetDetail[0]) {
-    return {
-      'Asset Tag': store.assetDetail[0].asset_tag,
-      'S/N': store.assetDetail[0].serial_tag,
-      Brand: store.assetDetail[0].brand,
-      Model: store.assetDetail[0].model,
-      Color: store.assetDetail[0].color,
-      Description: store.assetDetail[0].description,
-      'Warranty End': store.assetDetail[0].warranty_end,
-      'Store Location': store.assetDetail[0].store_location,
-      'Stock in': store.assetDetail[0].stock_in,
-      Price: Intl.NumberFormat('th-TH', {
-        style: 'currency',
-        currency: 'THB',
-      }).format(store.assetDetail[0].price),
-      // officeName: store.assetDetail[0].office_name.name,
-    }
-  }
-  return {}
-})
+// const accountData = computed(() => {
+//   if (store.assetDetail && store.assetDetail[0]) {
+//     return {
+//       'Asset Tag': store.assetDetail[0].asset_tag,
+//       'S/N': store.assetDetail[0].serial_tag,
+//       Brand: store.assetDetail[0].brand,
+//       Model: store.assetDetail[0].model,
+//       Color: store.assetDetail[0].color,
+//       Description: store.assetDetail[0].description,
+//       'Warranty End': store.assetDetail[0].warranty_end,
+//       'Store Location': store.assetDetail[0].store_location,
+//       'Stock in': store.assetDetail[0].stock_in,
+//       Price: Intl.NumberFormat('th-TH', {
+//         style: 'currency',
+//         currency: 'THB',
+//       }).format(store.assetDetail[0].price),
+//       // officeName: store.assetDetail[0].office_name.name,
+//     }
+//   }
+//   return {}
+// })
 
 const updateData = reactive({
   id: paramID,
-  asset_tag: '',
-  serial_tag: '',
-  brand: '',
-  model: '',
-  color: '',
-  warranty_end: '',
-  store_location: '',
-  stock_in: new Date(),
-  prince: Number,
-  description: '',
-  office_id: Number,
-  user_id: Number,
-  spec: {}, // JSONB column
+  asset_tag: store.assetDetail[0].asset_tag,
+  serial_tag: store.assetDetail[0].serial_tag,
+  brand: store.assetDetail[0].brand,
+  model: store.assetDetail[0].model,
+  color: store.assetDetail[0].color,
+  warranty_end: store.assetDetail[0].warranty_end,
+  store_location: store.assetDetail[0].store_location,
+  stock_in: store.assetDetail[0].stock_in,
+  price: Intl.NumberFormat('th-TH', {
+    style: 'currency',
+    currency: 'THB',
+  }).format(store.assetDetail[0].price),
+  description: store.assetDetail[0].description,
+  office_id: store.assetDetail[0].office_id,
+  user_id: store.assetDetail[0].user_id,
+  spec: store.assetDetail[0].spec, // JSONB column
 })
+console.log('updateDATA :', updateData)
 // separate user from updateDATA to save edit
 
 const user_name = ref('')
