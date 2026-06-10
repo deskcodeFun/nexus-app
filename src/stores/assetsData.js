@@ -98,10 +98,31 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     }
   }
 
+  // async function updateAsset(assetID, updateData) {
+  //   try {
+  //     isLoading.value = true
+  //     const { error } = await supabase.from('asset').update(updateData).eq('id', assetID).select()
+  //     if (error) throw error
+  //   } catch (error) {
+  //     console.error('update  Assets error: ', error)
+  //   } finally {
+  //     isLoading.value = false
+  //   }
+  // }
   async function updateAsset(assetID, updateData) {
     try {
       isLoading.value = true
-      const { error } = await supabase.from('asset').update(updateData).eq('id', assetID).select()
+
+      // Convert empty strings to null to avoid PostgreSQL date syntax errors
+      const sanitizedData = Object.fromEntries(
+        Object.entries(updateData).map(([key, value]) => [key, value === '' ? null : value]),
+      )
+
+      const { error } = await supabase
+        .from('asset')
+        .update(sanitizedData)
+        .eq('id', assetID)
+        .select()
       if (error) throw error
     } catch (error) {
       console.error('update  Assets error: ', error)

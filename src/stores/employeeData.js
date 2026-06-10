@@ -121,7 +121,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     }
   }
 
-  // getAllEmployee()
+  getAllEmployee()
   return {
     employee,
     employeeDetail,

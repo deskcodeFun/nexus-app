@@ -10,7 +10,7 @@
         <label for="asset_tag" class="label">Stock in</label>
         <input type="date" v-model.trim="newComputer.stock_in" class="input" />
         <label for="asset_tag" class="label">Price</label>
-        <input type="text" v-model.trim="newComputer.price" class="input" />
+        <input type="number" v-model.trim="newComputer.price" class="input" />
 
         <label for="serial_tag" class="label">Serial Tag</label>
         <input type="text" v-model.trim="newComputer.serial_tag" class="input" />
@@ -21,7 +21,7 @@
         <label for="color" class="label">Color</label>
         <input type="text" v-model.trim="newComputer.color" class="input" />
         <label for="color" class="label">Warranty End</label>
-        <input type="text" v-model.trim="newComputer.warranty_end" class="input" />
+        <input type="date" v-model.trim="newComputer.warranty_end" class="input" />
         <label for="color" class="label">Store Location</label>
         <input type="text" v-model.trim="newComputer.store_location" class="input" />
         <label for="description" class="label">Description</label>
@@ -135,7 +135,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { BookmarkIcon } from '@heroicons/vue/20/solid'
@@ -156,10 +156,11 @@ const newComputer = reactive({
   model: '',
   color: '',
   description: '',
-  warranty_end: '',
+  warranty_end: new Date(),
   store_location: '',
   stock_in: new Date(),
-  price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(0),
+  // price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(0),
+  price: Number,
   user_id: Number,
   office_id: Number,
   image: [],
@@ -179,7 +180,7 @@ const newComputer = reactive({
 })
 const isUploaded = ref(false)
 const previewImages = ref([])
-const dirName = computed(() => newComputer.asset_tag)
+const dirName = newComputer.asset_tag
 
 async function handleFileSelect(event) {
   try {

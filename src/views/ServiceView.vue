@@ -5,7 +5,7 @@
     <p class="text-lg mt-1 text-blue-900">Service Type</p>
     <BaseButtonAdd Link="/addComputerService" label="Computer Service" />
     <!-- <BaseButtonAdd Link="/addAsset" label="Asset" />-->
-    <BaseButtonAdd Link="/addEmailService" label="Add Email" />
+    <BaseButtonAdd Link="/addEmployee" label="Add Email" />
   </div>
 
   <!-- show Service table -->

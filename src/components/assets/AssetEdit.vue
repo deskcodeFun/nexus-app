@@ -1,14 +1,10 @@
 <template>
-  <!-- TODO :
-    1. remove image
-    2. add more image
-    3. when delete asset, remove image and directory in backend
-    -->
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" :isShow="true" />
   <div class="h-full pb-50 overflow-scroll pt-2 text-blue-900">
     <!-- show computer image and information -->
     <div class="flex flex-col lg:flex-row">
+      <!-- computer gallery -->
       <div class="pb-4 px-4 flex-row">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
         <div class="px-4 sm:flex-row">
@@ -24,20 +20,22 @@
       <div class="w-80 lg:w-180 text-nowrap flex flex-wrap flex-col">
         <p class="ml-4 sm:ml-0 sm:pb-4 text-lg tracking-wide">Accounting information</p>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-1 mb-8">
+          <!-- get data from JSONB column -->
           <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
             <BaseBox :label="label" :data="data"></BaseBox>
-            <!-- user section -->
           </div>
+          <!-- user section -->
           <BaseBox
             :label="userNameLabel"
             :data="user_name"
             class="pl-4 pt-2 sm:pt-0 sm:pl-0"
           ></BaseBox>
+          <!-- office name of asset -->
+          <BaseBox label="Asset BU" :data="updateData.assetBU"> </BaseBox>
         </div>
       </div>
       <div class="flex flex-col">
         <BaseAccordion title="Update">
-          <!-- <div class="grid grid-row-2 gap-x-16 gap-y-1"> -->
           <div class="flex flex-col gap-8">
             <div
               v-if="updateData.spec.ram && updateData.spec.harddisk !== null"
@@ -71,23 +69,7 @@
                 </option>
               </select>
             </div>
-            <div v-else>
-              <p class="py-2 text-sm text-gray-500">Change BU asset</p>
-              <select
-                name="officeName"
-                id="officeName"
-                v-model.trim="updateData.office_id"
-                class="text-md bg-green-100 py-2 pl-1 pr-2"
-              >
-                <option
-                  v-for="office_name in officeNameStore.officeName"
-                  :key="office_name"
-                  :value="office_name.id"
-                >
-                  {{ office_name.name }}
-                </option>
-              </select>
-            </div>
+
             <!-- change user name section  -->
             <div class="text-nowrap px-4 flex flex-col">
               <p class="sm:pb-4 text-lg tracking-wide">User Information</p>
@@ -106,10 +88,6 @@
                   <p class="w-72 px py-1 px-2 mt-1 font-semibold bg-blue-50 text-wrap">
                     {{ user_name }}
                   </p>
-                  <!-- <p class="text-md text-gray-500">Office</p>
-              <p class="text-gray-500 text-md py-2 px-1 mb-2">
-                {{ user_officeName }}
-              </p> -->
                 </div>
                 <div v-else class="font-semibold bg-green-100 py-1 px-2 mb-2 mt-1">
                   {{ user_name }}
@@ -127,12 +105,12 @@
                   >
                     <option :value="0" class="bg-green-100">FREE</option>
                     <option
-                      v-for="item in employeeStore.employee"
-                      :key="item.id"
-                      :value="item.id"
+                      v-for="user in employeeStore.employee"
+                      :key="user.id"
+                      :value="user.id"
                       class="text-lg bg-green-100"
                     >
-                      {{ item.fname + ' ' + item.lname }}
+                      {{ user.fname + ' ' + user.lname }}
                     </option>
                   </select>
                   <!-- show office name of user if user name !== 'FREE' -->
@@ -254,7 +232,7 @@ const accountData = computed(() => {
         style: 'currency',
         currency: 'THB',
       }).format(store.assetDetail[0].price),
-      officeName: store.assetDetail[0].office_name.name,
+      // officeName: store.assetDetail[0].office_name.name,
     }
   }
   return {}
@@ -270,24 +248,22 @@ const updateData = reactive({
   warranty_end: '',
   store_location: '',
   stock_in: new Date(),
-  price: Intl.NumberFormat('th-TH', {
-    style: 'currency',
-    currency: 'THB',
-  }).format(0),
+  prince: Number,
   description: '',
   office_id: Number,
   user_id: Number,
   spec: {}, // JSONB column
 })
 // separate user from updateDATA to save edit
+
 const user_name = ref('')
-const userNameLabel = ref('')
 const user_officeName = ref('')
 const new_officeName = ref('')
 const editUser = ref(false)
 const updateRAM = ref('')
 const updateHarddisk = ref('')
 const updateDescription = ref('')
+const updateUserID = ref('')
 const serviceStore = useServiceLog()
 const serviceLog = computed(() => {
   if (!store.assetDetail[0] || store.assetDetail[0].asset_tag === null) {
@@ -303,13 +279,13 @@ const serviceLog = computed(() => {
 //   })
 // })
 
-// const userNameLabel = computed(() => {
-//   if (user_name.value === 'FREE') {
-//     return 'Status'
-//   } else {
-//     return 'User Name'
-//   }
-// })
+const userNameLabel = computed(() => {
+  if (user_name.value === 'FREE') {
+    return 'Status'
+  } else {
+    return 'User Name'
+  }
+})
 const toggleUser = () => {
   editUser.value = !editUser.value
   // console.log('toggleUser value : ', editUser)
@@ -342,26 +318,26 @@ onMounted(async () => {
     updateData.model = store.assetDetail[0].model
     updateData.description = store.assetDetail[0].description
     updateData.office_id = store.assetDetail[0].office_id
+    updateData.assetBU = store.assetDetail[0].office_name.name
     updateData.user_id = store.assetDetail[0].user_id
     updateData.spec = store.assetDetail[0].spec
-    updateRAM.value = store.assetDetail[0].spec.ram
-    updateHarddisk.value = store.assetDetail[0].spec.harddisk
-    updateDescription.value = store.assetDetail[0].description
   }
+
+  // init value for updata filed
+  updateRAM.value = store.assetDetail[0].spec.ram
+  updateHarddisk.value = store.assetDetail[0].spec.harddisk
+  updateDescription.value = store.assetDetail[0].description
+
   if (store.assetDetail[0].employee) {
-    // console.log('store.computerDetail[0].employee', store.computerDetail[0].employee)
     await employeeStore.getEmployeeDetail(store.assetDetail[0].user_id)
+    userNameLabel.value = 'User Name'
     user_name.value =
       employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
     user_officeName.value = employeeStore.employeeDetail[0].office_name.name
-    userNameLabel.value = 'User Name'
   } else {
     // employee data is not available-> computer is available in stock, free computer
-    user_name.value = 'FREE' // Assign an empty string or a default value
     userNameLabel.value = 'Status'
-  }
-  if (store.assetDetail[0].user_id) {
-    updateData.user_id = store.assetDetail[0].user_id
+    user_name.value = 'FREE' // Assign an empty string or a default value
   }
 }) // END onMounted()
 
@@ -373,6 +349,7 @@ async function editSubmit() {
   // TODO: validate data
   // console.log('UpdateData before call editsubmit : ', updateData)
   // upgrade ram and harddisk
+
   if (updateRAM.value !== '' || updateHarddisk.value !== '') {
     updateData.spec.ram = updateRAM.value
     updateData.spec.harddisk = updateHarddisk.value
@@ -386,6 +363,12 @@ async function editSubmit() {
   } else {
     updateData.description = null
   }
+
+  if (updateUserID.value !== null || undefined) {
+    updateData.user_id = updateUserID.value
+  } else {
+    updateData.description = null
+  }
   await store.updateAsset(paramID, updateData)
   router.push('/assets')
 }
@@ -396,14 +379,3 @@ async function deleteAsset(paramID) {
   router.push('/assets')
 }
 </script>
-
-<!-- <style scoped>
-.label {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  letter-spacing: 0.1rem;
-  color: #37383a;
-}
-</style> -->

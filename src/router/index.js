@@ -7,7 +7,6 @@ import NotFoundView from '@/views/NotFoundView.vue'
 
 import ServiceView from '@/views/ServiceView.vue'
 import AddComputerService from '@/components/Services/AddComputerService.vue'
-import AddEmailService from '@/components/Services/AddEmailService.vue'
 
 import AssetsView from '@/views/AssetsView.vue'
 import AssetEdit from '@/components/assets/AssetEdit.vue'
@@ -52,12 +51,7 @@ const router = createRouter({
       component: AddComputerService,
       // component: ServiceForm,
     },
-    {
-      path: '/addEmailService',
-      name: 'add-emailService',
-      component: AddEmailService,
-      // component: ServiceForm,
-    },
+
     {
       path: '/assets',
       name: 'assets',
