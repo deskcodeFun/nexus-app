@@ -8,8 +8,8 @@
       <div class="pb-4 px-4 flex-row">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
         <div class="px-4 sm:flex-row">
-          <div v-if="store.assetDetail && store.assetDetail[0].image !== null">
-            <BaseImage :images="store.assetDetail[0].image" />
+          <div v-if="assetStore.assetDetail && assetStore.assetDetail[0].image !== null">
+            <BaseImage :images="assetStore.assetDetail[0].image" />
           </div>
           <div v-else>
             <p class="w-25 text-lg italic text-gray-400">No Image</p>
@@ -21,15 +21,18 @@
         <p class="ml-4 sm:ml-0 sm:pb-4 text-lg tracking-wide">Accounting information</p>
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-x-8 gap-y-1 mb-8">
           <!-- get data from JSONB column -->
-          <BaseBox label="'Asset Tag'" :data="updateData.asset_tag"></BaseBox>
-          <BaseBox label="'S/N'" :data="updateData.serial_tag"></BaseBox>
-          <BaseBox label="Brand" :data="updateData.brand"></BaseBox>
-          <BaseBox label="Color" :data="updateData.color"></BaseBox>
-          <BaseBox label="'Warranty End'" :data="updateData.warranty_end"></BaseBox>
-          <BaseBox label="Description" :data="updateData.description"></BaseBox>
-          <BaseBox label="'Store Location'" :data="updateData.store_location"></BaseBox>
-          <BaseBox label="'Stock in Date'" :data="updateData.stock_in"></BaseBox>
-          <BaseBox label="Price" :data="updateData.price"></BaseBox>
+          <BaseBox label="'Asset Tag'" :data="assetStore.assetDetail[0].asset_tag"></BaseBox>
+          <BaseBox label="'S/N'" :data="assetStore.assetDetail[0].serial_tag"></BaseBox>
+          <BaseBox label="Brand" :data="assetStore.assetDetail[0].brand"></BaseBox>
+          <BaseBox label="Color" :data="assetStore.assetDetail[0].color"></BaseBox>
+          <BaseBox label="'Warranty End'" :data="assetStore.assetDetail[0].warranty_end"></BaseBox>
+          <BaseBox label="Description" :data="assetStore.assetDetail[0].description"></BaseBox>
+          <BaseBox
+            label="'Store Location'"
+            :data="assetStore.assetDetail[0].store_location"
+          ></BaseBox>
+          <BaseBox label="'Stock in Date'" :data="assetStore.assetDetail[0].stock_in"></BaseBox>
+          <BaseBox label="Price" :data="assetStore.assetDetail[0].price"></BaseBox>
           <!-- user section -->
           <BaseBox
             :label="userNameLabel"
@@ -37,7 +40,7 @@
             class="pl-4 pt-2 sm:pt-0 sm:pl-0"
           ></BaseBox>
           <!-- office name of asset -->
-          <BaseBox label="Asset BU" :data="updateData.assetBU"> </BaseBox>
+          <BaseBox label="Asset BU" :data="assetStore.assetDetail[0].office_name.name"> </BaseBox>
         </div>
       </div>
       <div>
@@ -46,7 +49,7 @@
           <!-- <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2"> -->
           <div class="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-x-8 gap-y-1">
             <div
-              v-for="(data, label) in updateData.spec"
+              v-for="(data, label) in assetStore.assetDetail[0].spec"
               :key="label"
               class="pl-4 sm:pl-0 pt-2 sm:pt-0"
             >
@@ -57,7 +60,10 @@
         <BaseAccordion title="Update">
           <div class="flex flex-col gap-8">
             <div
-              v-if="updateData.spec.ram && updateData.spec.harddisk !== null"
+              v-if="
+                assetStore.assetDetail[0].spec.ram &&
+                assetStore.assetDetail[0].spec.harddisk !== null
+              "
               class="pl-4 sm:pl-0 pt-2 sm:pt-0"
             >
               <p class="mt-4 mb-1 text-sm text-gray-500">RAM</p>
@@ -76,7 +82,7 @@
               <select
                 name="officeName"
                 id="officeName"
-                v-model.trim="updateData.office_id"
+                v-model.trim="assetStore.assetDetail[0].office_id"
                 class="text-md bg-green-100 py-2 pl-1 pr-2"
               >
                 <option
@@ -118,7 +124,7 @@
                 >
                   <p class="pb-2">Update User</p>
                   <select
-                    v-model.trim="updateData.user_id"
+                    v-model.trim="assetStore.assetDetail[0].user_id"
                     @change="handleUpdateUser"
                     class="w-full bg-green-100 py-2 text-md"
                   >
@@ -201,7 +207,7 @@
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 
 import { useAssetStore } from '@/stores/assetsData'
 import { useOfficeNameStore } from '@/stores/officeData'
@@ -219,9 +225,14 @@ import BaseAccordion from '../BaseAccordion.vue'
 const route = useRoute()
 const router = useRouter()
 let paramID = +route.params.id
-const store = useAssetStore()
+const assetStore = useAssetStore()
 const officeNameStore = useOfficeNameStore()
 const employeeStore = useEmployeeStore()
+const asset = await assetStore.getAssetDetail(paramID)
+
+console.log('get asset, detail by paramID', assetStore.assetDetail)
+console.log('Asset ', asset)
+
 // const accountData = computed(() => {
 //   if (store.assetDetail && store.assetDetail[0]) {
 //     return {
@@ -244,43 +255,39 @@ const employeeStore = useEmployeeStore()
 //   return {}
 // })
 
-const updateData = reactive({
-  id: paramID,
-  asset_tag: store.assetDetail[0].asset_tag,
-  serial_tag: store.assetDetail[0].serial_tag,
-  brand: store.assetDetail[0].brand,
-  model: store.assetDetail[0].model,
-  color: store.assetDetail[0].color,
-  warranty_end: store.assetDetail[0].warranty_end,
-  store_location: store.assetDetail[0].store_location,
-  stock_in: store.assetDetail[0].stock_in,
-  price: Intl.NumberFormat('th-TH', {
-    style: 'currency',
-    currency: 'THB',
-  }).format(store.assetDetail[0].price),
-  description: store.assetDetail[0].description,
-  office_id: store.assetDetail[0].office_id,
-  user_id: store.assetDetail[0].user_id,
-  spec: store.assetDetail[0].spec, // JSONB column
-})
-console.log('updateDATA :', updateData)
+// const updateData = reactive({
+//   id: paramID,
+//   asset_tag: store.assetDetail[0].asset_tag,
+//   serial_tag: store.assetDetail[0].serial_tag,
+//   brand: store.assetDetail[0].brand,
+//   model: store.assetDetail[0].model,
+//   color: store.assetDetail[0].color,
+//   warranty_end: store.assetDetail[0].warranty_end,
+//   store_location: store.assetDetail[0].store_location,
+//   stock_in: store.assetDetail[0].stock_in,
+//   price: Intl.NumberFormat('th-TH', {
+//     style: 'currency',
+//     currency: 'THB',
+//   }).format(store.assetDetail[0].price),
+//   description: store.assetDetail[0].description,
+//   office_id: store.assetDetail[0].office_id,
+//   user_id: store.assetDetail[0].user_id,
+//   spec: store.assetDetail[0].spec, // JSONB column
+// })
+// console.log('updateDATA :', updateData)
 // separate user from updateDATA to save edit
 
-const user_name = ref('')
-const user_officeName = ref('')
-const new_officeName = ref('')
 const editUser = ref(false)
 const updateRAM = ref('')
 const updateHarddisk = ref('')
 const updateDescription = ref('')
-const updateUserID = ref('')
 const serviceStore = useServiceLog()
 const serviceLog = computed(() => {
-  if (!store.assetDetail[0] || store.assetDetail[0].asset_tag === null) {
+  if (!assetStore.assetDetail[0] || assetStore.assetDetail[0].asset_tag === null) {
     return []
   }
   return serviceStore.serviceLog.filter(
-    (service) => service.asset_tag === store.assetDetail[0].asset_tag,
+    (service) => service.asset_tag === assetStore.assetDetail[0].asset_tag,
   )
 })
 // const serviceDate = computed(() => {
@@ -288,7 +295,12 @@ const serviceLog = computed(() => {
 //     return new Date(service.created_at).toLocaleDateString()
 //   })
 // })
-
+const user_name = computed(() => {
+  if (assetStore.assetDetail[0].user_id === null || undefined) {
+    return 'FREE'
+  }
+  return assetStore.assetDetail[0].employee.fname + ' ' + assetStore.assetDetail[0].employee.lname
+})
 const userNameLabel = computed(() => {
   if (user_name.value === 'FREE') {
     return 'Status'
@@ -303,53 +315,54 @@ const toggleUser = () => {
 
 async function handleUpdateUser(event) {
   const value = event.target.value
-  updateData.user_id = value
-  // console.log('updateData.user_id value', value)
-  if (updateData.user_id !== '0') {
-    await employeeStore.getEmployeeDetail(updateData.user_id)
-    // console.log('employee detail', employeeStore.employeeDetail)
-    new_officeName.value = employeeStore.employeeDetail[0].office_name.name
-  } else {
-    editUser.value = false
-    new_officeName.value = ''
-    user_name.value = 'FREE'
-    updateData.user_id = null
-  }
+  console.log('Value Change in handdleUpdateUser', value)
+  // updateData.user_id = value
+  // // console.log('updateData.user_id value', value)
+  // if (updateData.user_id !== '0') {
+  //   await employeeStore.getEmployeeDetail(updateData.user_id)
+  //   // console.log('employee detail', employeeStore.employeeDetail)
+  //   new_officeName.value = employeeStore.employeeDetail[0].office_name.name
+  // } else {
+  //   editUser.value = false
+  //   new_officeName.value = ''
+  //   user_name.value = 'FREE'
+  //   updateData.user_id = null
+  // }
 }
 
-onMounted(async () => {
-  await store.getAssetDetail(paramID)
-  // console.log('computerDetail : ', store.assetDetail)
-  if (store.assetDetail[0]) {
-    // console.log('store.assetDetail[0]', store.assetDetail[0])
-    updateData.asset_tag = store.assetDetail[0].asset_tag
-    updateData.serial_tag = store.assetDetail[0].serial_tag
-    updateData.brand = store.assetDetail[0].brand
-    updateData.model = store.assetDetail[0].model
-    updateData.description = store.assetDetail[0].description
-    updateData.office_id = store.assetDetail[0].office_id
-    updateData.assetBU = store.assetDetail[0].office_name.name
-    updateData.user_id = store.assetDetail[0].user_id
-    updateData.spec = store.assetDetail[0].spec
-  }
+// onMounted(async () => {
+//   await store.getAssetDetail(paramID)
+//   // console.log('computerDetail : ', store.assetDetail)
+//   if (store.assetDetail[0]) {
+//     // console.log('store.assetDetail[0]', store.assetDetail[0])
+//     updateData.asset_tag = store.assetDetail[0].asset_tag
+//     updateData.serial_tag = store.assetDetail[0].serial_tag
+//     updateData.brand = store.assetDetail[0].brand
+//     updateData.model = store.assetDetail[0].model
+//     updateData.description = store.assetDetail[0].description
+//     updateData.office_id = store.assetDetail[0].office_id
+//     updateData.assetBU = store.assetDetail[0].office_name.name
+//     updateData.user_id = store.assetDetail[0].user_id
+//     updateData.spec = store.assetDetail[0].spec
+//   }
 
-  // init value for updata filed
-  updateRAM.value = store.assetDetail[0].spec.ram
-  updateHarddisk.value = store.assetDetail[0].spec.harddisk
-  updateDescription.value = store.assetDetail[0].description
+//   // init value for updata filed
+//   updateRAM.value = store.assetDetail[0].spec.ram
+//   updateHarddisk.value = store.assetDetail[0].spec.harddisk
+//   updateDescription.value = store.assetDetail[0].description
 
-  if (store.assetDetail[0].employee) {
-    await employeeStore.getEmployeeDetail(store.assetDetail[0].user_id)
-    userNameLabel.value = 'User Name'
-    user_name.value =
-      employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
-    user_officeName.value = employeeStore.employeeDetail[0].office_name.name
-  } else {
-    // employee data is not available-> computer is available in stock, free computer
-    userNameLabel.value = 'Status'
-    user_name.value = 'FREE' // Assign an empty string or a default value
-  }
-}) // END onMounted()
+//   if (store.assetDetail[0].employee) {
+//     await employeeStore.getEmployeeDetail(store.assetDetail[0].user_id)
+//     userNameLabel.value = 'User Name'
+//     user_name.value =
+//       employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
+//     user_officeName.value = employeeStore.employeeDetail[0].office_name.name
+//   } else {
+//     // employee data is not available-> computer is available in stock, free computer
+//     userNameLabel.value = 'Status'
+//     user_name.value = 'FREE' // Assign an empty string or a default value
+//   }
+// }) // END onMounted()
 
 const modalActive = ref(null)
 const toggleModal = () => {
@@ -360,32 +373,12 @@ async function editSubmit() {
   // console.log('UpdateData before call editsubmit : ', updateData)
   // upgrade ram and harddisk
 
-  if (updateRAM.value !== '' || updateHarddisk.value !== '') {
-    updateData.spec.ram = updateRAM.value
-    updateData.spec.harddisk = updateHarddisk.value
-  } else {
-    updateData.spec.ram = store.assetDetail[0].spec.ram
-    updateData.spec.harddisk = store.assetDetail[0].spec.harddisk
-    // updateData.description = ref(null)
-  }
-  if (updateDescription.value !== '') {
-    updateData.description = updateDescription.value
-  } else {
-    updateData.description = null
-  }
-
-  if (updateUserID.value !== null || undefined) {
-    updateData.user_id = updateUserID.value
-  } else {
-    updateData.description = null
-  }
-  await store.updateAsset(paramID, updateData)
   router.push('/assets')
 }
 
 async function deleteAsset(paramID) {
-  await store.deleteAsset(paramID)
-  await store.getAssetByOffice('0')
+  await assetStore.deleteAsset(paramID)
+  await assetStore.getAssetByOffice('0')
   router.push('/assets')
 }
 </script>

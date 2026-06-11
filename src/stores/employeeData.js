@@ -75,10 +75,11 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
       } finally {
         isLoading.value = false
       }
-    } else {
-      console.error('param id is undefined')
-      isLoading.value = false
     }
+    //   else {
+    //     console.log('this asset is FREE')
+    //     isLoading.value = false
+    //   }
   }
 
   async function addEmployee(newUser) {

@@ -4,7 +4,9 @@
       <TheTopbar />
     </div>
     <div class="h-screen mt-18 sm:pl-8 sm:mr-8 z-0">
-      <RouterView />
+      <Suspense>
+        <RouterView />
+      </Suspense>
     </div>
   </div>
 </template>

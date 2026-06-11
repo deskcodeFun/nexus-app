@@ -10,6 +10,6 @@
 <script setup>
 defineProps({
   label: String,
-  data: String,
+  data: [String, Number],
 })
 </script>

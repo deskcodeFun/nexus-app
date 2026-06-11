@@ -57,7 +57,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
 
   async function getAssetDetail(paramID) {
     let assetID = paramID
-    if (assetID !== undefined) {
+    if (assetID !== undefined || null) {
       try {
         isLoading.value = true
         const { data, error } = await supabase
@@ -98,31 +98,10 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     }
   }
 
-  // async function updateAsset(assetID, updateData) {
-  //   try {
-  //     isLoading.value = true
-  //     const { error } = await supabase.from('asset').update(updateData).eq('id', assetID).select()
-  //     if (error) throw error
-  //   } catch (error) {
-  //     console.error('update  Assets error: ', error)
-  //   } finally {
-  //     isLoading.value = false
-  //   }
-  // }
   async function updateAsset(assetID, updateData) {
     try {
       isLoading.value = true
-
-      // Convert empty strings to null to avoid PostgreSQL date syntax errors
-      const sanitizedData = Object.fromEntries(
-        Object.entries(updateData).map(([key, value]) => [key, value === '' ? null : value]),
-      )
-
-      const { error } = await supabase
-        .from('asset')
-        .update(sanitizedData)
-        .eq('id', assetID)
-        .select()
+      const { error } = await supabase.from('asset').update(updateData).eq('id', assetID).select()
       if (error) throw error
     } catch (error) {
       console.error('update  Assets error: ', error)
@@ -130,6 +109,27 @@ export const useAssetStore = defineStore('useAssetStore', () => {
       isLoading.value = false
     }
   }
+  // async function updateAsset(assetID, updateData) {
+  //   try {
+  //     isLoading.value = true
+
+  //     // Convert empty strings to null to avoid PostgreSQL date syntax errors
+  //     const sanitizedData = Object.fromEntries(
+  //       Object.entries(updateData).map(([key, value]) => [key, value === '' ? null : value]),
+  //     )
+
+  //     const { error } = await supabase
+  //       .from('asset')
+  //       .update(sanitizedData)
+  //       .eq('id', assetID)
+  //       .select()
+  //     if (error) throw error
+  //   } catch (error) {
+  //     console.error('update  Assets error: ', error)
+  //   } finally {
+  //     isLoading.value = false
+  //   }
+  // }
 
   async function deleteAsset(paramID) {
     try {
@@ -144,7 +144,6 @@ export const useAssetStore = defineStore('useAssetStore', () => {
   }
 
   getAssetByOffice('0')
-  getAssetDetail('1')
   fetchAsset()
 
   return {
