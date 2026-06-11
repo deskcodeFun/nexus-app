@@ -1,5 +1,5 @@
 // import { createRouter, createWebHistory } from 'vue-router'
-import { createRouter, createMemoryHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
@@ -22,8 +22,8 @@ import { supabase } from '@/lib/supabaseClient'
 // import ServiceForm from '@/components/Services/ServiceForm.vue'
 
 const router = createRouter({
-  // history: createWebHistory(import.meta.env.BASE_URL),
-  history: createMemoryHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createMemoryHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
