@@ -21,7 +21,8 @@
             <tr>
               <th>User Name</th>
               <td class="font-bold">
-                {{ items.fname + ' ' + items.lname.substring(0, 1) + '.' }}
+                <!-- {{ userName }} -->
+                {{ items.fname + ' ' + (items.lname ? items.lname : '.') }}
               </td>
             </tr>
             <tr>

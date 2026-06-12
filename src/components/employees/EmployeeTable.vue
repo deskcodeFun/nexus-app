@@ -23,7 +23,9 @@
             @click="router.push(`/editEmployee/${items.id}`)"
             class="table-row hover:shadow-2xl hover:bg-blue-50 hover:cursor-pointer text-nowrap"
           >
-            <td class="table-cell font-bold">{{ items.fname + ' ' + items.lname }}</td>
+            <td class="table-cell font-bold">
+              {{ items.fname + ' ' + (items.lname ? items.lname : '.') }}
+            </td>
             <!-- <td class="table-cell">{{ employee.email }}</td> -->
             <td class="table-cell">{{ items.job_title ?? 'No department' }}</td>
             <td class="table-cell">{{ items.department_name?.name || 'No department' }}</td>
