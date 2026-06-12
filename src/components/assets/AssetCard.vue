@@ -37,7 +37,7 @@
               <th scope="col">User Name</th>
               <td>
                 <p v-if="item.employee">
-                  {{ item.employee.fname + ' ' + item.employee.lname.substring(0, 1) + '.' }}
+                  {{ item.employee.fname + ' ' + item.employee.lname?.substring(0, 1) + '.' }}
                 </p>
                 <p v-else class="text-green-800">FREE</p>
               </td>
