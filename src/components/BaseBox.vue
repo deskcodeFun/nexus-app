@@ -1,7 +1,7 @@
 <template>
-  <div class="w-75 xl:w-auto mb-2">
-    <label class="capitalize text-gray-500 text-sm">{{ label }}</label>
-    <div class="w-full py-1 px-2 mt-1 mr-8 lg:mr-20 font-semibold bg-blue-50 text-wrap">
+  <div class="w-full flex flex-col mb-1">
+    <label class="w-fit capitalize text-gray-500 text-sm">{{ label }}</label>
+    <div class="w-2/3 py-1 px-2 mt-1 font-semibold bg-blue-50 text-wrap">
       {{ data ?? '-' }}
     </div>
   </div>

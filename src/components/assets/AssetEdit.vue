@@ -11,7 +11,10 @@
     <div class="flex flex-col lg:flex-row gap-4">
       <div class="pb-4 px-4">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
-        <div v-if="store.assetDetail && store.assetDetail[0].image !== null">
+        <div
+          v-if="store.assetDetail && store.assetDetail[0].image !== null"
+          class="overflow-y-scroll lg:overflow-y-visible"
+        >
           <BaseImage :images="store.assetDetail[0].image" />
         </div>
         <div v-else>
@@ -19,10 +22,10 @@
         </div>
       </div>
       <!-- accounting section -->
-      <div class="w-xl text-nowrap flex flex-wrap flex-col pb-2">
-        <p class="sm:pb-4 text-lg tracking-wide ml-4">Asset information</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-1">
-          <div v-for="(data, label) in accountData" :key="label" class="pl-4 pt-2 sm:pt-0 sm:pl-0">
+      <div class="text-nowrap flex flex-wrap flex-col pb-2 mx-4">
+        <p class="sm:pb-4 text-lg tracking-wide">Asset information</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+          <div v-for="(data, label) in accountData" :key="label">
             <div v-if="data !== null">
               <BaseBox :label="label" :data="data"></BaseBox>
             </div>

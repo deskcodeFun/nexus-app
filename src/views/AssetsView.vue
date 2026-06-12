@@ -20,41 +20,40 @@
 </template>
 
 <script setup>
-  import { ref, onMounted, onUnmounted } from 'vue';
-  import BaseHeader from '@/components/BaseHeader.vue'
-  import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue';
+import { ref, onMounted, onUnmounted } from 'vue'
+import BaseHeader from '@/components/BaseHeader.vue'
+import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
 
+import AssetTable from '@/components/assets/AssetTable.vue'
+import AssetCard from '@/components/assets/AssetCard.vue'
+import { useAssetStore } from '@/stores/assetsData'
+import BaseButtonAdd from '@/components/BaseButtonAdd.vue'
 
-  import AssetTable from '@/components/assets/AssetTable.vue';
-  import AssetCard from '@/components/assets/AssetCard.vue';
-  import { useAssetStore } from '@/stores/assetsData';
-  import BaseButtonAdd from '@/components/BaseButtonAdd.vue';
+const assetStore = useAssetStore()
+assetStore.getAssetByOffice('0')
 
-  const assetStore = useAssetStore()
-  assetStore.getAssetByOffice('0')
+// detect screen
+const isMobile = ref(false)
+const breakpoint = 1024
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= breakpoint
+}
 
-  // detect screen
-  const isMobile = ref(false)
-  const breakpoint = 1024
-  const checkMobile = () => {
-    isMobile.value = window.innerWidth <= breakpoint
+// select dropdown BU
+function handleChoice(value) {
+  checkMobile()
+  if (value !== 0 && value !== null) {
+    assetStore.getAssetByOffice(value)
   }
-
-  // select dropdown BU
-  function handleChoice(value) {
-    checkMobile()
-    if (value !== 0 && value !== null) {
-      assetStore.getAssetByOffice(value)
-    }
-    if (value == 0 || value == null) {
-      assetStore.getAssetByOffice('0')
-    }
+  if (value == 0 || value == null) {
+    assetStore.getAssetByOffice('0')
   }
-  onMounted(() => {
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-  })
-  onUnmounted(() => {
-    window.removeEventListener('resize', checkMobile)
-  })
+}
+onMounted(() => {
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+})
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile)
+})
 </script>

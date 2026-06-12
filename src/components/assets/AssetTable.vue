@@ -7,7 +7,7 @@
           <th scope="col" class="text-left text-base font-bold pl-2 text-blue-900">Asset Tag</th>
           <th scope="col" class="text-left text-base font-bold text-blue-900">Serial</th>
           <th scope="col" class="text-left text-base font-bold text-blue-900">Brand</th>
-          <th scope="col" class="text-left text-base font-bold text-blue-900">Model</th>
+          <!-- <th scope="col" class="text-left text-base font-bold text-blue-900">Model</th> -->
           <th scope="col" class="text-left text-base font-bold text-blue-900">Used By</th>
           <th scope="col" class="text-left text-base font-bold text-blue-900">Asset BU</th>
         </tr>
@@ -26,9 +26,9 @@
             class="table-row hover:shadow-2xl hover:bg-blue-50 hover:cursor-pointer text-nowrap"
           >
             <td class="table-cell font-bold">{{ item.asset_tag }}</td>
-            <td class="table-cell">{{ item.serial_tag }}</td>
-            <td class="table-cell">{{ item.brand }}</td>
-            <td class="table-cell">{{ item.model }}</td>
+            <td class="table-cell">{{ item.serial_tag?.substring(0, 15) + '...' }}</td>
+            <td class="table-cell">{{ item.brand + ' ' + item.model }}</td>
+            <!-- <td class="table-cell">{{ item.model }}</td> -->
 
             <!-- User Full name -->
             <td class="table-cell">
