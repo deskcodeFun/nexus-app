@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="flex flex-row lg:flex-col md:justify-around overflow-y-auto">
+    <div class="w-64 flex flex-col">
       <img
         v-for="(image, index) in images"
         :key="index"
         :src="image"
         alt="Image"
         @click="showPreview(image)"
-        class="w-30 h-auto mx-4 my-4 cursor-pointer"
+        class="h-auto m-4 cursor-pointer"
       />
     </div>
     <div class="modal" v-if="previewImage">
@@ -42,9 +42,9 @@ const closePreview = () => {
   left: 0;
   top: 0;
   width: 100%;
-  height: 95%;
+  height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(57, 55, 55, 0.8);
 }
 
 .modal img {
@@ -53,7 +53,7 @@ const closePreview = () => {
   height: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 4%;
+  margin-top: 10%;
   margin-bottom: auto;
   transform: scale(1.1);
 }
