@@ -146,7 +146,7 @@ onMounted(async () => {
     updateEmployee.job_title = store.employeeDetail[0].job_title
     updateEmployee.department_id = store.employeeDetail[0].department_name?.id || '-'
     updateEmployee.office_id = store.employeeDetail[0].office_name?.id || '-'
-    updateEmployee.email_group = store.employeeDetail[0].email_group || '-'
+    updateEmployee.email_group = store.employeeDetail[0].email_group
   } else {
     console.error(`ERROR Employee with ID ${paramID} not found.`)
   }
@@ -158,8 +158,21 @@ const toggleModal = () => {
 }
 
 async function editSubmit() {
-  await store.updateEmployee(paramID, updateEmployee)
-  router.push('/employee')
+  try {
+    await store.updateEmployee(paramID, updateEmployee)
+  } catch (error) {
+    console.log('Can noet Edit Employee', error)
+  } finally {
+    Object.assign(updateEmployee, {
+      fname: '',
+      lname: '',
+      job_title: '',
+      department_id: '',
+      office_id: null,
+      email_group: [],
+    })
+    router.push('/employee')
+  }
 }
 
 function delEmployee(paramID) {
