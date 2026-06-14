@@ -7,14 +7,27 @@ export const useServiceLog = defineStore('service_log', () => {
   const serviceDetail = ref()
   let isLoading = ref(true)
 
+  async function addService(newService) {
+    try {
+      isLoading.value = true
+      const { error } = await supabase.from('service_log').insert([newService])
+      if (error) throw error
+    } catch (error) {
+      console.error('ERROR Add new service : ', error)
+    } finally {
+      alert('Add service suscess')
+      isLoading.value = false
+    }
+  }
+
   async function fetchService() {
     try {
       const { data, error } = await supabase
         .from('service_log')
-        .select('*')
+        .select(`*,service_type(*)`)
         .order('id', { ascending: false })
       serviceLog.value = data
-      // console.log('service log in store: ', serviceLog.value)
+      console.log('service log in store: ', serviceLog.value)
       if (error) throw error
       // console.log('service in store :', serviceLog)
     } catch (error) {
@@ -28,7 +41,7 @@ export const useServiceLog = defineStore('service_log', () => {
       try {
         const { data, error } = await supabase
           .from('service_log')
-          .select('*')
+          .select(`*,service_type(*)`)
           .eq('asset_tag', paramId)
         serviceDetail.value = data
         if (error) throw error
@@ -63,6 +76,7 @@ export const useServiceLog = defineStore('service_log', () => {
   return {
     serviceLog,
     serviceDetail,
+    addService,
     fetchService,
     getServiceDetail,
     updateServiceState,

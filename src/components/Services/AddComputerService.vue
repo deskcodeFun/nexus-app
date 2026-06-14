@@ -1,5 +1,5 @@
 <template>
-  <BaseHeader title="Add Computer Service" :isShow="true"></BaseHeader>
+  <BaseHeader title="Computer Service" :isShow="true"></BaseHeader>
   <!-- container -->
   <div
     class="h-[clamp(300px,70dvh,600px)] overflow-y-auto flex flex-col mx-2 lg:flex-row gap-4 lg:gap-24"
@@ -35,19 +35,26 @@
         <div v-if="selectAsset?.user_id" class="m-2 flex flex-col justify-between">
           <div class="flex flex-row justify-between items-baseline">
             <label for="employeeName" class="label">User Name</label>
-            <p>{{ selectAsset.employee.fname + ' ' + selectAsset.employee.lname }}</p>
+            <!-- <p>{{ selectAsset.employee.fname + ' ' + selectAsset.employee.lname }}</p> -->
+            <p>
+              {{
+                employeeStore.employeeDetail[0]?.fname +
+                ' ' +
+                employeeStore.employeeDetail[0]?.lname
+              }}
+            </p>
           </div>
-          <div class="flex flex-row justify-between items-baseline">
+          <!-- <div class="flex flex-row justify-between items-baseline">
             <label for="employeeEmail" class="label">Email</label>
             <p>{{ selectAsset.employee.email }}</p>
-          </div>
+          </div> -->
           <div class="flex flex-row justify-between items-baseline">
             <label for="employeeDept" class="label">Department</label>
-            <p>{{ selectAsset.employee.department }}</p>
+            <p>{{ employeeStore.employeeDetail[0].department_name.name }}</p>
           </div>
           <div class="flex flex-row justify-between items-baseline">
-            <label for="employeeOffice" class="label">BU</label>
-            <p>{{ selectAsset.office_name.name }}</p>
+            <label for="employeeOffice" class="label">User Office </label>
+            <p>{{ employeeStore.employeeDetail[0]?.office_name?.name }}</p>
           </div>
         </div>
         <!--case: user is free  -->
@@ -62,7 +69,7 @@
         <div class="w-full">
           <input type="checkbox" id="changeUser" value="changeUser" v-model="changeUser" />
           <label for="employeeName" class="text-lg items-baseline text-blue-900 mx-1"
-            >Change User</label
+            >Change User {{ changeUser }}</label
           >
           <hr class="my-1 mb-4 border-blue-900" />
         </div>
@@ -72,26 +79,29 @@
           <!-- option 1 : change user to FREE asset  option 2 : change user to other employee  -->
           <select v-model.trim="selectEmployee" @change="handleEmployee" class="px-2 bg-blue-50">
             <option value="null" class="text-green-500 font-bold">FREE</option>
-            <option v-for="user in employeeStore.employee" :key="user.id" :value="user">
-              {{ user.fname + ' ' + user.lname }}
+            <option v-for="users in employeeStore.employee" :key="users.id" :value="users.id">
+              {{ users.fname + ' ' + users.lname }}
             </option>
           </select>
         </div>
         <!-- user details -->
-        <div v-if="selectEmployee && changeUser" class="w-full m-2 flex flex-col justify-between">
-          <div class="w-full flex flex-row justify-between items-baseline">
+        <div
+          v-if="employeeStore.employeeDetail[0] && changeUser"
+          class="w-full m-2 flex flex-col justify-between"
+        >
+          <!-- <div class="w-full flex flex-row justify-between items-baseline">
             <label for="employeeEmail" class="label">Email</label>
             <p>{{ selectEmployee.email }}</p>
-          </div>
+          </div> -->
 
           <div class="w-full flex flex-row justify-between items-baseline">
             <label for="employeeDept" class="label">Department</label>
-            <p>{{ selectEmployee.department }}</p>
+            <p>{{ employeeStore.employeeDetail[0].department_name.name }}</p>
           </div>
 
           <div class="w-full flex flex-row justify-between items-baseline">
             <label for="employeeOffice" class="label">BU</label>
-            <p>{{ selectEmployee.office_name.name }}</p>
+            <p>{{ employeeStore.employeeDetail[0].office_name.name }}</p>
           </div>
         </div>
       </div>
@@ -411,16 +421,31 @@ const newServiceLog = reactive({
   employee: '',
 })
 
-function handleAssetTag(event) {
+async function handleAssetTag(event) {
   const value = event.target.value
   newServiceLog.asset_tag = value
+  if (selectAsset.value?.employee?.id) {
+    await employeeStore.getEmployeeDetail(selectAsset.value.employee.id)
+    console.log('selectAsset.value', selectAsset.value)
+    console.log('emaployee detail ', employeeStore.employeeDetail)
+  }
   console.log('newServiceLog.asset_tag', selectAsset)
 }
-function handleEmployee(event) {
+async function handleEmployee(event) {
   const value = event.target.value
-  newServiceLog.employee = value
-  console.log('newServiceLog.asset_tag', newServiceLog)
+  if (value !== null) {
+    newServiceLog.employee = value
+    if (selectEmployee.value.employee !== null || undefined) {
+      await employeeStore.getEmployeeDetail(selectAsset.value.employee.id)
+      console.log('selectAsset.value', selectAsset.value)
+      console.log('emaployee detail ', employeeStore.employeeDetail)
+      console.log('newServiceLog.asset_tag', changeUser.value)
+    }
+  }
 }
+// console.log('newServiceLog.asset_tag', selectAsset)
+// console.log('newServiceLog.asset_tag', newServiceLog)
+
 onMounted(async () => {
   await assetStore.fetchAsset()
   await employeeStore.getAllEmployee()

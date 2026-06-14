@@ -45,5 +45,5 @@ import { useEmployeeStore } from '@/stores/employeeData.js'
 const router = useRouter()
 const employeeStore = useEmployeeStore()
 employeeStore.getAllEmployee()
-console.log(' get all employee ', employeeStore.employee)
+// console.log(' get all employee ', employeeStore.employee)
 </script>

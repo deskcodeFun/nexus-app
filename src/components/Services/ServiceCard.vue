@@ -12,15 +12,16 @@
       </Teleport>
     </Transition>
 
-    <div class="flex flex-col lg:flex-row justify-between">
-      <p class="text-sky-900 font-bold text-sm">
-        {{ props.item.asset_tag }}
+    <div class="flex flex-col md:flex-row justify-between">
+      <p class="text-sky-900 font-semibold">
+        <!-- {{ props.item.asset_tag }} -->
+        {{ props.item.service_type.service_name }}
       </p>
-      <p class="text-teal-800 py-1 mb-1 rounded-md text-xs">
+      <p class="text-teal-800 py-1 mb-1 text-xs">
         {{ dateFormat(props.item.appointment_date) }}
       </p>
     </div>
-    <p class="w-full text-mm text-teal-800 text-wrap">
+    <p class="w-fit bg-amber-50 text-mm text-teal-800">
       {{ props.item.detail }}
     </p>
   </div>

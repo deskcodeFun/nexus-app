@@ -67,7 +67,8 @@
         <form @submit.prevent="addSubmit" class="flex flex-row justify-between">
           <button
             class="flex items-center justify-center hover:bg-red-900 hover:scale-102 border border-red-900 hover:text-white py-1 px-4 mt-8 rounded-xl"
-            type="submit"
+            type="button"
+            @click="router.back()"
           >
             <XMarkIcon class="h-4 w-4 mr-2" />
             <span> Cancel </span>
@@ -92,6 +93,7 @@ import { reactive } from 'vue'
 import { useEmployeeStore } from '@/stores/employeeData'
 import { useOfficeNameStore } from '@/stores/officeData'
 import { useDepartmentStore } from '@/stores/departmentData.js'
+import { useServiceLog } from '@/stores/service_log.js'
 
 import BaseHeader from '../BaseHeader.vue'
 // import BaseBox from '../BaseBox.vue'
@@ -100,6 +102,7 @@ const router = useRouter()
 const employeeStore = useEmployeeStore()
 const officeNameStore = useOfficeNameStore()
 const departmentNameStore = useDepartmentStore()
+const serviceLogStore = useServiceLog()
 // console.log('office name', officeNameStore)
 const newEmployee = reactive({
   fname: '',
@@ -109,6 +112,13 @@ const newEmployee = reactive({
   office_id: null,
   email_group: [],
 })
+const newService = reactive({
+  appointment_date: new Date(),
+  asset_tag: '',
+  state: 1,
+  service_id: 1, // service name is always 'Add Email'
+  detail: newEmployee,
+})
 officeNameStore.getGroupEmail()
 // console.log('office name store', officeNameStore.email_groupName)
 // function addSubmit() {
@@ -117,9 +127,17 @@ officeNameStore.getGroupEmail()
 // console.log('office name store', officeNameStore.email_groupName)
 async function addSubmit() {
   try {
+    // 1. add new user and email to employye table
     await employeeStore.addEmployee({ ...newEmployee })
+
+    console.log('suscessfull add emaployee ')
+
+    // 2. create Service IT card for notify it to add new email to exchange server
+    await serviceLogStore.addService({ ...newService })
+
+    console.log('suscessfull add service card')
   } catch (error) {
-    console.error('Can not Add new Employee: ', error)
+    return { data: undefined, error: error }
   } finally {
     Object.assign(newEmployee, {
       fname: '',
@@ -129,6 +147,8 @@ async function addSubmit() {
       office_id: null,
       email_group: [],
     })
+    // 3. if succss back to before page
+    // alert('suscessfull add emaployee and service card')
     router.push('/employee')
   }
 }

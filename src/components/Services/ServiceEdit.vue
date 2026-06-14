@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-1/2 min-w-fit bg-green-50 p-4 rounded-xl border border-green-900">
-    <div class="flex flex-row justify-between">
+  <div class="max-w-1/2 min-w-fit bg-green-50 rounded-xl border border-green-900">
+    <div class="flex flex-row justify-between bg-amber-50">
       <BaseHeader title="Service Edit" />
       <XMarkIcon
         @click="$emit('toggle-open')"

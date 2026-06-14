@@ -66,7 +66,7 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      path: '/addAsset/',
+      path: '/addAsset',
       name: 'add-asset',
       component: AssetAdd,
       meta: { requiresAuth: true },
