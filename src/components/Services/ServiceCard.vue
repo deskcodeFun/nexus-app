@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import ServiceEdit from './ServiceEdit.vue'
 
 const open = ref(false)
@@ -46,18 +46,18 @@ const props = defineProps({
   item: Object,
 })
 console.log('props.item', props.item)
-const itemDetail = computed(() => {
-  if (props.item.service_id == 1) {
-    try {
-      return JSON.parse(props.item.detail)
-    } catch {
-      return {}
-    }
-  } else {
-    return props.item.detail
-  }
-})
-console.log('Item detail with computed :', itemDetail.value)
+// const itemDetail = computed(() => {
+//   if (props.item.service_id == 1) {
+//     try {
+//       return JSON.parse(props.item.detail)
+//     } catch {
+//       return {}
+//     }
+//   } else {
+//     return props.item.detail
+//   }
+// })
+// console.log('Item detail with computed :', itemDetail.value)
 // const { itemRef } = toRefs(props)
 // console.log('item to Refs ', itemRef)
 // Use Object.entries() on props.item

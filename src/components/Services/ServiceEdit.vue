@@ -63,7 +63,7 @@ import { XMarkIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outlin
 
 // const emit = defineEmits('open')
 const props = defineProps({ itemDetail: Object })
-console.log(props.itemDetail)
+// console.log(props.itemDetail)
 
 const serviceAssetTag = ref(props.itemDetail.asset_tag || '-')
 const userFullName = computed(() => {
