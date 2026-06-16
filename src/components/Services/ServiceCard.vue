@@ -21,20 +21,50 @@
         {{ dateFormat(props.item.appointment_date) }}
       </p>
     </div>
-    <p class="w-fit bg-amber-50 text-mm text-teal-800">
-      {{ props.item.detail }}
-    </p>
+    <div v-if="props.item.service_id !== 1">
+      <p class="w-fit text-mm text-teal-800">
+        {{ props.item.id + ' ' + props.item.detail }}
+      </p>
+    </div>
+    <div v-else>
+      <p class="w-fit text-mm text-teal-800">
+        {{ 'First name : ' + props.item.fname }}
+      </p>
+      <p class="w-fit text-mm text-teal-800">
+        {{ 'Last Name : ' + props.item.lname }}
+      </p>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import ServiceEdit from './ServiceEdit.vue'
 
 const open = ref(false)
 const props = defineProps({
   item: Object,
 })
+console.log('props.item', props.item)
+const itemDetail = computed(() => {
+  if (props.item.service_id == 1) {
+    try {
+      return JSON.parse(props.item.detail)
+    } catch {
+      return {}
+    }
+  } else {
+    return props.item.detail
+  }
+})
+console.log('Item detail with computed :', itemDetail.value)
+// const { itemRef } = toRefs(props)
+// console.log('item to Refs ', itemRef)
+// Use Object.entries() on props.item
+// Object.entries(props.item).forEach(([key, value]) => {
+//   console.log(`${key}: ${value}`)
+// })
+
 // console.log('item in ServiceCard: ', props.item)
 // const fullName = computed(() => {
 //   return props.item.fname + " " + props.item.lname.substring(0, 1);

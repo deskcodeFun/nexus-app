@@ -4,8 +4,8 @@
   <div
     class="h-[clamp(300px,70dvh,600px)] overflow-y-auto flex flex-col mx-2 lg:flex-row gap-4 lg:gap-24"
   >
-    <!-- asset and employee infomation -->
     <div class="w-sm md:w-md">
+      <!-- asset and employee infomation -->
       <p class="text-blue-900 text-lg">Asset Information</p>
       <hr class="my-1 mb-4 border-blue-900" />
       <!-- Appointment Date -->
@@ -74,19 +74,24 @@
           <hr class="my-1 mb-4 border-blue-900" />
         </div>
         <!-- Select new user -->
-        <div v-show="changeUser" class="w-full flex flex-row justify-between items-baseline">
+        <div v-show="changeUser" class="w-content flex flex-row justify-between items-baseline">
           <p class="text-blue-900">Select new user</p>
           <!-- option 1 : change user to FREE asset  option 2 : change user to other employee  -->
-          <select v-model.trim="selectEmployee" @change="handleEmployee" class="px-2 bg-blue-50">
+          <select
+            v-model.trim="selectEmployee"
+            @change="handleEmployee"
+            class="w-1/2 px-2 bg-blue-50"
+          >
             <option value="null" class="text-green-500 font-bold">FREE</option>
             <option v-for="users in employeeStore.employee" :key="users.id" :value="users.id">
-              {{ users.fname + ' ' + users.lname }}
+              {{ users.id + ' ' + users.fname + ' ' + users.lname }}
             </option>
           </select>
         </div>
+        <p>selected user: {{ selectEmployee }}</p>
         <!-- user details -->
         <div
-          v-if="employeeStore.employeeDetail[0] && changeUser"
+          v-if="employeeStore.employeeDetail?.[0] && changeUser"
           class="w-full m-2 flex flex-col justify-between"
         >
           <!-- <div class="w-full flex flex-row justify-between items-baseline">
@@ -435,8 +440,8 @@ async function handleEmployee(event) {
   const value = event.target.value
   if (value !== null) {
     newServiceLog.employee = value
-    if (selectEmployee.value.employee !== null || undefined) {
-      await employeeStore.getEmployeeDetail(selectAsset.value.employee.id)
+    if (selectEmployee.value !== null || undefined) {
+      await employeeStore.getEmployeeDetail(selectEmployee.value)
       console.log('selectAsset.value', selectAsset.value)
       console.log('emaployee detail ', employeeStore.employeeDetail)
       console.log('newServiceLog.asset_tag', changeUser.value)
@@ -449,6 +454,7 @@ async function handleEmployee(event) {
 onMounted(async () => {
   await assetStore.fetchAsset()
   await employeeStore.getAllEmployee()
+  console.log('emaployee :', employeeStore.employee)
 })
 // console.log('assetAll in serviceLog :', assetStore.assetAll)
 

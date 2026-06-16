@@ -25,7 +25,10 @@
         v-model.trim="updateEmployee.job_title"
         class="w-fit bg-sky-50 text-md p-1"
       />
-      <label for="department">Department</label>
+      <label for="department" class="flex flex-row"
+        >Department
+        <span class="ml-4 text-blue-900 font-semibold">{{ currentDepartmantName }}</span>
+      </label>
       <select
         name="departmentName"
         id="departmentName"
@@ -41,7 +44,9 @@
           {{ items.name }}
         </option>
       </select>
-      <label for="offie_id">Office</label>
+      <label for="offie_id" class="flex flex-row"
+        >Office <span class="ml-4 text-blue-900 font-semibold">{{ currentOfficeName }}</span></label
+      >
       <select
         name="officeName"
         id="officeName"
@@ -124,6 +129,8 @@ const route = useRoute()
 const router = useRouter()
 const officeNameStore = useOfficeNameStore()
 const departmentNameStore = useDepartmentStore()
+const currentDepartmantName = ref(null)
+const currentOfficeName = ref(null)
 const store = useEmployeeStore()
 let paramID = +route.params.id
 const updateEmployee = reactive({
@@ -145,7 +152,9 @@ onMounted(async () => {
     updateEmployee.lname = store.employeeDetail[0].lname
     updateEmployee.job_title = store.employeeDetail[0].job_title
     updateEmployee.department_id = store.employeeDetail[0].department_name?.id || '-'
+    currentDepartmantName.value = store.employeeDetail[0].department_name?.name || '-'
     updateEmployee.office_id = store.employeeDetail[0].office_name?.id || '-'
+    currentOfficeName.value = store.employeeDetail[0].office_name?.name || '-'
     updateEmployee.email_group = store.employeeDetail[0].email_group
   } else {
     console.error(`ERROR Employee with ID ${paramID} not found.`)

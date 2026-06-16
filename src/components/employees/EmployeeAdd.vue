@@ -117,7 +117,11 @@ const newService = reactive({
   asset_tag: '',
   state: 1,
   service_id: 1, // service name is always 'Add Email'
-  detail: newEmployee,
+  fname: '',
+  lname: '',
+  user_id: '',
+
+  // detail: newEmployee,
 })
 officeNameStore.getGroupEmail()
 // console.log('office name store', officeNameStore.email_groupName)
@@ -129,13 +133,16 @@ async function addSubmit() {
   try {
     // 1. add new user and email to employye table
     await employeeStore.addEmployee({ ...newEmployee })
-
-    console.log('suscessfull add emaployee ')
+    console.log('suscessfull add emaployee ', employeeStore.newAddEmployee)
 
     // 2. create Service IT card for notify it to add new email to exchange server
+    newService.fname = newEmployee.fname
+    newService.lname = newEmployee.lname
+    newService.user_id = employeeStore.newAddEmployee.id
+
     await serviceLogStore.addService({ ...newService })
 
-    console.log('suscessfull add service card')
+    console.log('suscessfull add service card', newService)
   } catch (error) {
     return { data: undefined, error: error }
   } finally {

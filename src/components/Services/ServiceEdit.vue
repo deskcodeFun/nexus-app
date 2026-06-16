@@ -1,10 +1,10 @@
 <template>
-  <div class="max-w-1/2 min-w-fit bg-green-50 rounded-xl border border-green-900">
-    <div class="flex flex-row justify-between bg-amber-50">
+  <div class="w-fit h-screen px-4 mt-15 mx-1 bg-green-50 rounded-xl border border-green-900">
+    <div class="flex flex-row justify-between">
       <BaseHeader title="Service Edit" />
       <XMarkIcon
         @click="$emit('toggle-open')"
-        class="h-4 w-4 mt-9.5 text-red-400 font-extrabold border border-red-600 rounded hover:scale-140 hover:shadow-red-400 hover:cursor-pointer"
+        class="h-6 w-6 mt-9.5 text-red-800 hover:scale-110 hover:rounded-full hover:bg-red-800 hover:text-white hover:cursor-pointer"
       />
     </div>
     <hr class="border-gray-300 mb-4" />
@@ -14,27 +14,35 @@
       <input type="date" class="input w-fit" v-model.trim="updateService.appointment_date" />
       <p>Asset Tag</p>
       <p>{{ serviceAssetTag }}</p>
+
       <p>User Name:</p>
-      <p>{{ userFullName }}</p>
+      <p
+        class="cursor-pointer underline text-blue-900"
+        @click="$router.push(`/editEmployee/${props.itemDetail.user_id}`)"
+      >
+        {{ userFullName }}
+      </p>
       <p>Service Type:</p>
       <p>{{ serviceType }}</p>
     </div>
 
-    <div class="flex flex-row justify-between text-wrap text-blue-900 mt-4 mb-1">
-      <p>Detail :</p>
-      <span>
-        <PencilSquareIcon
-          class="w-5 h-5 inline-block -mt-1 mx-1 text-green-900 hover:bg-green-100"
-        />
-        <TrashIcon class="w-5 h-5 inline-block -mt-1 mx-1 stroke-red-800 hover:bg-red-100" />
-      </span>
+    <div v-show="props.itemDetail.detail !== null" class="flex flex-col">
+      <div class="flex flex-row justify-between text-wrap text-blue-900 mt-4 mb-1">
+        <p>Detail :</p>
+        <span>
+          <PencilSquareIcon
+            class="w-5 h-5 inline-block -mt-1 mx-1 text-green-900 hover:bg-green-100"
+          />
+          <TrashIcon class="w-5 h-5 inline-block -mt-1 mx-1 stroke-red-800 hover:bg-red-100" />
+        </span>
+      </div>
+      <textarea
+        cols="50"
+        class="border border-green-800 px-2 py-2"
+        v-model.trim="updateService.detail"
+      ></textarea>
     </div>
 
-    <textarea
-      cols="50"
-      class="border border-green-800 px-2 py-2"
-      v-model.trim="updateService.detail"
-    ></textarea>
     <div class="flex flex-row justify-end">
       <button
         @click="$emit('toggle-open')"
@@ -57,11 +65,11 @@ import { XMarkIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outlin
 const props = defineProps({ itemDetail: Object })
 console.log(props.itemDetail)
 
-const serviceAssetTag = ref(props.itemDetail.asset_tag)
+const serviceAssetTag = ref(props.itemDetail.asset_tag || '-')
 const userFullName = computed(() => {
   return props.itemDetail.fname + ' ' + props.itemDetail.lname
 })
-const serviceType = ref(props.itemDetail.service_type)
+const serviceType = ref(props.itemDetail.service_type.service_name)
 const updateService = reactive({
   appointment_date: props.itemDetail.appointment_date,
   detail: props.itemDetail.detail || '',

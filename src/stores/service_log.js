@@ -15,7 +15,6 @@ export const useServiceLog = defineStore('service_log', () => {
     } catch (error) {
       console.error('ERROR Add new service : ', error)
     } finally {
-      alert('Add service suscess')
       isLoading.value = false
     }
   }

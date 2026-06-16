@@ -5,6 +5,7 @@ import { ref } from 'vue'
 export const useEmployeeStore = defineStore('useEmployeeStore', () => {
   const employee = ref(null)
   const employeeDetail = ref(null)
+  const newAddEmployee = ref(null)
   // const employeeByOffice = ref(null)
   const isLoading = ref(false)
 
@@ -85,7 +86,15 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
   async function addEmployee(newUser) {
     try {
       isLoading.value = true
-      const { error } = await supabase.from('employee').insert([newUser])
+      const { data, error } = await supabase
+        .from('employee')
+        .insert([newUser])
+        .select()
+        .order('id')
+        .limit(1)
+        .single()
+      newAddEmployee.value = data
+      console.log('new employee in staore: ', newAddEmployee)
       if (error) throw error
     } catch (error) {
       console.error('ERROR Add new Employee: ', error)
@@ -127,6 +136,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     employee,
     employeeDetail,
     isLoading,
+    newAddEmployee,
     getEmployee,
     getAllEmployee,
     getEmployeeDetail,
