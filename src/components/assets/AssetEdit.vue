@@ -8,8 +8,8 @@
   <BaseHeader title="ASSET DETAIL" :isShow="true" />
   <div class="h-full pb-50 mx-auto overflow-scroll pt-2 text-blue-900">
     <!-- show computer image and information -->
-    <div class="flex flex-col lg:flex-row gap-4">
-      <div class="pb-4 px-4">
+    <div class="flex flex-col lg:flex-row">
+      <div class="px-4 lg:h-128">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
         <div
           v-if="store.assetDetail && store.assetDetail[0].image !== null"
@@ -22,16 +22,11 @@
         </div>
       </div>
       <!-- accounting section -->
-      <div class="text-nowrap flex flex-wrap flex-col pb-2 mx-4">
-        <p class="sm:pb-4 text-lg tracking-wide">Asset information</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+      <div class="mx-2 mb-4 mt-4 md:mt-0 flex flex-col">
+        <p class="w-fit sm:pb-4 text-lg tracking-wide">Asset information</p>
+        <div class="w-content mx-2 lg:mr-24 grid grid-cols lg:grid-cols-2 gap-y-1 lg:gap-x-16">
           <div v-for="(data, label) in accountData" :key="label">
-            <div v-if="data !== null">
-              <BaseBox :label="label" :data="data"></BaseBox>
-            </div>
-            <div v-else>
-              <BaseBox :label="label" data="-"></BaseBox>
-            </div>
+            <BaseBox :label="label" :data="data"></BaseBox>
           </div>
         </div>
       </div>

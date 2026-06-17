@@ -181,7 +181,7 @@ const newComputer = reactive({
 const isUploaded = ref(false)
 const previewImages = ref([])
 const dirName = newComputer.asset_tag
-
+// handle upload image file
 async function handleFileSelect(event) {
   try {
     isUploaded.value = true

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-48 h-48 lg:w-38 flex lg:flex-col flex-row">
+    <div class="w-48 h-40 lg:w-38 flex lg:flex-col flex-row">
       <img
         v-for="(image, index) in images"
         :key="index"
