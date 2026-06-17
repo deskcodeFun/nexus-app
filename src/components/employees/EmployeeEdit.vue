@@ -146,7 +146,7 @@ officeNameStore.getGroupEmail()
 
 onMounted(async () => {
   await store.getEmployeeDetail(paramID)
-  console.log('getstaffDetail: ', store.employeeDetail)
+  // console.log('getstaffDetail: ', store.employeeDetail)
   if (store.employeeDetail[0]) {
     updateEmployee.fname = store.employeeDetail[0].fname
     updateEmployee.lname = store.employeeDetail[0].lname

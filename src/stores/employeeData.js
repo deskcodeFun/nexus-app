@@ -69,7 +69,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
           .eq('id', userID)
           .order('fname', { ascending: true })
         employeeDetail.value = data
-        console.log('getEmployeeDetail', employeeDetail)
+        // console.log('getEmployeeDetail', employeeDetail)
         if (error) throw error
       } catch (error) {
         console.error('error get Employee detail:', error)
@@ -77,10 +77,6 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         isLoading.value = false
       }
     }
-    //   else {
-    //     console.log('this asset is FREE')
-    //     isLoading.value = false
-    //   }
   }
 
   async function addEmployee(newUser) {
@@ -94,7 +90,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
         .limit(1)
         .single()
       newAddEmployee.value = data
-      console.log('new employee in staore: ', newAddEmployee)
+      // console.log('new employee in staore: ', newAddEmployee)
       if (error) throw error
     } catch (error) {
       console.error('ERROR Add new Employee: ', error)

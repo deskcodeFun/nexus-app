@@ -1,5 +1,5 @@
 <template>
-  <BaseHeader title="ADD NEW USER" :isShow="true" />
+  <BaseHeader title="ADD New Employee" :isShow="true" />
   <main
     class="w-full h-[clamp(300px,70dvh,900px)] mx-2 overflow-y-auto flex flex-col md:flex-row md:gap-x-8"
   >
@@ -103,7 +103,6 @@ const employeeStore = useEmployeeStore()
 const officeNameStore = useOfficeNameStore()
 const departmentNameStore = useDepartmentStore()
 const serviceLogStore = useServiceLog()
-// console.log('office name', officeNameStore)
 const newEmployee = reactive({
   fname: '',
   lname: '',
@@ -120,29 +119,25 @@ const newService = reactive({
   fname: '',
   lname: '',
   user_id: '',
-
-  // detail: newEmployee,
+  detail: '',
 })
+
 officeNameStore.getGroupEmail()
-// console.log('office name store', officeNameStore.email_groupName)
-// function addSubmit() {
-//   console.log('NewEmaployee object ', toRaw(newEmployee))
-// }
-// console.log('office name store', officeNameStore.email_groupName)
+
 async function addSubmit() {
   try {
     // 1. add new user and email to employye table
     await employeeStore.addEmployee({ ...newEmployee })
-    console.log('suscessfull add emaployee ', employeeStore.newAddEmployee)
+    // console.log('suscessfull add emaployee ', employeeStore.newAddEmployee)
 
     // 2. create Service IT card for notify it to add new email to exchange server
+    //    newAddEmployee is get from employeeStore after addEmployee is sucsess
+    //    we use user_id when click on service card and route it to EmployeeEdit page
     newService.fname = newEmployee.fname
     newService.lname = newEmployee.lname
     newService.user_id = employeeStore.newAddEmployee.id
-
     await serviceLogStore.addService({ ...newService })
-
-    console.log('suscessfull add service card', newService)
+    // console.log('suscessfull add service card', newService)
   } catch (error) {
     return { data: undefined, error: error }
   } finally {

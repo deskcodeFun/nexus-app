@@ -26,7 +26,7 @@ export const useServiceLog = defineStore('service_log', () => {
         .select(`*,service_type(*)`)
         .order('id', { ascending: false })
       serviceLog.value = data
-      console.log('service log in store: ', serviceLog.value)
+      // console.log('service log in store: ', serviceLog.value)
       if (error) throw error
       // console.log('service in store :', serviceLog)
     } catch (error) {
