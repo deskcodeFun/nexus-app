@@ -2,13 +2,13 @@
   <BaseHeader title="IT Service" :isShow="true" />
 
   <div>
-    <div class="w-fit py-4 flex flex-row">
-      <p class="font-semibold text-blue-800">Select Service :</p>
+    <div class="py-4 ml-2 flex flex-col md:flex-row md:w-fit">
+      <p class="text-gray-800 mb-2 md:mb-0">Select Service :</p>
       <CatalogMenuService @changeView="updateView" />
     </div>
 
     <!-- <div class="h-full pb-60 overflow-scroll"> -->
-    <div class="">
+    <div class="border border-gray-300 m-2 md:w-fit">
       <component :is="currentComponent" />
     </div>
   </div>

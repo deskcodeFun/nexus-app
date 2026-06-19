@@ -21,17 +21,27 @@
         {{ dateFormat(props.item.appointment_date) }}
       </p>
     </div>
-    <div v-if="props.item.service_id !== 1">
+    <!-- service type 4-Todo, 5-HW-upgrade or change-->
+    <div v-if="props.item.service_id == 4 || 5">
       <p class="w-fit text-mm text-teal-800">
-        {{ props.item.id + ' ' + props.item.detail }}
+        <!-- {{ props.item.id + ' ' + props.item.detail }} -->
+        {{ props.item.detail }}
       </p>
     </div>
-    <div v-else>
+    <div v-if="props.item.service_id === 1">
       <p class="w-fit text-mm text-teal-800">
         {{ 'First name : ' + props.item.fname }}
       </p>
       <p class="w-fit text-mm text-teal-800">
         {{ 'Last Name : ' + props.item.lname }}
+      </p>
+    </div>
+    <div v-if="props.item.service_id === 3">
+      <p class="w-fit text-mm text-teal-800">
+        {{ 'asset tag: ' + ' ' + props.item.asset_tag }}
+      </p>
+      <p class="w-fit text-mm text-teal-800">
+        {{ 'New User ' + ' ' + props.item.fname + ' ' + props.item.lname }}
       </p>
     </div>
   </div>
@@ -45,7 +55,7 @@ const open = ref(false)
 const props = defineProps({
   item: Object,
 })
-console.log('props.item', props.item)
+// console.log('props.item', props.item)
 // const itemDetail = computed(() => {
 //   if (props.item.service_id == 1) {
 //     try {

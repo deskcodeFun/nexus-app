@@ -6,7 +6,6 @@
     <BaseButtonAdd Link="/addEmployee" label="Add Email" />
     <!-- <BaseButtonAdd Link="/addAsset" label="Add Asset" /> -->
     <BaseButtonAdd Link="/addServices" label="Add IT Service" />
-    <!-- <BaseButtonAdd Link="/addAsset" label="Asset" />-->
   </div>
 
   <!-- show Service table -->
