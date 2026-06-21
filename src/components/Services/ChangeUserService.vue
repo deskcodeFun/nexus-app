@@ -6,82 +6,151 @@
        5. save to service_log table and return to service view page
        6. check new card is show -->
   <!-- Appointment Date -->
-  <main
-    class="w-full md:w-md h-[clamp(300px,70dvh,900px)] md:h-fit md:mt-4 px-2 overflow-scroll md:overflow-auto"
-  >
+  <main class="w-full h-[clamp(300px,70dvh,900px)] md:mt-4 px-2 overflow-scroll md:overflow-auto">
     <p
       class="bg-linear-to-r from-gray-100 to-white p-6 rounded-lg text-blue-900 text-lg font-semibold mb-8 py-2 px-2"
     >
-      Change User
+      Change User Services
     </p>
-    <!-- 1. show appontment date -->
-    <div class="flex flex-col mr-4 md:mr-0 md:flex-row justify-between">
-      <p class="mx-1 mt-4 mb-2 md:mb-0 text-gray-500">Appointment Date</p>
-      <input
-        type="date"
-        class="w-full md:w-fit items-center mx-1 px-2 bg-blue-50 text-blue-900 font-bold"
-        v-model="appointDate"
-      />
-    </div>
-    <!-- 2. show select asset -->
-    <div class="flex flex-col mr-4 md:mr-0 md:flex-row md:justify-between my-4 items-baseline">
-      <p class="mx-1 mb-2 md:mb-0 text-gray-500">Asset Tag</p>
-      <select
-        v-model.trim="assetID"
-        @change="handleassetID"
-        class="w-full md:w-fit p-2 items-center mx-1 px-2 bg-blue-50 text-blue-900 font-bold"
-      >
-        <option v-for="assetID in assetStore.assetAll" :key="assetID.id" :value="assetID.id">
-          {{ assetID.asset_tag }}
-        </option>
-      </select>
-    </div>
-    <!--3. show current user: full name, department, BU or FREE -->
-    <div v-show="assetID" class="bg-gray-50/50 flex-col mr-4 md:mr-0 md:flex-row my-1 py-2">
-      <div class="flex flex-row mb-2 justify-between">
-        <p class="text-gray-500">Current user</p>
-        <p class="text-blue-700">{{ currentFname + ' ' + currentLname }}</p>
-      </div>
+    <!--  separate 2 colomn 1. header, 2. format -->
+    <div class="w-full flex flex-col md:flex-row md:gap-14">
+      <!-- column 1 header -->
+      <div class="">
+        <p class="bg-linear-to-r from bg-amber-50 to-white px-2 py-1 text-md">General Info</p>
+        <div class="flex flex-col mr-4 md:mr-0 md:flex-row justify-between">
+          <p class="mx-1 mt-4 mb-2 md:mb-0 text-gray-500">Appointment Date</p>
+          <input
+            type="date"
+            class="w-full md:w-fit items-center mx-1 px-2 bg-blue-50 text-blue-900 font-bold"
+            v-model="appointDate"
+          />
+        </div>
+        <!-- 2. show select asset -->
+        <div class="flex flex-col mr-4 md:mr-0 md:flex-row md:justify-between my-4 items-baseline">
+          <p class="mx-1 mb-2 md:mb-0 text-gray-500">Asset Tag</p>
+          <select
+            v-model.trim="assetID"
+            @change="handleassetID"
+            class="w-full md:w-fit p-2 items-center mx-1 px-2 bg-blue-50 text-blue-900 font-bold"
+          >
+            <option v-for="assetID in assetStore.assetAll" :key="assetID.id" :value="assetID.id">
+              {{ assetID.asset_tag }}
+            </option>
+          </select>
+        </div>
+        <!--3. show current user: full name, department, BU or FREE -->
+        <div v-show="assetID" class="bg-gray-50/50 flex-col mr-4 md:mr-0 md:flex-row my-1 py-2">
+          <div class="flex flex-row mb-2 justify-between">
+            <p class="text-gray-500">Current user</p>
+            <p class="text-blue-700">{{ currentFname + ' ' + currentLname }}</p>
+          </div>
 
-      <div class="flex flex-row justify-between">
-        <p class="text-gray-500">Asset BU</p>
-        <p class="text-blue-700">
-          {{ currentBU.substring(0, currentBU.length - 9) }}
-        </p>
+          <div class="flex flex-row justify-between">
+            <p class="text-gray-500">Asset BU</p>
+            <p class="text-blue-700">
+              {{ currentBU.substring(0, currentBU.length - 9) }}
+            </p>
+          </div>
+        </div>
+        <!-- 3.select new user -->
+        <div>
+          <div
+            class="flex flex-col mr-4 md:mr-0 md:flex-row md:justify-between my-4 items-baseline"
+          >
+            <p class="mx-1 mb-2 md:mb-0 text-gray-500">New user</p>
+            <!-- option 1 : change user to FREE asset  option 2 : change user to other employee  -->
+            <select
+              v-model.trim="newUserId"
+              @change="handleEmployee"
+              class="w-fit p-2 items-center mx-1 px-2 bg-blue-50 text-blue-900 font-bold"
+            >
+              <option value="null" class="text-green-500 font-bold">FREE</option>
+              <option v-for="users in employeeStore.employee" :key="users.id" :value="users.id">
+                {{ users.fname + ' ' + users.lname }}
+              </option>
+            </select>
+          </div>
+          <!-- Show employee detail -->
+          <div v-show="newUserId" class="bg-gray-50/50 mt-4">
+            <div class="flex flex-row justify-between items-baseline mb-2">
+              <p class="text-gray-400">user Name</p>
+              <p class="text-blue-700">{{ newFname + ' ' + newLname }}</p>
+            </div>
+            <div class="flex flex-row justify-between items-baseline mb-2">
+              <p class="text-gray-400">Department</p>
+              <p class="text-blue-700">{{ newDept }}</p>
+            </div>
+            <div class="flex flex-row justify-between items-baseline mb-2">
+              <p class="text-gray-400">User Office</p>
+              <p class="text-blue-700">{{ newBU.substring(0, newBU.length - 9) }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <!-- 3.select new user -->
-    <div>
-      <div class="flex flex-col mr-4 md:mr-0 md:flex-row md:justify-between my-4 items-baseline">
-        <p class="mx-1 mb-2 md:mb-0 text-gray-500">New user</p>
-        <!-- option 1 : change user to FREE asset  option 2 : change user to other employee  -->
-        <select
-          v-model.trim="newUserId"
-          @change="handleEmployee"
-          class="w-fit p-2 items-center mx-1 px-2 bg-blue-50 text-blue-900 font-bold"
+      <!-- column 2 format -->
+      <div>
+        <!-- application -->
+        <p class="text-sky-600 mb-2">Application {{ checkList }}</p>
+        <div
+          v-for="items in appNameStore.appNameAll"
+          :key="items.id"
+          :value="items.application_name"
         >
-          <option value="null" class="text-green-500 font-bold">FREE</option>
-          <option v-for="users in employeeStore.employee" :key="users.id" :value="users.id">
-            {{ users.fname + ' ' + users.lname }}
-          </option>
-        </select>
-      </div>
-      <!-- Show employee detail -->
-      <div v-show="newUserId" class="bg-gray-50/50 mt-4">
-        <div class="flex flex-row justify-between items-baseline mb-2">
-          <p class="text-gray-400">user Name</p>
-          <p class="text-blue-700">{{ newFname + ' ' + newLname }}</p>
+          <input type="checkbox" :value="items.application_name" v-model="checkList" class="mr-1" />
+          <label>{{ items.application_name }}</label>
         </div>
-        <div class="flex flex-row justify-between items-baseline mb-2">
-          <p class="text-gray-400">Department</p>
-          <p class="text-blue-700">{{ newDept }}</p>
+        <!-- detail -->
+        <div>
+          <p class="text-sky-600 mb-2 mt-4">Other {{ newDetail }}</p>
+          <textarea rows="4" class="w-xs border bg-green-50/50" v-model.trim="newDetail"></textarea>
         </div>
-        <div class="flex flex-row justify-between items-baseline mb-2">
-          <p class="text-gray-400">User Office</p>
-          <p class="text-blue-700">{{ newBU.substring(0, newBU.length - 9) }}</p>
+        <!-- Map drive -->
+        <p class="text-sky-600 mb-2">Map Drive {{ mapDriveName }}</p>
+        <!-- select bu -->
+        <p class="text-blue-900 text-nowrap">Select BU {{ selectBU }}</p>
+        <div class="flex items-baseline">
+          <div class="flex flex-col md:flex-row gap-2" @change="handleNasList">
+            <div class="flex flex-row">
+              <input type="radio" id="map1" value="1" v-model="selectBU" class="mr-1" />
+              <label for="1">NPA</label>
+            </div>
+            <div class="flex flex-row">
+              <input type="radio" id="2" value="2" v-model="selectBU" class="mr-1" />
+              <label for="2">Admin</label>
+            </div>
+            <div class="flex flex-row">
+              <input type="radio" id="3" value="3" v-model="selectBU" class="mr-1" />
+              <label for="3">NPM</label>
+            </div>
+            <div class="flex flex-row">
+              <input type="radio" id="4" value="4" v-model="selectBU" class="mr-1" />
+              <label for="4">NRA</label>
+            </div>
+            <div class="flex flex-row">
+              <input type="radio" id="7" value="7" v-model="selectBU" class="mr-1" />
+              <label for="5">Conspire</label>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4 border-blue-800" />
+        <!-- show map drive name if selectBU !== null -->
+        <div
+          v-show="selectBU"
+          class="grid grid-cols-1 md:grid-cols-2 md:w-content md:gap-x-4 mt-4 p-4 bg-amber-50"
+        >
+          <div
+            v-for="items in nasNameStore.nasNameAll"
+            :key="items.id"
+            :value="items.name"
+            class="flex flex-row"
+          >
+            <input type="checkbox" :value="items.name" v-model="mapDriveName" />
+            <p class="ml-1">{{ items.name }}</p>
+          </div>
         </div>
       </div>
     </div>
+    <!-- 1. show appontment date -->
 
     <!-- button section -->
     <div class="my-8 justify-end">
@@ -112,15 +181,33 @@ import { useRouter } from 'vue-router'
 import { useAssetStore } from '@/stores/assetsData'
 import { useEmployeeStore } from '@/stores/employeeData'
 import { useServiceLog } from '@/stores/service_log'
+import { useAppNameStore } from '@/stores/applicationData'
+import { useNasStore } from '@/stores/nasData'
+import { useOfficeNameStore } from '@/stores/officeData'
 import { BookmarkIcon, XMarkIcon } from '@heroicons/vue/20/solid'
 
+// import FormatService from './FormatService.vue'
+
 onMounted(async () => {
-  await assetStore.fetchAsset() // use to show asset_tag in select assetID
-  await employeeStore.getAllEmployee()
+  try {
+    await assetStore.fetchAsset() // use to show asset_tag in select assetID
+    await employeeStore.getAllEmployee()
+    await appNameStore.fetchAppNameAll()
+    await officeNameStore.getAllOffice()
+    await nasNameStore.fetchNasNameAll('0')
+  } catch (error) {
+    console.error(error)
+  }
 })
+
 const router = useRouter()
 const assetStore = useAssetStore()
 const employeeStore = useEmployeeStore()
+const officeNameStore = useOfficeNameStore()
+const appNameStore = useAppNameStore()
+const nasNameStore = useNasStore()
+
+// get nas drive name by officeID
 const serviceLogStore = useServiceLog()
 // 1. init ref variable for each column in service_log table
 const appointDate = ref('')
@@ -146,7 +233,14 @@ const newService = reactive({
   lname: '',
   service_id: 3, // change user
   user_id: '', // link to employee detail page
+  map_drive: [],
+  application_list: [],
 })
+
+const selectBU = ref('')
+const checkList = ref([])
+
+const mapDriveName = ref([])
 
 async function handleassetID(event) {
   if (!event || !event.target) return
@@ -193,6 +287,13 @@ async function handleEmployee(event) {
     newBU.value = ''
   }
 }
+
+async function handleNasList(event) {
+  if (!event || !event.target) return
+  await nasNameStore.fetchNasNameAll(selectBU.value)
+  console.log('list of nas by selectBU', selectBU.value, nasNameStore.nasNameAll)
+}
+
 async function addSubmit() {
   try {
     newService.appointment_date = appointDate.value
@@ -201,6 +302,8 @@ async function addSubmit() {
     newService.fname = newFname.value
     newService.lname = newLname.value
     newService.user_id = newUserId.value
+    newService.map_drive = mapDriveName.value
+    newService.application_list = checkList.value
 
     await serviceLogStore.addService({ ...newService })
     console.log('successful add service card', newService)
@@ -220,18 +323,4 @@ async function addSubmit() {
     router.push('/services')
   }
 }
-
-// const dateFormat = (date) => {
-//   return new Date(date).toLocaleDateString('en-EN', {
-//     year: 'numeric',
-//     month: 'short',
-//     day: 'numeric',
-//   })
-// }
-// const formattedAppointmentDate = computed({
-//   get: () => newServiceLog.appointmentDate.toISOString().split('T')[0],
-//   set: (value) => {
-//     newServiceLog.appointmentDate = new Date(value)
-//   },
-// })
 </script>
