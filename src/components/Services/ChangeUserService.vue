@@ -109,26 +109,30 @@
         <!-- select bu -->
         <p class="text-blue-900 text-nowrap">Select BU {{ selectBU }}</p>
         <div class="flex items-baseline">
-          <div class="flex flex-col md:flex-row gap-2" @change="handleNasList">
+          <div class="w-xs flex-wrap flex flex-col md:flex-row gap-2" @change="handleNasList">
             <div class="flex flex-row">
-              <input type="radio" id="map1" value="1" v-model="selectBU" class="mr-1" />
-              <label for="1">NPA</label>
+              <input type="radio" value="0" v-model="selectBU" class="mr-1" />
+              <label>ALL</label>
             </div>
             <div class="flex flex-row">
-              <input type="radio" id="2" value="2" v-model="selectBU" class="mr-1" />
-              <label for="2">Admin</label>
+              <input type="radio" value="1" v-model="selectBU" class="mr-1" />
+              <label>NPA</label>
             </div>
             <div class="flex flex-row">
-              <input type="radio" id="3" value="3" v-model="selectBU" class="mr-1" />
-              <label for="3">NPM</label>
+              <input type="radio" value="2" v-model="selectBU" class="mr-1" />
+              <label>Admin</label>
             </div>
             <div class="flex flex-row">
-              <input type="radio" id="4" value="4" v-model="selectBU" class="mr-1" />
-              <label for="4">NRA</label>
+              <input type="radio" value="3" v-model="selectBU" class="mr-1" />
+              <label>NPM</label>
             </div>
             <div class="flex flex-row">
-              <input type="radio" id="7" value="7" v-model="selectBU" class="mr-1" />
-              <label for="5">Conspire</label>
+              <input type="radio" value="4" v-model="selectBU" class="mr-1" />
+              <label>NRA</label>
+            </div>
+            <div class="flex flex-row">
+              <input type="radio" value="7" v-model="selectBU" class="mr-1" />
+              <label>Conspire</label>
             </div>
           </div>
         </div>
@@ -194,7 +198,7 @@ onMounted(async () => {
     await employeeStore.getAllEmployee()
     await appNameStore.fetchAppNameAll()
     await officeNameStore.getAllOffice()
-    await nasNameStore.fetchNasNameAll('0')
+    // await nasNameStore.fetchNasNameAll(officeID)
   } catch (error) {
     console.error(error)
   }
@@ -239,7 +243,6 @@ const newService = reactive({
 
 const selectBU = ref('')
 const checkList = ref([])
-
 const mapDriveName = ref([])
 
 async function handleassetID(event) {
@@ -290,7 +293,13 @@ async function handleEmployee(event) {
 
 async function handleNasList(event) {
   if (!event || !event.target) return
-  await nasNameStore.fetchNasNameAll(selectBU.value)
+  if (selectBU.value == 0) {
+    await nasNameStore.getAllNas()
+    nasNameStore.nasNameAll = nasNameStore.allNas
+  } else {
+    await nasNameStore.fetchNasNameAll(selectBU.value)
+  }
+  console.log('event in handleNasList', event, event.target)
   console.log('list of nas by selectBU', selectBU.value, nasNameStore.nasNameAll)
 }
 
@@ -319,6 +328,8 @@ async function addSubmit() {
       lname: '',
       service_id: 3, // change user
       user_id: '', // link to employee detail page
+      map_drive: [],
+      application_list: [],
     })
     router.push('/services')
   }
