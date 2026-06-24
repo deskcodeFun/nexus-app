@@ -6,7 +6,8 @@ import AboutView from '@/views/AboutView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 
 import ServiceView from '@/views/ServiceView.vue'
-import AddServices from '@/components/Services/AddServices.vue'
+// import AddServices from '@/components/Services/AddServices.vue'
+import ItServiceForm from '@/components/Services/ItServiceForm.vue'
 import AssetsView from '@/views/AssetsView.vue'
 import AssetEdit from '@/components/assets/AssetEdit.vue'
 import AssetAdd from '@/components/assets/AssetAdd.vue'
@@ -47,7 +48,7 @@ const router = createRouter({
     {
       path: '/addServices',
       name: 'add-services',
-      component: AddServices,
+      component: ItServiceForm,
       meta: { requiresAuth: true },
       // component: ServiceForm,
     },
