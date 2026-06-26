@@ -113,12 +113,12 @@ const newEmployee = reactive({
 })
 const newService = reactive({
   appointment_date: new Date(),
-  asset_tag: '',
+  // asset_id: '',
   state: 1,
   service_id: 1, // service name is always 'Add Email'
   fname: '',
   lname: '',
-  user_id: '',
+  eUser_id: '',
   detail: '',
 })
 
@@ -135,7 +135,7 @@ async function addSubmit() {
     //    we use user_id when click on service card and route it to EmployeeEdit page
     newService.fname = newEmployee.fname
     newService.lname = newEmployee.lname
-    newService.user_id = employeeStore.newAddEmployee.id
+    newService.eUser_id = employeeStore.newAddEmployee.id
     await serviceLogStore.addService({ ...newService })
     // console.log('suscessfull add service card', newService)
   } catch (error) {

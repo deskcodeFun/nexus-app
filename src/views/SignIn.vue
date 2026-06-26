@@ -85,6 +85,7 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 // Pre-filled credentials for production purposes. In development, these should be removed or handled securely.
 const email = ref('')
 const password = ref('')
+
 const passwordVisible = ref(false)
 
 const handleSignin = async () => {

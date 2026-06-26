@@ -23,22 +23,23 @@
           <input
             type="date"
             class="w-fit items-center mx-1 px-2 bg-blue-50 text-blue-900 font-bold"
-            v-model="appointDate"
+            v-model="newService.appointment_date"
           />
         </div>
         <!-- 2. show select asset -->
         <div class="flex flex-col mr-4 md:mr-0 md:flex-row md:justify-between my-4 items-baseline">
           <p class="mx-1 mb-2 md:mb-0 text-gray-500">Asset Tag</p>
           <select
-            v-model.trim="assetID"
+            v-model.trim="newService.asset_id"
             @change="handleassetID"
             class="w-fit items-center mx-1 px-2 py-1 bg-blue-50 text-blue-900 font-bold"
           >
             <option v-for="assetID in assetStore.assetAll" :key="assetID.id" :value="assetID.id">
-              {{ assetID.asset_tag }}
+              {{ assetID.id + assetID.asset_tag }}
             </option>
           </select>
         </div>
+        <!-- 2.1 show asset user, BU -->
         <div v-show="assetID" class="bg-gray-50/50 grid-col md:mr-0 md:flex-row my-1 py-2">
           <div class="grid grid-cols-2 mb-2">
             <p class="text-gray-500">Current user</p>
@@ -53,6 +54,7 @@
           </div>
         </div>
         <hr class="mt-2 border-gray-300" />
+
         <!-- SubMenu select service type
              value is id column in service_type table  -->
         <div class="flex flex-col mt-4">
@@ -60,42 +62,40 @@
             Service Type
           </p>
           <div class="mb-2">
-            <input type="radio" id="4" value="4" v-model="newServiceID" />
-            <label for="4" class="ml-2 hover:cursor-pointer">Todo, Fix Eror</label>
+            <input type="radio" id="4" value="4" v-model="newService.service_id" />
+            <label for="4" class="ml-2 hover:cursor-pointer">Todo, Eror, Repair, Replace</label>
           </div>
           <div class="mb-2">
-            <input type="radio" id="3" value="3" v-model="newServiceID" />
+            <input type="radio" id="3" value="3" v-model="newService.service_id" />
             <label for="3" class="ml-2 hover:cursor-pointer">Change Commputer User</label>
           </div>
           <div class="mb-2">
-            <input type="radio" id="5" value="5" v-model="newServiceID" />
+            <input type="radio" id="5" value="5" v-model="newService.service_id" />
             <label for="5" class="ml-2 hover:cursor-pointer">HW - upgrade or change</label>
           </div>
         </div>
       </div>
-      <!-- column 1 section 2 submenu to select service type -->
+      <!-- column 2 Show form by service type  -->
       <div>
-        <!--3. service_type = 1, Todo  -->
-        <div v-show="newServiceID == 4" class="w-full md:w-md">
+        <!--column 2  service_type = 4, Todo  -->
+        <div v-show="newService.service_id == 4" class="w-full md:w-md">
           <p class="font-semibold bg-linear-to-r from bg-amber-50 to-white px-2 py-1 text-md">
-            Todo, Fix error
+            Todo, Eror, Repair, Replace
           </p>
 
           <textarea
             rows="4"
             name="detail"
             id="detail"
-            v-model="newDetail"
-            @change="newServiceID = 4"
+            v-model="newService.detail"
             class="w-full mt-4 bg-green-50 border border-green-900"
           ></textarea>
         </div>
-        <!-- 4. service_type = 2, change user show current user: full name, department, BU or FREE -->
-        <div v-show="newServiceID == 3">
+        <!-- column 2 service_type = 3b -->
+        <div v-show="newService.service_id == 3">
           <p class="font-semibold bg-linear-to-r from bg-amber-50 to-white px-2 py-1 text-md">
             Change computer User
           </p>
-          <p class="bg-linear-to-r from bg-amber-50 to-white px-2 py-1 text-md"></p>
           <!-- select new user -->
           <div
             class="flex flex-col mr-4 md:mr-0 md:flex-row md:justify-between my-4 items-baseline"
@@ -103,7 +103,7 @@
             <p class="mx-1 mb-2 md:mb-0 text-gray-500">New user</p>
             <!-- option 1 : change user to FREE asset  option 2 : change user to other employee  -->
             <select
-              v-model.trim="newUserId"
+              v-model.trim="newService.nUser_id"
               @change="handleEmployee"
               class="w-fit p-2 items-center mx-1 px-2 bg-blue-50 text-blue-900 font-bold"
             >
@@ -143,18 +143,18 @@
               <input
                 type="checkbox"
                 :value="items.application_name"
-                v-model="checkList"
+                v-model="newService.application_list"
                 class="mr-1"
               />
               <label>{{ items.application_name }}</label>
             </div>
             <!-- detail -->
             <div>
-              <p class="text-sky-600 mb-2 mt-4">Other program {{ newDetail }}</p>
+              <p class="text-sky-600 mb-2 mt-4">Other detail</p>
               <textarea
                 rows="4"
                 class="w-xs border bg-green-50/50"
-                v-model.trim="newDetail"
+                v-model.trim="newService.detail"
               ></textarea>
             </div>
           </div>
@@ -204,16 +204,16 @@
                 :value="items.name"
                 class="flex flex-row"
               >
-                <input type="checkbox" :value="items.name" v-model="mapDriveName" />
+                <input type="checkbox" :value="items.name" v-model="newService.map_drive" />
                 <p class="ml-1">{{ items.name }}</p>
               </div>
             </div>
           </div>
         </div>
         <!-- 5. service_type = 3 HW-upgrade or change  -->
-        <div v-show="newServiceID == 5">
+        <div v-show="newService.service_id == 5">
           <p class="font-semibold bg-linear-to-r from bg-amber-50 to-white px-2 py-1 text-md">
-            HW- upgrade or change
+            HW - upgrade or change
           </p>
           <div class="w-full flex flex-col my-4">
             <div class="flex justify-between my-2">
@@ -236,11 +236,11 @@
               />
             </div>
 
-            <p>{{ newDetail }}</p>
+            <p class="w-sm text-wrap">{{ newDetail }}</p>
           </div>
         </div>
         <!-- button section -->
-        <div v-show="assetID && newServiceID">
+        <div v-show="assetID && newService.service_id">
           <form @submit.prevent="addSubmit" class="w-full flex flex-row justify-between">
             <button
               class="flex items-center justify-center hover:bg-red-900 hover:scale-102 border border-red-900 hover:text-white py-1 px-4 mt-8 rounded-xl"
@@ -260,6 +260,9 @@
           </form>
         </div>
       </div>
+    </div>
+    <div v-for="(key, index) in newService" :key="index">
+      <p>{{ index }}: {{ key }}</p>
     </div>
   </main>
 </template>
@@ -301,7 +304,7 @@ const nasNameStore = useNasStore()
 // get nas drive name by officeID
 const serviceLogStore = useServiceLog()
 // 1. init ref variable for each column in service_log table
-const appointDate = ref('')
+// const appointDate = new Date()
 const assetID = ref('')
 const assetTag = ref('')
 const newDetail = ref('')
@@ -312,31 +315,34 @@ const currentBU = ref('')
 const newUserId = ref('')
 const newFname = ref('')
 const newLname = ref('')
-const newServiceID = ref('')
+// const newServiceID = ref('')
 const newDept = ref('')
 const newBU = ref('')
 const updateRAM = ref()
 const updateHD = ref()
+const descriptRAM = ref('')
+const descriptHD = ref('')
 // 2. init newServiceLog reactive object, each key is colomn name in service_log table
 const newService = reactive({
   appointment_date: '',
-  asset_tag: '',
-  state: 1, // at first time state is alway 1 for notify list
+  asset_id: '',
+  state: +1, // at first time state is alway 1 for notify list
   detail: '',
   fname: '',
   lname: '',
   service_id: '', // change user
-  user_id: '', // link to employee detail page
+  eUser_id: null, // link to employee detail page
+  nUser_id: null, // link to employee detail page
   map_drive: [],
   application_list: [],
 })
 
 const selectBU = ref('')
 const checkList = ref([])
-const mapDriveName = ref([])
+// const mapDriveName = ref([])
 
 async function handleassetID(event) {
-  if (!event || !event.target) return
+  // if (!event || !event.target) return
   assetID.value = event.target.value
   await assetStore.getAssetDetail(assetID.value)
   assetTag.value = assetStore.assetDetail[0].asset_tag
@@ -348,11 +354,15 @@ async function handleassetID(event) {
     currentLname.value = employeeStore.employeeDetail[0].lname
     currentDept.value = employeeStore.employeeDetail[0].department_name.name
     currentBU.value = employeeStore.employeeDetail[0].office_name.name
+    newService.fname = currentFname.value
+    newService.lname = currentLname.value
   } else {
-    currentFname.value = 'Free'
+    currentFname.value = 'FREE'
     currentLname.value = ''
-    currentDept.value = ''
+    currentDept.value = null
     currentBU.value = assetStore.assetDetail[0].office_name.name
+    newService.fname = null
+    newService.lname = null
   }
 
   console.log('Emaployee detail', employeeStore.employeeDetail)
@@ -373,13 +383,24 @@ async function handleEmployee(event) {
     newLname.value = employeeStore.employeeDetail[0].lname
     newDept.value = employeeStore.employeeDetail[0].department_name.name
     newBU.value = employeeStore.employeeDetail[0].office_name.name
-    newServiceID.value = 3
+    newService.service_id = 3
+    newService.detail =
+      'Chnage user from' +
+      ' ' +
+      currentFname.value +
+      ' ' +
+      currentLname.value +
+      ' TO ' +
+      ' ' +
+      newFname.value +
+      ' ' +
+      newLname.value
   } else {
     newFname.value = 'Free'
     newLname.value = ''
     newDept.value = ''
     newBU.value = ''
-    newServiceID.value = 3
+    newService.service_id = 3
   }
 }
 
@@ -394,19 +415,15 @@ async function handleNasList(event) {
   console.log('event in handleNasList', event, event.target)
   console.log('list of nas by selectBU', selectBU.value, nasNameStore.nasNameAll)
 }
+const handleUpgrade = () => {
+  descriptHD.value = updateHD.value ? 'update Harddisk to ' + updateHD.value : ''
+  descriptRAM.value = updateRAM.value ? 'update RAM to ' + updateRAM.value : ''
+  newService.detail = descriptRAM.value + ' ' + descriptHD.value
+}
 
 async function addSubmit() {
   try {
-    newService.appointment_date = appointDate.value
-    newService.asset_tag = assetTag.value
-    newService.detail = newDetail.value
-    newService.fname = newFname.value
-    newService.lname = newLname.value
-    newService.service_id = newServiceID.value
-    newService.user_id = newUserId.value
-    newService.map_drive = mapDriveName.value
-    newService.application_list = checkList.value
-
+    console.log('newService object', newService)
     await serviceLogStore.addService({ ...newService })
     console.log('successful add service card', newService)
   } catch (error) {
@@ -414,24 +431,18 @@ async function addSubmit() {
   } finally {
     Object.assign(newService, {
       appointment_date: '',
-      asset_tag: '',
+      asset_id: Number,
       state: 1, // at first time state is alway 1 for notify list
       detail: '',
       fname: '',
       lname: '',
       service_id: 3, // change user
-      user_id: '', // link to employee detail page
+      euser_id: Number, // link to employee detail page
+      nuser_id: Number, // link to employee detail page
       map_drive: [],
       application_list: [],
     })
     router.push('/services')
   }
-}
-const handleUpgrade = () => {
-  const descriptRAM = ref('')
-  const descriptHD = ref('')
-  descriptHD.value = updateHD.value ? 'update Harddisk to ' + updateHD.value : ''
-  descriptRAM.value = updateRAM.value ? 'update RAM to ' + updateRAM.value : ''
-  newDetail.value = `${descriptRAM.value}\n${descriptHD.value}`
 }
 </script>

@@ -1,77 +1,104 @@
 <template>
-  <div class="w-fit h-screen px-4 mt-15 mx-1 bg-green-50 rounded-xl border border-green-900">
+  <div class="w-full md:w-md h-screen px-4 mt-15 mx-1 bg-white rounded-xl border border-green-900">
     <div class="flex flex-row justify-between">
-      <BaseHeader title="Service Edit" />
+      <BaseHeader title="Service Detail" />
       <XMarkIcon
         @click="$emit('toggle-open')"
         class="h-6 w-6 mt-9.5 text-red-800 hover:scale-110 hover:rounded-full hover:bg-red-800 hover:text-white hover:cursor-pointer"
       />
     </div>
     <hr class="border-gray-300 mb-4" />
-    <!-- asset and employee infomation -->
-    <div class="grid grid-cols md:grid-cols-2 gap-y-4">
-      <label for="dateAppoint" class="label">Appointment Date</label>
-      <input type="date" class="input w-fit" v-model.trim="updateService.appointment_date" />
-      <p>Asset Tag</p>
-      <p>{{ serviceAssetTag }}</p>
-
-      <p>User Name:</p>
-      <p
-        class="cursor-pointer underline text-blue-900"
-        @click="$router.push(`/editEmployee/${props.itemDetail.user_id}`)"
-      >
-        {{ userFullName }}
-      </p>
-      <p>Service Type:</p>
-      <p>{{ serviceType }}</p>
-    </div>
-
-    <div v-show="props.itemDetail.detail !== null" class="flex flex-col">
-      <div class="flex flex-row justify-between text-wrap text-blue-900 mt-4 mb-1">
-        <p>Detail :</p>
-        <span>
-          <PencilSquareIcon
-            class="w-5 h-5 inline-block -mt-1 mx-1 text-green-900 hover:bg-green-100"
-          />
-          <TrashIcon class="w-5 h-5 inline-block -mt-1 mx-1 stroke-red-800 hover:bg-red-100" />
-        </span>
+    <!-- Section : show detail -->
+    <div>
+      <BaseBox label="Service" :data="props.itemDetail.service_type.service_name" />
+      <BaseBox label="Appointment Date" :data="dateFormat(props.itemDetail.appointment_date)" />
+      <!-- service type 1, add email -->
+      <div v-if="props.itemDetail.service_id === 1">
+        <BaseBox
+          label="New email"
+          :data="userFullName"
+          @click="$router.push(`/editEmployee/${props.itemDetail.eUser_id}`)"
+          class="hover:cursor-pointer hover:text-blue-700"
+        />
       </div>
-      <textarea
-        cols="50"
-        class="border border-green-800 px-2 py-2"
-        v-model.trim="updateService.detail"
-      ></textarea>
-    </div>
+      <!-- service type 3 change user -->
+      <div v-if="props.itemDetail.service_id === 3">
+        <BaseBox label="Current User" :data="props.itemDetail.fname" />
+        <BaseBox label="New User" :data="props.itemDetail.nUser_id" />
+        <!-- application section -->
+        <div class="grid grid-cols-2 my-4">
+          <p>Application</p>
+          <div class="">
+            <div
+              v-for="appName in props.itemDetail.application_list"
+              :key="appName.id"
+              :value="appName.value"
+            >
+              <p>{{ appName }}</p>
+            </div>
+          </div>
+        </div>
+        <!-- map drive section -->
+        <div class="grid grid-cols-2 my-4">
+          <p>Application</p>
+          <div class="">
+            <div
+              v-for="mapDrive in props.itemDetail.map_drive"
+              :key="mapDrive.id"
+              :value="mapDrive.value"
+            >
+              <p>{{ mapDrive }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- service type 4 and 5 todo or HW update  -->
+      <div v-if="props.itemDetail.service_id === 4 || props.itemDetail.service_id === 5">
+        <BaseBox label="Asset Tag" :data="props.itemDetail.asset.asset_tag" />
+        <BaseBox label="Detail" :data="props.itemDetail.detail" />
+      </div>
 
-    <div class="flex flex-row justify-end">
-      <button
-        @click="$emit('toggle-open')"
-        class="px-4 py-1 mt-4 bg-green-600 text-white rounded-xl"
-      >
-        Close
-      </button>
-      <!-- <button class="px-4 py-1 mt-4 bg-green-600 text-white rounded-xl">Cancel</button> -->
+      <!-- <BaseBox label="Asset Tag" :data="props.itemDetail.asset.asset_tag" /> -->
+      <!-- current user if fname = null show label='Status' data:'FREE'
+           else show Current User with userFullName -->
+
+      <!-- in case Service 3:
+           Change user we show new user name
+           if service type .eq 3 then show new user
+           else no show-->
+
+      <div class="flex flex-row justify-end">
+        <button
+          @click="$emit('toggle-open')"
+          class="px-4 py-1 mt-4 bg-green-600 text-white rounded-xl"
+        >
+          Close
+        </button>
+        <!-- <button class="px-4 py-1 mt-4 bg-green-600 text-white rounded-xl">Cancel</button> -->
+      </div>
     </div>
   </div>
 </template>
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { computed } from 'vue'
 
 import BaseHeader from '@/components/BaseHeader.vue'
 
-import { XMarkIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+import BaseBox from '../BaseBox.vue'
 
 // const emit = defineEmits('open')
 const props = defineProps({ itemDetail: Object })
-// console.log(props.itemDetail)
+console.log('props.itemDetail in Service edit', props.itemDetail)
+console.log('Service_id in Service edit', props.itemDetail.service_id)
 
-const serviceAssetTag = ref(props.itemDetail.asset_tag || '-')
+// const serviceAssetTag = ref(props.itemDetail.asset?.asset_tag || '')
 const userFullName = computed(() => {
   return props.itemDetail.fname + ' ' + props.itemDetail.lname
 })
-const serviceType = ref(props.itemDetail.service_type.service_name)
-const updateService = reactive({
-  appointment_date: props.itemDetail.appointment_date,
-  detail: props.itemDetail.detail || '',
-})
+
+const dateFormat = (dateString) => {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' }
+  return new Date(dateString).toLocaleDateString('en-EN', options)
+}
 </script>

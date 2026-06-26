@@ -22,7 +22,10 @@
       </p>
     </div>
     <!-- service type 4-Todo, 5-HW-upgrade or change-->
-    <div v-if="props.item.service_id == 4 || 5">
+    <div v-if="props.item.service_id === 4 || props.item.service_id === 5">
+      <p class="text-sm text-blue-900 mt-2">
+        {{ 'asset tag: ' + ' ' + props.item.asset?.asset_tag }}
+      </p>
       <p class="w-fit text-mm text-teal-800">
         <!-- {{ props.item.id + ' ' + props.item.detail }} -->
         {{ props.item.detail }}
@@ -38,10 +41,18 @@
     </div>
     <div v-if="props.item.service_id === 3">
       <p class="w-fit text-mm text-teal-800">
-        {{ 'asset tag: ' + ' ' + props.item.asset_tag }}
+        {{ 'asset tag: ' + ' ' + props.item.asset?.asset_tag }}
       </p>
       <p class="w-fit text-mm text-teal-800">
-        {{ 'New User ' + ' ' + props.item.fname + ' ' + props.item.lname }}
+        {{ 'Current User ' + ' ' + (props.item.fname || 'FREE') + ' ' + (props.item.lname || '') }}
+      </p>
+      <p>
+        {{
+          'New User ' +
+          (props.item.employee?.fname || 'Free') +
+          ' ' +
+          (props.item.employee?.lname || '')
+        }}
       </p>
     </div>
   </div>
@@ -56,6 +67,12 @@ const props = defineProps({
   item: Object,
 })
 // console.log('props.item', props.item)
+
+const dateFormat = (dateString) => {
+  const options = { year: 'numeric', month: 'short', day: 'numeric' }
+  return new Date(dateString).toLocaleDateString('en-EN', options)
+}
+
 // const itemDetail = computed(() => {
 //   if (props.item.service_id == 1) {
 //     try {
@@ -79,8 +96,4 @@ const props = defineProps({
 // const fullName = computed(() => {
 //   return props.item.fname + " " + props.item.lname.substring(0, 1);
 // });
-const dateFormat = (dateString) => {
-  const options = { year: 'numeric', month: 'short', day: 'numeric' }
-  return new Date(dateString).toLocaleDateString('en-EN', options)
-}
 </script>
