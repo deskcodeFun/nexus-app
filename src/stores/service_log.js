@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabaseClient'
 
 export const useServiceLog = defineStore('service_log', () => {
   const serviceLog = ref()
+  const assetServiceLog = ref(null)
   const serviceDetail = ref()
   let isLoading = ref(true)
 
@@ -38,6 +39,27 @@ export const useServiceLog = defineStore('service_log', () => {
       isLoading.value = false
     }
   }
+
+  async function getServiceByAssetID(paramId) {
+    let assetID = paramId
+    if (assetID !== null) {
+      try {
+        isLoading.value = true
+        const { data, error } = await supabase
+          .from('service_log')
+          .select('*')
+          .eq('asset_id', assetID)
+        assetServiceLog.value = data
+        console.log('assetServiceLog', assetServiceLog.value)
+        if (error) throw error
+      } catch (error) {
+        console.log('Error, getServiceByAssetID', error)
+      } finally {
+        isLoading.value = false
+      }
+    }
+  }
+
   async function getServiceDetail(paramId) {
     if (paramId !== undefined) {
       try {
@@ -75,9 +97,11 @@ export const useServiceLog = defineStore('service_log', () => {
   fetchService()
   updateServiceState()
   getServiceDetail()
+  getServiceByAssetID()
   return {
     serviceLog,
     serviceDetail,
+    assetServiceLog,
     addService,
     fetchService,
     getServiceDetail,

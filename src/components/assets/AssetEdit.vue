@@ -6,9 +6,9 @@
     -->
   <!-- Header -->
   <BaseHeader title="ASSET DETAIL" :isShow="true" />
-  <div class="h-full pb-50 mx-auto overflow-scroll pt-2 text-blue-900">
+  <div class="h-full w-full pb-50 mx-auto overflow-scroll pt-2 text-blue-900">
     <!-- show computer image and information -->
-    <div class="flex flex-col lg:flex-row">
+    <div class="flex flex-col md:flex-row">
       <div class="px-4 lg:h-128">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
         <div
@@ -22,9 +22,9 @@
         </div>
       </div>
       <!-- accounting section -->
-      <div class="mx-2 mb-4 mt-4 md:mt-0 flex flex-col">
-        <p class="w-fit sm:pb-4 text-lg tracking-wide">Asset information</p>
-        <div class="w-content mx-2 lg:mr-24 grid grid-cols lg:grid-cols-2 gap-y-1 lg:gap-x-16">
+      <div class="w-full mx-2 mb-4 mt-4 md:mt-0 flex flex-col">
+        <p class="sm:pb-4 text-lg tracking-wide">Asset information</p>
+        <div class="w-120 gap-y-1">
           <div v-for="(data, label) in accountData" :key="label">
             <BaseBox :label="label" :data="data"></BaseBox>
           </div>
@@ -33,18 +33,25 @@
     </div>
 
     <BaseAccordion title="Service Log">
-      <div v-for="service in serviceLog" :key="service.id" class="flex flex-row gap-4 ml-6 mt-8">
-        <!-- <p type="date">{{ service.created_at.toLocaleDateString() }}</p> -->
-        <p>
-          {{
-            new Date(service.created_at).toLocaleDateString('en-EN', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            })
-          }}
+      <div v-if="serviceLog && serviceLog.length">
+        <div v-for="service in serviceLog" :key="service.id" class="flex flex-row gap-4 ml-6 mt-8">
+          <!-- <p type="date">{{ service.created_at.toLocaleDateString() }}</p> -->
+          <p>
+            {{
+              new Date(service.created_at).toLocaleDateString('en-EN', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })
+            }}
+          </p>
+          <p>{{ service.detail }}</p>
+        </div>
+      </div>
+      <div v-else>
+        <p class="flex flex-row mt-4 mx-8 text-2xl text-red-900 font-light italic">
+          -- NO Record --
         </p>
-        <p>{{ service.detail }}</p>
       </div>
     </BaseAccordion>
 
@@ -279,14 +286,14 @@ const updateRAM = ref('')
 const updateHarddisk = ref('')
 const updateDescription = ref('')
 const serviceStore = useServiceLog()
+
 const serviceLog = computed(() => {
-  if (!store.assetDetail[0] || store.assetDetail[0].asset_tag === null) {
+  if (!store.assetDetail || store.assetDetail[0].asset_tag === null) {
     return []
   }
-  return serviceStore.serviceLog.filter(
-    (service) => service.asset_tag === store.assetDetail[0].asset_tag,
-  )
+  return serviceStore.serviceLog.filter((service) => service.asset_id === paramID)
 })
+console.log('serviceLog', serviceLog.value)
 // const serviceDate = computed(() => {
 //   return serviceLog.value.map((service) => {
 //     return new Date(service.created_at).toLocaleDateString();
@@ -323,6 +330,9 @@ async function handleUpdateUser(event) {
 
 onMounted(async () => {
   await store.getAssetDetail(paramID)
+  console.log('computerDetail : ', paramID, store.assetDetail)
+  // await serviceStore.getServiceByAssetID(89)
+
   // console.log('computerDetail : ', store.assetDetail)
   if (store.assetDetail[0]) {
     // console.log('store.assetDetail[0]', store.assetDetail[0])
