@@ -41,8 +41,11 @@ export const useServiceLog = defineStore('service_log', () => {
   }
 
   async function getServiceByAssetID(paramId) {
+    if (paramId === undefined) {
+      return
+    }
     let assetID = paramId
-    if (assetID !== null) {
+    if (assetID !== null || assetID !== 'undefined') {
       try {
         isLoading.value = true
         const { data, error } = await supabase
@@ -57,6 +60,9 @@ export const useServiceLog = defineStore('service_log', () => {
       } finally {
         isLoading.value = false
       }
+    } else {
+      isLoading.value = false
+      return []
     }
   }
 

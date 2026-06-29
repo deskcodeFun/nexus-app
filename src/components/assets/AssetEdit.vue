@@ -1,12 +1,6 @@
 <template>
-  <!-- TODO :
-    1. remove image
-    2. add more image
-    3. when delete asset, remove image and directory in backend
-    -->
-  <!-- Header -->
   <BaseHeader title="ASSET DETAIL" :isShow="true" />
-  <div class="h-full w-full pb-50 mx-auto overflow-scroll pt-2 text-blue-900">
+  <div class="h-full w-full pb-50 mx-auto overflow-auto pt-2 text-blue-900">
     <!-- show computer image and information -->
     <div class="flex flex-col md:flex-row">
       <div class="px-4 lg:h-128">
@@ -22,9 +16,9 @@
         </div>
       </div>
       <!-- accounting section -->
-      <div class="w-full mx-2 mb-4 mt-4 md:mt-0 flex flex-col">
+      <div class="mx-2 mb-4 mt-4 md:mt-0 flex flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Asset information</p>
-        <div class="w-120 gap-y-1">
+        <div class="mt-4 md:mt-0">
           <div v-for="(data, label) in accountData" :key="label">
             <BaseBox :label="label" :data="data"></BaseBox>
           </div>
@@ -288,7 +282,7 @@ const updateDescription = ref('')
 const serviceStore = useServiceLog()
 
 const serviceLog = computed(() => {
-  if (!store.assetDetail || store.assetDetail[0].asset_tag === null) {
+  if (!store.assetDetail || store.assetDetail[0].asset_tag === null || paramID === undefined) {
     return []
   }
   return serviceStore.serviceLog.filter((service) => service.asset_id === paramID)

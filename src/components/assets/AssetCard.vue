@@ -13,11 +13,11 @@
       <BaseCard>
         <!-- show image in each card -->
         <div class="flex justify-center items-center align-middle mb-8">
-          <div v-if="item && item.image !== null">
-            <img :src="item.image[1]" class="rounded-xl aspect-square" />
+          <div v-if="item && item.image !== null" class="block w-auto h-48 overflow-clip">
+            <img :src="item.image[1]" class="object-fit rounded-xl aspect-auto" />
           </div>
           <div v-else>
-            <PhotoIcon class="h-56 w-auto bg-amber-50/25 text-gray-300/50" />
+            <PhotoIcon class="block h-48 w-auto bg-amber-50/25 text-gray-300/50" />
           </div>
         </div>
         <!-- show data in each card -->

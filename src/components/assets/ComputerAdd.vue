@@ -1,7 +1,7 @@
 <template>
-  <div class="py-4 px-8 bg-white flex flex-row text-blue-900">
+  <div class="py-4 px-2 bg-white flex flex-row text-blue-900">
     <!-- 3 section -->
-    <div class="w-fit h-full gap-16 sm:flex sm:flex-row bg-white">
+    <div class="w-11/12 md:w-fit h-full gap-16 sm:flex sm:flex-row bg-white">
       <!-- accounting section -->
       <div class="text-nowrap flex flex-col">
         <p class="sm:pb-4 text-lg tracking-wide">Accounting information</p>
@@ -25,7 +25,12 @@
         <label for="color" class="label">Store Location</label>
         <input type="text" v-model.trim="newComputer.store_location" class="input" />
         <label for="description" class="label">Description</label>
-        <textarea row="3" cols="30" v-model.trim="newComputer.description" class="input" />
+        <textarea
+          rows="3"
+          cols="30"
+          v-model.trim="newComputer.description"
+          class="input"
+        ></textarea>
         <p class="py-2 text-sm text-gray-500">Office Name</p>
         <select
           name="officeName"
@@ -156,9 +161,9 @@ const newComputer = reactive({
   model: '',
   color: '',
   description: '',
-  warranty_end: new Date(),
+  warranty_end: new Date().toISOString().split('T')[0],
   store_location: '',
-  stock_in: new Date(),
+  stock_in: new Date().toISOString().split('T')[0],
   // price: Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(0),
   price: Number,
   user_id: Number,
@@ -217,6 +222,8 @@ async function handleFileSelect(event) {
     isUploaded.value = false
   }
 }
+console.log('newComputer date', newComputer.stock_in, newComputer.warranty_end)
+
 const removeImage = (index) => {
   previewImages.value.splice(index, 1)
   console.log('previewImages after DELETE:', previewImages.value)
@@ -225,6 +232,8 @@ const removeImage = (index) => {
 async function addSubmit() {
   const imageUrlArray = previewImages.value.map((image) => image.url)
   newComputer.image = imageUrlArray
+
+  console.log('newComputer date', newComputer.stock_in, newComputer.warranty_end)
   try {
     await store.addAsset(newComputer)
   } catch (error) {

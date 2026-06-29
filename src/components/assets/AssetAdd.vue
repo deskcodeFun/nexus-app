@@ -1,7 +1,7 @@
 <template>
   <BaseHeader title="ADD NEW ASSET" :isShow="true" />
   <!-- catalog menu, computer, printer etc.. -->
-  <div class="px-8 py-4 flex flex-row gap-4">
+  <div class="w-full px-2 py-4 flex flex-col md:flex-row gap-4">
     <p class="font-semibold text-blue-800">Select Catalog :</p>
     <CatalogMenu @changeView="updateView" />
   </div>
