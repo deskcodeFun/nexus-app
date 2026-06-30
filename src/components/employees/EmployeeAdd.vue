@@ -49,7 +49,7 @@
     </div>
     <!-- email column and save button-->
     <div>
-      <p class="mb-2">Group Email : {{ newEmployee.email_group }}</p>
+      <p class="mb-2 font-semibold text-blue-900">Group Email</p>
       <div class="grid grid-cols-1 md:grid-cols-2">
         <div v-for="items in officeNameStore.emailGroupName" :key="items.id" :value="items.name">
           <div class="flex flex-row my-1">
