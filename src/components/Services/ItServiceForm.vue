@@ -261,9 +261,9 @@
         </div>
       </div>
     </div>
-    <div v-for="(key, index) in newService" :key="index">
+    <!-- <div v-for="(key, index) in newService" :key="index">
       <p>{{ index }}: {{ key }}</p>
-    </div>
+    </div> -->
   </main>
 </template>
 <script setup>

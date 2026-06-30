@@ -222,18 +222,18 @@ async function handleFileSelect(event) {
     isUploaded.value = false
   }
 }
-console.log('newComputer date', newComputer.stock_in, newComputer.warranty_end)
+// console.log('newComputer date', newComputer.stock_in, newComputer.warranty_end)
 
 const removeImage = (index) => {
   previewImages.value.splice(index, 1)
-  console.log('previewImages after DELETE:', previewImages.value)
+  // console.log('previewImages after DELETE:', previewImages.value)
 }
 
 async function addSubmit() {
   const imageUrlArray = previewImages.value.map((image) => image.url)
   newComputer.image = imageUrlArray
 
-  console.log('newComputer date', newComputer.stock_in, newComputer.warranty_end)
+  // console.log('newComputer date', newComputer.stock_in, newComputer.warranty_end)
   try {
     await store.addAsset(newComputer)
   } catch (error) {
