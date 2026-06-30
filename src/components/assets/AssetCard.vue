@@ -12,8 +12,8 @@
       <!-- each card layout -->
       <BaseCard>
         <!-- show image in each card -->
-        <div class="flex justify-center items-center align-middle mb-8">
-          <div v-if="item && item.image !== null" class="block w-auto h-48 overflow-clip">
+        <div class="flex justify-center items-center">
+          <div v-if="item.image && item.image.length > 0" class="block w-36 h-36 m-4 overflow-clip">
             <img :src="item.image[1]" class="object-fit rounded-xl aspect-auto" />
           </div>
           <div v-else>
@@ -22,12 +22,12 @@
         </div>
         <!-- show data in each card -->
         <table
-          class="[&_th]:pt-1 [&_th]:text-left [&_tr]:align-baseline [&_tr]:h-6 [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4"
+          class="mx-auto [&_th]:pt-1 [&_th]:text-left [&_tr]:align-baseline [&_tr]:h-6 [&_th]:font-light [&_th]:text-xs [$_td]:text-base [&_th]:text-gray-500 [&_td]:text-blue-900 [&_td]:pl-4"
         >
           <tbody>
             <tr>
               <th>Asset Tag</th>
-              <td class="font-bold">{{ item.asset_tag.substring(0, 13) }}</td>
+              <td class="font-bold">{{ item.asset_tag.substring(0, 12) }}</td>
             </tr>
             <tr>
               <th scope="col">Brand</th>
@@ -43,7 +43,7 @@
               </td>
             </tr>
             <tr>
-              <th scope="col">Asset BU</th>
+              <th scope="col" class="pb-4">Asset BU</th>
               <td class="font-semibold">{{ item.office_name.short_name }}</td>
             </tr>
           </tbody>

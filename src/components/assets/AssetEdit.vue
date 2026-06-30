@@ -5,8 +5,16 @@
     <div class="flex flex-col md:flex-row">
       <div class="px-4 lg:h-128">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
+        <!-- null is default value
+             []   when you add new asset without image file,
+                  push empathy array not null value to asset.image
+        -->
         <div
-          v-if="store.assetDetail && store.assetDetail[0].image !== null"
+          v-if="
+            store.assetDetail &&
+            store.assetDetail[0].image !== null &&
+            store.assetDetail[0].image.length
+          "
           class="overflow-y-scroll lg:overflow-y-visible"
         >
           <BaseImage :images="store.assetDetail[0].image" />
@@ -27,10 +35,14 @@
     </div>
 
     <BaseAccordion title="Service Log">
-      <div v-if="serviceLog && serviceLog.length">
-        <div v-for="service in serviceLog" :key="service.id" class="flex flex-row gap-4 ml-6 mt-8">
+      <div v-if="serviceLog && serviceLog.length" class="md:w-1/2">
+        <div
+          v-for="service in serviceLog"
+          :key="service.id"
+          class="flex flex-col md:flex-row md:gap-6 ml-6 mt-8"
+        >
           <!-- <p type="date">{{ service.created_at.toLocaleDateString() }}</p> -->
-          <p>
+          <p class="font-semibold text-nowrap">
             {{
               new Date(service.created_at).toLocaleDateString('en-EN', {
                 year: 'numeric',
@@ -263,9 +275,7 @@ const updateData = reactive({
   brand: '',
   model: '',
   color: '',
-
   store_location: '',
-
   description: '',
   office_id: Number,
   user_id: Number,
@@ -287,7 +297,7 @@ const serviceLog = computed(() => {
   }
   return serviceStore.serviceLog.filter((service) => service.asset_id === paramID)
 })
-console.log('serviceLog', serviceLog.value)
+// console.log('serviceLog', serviceLog.value)
 // const serviceDate = computed(() => {
 //   return serviceLog.value.map((service) => {
 //     return new Date(service.created_at).toLocaleDateString();
@@ -324,7 +334,7 @@ async function handleUpdateUser(event) {
 
 onMounted(async () => {
   await store.getAssetDetail(paramID)
-  console.log('computerDetail : ', paramID, store.assetDetail)
+  // console.log('computerDetail : ', paramID, store.assetDetail)
   // await serviceStore.getServiceByAssetID(89)
 
   // console.log('computerDetail : ', store.assetDetail)

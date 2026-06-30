@@ -209,7 +209,7 @@ async function handleFileSelect(event) {
       // upload file to supabase storage
       const { error } = await supabase.storage.from('image').upload(filePath, file)
       if (error) throw error
-      const { data } = await supabase.storage.from('image').getPublicUrl(filePath)
+      const { data } = supabase.storage.from('image').getPublicUrl(filePath)
       previewImages.value.push({ url: data.publicUrl, file })
       console.log(' data: ', data)
       console.log('previewImages:', previewImages)
