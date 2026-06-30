@@ -9,12 +9,12 @@ export const useServiceLog = defineStore('service_log', () => {
   let isLoading = ref(true)
 
   async function addService(newService) {
-    console.log('Add service, newService', newService)
+    // console.log('Add service, newService', newService)
     try {
       isLoading.value = true
       // const { error } = await supabase.from('service_log').insert(...newService)
-      const { data, error } = await supabase.from('service_log').insert([newService]).select()
-      console.log('insert new service log', data)
+      const { error } = await supabase.from('service_log').insert([newService]).select()
+      // console.log('insert new service log', data)
       if (error) throw error
     } catch (error) {
       console.error('ERROR Add new service : ', error)
@@ -30,7 +30,7 @@ export const useServiceLog = defineStore('service_log', () => {
         .select(`*,service_type(*),asset(id,asset_tag,user_id)`)
         .order('id', { ascending: false })
       serviceLog.value = data
-      console.log('service log in store: ', serviceLog.value)
+      // console.log('service log in store: ', serviceLog.value)
       if (error) throw error
       // console.log('service in store :', serviceLog)
     } catch (error) {
@@ -53,7 +53,7 @@ export const useServiceLog = defineStore('service_log', () => {
           .select('*')
           .eq('asset_id', assetID)
         assetServiceLog.value = data
-        console.log('assetServiceLog', assetServiceLog.value)
+        // console.log('assetServiceLog', assetServiceLog.value)
         if (error) throw error
       } catch (error) {
         console.log('Error, getServiceByAssetID', error)
@@ -81,12 +81,12 @@ export const useServiceLog = defineStore('service_log', () => {
         isLoading.value = false
       }
     } else {
-      console.log('parmaID is undefined')
+      // console.log('parmaID is undefined')
       isLoading.value = false
     }
   }
   async function updateServiceState(list, itemID) {
-    console.log('Updating service state:', list, itemID)
+    // console.log('Updating service state:', list, itemID)
     try {
       const { error } = await supabase
         .from('service_log')
