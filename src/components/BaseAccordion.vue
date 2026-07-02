@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col mx-2 lg:mx-8 mb-8">
+  <div class="flex-col mx-2 mb-8">
     <div @click="toggleVisible" class="flex flex-row">
       <div v-if="visible">
         <ChevronDownIcon class="h-4 w-4 mt-1 bg-white/50 hover:cursor-pointer" />

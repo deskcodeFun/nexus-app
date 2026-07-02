@@ -100,7 +100,7 @@ import BaseButtonAdd from '@/components/BaseButtonAdd.vue'
 
 const store = useServiceLog()
 store.fetchService()
-console.log('ServiceView service log: ', store.serviceLog)
+// console.log('ServiceView service log: ', store.serviceLog)
 
 // store.serviceStore
 

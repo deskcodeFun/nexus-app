@@ -60,7 +60,7 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
   }
 
   async function getEmployeeDetail(userID) {
-    if (userID !== null || undefined) {
+    if (userID !== null && userID !== undefined) {
       try {
         isLoading.value = true
         const { data, error } = await supabase

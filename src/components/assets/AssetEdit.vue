@@ -2,7 +2,7 @@
   <BaseHeader title="ASSET DETAIL" :isShow="true" />
   <div class="h-full w-full pb-50 mx-auto overflow-auto pt-2 text-blue-900">
     <!-- show computer image and information -->
-    <div class="flex flex-col md:flex-row">
+    <div class="flex flex-col lg:flex-row">
       <div class="px-4 lg:h-128">
         <p class="mb-4 text-lg tracking-wide">Gallery</p>
         <!-- null is default value
@@ -32,163 +32,164 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <BaseAccordion title="Service Log">
-      <div v-if="serviceLog && serviceLog.length" class="md:w-1/2">
-        <div
-          v-for="service in serviceLog"
-          :key="service.id"
-          class="flex flex-col md:flex-row md:gap-6 ml-6 mt-8"
-        >
-          <!-- <p type="date">{{ service.created_at.toLocaleDateString() }}</p> -->
-          <p class="font-semibold text-nowrap">
-            {{
-              new Date(service.created_at).toLocaleDateString('en-EN', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              })
-            }}
-          </p>
-          <p>{{ service.detail }}</p>
-        </div>
-      </div>
-      <div v-else>
-        <p class="flex flex-row mt-4 mx-8 text-2xl text-red-900 font-light italic">
-          -- NO Record --
-        </p>
-      </div>
-    </BaseAccordion>
-
-    <BaseAccordion title="Specifiction">
-      <!-- asset spec section, replace JSONB key with label-->
-      <!-- <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2"> -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-x-16 gap-y-1">
-        <div
-          v-for="(data, label) in updateData.spec"
-          :key="label"
-          class="pl-4 sm:pl-0 pt-2 sm:pt-0"
-        >
-          <BaseBox :label="label" :data="data"></BaseBox>
-        </div>
-      </div>
-    </BaseAccordion>
-
-    <BaseAccordion title="Update / Upgrade">
-      <div class="grid grid-col-2 gap-x-16 gap-y1">
-        <div
-          v-if="updateData.spec.ram && updateData.spec.harddisk !== null"
-          class="pl-4 sm:pl-0 pt-2 sm:pt-0"
-        >
-          <p class="mb-1 text-sm text-gray-500">RAM</p>
-          <input type="text" v-model="updateRAM" class="bg-green-100 py-1 px-2 mb-2" />
-          <p class="mb-1 text-sm text-gray-500">Hard Disk</p>
-          <input type="text" v-model="updateHarddisk" class="bg-green-100 py-1 px-2 mb-2" />
-          <p class="mb-1 text-sm text-gray-500">Description</p>
-          <textarea
-            type="text"
-            rows="4"
-            cols="35"
-            v-model="updateDescription"
-            class="bg-green-100 py-1 px-2 mb-2"
-          />
-          <p class="mb-1 text-sm text-gray-500">Change BU asset</p>
-          <select
-            name="officeName"
-            id="officeName"
-            v-model.trim="updateData.office_id"
-            class="text-md bg-green-100 py-2 pl-1 pr-2"
-          >
-            <option
-              v-for="office_name in officeNameStore.officeName"
-              :key="office_name"
-              :value="office_name.id"
+      <div class="lg:w-2xl flex flex-col mt-4">
+        <BaseAccordion title="Service Log">
+          <div v-if="serviceLog && serviceLog.length">
+            <div
+              v-for="service in serviceLog"
+              :key="service.id"
+              class="flex flex-col md:flex-row md:gap-6 ml-6 mt-8"
             >
-              {{ office_name.name }}
-            </option>
-          </select>
-        </div>
-        <div v-else>
-          <p class="py-2 text-sm text-gray-500">Change BU asset</p>
-          <select
-            name="officeName"
-            id="officeName"
-            v-model.trim="updateData.office_id"
-            class="text-md bg-green-100 py-2 pl-1 pr-2"
-          >
-            <option
-              v-for="office_name in officeNameStore.officeName"
-              :key="office_name"
-              :value="office_name.id"
-            >
-              {{ office_name.name }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </BaseAccordion>
-
-    <BaseAccordion title="User Information">
-      <div class="text-nowrap px-4 flex flex-col pb-2">
-        <p class="pt-4 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
-        <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
-          <div class="pb-2">
-            <div class="flex justify-between">
-              <p>{{ userNameLabel }}</p>
-              <PencilSquareIcon
-                @click="toggleUser"
-                class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800"
-              />
+              <!-- <p type="date">{{ service.created_at.toLocaleDateString() }}</p> -->
+              <p class="font-semibold text-nowrap">
+                {{
+                  new Date(service.created_at).toLocaleDateString('en-EN', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })
+                }}
+              </p>
+              <p>{{ service.detail }}</p>
             </div>
           </div>
-        </div>
-        <!-- show user name 2 state 'FREE' or user_name -->
-        <div>
-          <div v-if="user_name !== 'FREE'">
-            <p class="bg-blue-50 text-md py-2 px-2 mb-2">{{ user_name }}</p>
-            <p class="text-md text-gray-500">Office</p>
-            <p class="text-gray-500 text-md py-2 px-1 mb-2">
-              {{ user_officeName }}
+          <div v-else>
+            <p class="flex flex-row mt-4 mx-8 text-2xl text-red-900 font-light italic">
+              -- NO Record --
             </p>
           </div>
-          <div v-else class="bg-green-100 text-lg py-2 px-1 mb-2">
-            {{ user_name }}
-          </div>
-          <!-- change user name section  -->
-          <div
-            v-if="editUser && user_name"
-            class="bg-blue-50/50 rounded-lg border border-blue-300 py-2 px-2 mt-4"
-          >
-            <p class="pb-2">Update User</p>
-            <select
-              v-model.trim="updateData.user_id"
-              @change="handleUpdateUser"
-              class="w-full bg-green-100 py-2 text-md"
+        </BaseAccordion>
+
+        <BaseAccordion title="Specifiction">
+          <!-- asset spec section, replace JSONB key with label-->
+          <!-- <div class="text-nowrap px-4 flex flex-wrap flex-col pb-2"> -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-x-16 gap-y-1">
+            <div
+              v-for="(data, label) in updateData.spec"
+              :key="label"
+              class="pl-4 sm:pl-0 pt-2 sm:pt-0"
             >
-              <option :value="0" class="bg-green-100">FREE</option>
-              <option
-                v-for="item in employeeStore.employee"
-                :key="item.id"
-                :value="item.id"
-                class="text-lg bg-green-100"
-              >
-                {{ item.fname + ' ' + item.lname }}
-              </option>
-            </select>
-            <!-- show office name of user if user name !== 'FREE' -->
-            <div v-if="editUser && updateData.user_id > '0'">
-              <p class="py-2">User Office</p>
-              <div class="text-md text-blue-900 bg-green-100 py-2 px-1 mb-2">
-                {{ new_officeName || ' - ' }}
-              </div>
+              <BaseBox :label="label" :data="data"></BaseBox>
             </div>
           </div>
-          <div v-else></div>
-        </div>
+        </BaseAccordion>
+
+        <BaseAccordion title="Update / Upgrade">
+          <div class="grid grid-col-2 gap-x-16 gap-y1">
+            <div
+              v-if="updateData.spec.ram && updateData.spec.harddisk !== null"
+              class="pl-4 sm:pl-0 pt-2 sm:pt-0"
+            >
+              <p class="mb-1 text-sm text-gray-500">RAM</p>
+              <input type="text" v-model="updateRAM" class="bg-green-100 py-1 px-2 mb-2" />
+              <p class="mb-1 text-sm text-gray-500">Hard Disk</p>
+              <input type="text" v-model="updateHarddisk" class="bg-green-100 py-1 px-2 mb-2" />
+              <p class="mb-1 text-sm text-gray-500">Description</p>
+              <textarea
+                type="text"
+                rows="4"
+                cols="35"
+                v-model="updateDescription"
+                class="bg-green-100 py-1 px-2 mb-2"
+              />
+              <p class="mb-1 text-sm text-gray-500">Change BU asset</p>
+              <select
+                name="officeName"
+                id="officeName"
+                v-model.trim="updateData.office_id"
+                class="text-md bg-green-100 py-2 pl-1 pr-2"
+              >
+                <option
+                  v-for="office_name in officeNameStore.officeName"
+                  :key="office_name"
+                  :value="office_name.id"
+                >
+                  {{ office_name.name }}
+                </option>
+              </select>
+            </div>
+            <div v-else>
+              <p class="py-2 text-sm text-gray-500">Change BU asset</p>
+              <select
+                name="officeName"
+                id="officeName"
+                v-model.trim="updateData.office_id"
+                class="text-md bg-green-100 py-2 pl-1 pr-2"
+              >
+                <option
+                  v-for="office_name in officeNameStore.officeName"
+                  :key="office_name"
+                  :value="office_name.id"
+                >
+                  {{ office_name.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </BaseAccordion>
+
+        <BaseAccordion title="User Information">
+          <div class="text-nowrap px-4 flex flex-col pb-2">
+            <p class="pt-4 sm:pt-0 sm:pb-4 text-lg tracking-wide">User Information</p>
+            <div class="pl-4 sm:pl-0 pt-2 sm:pt-0">
+              <div class="pb-2">
+                <div class="flex justify-between">
+                  <p>{{ userNameLabel }}</p>
+                  <PencilSquareIcon
+                    @click="toggleUser"
+                    class="h-5 w-6 text-gray-400 hover:text-white hover:bg-green-800"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- show user name 2 state 'FREE' or user_name -->
+            <div>
+              <div v-if="user_name !== 'FREE'">
+                <p class="bg-blue-50 text-md py-2 px-2 mb-2">{{ user_name }}</p>
+                <p class="text-md text-gray-500">Office</p>
+                <p class="text-gray-500 text-md py-2 px-1 mb-2">
+                  {{ user_officeName }}
+                </p>
+              </div>
+              <div v-else class="bg-green-100 text-lg py-2 px-1 mb-2">
+                {{ user_name }}
+              </div>
+              <!-- change user name section  -->
+              <div
+                v-if="editUser && user_name"
+                class="bg-blue-50/50 rounded-lg border border-blue-300 py-2 px-2 mt-4"
+              >
+                <p class="pb-2">Update User</p>
+                <select
+                  v-model.trim="updateData.user_id"
+                  @change="handleUpdateUser"
+                  class="w-full bg-green-100 py-2 text-md"
+                >
+                  <option :value="0" class="bg-green-100">FREE</option>
+                  <option
+                    v-for="item in employeeStore.employee"
+                    :key="item.id"
+                    :value="item.id"
+                    class="text-lg bg-green-100"
+                  >
+                    {{ item.fname + ' ' + item.lname }}
+                  </option>
+                </select>
+                <!-- show office name of user if user name !== 'FREE' -->
+                <div v-if="editUser && updateData.user_id > '0'">
+                  <p class="py-2">User Office</p>
+                  <div class="text-md text-blue-900 bg-green-100 py-2 px-1 mb-2">
+                    {{ new_officeName || ' - ' }}
+                  </div>
+                </div>
+              </div>
+              <div v-else></div>
+            </div>
+          </div>
+        </BaseAccordion>
         <!-- Action button for 'save' 'delete' button -->
         <form @submit.prevent="editSubmit">
-          <div class="flex flex-row justify-between gap-24">
+          <div class="flex flex-row justify-end gap-24">
             <button
               class="flex items-center justify-center border bg-white hover:bg-red-900 hover:scale-102 text-red-800 hover:text-white py-1 px-4 mt-8 rounded-xl"
               type="button"
@@ -215,7 +216,7 @@
           </div>
         </form>
       </div>
-    </BaseAccordion>
+    </div>
   </div>
 </template>
 

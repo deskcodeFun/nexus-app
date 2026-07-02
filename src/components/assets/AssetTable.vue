@@ -26,13 +26,15 @@
             class="table-row hover:shadow-2xl hover:bg-blue-50 hover:cursor-pointer text-nowrap"
           >
             <td class="table-cell font-bold">{{ item.asset_tag }}</td>
-            <td class="table-cell">{{ item.serial_tag?.substring(0, 15) + '...' }}</td>
-            <td class="table-cell">{{ item.brand + ' ' + item.model }}</td>
+            <td class="table-cell w-fit">{{ item.serial_tag }}</td>
+            <td class="table-cell w-fit">
+              {{ item.brand + ' ' + item.model }}
+            </td>
             <!-- <td class="table-cell">{{ item.model }}</td> -->
 
             <!-- User Full name -->
             <td class="table-cell">
-              <p v-if="item.employee">
+              <p v-if="item.employee" class="table-cell w-fit">
                 {{ item.employee.fname + ' ' + item.employee.lname }}
               </p>
               <p v-else class="font-bold text-green-800">Free</p>

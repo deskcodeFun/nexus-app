@@ -15,16 +15,25 @@
       <!-- service type 1, add email -->
       <div v-if="props.itemDetail.service_id === 1">
         <BaseBox
-          label="New email"
+          label="link to detail"
           :data="userFullName"
           @click="$router.push(`/editEmployee/${props.itemDetail.eUser_id}`)"
-          class="hover:cursor-pointer hover:text-blue-700"
+          class="hover:cursor-pointer hover:text-blue-500"
         />
       </div>
       <!-- service type 3 change user -->
       <div v-if="props.itemDetail.service_id === 3">
-        <BaseBox label="Current User" :data="props.itemDetail.fname" />
-        <BaseBox label="New User" :data="props.itemDetail.nUser_id" />
+        <BaseBox label="Asset Tag" :data="props.itemDetail.asset.asset_tag" />
+        <BaseBox label="Current User" :data="props.itemDetail?.fname || 'FREE'" />
+        <BaseBox label="New User ID" :data="props.itemDetail.nUser_id" />
+        <BaseBox
+          label="New User Name"
+          :data="userFullName"
+          @click="$router.push(`/editEmployee/${props.itemDetail.nUser_id}`)"
+          class="hover:cursor-pointer hover:text-blue-500"
+        />
+        <BaseBox label="" :data="employeeStore.employeeDetail[0].department_name?.name || 'N/A'" />
+        <BaseBox label="" :data="employeeStore.employeeDetail[0].office_name?.name || 'N/A'" />
         <!-- application section -->
         <div class="grid grid-cols-2 my-4">
           <p>Application</p>
@@ -80,22 +89,38 @@
   </div>
 </template>
 <script setup>
-import { computed } from 'vue'
+import { ref } from 'vue'
 
 import BaseHeader from '@/components/BaseHeader.vue'
+import BaseBox from '../BaseBox.vue'
 
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import BaseBox from '../BaseBox.vue'
+
+import { useEmployeeStore } from '@/stores/employeeData'
 
 // const emit = defineEmits('open')
 const props = defineProps({ itemDetail: Object })
-console.log('props.itemDetail in Service edit', props.itemDetail)
-console.log('Service_id in Service edit', props.itemDetail.service_id)
+// console.log('props.itemDetail in Service edit', props.itemDetail)
+// console.log('Service_id in Service edit', props.itemDetail.service_id)
 
-// const serviceAssetTag = ref(props.itemDetail.asset?.asset_tag || '')
-const userFullName = computed(() => {
-  return props.itemDetail.fname + ' ' + props.itemDetail.lname
-})
+// const userFullName = ref('')
+const userFullName = ref('')
+
+const employeeStore = useEmployeeStore()
+
+const fetchUserFullName = async () => {
+  if (props.itemDetail.nUser_id) {
+    // console.log('nUser_id in Service edit', props.itemDetail.nUser_id)
+    await employeeStore.getEmployeeDetail(props.itemDetail.nUser_id)
+    // console.log('employee in Service edit', employeeStore.employeeDetail)
+    userFullName.value =
+      employeeStore.employeeDetail[0].fname + ' ' + employeeStore.employeeDetail[0].lname
+  } else {
+    userFullName.value = props.itemDetail.fname + ' ' + props.itemDetail.lname
+  }
+}
+
+fetchUserFullName()
 
 const dateFormat = (dateString) => {
   const options = { year: 'numeric', month: 'short', day: 'numeric' }

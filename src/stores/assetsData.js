@@ -30,7 +30,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
           .from('asset')
           .select(`*,employee(*),office_name(*)`)
           .eq('office_id', officeID)
-          .order('id')
+          .order('')
         asset.value = data
         if (error) throw error
       } catch (error) {
@@ -44,7 +44,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
         const { data, error } = await supabase
           .from('asset')
           .select(`*, employee(*),office_name(*)`)
-          .order('id')
+          .order('office_id')
         asset.value = data
         if (error) throw error
       } catch (error) {
