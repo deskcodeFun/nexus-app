@@ -5,6 +5,7 @@ import { ref } from 'vue'
 export const useAssetStore = defineStore('useAssetStore', () => {
   const asset = ref(null)
   const assetAll = ref('')
+  const assetByEmployee = ref(null)
   const assetDetail = ref(null)
   const isLoading = ref(false)
 
@@ -19,6 +20,24 @@ export const useAssetStore = defineStore('useAssetStore', () => {
       console.error('Fetch all asset error', error)
     } finally {
       isLoading.value = false
+    }
+  }
+  async function getAssetByEmployee(employeeID) {
+    if (employeeID !== null && employeeID !== '0') {
+      // console.log('getAssetByEmployee employeeID: ', employeeID)
+      try {
+        isLoading.value = true
+        const { data, error } = await supabase
+          .from('asset')
+          .select(`*,employee(*),office_name(*)`)
+          .eq('user_id', employeeID)
+        assetByEmployee.value = data
+        if (error) throw error
+      } catch (error) {
+        console.error('Error filter asstet by employee', error)
+      } finally {
+        isLoading.value = false
+      }
     }
   }
 
@@ -151,10 +170,12 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     asset,
     isLoading,
     assetDetail,
+    assetByEmployee,
     // assetByOffice,
     // getAllasset,
     fetchAsset,
     getAssetByOffice,
+    getAssetByEmployee,
     getAssetDetail,
     addAsset,
     updateAsset,
