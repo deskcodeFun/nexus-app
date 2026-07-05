@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row items-baseline py-8">
+  <div class="flex flex-row items-baseline py-4">
     <BaseButttonBack v-show="isShow" />
     <div class="px-4">
       <p class="text-lg tracking-widest text-blue-900">{{ title }}</p>
