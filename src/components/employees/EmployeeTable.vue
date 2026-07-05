@@ -1,7 +1,7 @@
 <template>
   <div class="mt-2">
     <!-- Table Header -->
-    <table class="table-fixed w-full mb-2 [&_th]:py-6">
+    <table class="table-fixed w-full mb-2 [&_th]:py-4">
       <thead class="table-header-group sticky top-0">
         <tr class="border-b border-gray-300 bg-sky-100 text-nowrap">
           <th scope="col" class="text-left text-base pl-2 font-bold text-blue-900">User Name</th>
