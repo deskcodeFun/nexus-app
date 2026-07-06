@@ -127,6 +127,24 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     }
   }
 
+  async function searchEmployee(searchQuery) {
+    try {
+      isLoading.value = true
+      const { data, error } = await supabase
+        .from('employee')
+        .select(`*,office_name(*),department_name(*)`)
+        .ilike('fname', `%${searchQuery}%`)
+        .order('fname', { ascending: true })
+      employee.value = data
+      // console.log('search employee in store: ', data)
+      if (error) throw error
+    } catch (error) {
+      console.error('Error search employee: ', error)
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   getAllEmployee()
   return {
     employee,
@@ -139,5 +157,6 @@ export const useEmployeeStore = defineStore('useEmployeeStore', () => {
     addEmployee,
     updateEmployee,
     deleteEmployee,
+    searchEmployee,
   }
 })

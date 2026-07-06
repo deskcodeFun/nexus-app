@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import BaseHeader from '@/components/BaseHeader.vue'
 import BaseOfficeDrop from '@/components/BaseOfficeDrop.vue'
 import BaseButtonAdd from '@/components/BaseButtonAdd.vue'
@@ -52,6 +52,8 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 
 const employeeStore = useEmployeeStore()
 const searchQuery = ref('')
+// const resultSearch = ref([])
+let debounceTimeout = null
 
 // detect screen
 const isMobile = ref(false)
@@ -71,15 +73,27 @@ function handleChoice(value) {
   }
 }
 
-function handleSearch() {
+async function handleSearch() {
   checkMobile()
   if (searchQuery.value !== '') {
-    // employeeStore.searchEmployee(searchQuery.value)
-    console.log('searching for:', searchQuery.value)
+    await employeeStore.searchEmployee(searchQuery.value)
+    if (employeeStore.employee.length === 0) {
+      alert('No employee found')
+    }
+    // console.log('searching for:', searchQuery.value)
   } else {
-    employeeStore.getAllEmployee()
+    await employeeStore.getAllEmployee()
   }
 }
+watch(searchQuery, (newValue) => {
+  clearTimeout(debounceTimeout)
+  debounceTimeout = setTimeout(() => {
+    handleSearch()
+  }, 300)
+  if (newValue === '') {
+    employeeStore.getAllEmployee()
+  }
+})
 
 onMounted(() => {
   checkMobile()
