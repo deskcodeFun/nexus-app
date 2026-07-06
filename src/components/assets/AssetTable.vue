@@ -39,7 +39,7 @@
               </p>
               <p v-else class="font-bold text-green-800">Free</p>
             </td>
-            <td class="  ">{{ item.office_name?.name }}</td>
+            <td>{{ item.office_name?.name.slice(0, -9) }}</td>
             <!-- <td>{{ item.catalog }}</td> -->
           </tr>
         </tbody>
@@ -55,7 +55,9 @@ import { useAssetStore } from '@/stores/assetsData'
 
 const router = useRouter()
 const store = useAssetStore()
-store.getAssetByOffice('0')
+store.fetchAsset()
+console.log('store.asset: ', store.assetAll)
+// store.getAssetByOffice('0')
 
 // label
 // const itemLabel = computed(() => {

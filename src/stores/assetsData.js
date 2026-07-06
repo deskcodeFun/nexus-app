@@ -4,7 +4,7 @@ import { ref } from 'vue'
 
 export const useAssetStore = defineStore('useAssetStore', () => {
   const asset = ref(null)
-  const assetAll = ref('')
+
   const assetByEmployee = ref(null)
   const assetDetail = ref(null)
   const isLoading = ref(false)
@@ -14,7 +14,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
       isLoading.value = true
       const { data, error } = await supabase.from('asset').select(`*,employee(*),office_name(*)`)
 
-      assetAll.value = data
+      asset.value = data
       if (error) throw error
     } catch (error) {
       console.error('Fetch all asset error', error)
@@ -49,7 +49,7 @@ export const useAssetStore = defineStore('useAssetStore', () => {
           .from('asset')
           .select(`*,employee(*),office_name(*)`)
           .eq('office_id', officeID)
-          .order('')
+          .order('asset_tag', { ascending: true })
         asset.value = data
         if (error) throw error
       } catch (error) {
@@ -162,11 +162,46 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     }
   }
 
+  // .select(`*`)
+  async function searchAsset(searchQuery) {
+    try {
+      isLoading.value = true
+      const { data, error } = await supabase
+        .from('asset')
+        .select(`*,office_name(*),employee:user_id (*)`)
+        .ilike('asset_tag', `%${searchQuery}%`)
+        .order('asset_tag', { ascending: true })
+      asset.value = data
+      console.log('search asset in store: ', data)
+      if (error) throw error
+    } catch (error) {
+      console.error('Error search asset: ', error)
+    } finally {
+      isLoading.value = false
+    }
+  }
+  // async function searchAsset(searchQuery) {
+  //   try {
+  //     isLoading.value = true
+  //     const { data, error } = await supabase
+  //       .from('asset')
+  //       .select(`*, office_name(*), employee(name)`)
+  //       .ilike('asset_tag', `%${searchQuery}%`)
+  //       .order('asset_tag', { ascending: true })
+  //     asset.value = data
+  //     console.log('search asset in store: ', data)
+  //     if (error) throw error
+  //   } catch (error) {
+  //     console.error('Error search asset: ', error)
+  //   } finally {
+  //     isLoading.value = false
+  //   }
+  // }
+
   getAssetByOffice('0')
   fetchAsset()
 
   return {
-    assetAll,
     asset,
     isLoading,
     assetDetail,
@@ -180,5 +215,6 @@ export const useAssetStore = defineStore('useAssetStore', () => {
     addAsset,
     updateAsset,
     deleteAsset,
+    searchAsset,
   }
 })
