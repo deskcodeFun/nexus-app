@@ -1,13 +1,13 @@
 <template>
-  <div class="mt-2">
+  <div class="mt-2 bg-amber-50/50">
     <!-- Table Header -->
-    <table class="table-fixed w-full mb-2 [&_th]:py-4">
+    <table class="table-fixed w-full mb-2 [&_th]:py-2">
       <thead class="table-header-group sticky top-0">
-        <tr class="border-b border-gray-300 bg-sky-100 text-nowrap">
-          <th scope="col" class="text-left text-base pl-2 font-bold text-blue-900">User Name</th>
-          <th scope="col" class="text-left text-base pl-2 font-bold text-blue-900">Job Title</th>
-          <th scope="col" class="text-left text-base font-bold text-blue-900">Department</th>
-          <th scope="col" class="text-left text-base font-bold text-blue-900">Office</th>
+        <tr class="bg-sky-900 [&_th]:font-light [&_th]:text-left text-white text-nowrap">
+          <th scope="col" class="pl-2">User Name</th>
+          <th scope="col">Job Title</th>
+          <th scope="col">Department</th>
+          <th scope="col">Office</th>
         </tr>
       </thead>
     </table>
@@ -16,7 +16,7 @@
       <table
         class="w-full table-fixed [&_td]:text-blue-900 [&_td]:py-4 [&_td]:px-2 [&_td]:border-b [&_td]:border-slate-300"
       >
-        <tbody class="text-blue-900">
+        <tbody class="text-blue-900 text-sm">
           <tr
             v-for="items in employeeStore.employee"
             :key="items.id"
@@ -30,7 +30,9 @@
             <td class="table-cell">{{ items.job_title ?? 'No department' }}</td>
             <td class="table-cell">{{ items.department_name?.name || 'No department' }}</td>
             <!-- <td class="m-2 p-2">{{ employee.office_id}}</td> -->
-            <td class="table-cell m-2 p-2">{{ items.office_name?.name || 'No Office' }}</td>
+            <td class="table-cell m-2 p-2">
+              {{ items.office_name?.name.slice(0, -9) || 'No Office' }}
+            </td>
           </tr>
         </tbody>
       </table>

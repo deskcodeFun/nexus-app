@@ -1,10 +1,13 @@
 <template>
-  <div
-    class="flex flex-row justify-between items-baseline bg-white text-blue-900 tracking-wide p-2"
-  >
-    <div id="selct-bu" class="flex flex-row w-fit">
-      <p class="pr-4">Filter by Office:</p>
-      <select v-model="selectChoice" @change="handleChange" class="bg-blue-50/25 ml-4">
+  <div class="flex flex-row bg-sky-100 text-blue-900">
+    <div class="flex flex-row w-fit">
+      <!-- <p class="pr-4 my-auto text-xs">Filter by Office:</p> -->
+      <select
+        v-model="selectChoice"
+        @change="handleChange"
+        class="text-xs border border-blue-800 bg-blue-50/25 rounded-full px-2 py-1 w-32"
+      >
+        <option value="" disabled selected hidden>Filter by Office</option>
         <option v-for="item in officeStores.officeAllName" :key="item.id" :value="item.id">
           {{ item.short_name }}
         </option>
@@ -17,7 +20,7 @@
 import { ref } from 'vue'
 import { useOfficeNameStore } from '@/stores/officeData.js'
 
-const selectChoice = ref(0)
+const selectChoice = ref('')
 const officeStores = useOfficeNameStore()
 // define event name to emited
 const emit = defineEmits(['select-option'])

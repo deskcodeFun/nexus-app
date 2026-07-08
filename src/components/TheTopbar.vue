@@ -112,10 +112,12 @@ onUnmounted(() => {
     <Transition name="slide-right-to-left">
       <Teleport to="body">
         <div v-if="navOpen" class="modal-menu mt-18" @click.self="navOpen = false">
-          <nav class="flex flex-col w-9/12 bg-amber-50/70 shadow-2xl text-blue-900">
+          <nav
+            class="flex flex-col w-11/12 h-fit overflow-auto bg-amber-50/70 shadow-2xl text-blue-900"
+          >
             <RouterLink
-              to="/"
-              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              :to="{ name: 'home' }"
+              class="flex flex-row text-xl py-4 px-2 border-b border-neutral-400"
               active-class="bg-sky-100 rounded-lg text-blue-900"
               @click="navOpen = !navOpen"
             >
@@ -125,7 +127,7 @@ onUnmounted(() => {
 
             <RouterLink
               to="/assets"
-              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              class="flex flex-row text-xl py-4 px-2 border-b border-neutral-400"
               active-class="bg-sky-50 rounded-lg text-blue-900"
               @click="navOpen = !navOpen"
             >
@@ -134,7 +136,7 @@ onUnmounted(() => {
             </RouterLink>
             <RouterLink
               to="/employee"
-              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              class="flex flex-row text-xl py-4 px-2 border-b border-neutral-400"
               active-class="bg-sky-50 rounded-lg text-blue-900"
               @click="navOpen = !navOpen"
             >
@@ -143,7 +145,7 @@ onUnmounted(() => {
             </RouterLink>
             <RouterLink
               to="/services"
-              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              class="flex flex-row text-xl py-4 px-2 border-b border-neutral-400"
               active-class="bg-sky-50 rounded-lg text-blue-900"
               @click="navOpen = !navOpen"
             >
@@ -153,7 +155,7 @@ onUnmounted(() => {
             </RouterLink>
             <RouterLink
               to="/about"
-              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              class="flex flex-row text-xl py-4 px-2 border-b border-neutral-400"
               active-class="bg-sky-50 rounded-lg text-blue-900"
               @click="navOpen = !navOpen"
             >
@@ -164,7 +166,7 @@ onUnmounted(() => {
             <!-- sign in/out button -->
             <RouterLink
               v-if="!store.user"
-              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              class="flex flex-row text-xl py-4 px-2 border-b border-neutral-400"
               active-class="bg-sky-50 rounded-lg text-blue-900"
               :to="{ name: 'sign-in' }"
             >
@@ -174,7 +176,7 @@ onUnmounted(() => {
             <button
               v-else
               @click="handleLogout"
-              class="flex flex-row text-xl py-8 px-6 border-b border-neutral-400"
+              class="flex flex-row text-xl py-4 px-2 border-b border-neutral-400"
             >
               <ArrowRightStartOnRectangleIcon class="h-6 w-6 text-blue-800" />
               <p class="px-4">Log out</p>

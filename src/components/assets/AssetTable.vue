@@ -1,15 +1,15 @@
 <template>
-  <div class="mt-2">
+  <div class="mt-2 bg-amber-50/50">
     <!-- Table Header -->
-    <table class="table-fixed w-full mb-2 [&_th]:py-6">
+    <table class="table-fixed w-full mb-2 [&_th]:py-2">
       <thead class="table-header-group sticky top-0">
-        <tr class="border-b border-gray-300 bg-sky-100 text-nowrap">
-          <th scope="col" class="text-left text-base font-bold pl-2 text-blue-900">Asset Tag</th>
-          <th scope="col" class="text-left text-base font-bold text-blue-900">Serial</th>
-          <th scope="col" class="text-left text-base font-bold text-blue-900">Brand</th>
-          <!-- <th scope="col" class="text-left text-base font-bold text-blue-900">Model</th> -->
-          <th scope="col" class="text-left text-base font-bold text-blue-900">Used By</th>
-          <th scope="col" class="text-left text-base font-bold text-blue-900">Asset BU</th>
+        <tr class="bg-sky-900 [&_th]:font-light [&_th]:text-left text-white text-nowrap">
+          <th scope="col" class="pl-2">Asset Tag</th>
+          <th scope="col">Serial</th>
+          <th scope="col">Brand</th>
+          <!-- <th scope="col" >Model</th> -->
+          <th scope="col">Used By</th>
+          <th scope="col">Asset BU</th>
         </tr>
       </thead>
     </table>
@@ -26,8 +26,8 @@
             class="table-row hover:shadow-2xl hover:bg-blue-50 hover:cursor-pointer text-nowrap"
           >
             <td class="table-cell font-bold">{{ item.asset_tag }}</td>
-            <td class="table-cell w-fit">{{ item.serial_tag }}</td>
-            <td class="table-cell w-fit">
+            <td class="table-cell overflow-hidden">{{ item.serial_tag }}</td>
+            <td class="table-cell overflow-hidden">
               {{ item.brand + ' ' + item.model }}
             </td>
             <!-- <td class="table-cell">{{ item.model }}</td> -->
