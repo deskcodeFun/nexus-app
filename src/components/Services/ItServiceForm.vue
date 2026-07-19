@@ -32,10 +32,10 @@
           <select
             v-model.trim="newService.asset_id"
             @change="handleassetID"
-            class="w-fit items-center mx-1 px-2 py-1 bg-blue-50 text-blue-900 font-bold"
+            class="w-11/12 items-center mx-1 px-2 py-1 bg-blue-50 text-blue-900 font-bold"
           >
-            <option v-for="assetID in assetStore.assetAll" :key="assetID.id" :value="assetID.id">
-              {{ assetID.id + assetID.asset_tag }}
+            <option v-for="assetID in assetStore.asset" :key="assetID.id" :value="assetID.id">
+              {{ assetID.asset_tag }}
             </option>
           </select>
         </div>

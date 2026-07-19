@@ -3,7 +3,7 @@
   <header>
     <BaseHeader title="IT SERVICE" />
   </header>
-  <main class="flex flex-col">
+  <main class="container flex flex-col h-160 md:h-screen">
     <!-- sub Menu -->
     <div class="w-40 flex flex-row mb-2 justify-between">
       <!-- <p class="mt-1 text-blue-900">Service Type</p> -->
@@ -11,7 +11,9 @@
       <BaseButtonAdd Link="/addServices" label="Service" />
     </div>
     <!-- show Service table -->
-    <div class="w-full border border-gray-400 grid grid-row-3 gap-4 sm:grid-cols-3 overflow-auto">
+    <div
+      class="w-full px-2 md:px-0 md:w-full h-auto border border-gray-400 grid grid-row-3 gap-4 sm:grid-cols-3 overflow-y-auto"
+    >
       <!-- Drop zone 1 -->
       <div>
         <!-- Header Table -->
@@ -37,7 +39,7 @@
       <!-- Drop zone 2 -->
       <div>
         <!-- Header Table -->
-        <p class="bg-red-800 text-white text-center pb-2">In Progress</p>
+        <p class="sticky bg-red-800 text-white text-center pb-2">In Progress</p>
         <!-- Content In Progress -->
         <div
           @drop="onDrop($event, 2)"
@@ -68,7 +70,7 @@
           @drop="onDrop($event, 3)"
           @dragenter.prevent
           @dragover.prevent
-          class="overflow-y-auto overflow-auto w-full h-80 md:h-140 md:w-auto mx-1 md:mx-4 min-h-50px"
+          class="overflow-y-auto overflow-auto w-full h-80 md:h-140 mx-1"
         >
           <div
             v-for="item in getList(3)"
