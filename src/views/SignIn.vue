@@ -80,11 +80,11 @@ import { supabase } from '@/lib/supabaseClient'
 
 import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 // Pre-filled credentials for testing purposes. In production, these should be removed or handled securely.
-const email = ref('panya.korkusol@gmail.com')
-const password = ref('pkok4050')
+// const email = ref('panya.korkusol@gmail.com')
+// const password = ref('pkok4050')
 // Pre-filled credentials for production purposes. In development, these should be removed or handled securely.
-// const email = ref('')
-// const password = ref('')
+const email = ref('')
+const password = ref('')
 
 const passwordVisible = ref(false)
 
