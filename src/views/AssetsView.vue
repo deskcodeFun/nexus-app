@@ -1,9 +1,6 @@
 <template>
-  <!-- Header -->
-  <header>
-    <BaseHeader title="ASSETS ACCOUNTING" />
-  </header>
   <main class="min-h-screen md:w-11/12 flex flex-col mx-auto my-2">
+    <BaseHeader title="ASSETS ACCOUNTING" />
     <!-- Sub Menu -->
     <div class="w-full flex flex-col gap-y-4 lg:flex-row lg:justify-between">
       <BaseButtonAdd Link="/addAsset" label="Add Asset"></BaseButtonAdd>
@@ -17,7 +14,7 @@
             v-model="searchQuery"
             @blur="searchQuery = ''"
             @keyup.enter="handleSearch"
-            class="text-xs px-2 border border-full border-blue-800 py-1 rounded-full bg-sky-100 text-blue-900 placeholder:text-blue-900"
+            class="text-xs px-2 border border-blue-800 py-1 rounded-full text-blue-900 placeholder:text-blue-900"
           />
 
           <MagnifyingGlassIcon

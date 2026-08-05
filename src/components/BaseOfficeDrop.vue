@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-row bg-sky-100 text-blue-900">
+  <div class="flex flex-row text-blue-900">
     <div class="flex flex-row w-fit">
       <!-- <p class="pr-4 my-auto text-xs">Filter by Office:</p> -->
       <select
         v-model="selectChoice"
         @change="handleChange"
-        class="text-xs border border-blue-800 bg-blue-50/25 rounded-full px-2 py-1 w-32"
+        class="text-xs border border-blue-800 rounded-full px-2 py-1 w-32"
       >
         <option value="" disabled selected hidden>Filter by Office</option>
         <option v-for="item in officeStores.officeAllName" :key="item.id" :value="item.id">

@@ -33,8 +33,8 @@
             <!-- <td class="table-cell">{{ item.model }}</td> -->
 
             <!-- User Full name -->
-            <td class="table-cell">
-              <p v-if="item.employee" class="table-cell w-fit">
+            <td class="table-cell overflow-hidden">
+              <p v-if="item.employee">
                 {{ item.employee.fname + ' ' + item.employee.lname }}
               </p>
               <p v-else class="font-bold text-green-800">Free</p>

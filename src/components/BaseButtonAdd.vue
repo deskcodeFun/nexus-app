@@ -1,13 +1,12 @@
 <template>
-  <div class="bg-white text-blue-900">
-    <RouterLink
-      :to="props.Link"
-      class="w-fit flex flex-row rounded-full px-2 py-1 border border-blue-800 bg-sky-100 hover:text-white hover:bg-blue-800"
-    >
+  <button
+    class="w-fit rounded-full px-4 py-1 bg-blue-800 text-white hover:scale-102 hover:shadow-[2px_-2px_16px_2px_rgba(30,64,175,0.2)]"
+  >
+    <RouterLink :to="props.Link" class="flex flex-row">
       <PlusIcon class="h-4 w-4" />
       <p class="text-xs">{{ label }}</p>
     </RouterLink>
-  </div>
+  </button>
 </template>
 
 <script setup>

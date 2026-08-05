@@ -5,7 +5,7 @@
   </header>
   <main class="container flex flex-col h-160 md:h-screen">
     <!-- sub Menu -->
-    <div class="w-40 flex flex-row mb-2 justify-between">
+    <div class="w-40 flex flex-row mb-2 gap-x-4">
       <!-- <p class="mt-1 text-blue-900">Service Type</p> -->
       <BaseButtonAdd Link="/addEmployee" label="Email" />
       <BaseButtonAdd Link="/addServices" label="Service" />
