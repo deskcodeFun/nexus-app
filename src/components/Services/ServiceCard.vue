@@ -1,9 +1,6 @@
 <template>
   <!-- each Service card in each Zone -->
-  <div
-    @click="open = true"
-    class="mx-1 my-4 p-2 border border-gray-300 rounded-lg hover:bg-sky-100"
-  >
+  <div @click="open = true" class="mx-1 my-4 p-2 border border-gray-300 rounded-lg hover:bg-sky-100">
     <Transition name="slide-fade">
       <Teleport to="body">
         <div v-if="open" class="modal" @click.self="open = false">
@@ -43,17 +40,20 @@
       <p class="w-fit text-mm text-teal-800">
         {{ 'asset tag: ' + ' ' + props.item.asset?.asset_tag }}
       </p>
-      <p class="w-fit text-mm text-teal-800">
+      <p>{{ props.item.detail }}</p>
+
+      <!-- <p class="w-fit text-mm text-teal-800">
         {{ 'Current User ' + ' ' + (props.item.fname || 'FREE') + ' ' + (props.item.lname || '') }}
-      </p>
-      <p>
+      </p> -->
+      <!-- <p>
         {{
-          'New User ' +
+          'New User ' + props.item.nUser_id + ' ' +
           (props.item.employee?.fname || 'Free') +
           ' ' +
           (props.item.employee?.lname || '')
         }}
-      </p>
+      </p> -->
+
     </div>
   </div>
 </template>
@@ -62,11 +62,12 @@
 import { ref } from 'vue'
 import ServiceEdit from './ServiceEdit.vue'
 
+
 const open = ref(false)
 const props = defineProps({
   item: Object,
 })
-// console.log('props.item', props.item)
+console.log('props.item', props.item)
 
 const dateFormat = (dateString) => {
   const options = { year: 'numeric', month: 'short', day: 'numeric' }
