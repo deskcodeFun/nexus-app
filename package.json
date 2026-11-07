@@ -26,12 +26,12 @@
     "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.5",
     "@vitejs/plugin-vue": "^6.0.5",
     "@vitest/eslint-plugin": "^1.6.12",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/test-utils": "^2.4.6",
-    "eslint": "^10.0.3",
+    "eslint": "^9.39.5",
     "eslint-plugin-vue": "~10.8.0",
     "gh-pages": "^6.3.0",
     "globals": "^17.4.0",
